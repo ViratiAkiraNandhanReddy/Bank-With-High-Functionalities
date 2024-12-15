@@ -6,7 +6,7 @@ from Main_File.__init__ import Accounts,PinCodes,User_func
 def New_Account():
 
     def Stop():
-            Window.destroy()
+            Window_NA.destroy()
             Login()
             global Command
             Command = False
@@ -17,17 +17,17 @@ def New_Account():
             global Acc
             Acc=New.get()
         
-        Window = tk.Tk()
-        Window.title('New Account')
-        Window.geometry('350x120')
-        tk.Label(Window,text='Creating An New Account',fg='Red').grid(column=2)
-        tk.Label(Window,text='New UserName').grid(row=2,pady=20)
-        New = tk.Entry(Window)
+        Window_NA = tk.Tk()
+        Window_NA.title('New Account')
+        Window_NA.geometry('350x120')
+        tk.Label(Window_NA,text='Creating An New Account',fg='Red').grid(column=2)
+        tk.Label(Window_NA,text='New UserName').grid(row=2,pady=20)
+        New = tk.Entry(Window_NA)
         New.grid(row=2,column=2,ipadx=30)
         Continue = tk.Button(text='Continue',fg='Green',command=Values).grid(row=3,column=2)
         Cancel = tk.Button(text='Cancel',fg='Red',command=Stop).grid(row=3,column=3)
 
-        Window.mainloop()
+        Window_NA.mainloop()
 
         try:
             if Acc == '':
@@ -46,14 +46,18 @@ def New_Account():
 def User_Functions():
 
     Command = True
+
     while Command:
         def log():
             Window.destroy()
+            global UserName,PinCode
+            UserName = None
+            PinCode = None
             Login()
             global Command
             Command = False
 
-        Window = tk.Tk(sync=True)
+        Window = tk.Tk()
         Window.geometry('300x500')
         B = tk.Button(Window,text='Balance',fg='Green')
         B.place(x=130,y=10)
@@ -85,8 +89,14 @@ def Login():
             global UserName,PinCode
             UserName = User.get()
             PinCode = Pin.get()
-            User_Functions()
-        
+            Window.destroy()
+            if UserName == '':
+                Invalid_Error.Blank_Error()
+                
+        def Create():
+            Window.destroy()
+            New_Account()
+
         #Creating The Main Login screen
         Window = tk.Tk()
         Window.geometry('250x150')
@@ -97,6 +107,7 @@ def Login():
         Pin = tk.Entry(Window)
         Pin.grid(row=4,column=3,pady=20)
         User.grid(row=2,column=3,padx=20)
+        New_Acc = tk.Button(Window,text='Sign Up',command=Create,fg='Cyan').grid(row=6,column=2)
         Continue = tk.Button(Window,text='Continue',command=Values,fg='Green').grid(row=6,column=3)
 
         Window.mainloop()
@@ -109,6 +120,8 @@ def Login():
                 else:
                     Invalid_Error.Pass_Error()
                 Command = False
+            elif UserName == None or '':
+                Invalid_Error.Blank_Error()
             else:
                 try:
 

@@ -2,17 +2,15 @@ import tkinter as tk
 import Invalid_Error
 from __init__ import Accounts,PinCodes,User_func
 
+Command = True 
 
-def New_Account():
+while Command:
+    def New_Account():
 
-    def Stop():
+        def Stop():
             Window_NA.destroy()
             Login()
-            global Command
-            Command = False
 
-    Command = True
-    while Command:
         def Values():
             global Acc
             Acc=New.get()
@@ -21,7 +19,7 @@ def New_Account():
         Window_NA.title('New Account')
         Window_NA.geometry('350x120')
         tk.Label(Window_NA,text='Creating An New Account',fg='Red').grid(column=2)
-        tk.Label(Window_NA,text='New UserName').grid(row=2,pady=20)
+        tk.Label(Window_NA,text='New Username').grid(row=2,pady=20)
         New = tk.Entry(Window_NA)
         New.grid(row=2,column=2,ipadx=30)
         Continue = tk.Button(text='Continue',fg='Green',command=Values).grid(row=3,column=2)
@@ -43,19 +41,15 @@ def New_Account():
             pass
 
 
-def User_Functions():
+    def User_Functions():
 
-    Command = True
-
-    while Command:
         def log():
             Window.destroy()
             global UserName,PinCode
             UserName = None
             PinCode = None
             Login()
-            global Command
-            Command = False
+            
 
         Window = tk.Tk()
         Window.geometry('300x500')
@@ -76,13 +70,7 @@ def User_Functions():
 
 
 
-def Login():
-    
-    #Variable To Stop The Loop 
-    Command = True
-
-    #Running In a loop
-    while Command:
+    def Login():
 
         #Getting All The Values
         def Values():
@@ -90,8 +78,7 @@ def Login():
             UserName = User.get()
             PinCode = Pin.get()
             Window.destroy()
-            if UserName == '':
-                Invalid_Error.Blank_Error()
+            
                 
         def Create():
             Window.destroy()
@@ -101,27 +88,36 @@ def Login():
         Window = tk.Tk()
         Window.geometry('250x150')
         Window.title('Login')
-        tk.Label(Window,text='UserName').grid(row=2,column=2)
+        tk.Label(Window,text='Username').grid(row=2,column=2)
         tk.Label(Window,text='PinCode').grid(row=4,column=2)
         User = tk.Entry(Window)
-        Pin = tk.Entry(Window)
+        Pin = tk.Entry(Window,fg='Red')
         Pin.grid(row=4,column=3,pady=20)
         User.grid(row=2,column=3,padx=20)
-        New_Acc = tk.Button(Window,text='Sign Up',command=Create,fg='Cyan').grid(row=6,column=2)
+        New_Acc = tk.Button(Window,text='Sign Up',command=Create,fg='Dark Red').place(x=15,y=110)
         Continue = tk.Button(Window,text='Continue',command=Values,fg='Green').grid(row=6,column=3)
 
         Window.mainloop()
 
         #Using The Info Of Users
         try:
+            print(UserName)
+            print(PinCode)
             if UserName in Accounts:
                 if PinCodes[User_func(UserName)] == PinCode:
                     User_Functions()
-                else:
-                    Invalid_Error.Pass_Error()
-                Command = False
+                elif PinCode.startswith('',0) and PinCode.endswith('',0):
+                    Invalid_Error.Pin_blank_Error()
+                
+
             elif UserName == None or '':
-                Invalid_Error.Blank_Error()
+                Invalid_Error.User_blank_Error()
+            elif UserName == '':
+                Invalid_Error.User_blank_Error()
+            elif PinCode == None or '':
+                Invalid_Error.Pin_blank_Error()
+            elif PinCode == '':
+                Invalid_Error.Pin_blank_Error()
             else:
                 try:
 
@@ -130,8 +126,6 @@ def Login():
                         if Yes_Bt.configure():
                             Verify.destroy()
                             New_Account()
-                            global Command
-                            Command = False
 
                     #If No Loop Runs Again
                     def No():
@@ -153,4 +147,4 @@ def Login():
         except:
             Window.mainloop()
 
-Login()
+    Login()
