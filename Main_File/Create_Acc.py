@@ -3,17 +3,19 @@ def New_Account():
     import tkinter as tk
     import Login_Screen
     import Invalid_Error
+    
+    def Stop():
+            Window.destroy()
+            Login_Screen.Login()
+            global Command
+            Command = False
 
     Command = True
     while Command:
         def Values():
             global Acc
             Acc=New.get()
-        def Stop():
-            Window.destroy()
-            Login_Screen.Login()
-            global Command
-            Command = False
+        
         Window = tk.Tk()
         Window.title('New Account')
         Window.geometry('350x120')
@@ -34,7 +36,7 @@ def New_Account():
             elif Acc.isdigit()==True:
                 Invalid_Error.Digit_Error()
             else:
-                pass
+                Accounts.append(Acc)
 
         except:
             pass

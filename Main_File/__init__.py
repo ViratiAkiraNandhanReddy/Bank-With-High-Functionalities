@@ -7,14 +7,17 @@ else:
     Path = Check_Location
     
 with open(fr'{Path}\Data_Of_User.txt') as Data:
-    Accounts=eval(Data.readline())
+    Accounts:list[str] =eval(Data.readline())
     PinCodes=eval(Data.readline())
 
-
-
+def User_func(User=None)->int:
+    User_index = Accounts.index(User)
+    return User_index
 
 def Licence():
     pass
 
 def Documentation()->str:
     pass
+
+print('Hello')
