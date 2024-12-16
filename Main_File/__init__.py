@@ -8,7 +8,8 @@ else:
     
 with open(fr'{Path}\Data_Of_User.txt') as Data:
     Accounts:list[str] =eval(Data.readline())
-    PinCodes=eval(Data.readline())
+    PinCodes:list[str]=eval(Data.readline())
+    Security:list[str]=eval(Data.readline())
 
 def User_func(User=None)->int:
     User_index = Accounts.index(User)
