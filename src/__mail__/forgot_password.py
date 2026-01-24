@@ -1,0 +1,30 @@
+from . import *
+
+class forgot_password:
+
+    def __init__(self, receiver_mail_address: str) -> None:
+
+        self.otp: str = otp_code()
+        
+        with open(fr'{DIR_PATH}\src\__mail__\templates\forgot_password.html') as file:
+            self.email_html = file.read().replace('[CODE]', self.otp).replace('[EMAIL]', receiver_mail_address)
+        
+        self.email = email_msg()
+
+        self.email['Subject'] = f'{self.otp} is your verification code to reset password at Bank With High Functionalities.'
+        self.email['From'] = 'Bank With High Functionalities'
+        self.email['To'] = receiver_mail_address
+
+        self.email.set_content(self.email_html, subtype='html')
+
+
+        try:
+
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as gmail:
+
+                gmail.login(f"{SMTP__MAIL_ADDRESS}", f"{SMTP__APP_PASSWORD}")
+                gmail.send_message(self.email)
+
+                print('success')
+        except Exception as e:
+            ...
