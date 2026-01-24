@@ -1,20 +1,22 @@
 from . import *
+import datetime
 
-class forgot_password:
+class two_factor_authentication:
 
     def __init__(self, receiver_mail_address: str) -> None:
 
         self.otp: str = otp_code()
         
-        with open(fr'{DIR_PATH}\src\__mail__\templates\forgot_password.html') as file:
+        with open(fr'{DIR_PATH}\src\__mail__\templates\two_factor_authentication.html') as file:
             
             self.email_html = file.read()\
                 .replace('[CODE]', self.otp)\
-                .replace('[EMAIL]', receiver_mail_address)
+                .replace('[EMAIL]', receiver_mail_address)\
+                .replace('[TIME]', datetime.datetime.now().strftime("%I:%M %p"))
         
         self.email = email_msg()
 
-        self.email['Subject'] = f'{self.otp} is your verification code to reset password at Bank With High Functionalities.'
+        self.email['Subject'] = f'{self.otp} is your 2FA code to login at Bank With High Functionalities.'
         self.email['From'] = 'Bank With High Functionalities'
         self.email['To'] = receiver_mail_address
 

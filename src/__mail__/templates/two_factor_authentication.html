@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        /* GMAIL SAFE RESET */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6fb;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #222222;
+        }
+
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+
+        img {
+            border: 0;
+            display: block;
+        }
+
+        /* WRAPPER & MAIN CARD */
+        .wrapper {
+            width: 100%;
+            background-color: #f4f6fb;
+            padding: 30px 0;
+        }
+
+        .main-card {
+            width: 100%;
+            max-width: 600px;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        .header {
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .logo-text {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #111111;
+        }
+
+        .logo-highlight {
+            color: #0077ff;
+        }
+
+        /* CONTENT */
+        .content {
+            padding: 30px 25px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 22px;
+            margin: 15px 0;
+            color: #111111;
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #444444;
+            margin: 15px 0;
+        }
+
+        /* 2FA TAG (Orange for Action Required) */
+        .auth-tag {
+            display: inline-block;
+            font-size: 10px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            background-color: #fff8e1;
+            color: #f57f17;
+            border: 1px solid #ffe0b2;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        /* SECURE CODE BOX */
+        .code-box {
+            background-color: #f0f8ff;
+            border: 2px dashed #0077ff;
+            color: #0077ff;
+            font-size: 36px;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+            letter-spacing: 8px;
+            border-radius: 8px;
+            margin: 25px 0;
+            font-weight: bold;
+        }
+
+        /* LOGIN DETAILS TABLE */
+        .details-table {
+            width: 100%;
+            margin: 20px 0;
+            background-color: #fafafa;
+            border-radius: 6px;
+            border: 1px solid #eeeeee;
+            text-align: left;
+        }
+
+        .details-td {
+            padding: 10px 15px;
+            font-size: 13px;
+            color: #555;
+            border-bottom: 1px solid #eee;
+        }
+
+        .details-label {
+            font-weight: bold;
+            color: #333;
+            width: 30%;
+        }
+
+        /* FOOTER */
+        .footer {
+            padding: 20px;
+            font-size: 12px;
+            color: #666666;
+            text-align: center;
+            border-top: 1px solid #eeeeee;
+            background-color: #fafafa;
+        }
+
+        .footer a {
+            color: #0077ff;
+            text-decoration: none;
+        }
+
+        .warning-text {
+            font-size: 13px;
+            color: #888888;
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <table role="presentation" class="wrapper" width="100%">
+        <tr>
+            <td align="center">
+                <table role="presentation" class="main-card" width="100%">
+
+                    <tr>
+                        <td class="header">
+                            <div class="logo-text">BANK WITH <span class="logo-highlight">HIGH FUNCTIONALITIES</span>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="content">
+                            <span class="auth-tag">VERIFY LOGIN</span>
+
+                            <h1>Two-Factor Authentication</h1>
+
+                            <p>
+                                A new sign-in attempt was detected on your BWHF account.
+                                Please enter the code below to complete the login process.
+                            </p>
+
+                            <div class="code-box">[CODE]</div>
+
+                            <table class="details-table" cellspacing="0">
+                                <tr>
+                                    <td class="details-td details-label" style="border-bottom: none;">Time</td>
+                                    <td class="details-td" style="border-bottom: none;">[TIME]</td>
+                                </tr>
+                            </table>
+
+                            <div class="warning-text">
+                                If this wasn't you, your password may be compromised. Please change it immediately.
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <table width="100%" style="border-top: 1px solid #eee;">
+                                <tr>
+                                    <td style="padding: 15px; text-align: center; color: #aaa; font-size: 11px;">
+                                        This message was sent to [EMAIL]
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="footer">
+                            <p>This is an automated message from the BWHF.</p>
+                            <p>
+                                <a href="https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities">View
+                                    Source</a>
+                                &nbsp;&bull;&nbsp;
+                                <a href="https://github.com/ViratiAkiraNandhanReddy">Contact Developer</a>
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
