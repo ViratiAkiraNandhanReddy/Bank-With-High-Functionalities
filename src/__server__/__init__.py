@@ -2,13 +2,14 @@ import os
 import json
 import logging
 
+DIR_PATH: str = str(os.environ.get("LOCALAPPDATA")) + r"\Bank-With-High-Functionalities"
+
+MYSQL__DB_PASSWORD: str | None = os.getenv("MYSQL__DB_PASSWORD")
+
 try:
 
-    with open(
-
-        fr'{ os.environ.get('LOCALAPPDATA') }\Bank-With-High-Functionalities\database\json\administrative files\config.json'
-        
-        ) as config: CONFIGURATION_JSON: dict = json.load(config)
+    with open(rf"{DIR_PATH}\database\config.json") as config:
+        CONFIGURATION_JSON: dict = json.load(config)
 
 except FileNotFoundError, json.JSONDecodeError:
 
@@ -16,10 +17,13 @@ except FileNotFoundError, json.JSONDecodeError:
 
 # ---  --- #
 
-match CONFIGURATION_JSON.get('DATABASE TYPE'):
+match CONFIGURATION_JSON.get("DATABASE TYPE"):
 
-    case 'JSON': from .JSON import SERVER
-    case 'MySQL': from .MySQL import SERVER
-    case 'SQLite3': from .SQLite3 import SERVER
+    case "JSON":
+        from .JSON import SERVER
+    case "MySQL":
+        from .MySQL import SERVER
+    case "SQLite3":
+        from .SQLite3 import SERVER
 
-__all__ = ['SERVER']
+__all__ = ["SERVER"]

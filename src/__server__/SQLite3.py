@@ -139,4 +139,3 @@ class SERVER:
             connection.commit()
 
             return self.cursor.rowcount > 0
-
