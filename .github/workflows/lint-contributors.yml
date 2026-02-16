@@ -1,0 +1,31 @@
+name: Lint Contributors (Markdown)
+
+on:
+
+  push:
+    paths:
+      - 'CONTRIBUTORS.md'
+      
+  pull_request:
+    paths:
+      - 'CONTRIBUTORS.md'
+      
+  workflow_dispatch:
+
+jobs:
+  lint:
+  
+    runs-on: ubuntu-latest
+    
+    steps:
+    
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Run Contributors Linter
+        run: node .github/scripts/lint-contributors.js
