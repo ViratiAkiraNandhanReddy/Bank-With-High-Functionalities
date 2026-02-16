@@ -42,10 +42,9 @@ The list is intentionally **not sorted alphabetically** to preserve contribution
 
 Each contributor is represented by their public GitHub identity:
 
-- Profile avatar  
-- GitHub username  
+- Profile avatar only (username shown as tooltip on hover)
 
-Avatars provide quick visual recognition, while usernames ensure precise attribution and traceability to contribution history.
+Avatars provide quick visual recognition, and the contributor’s GitHub username is displayed as a tooltip on hover to ensure precise attribution and traceability while maintaining a uniform grid layout.
 
 ---
 
@@ -81,7 +80,7 @@ To be recognized in this document, a contributor should:
 - Have a commit authored by them included in the project, or  
 - Provide a documented contribution accepted by maintainers  
 
-Attribution is derived from the Git author identity associated with the accepted contribution. The GitHub username and avatar linked to that identity are used for representation in this file.
+Attribution is derived from the Git author identity associated with the accepted contribution. The contributor’s GitHub avatar is used for representation, and the GitHub username is shown as a tooltip on hover to preserve a uniform grid layout.
 
 After a contribution is merged, maintainers will append the contributor to the end of the contributors table in chronological order of first accepted contribution. This preserves the historical sequence of participation in the project.
 
@@ -95,7 +94,7 @@ By contributing to the project, individuals agree to be publicly acknowledged in
 
 Contributors who have changed their GitHub username may request an update to their attribution entry in this document to reflect their current public identity.
 
-Because contributor avatars and profile links are derived directly from GitHub usernames, a username change may cause outdated avatars or profile references if not updated in the contributors table. Maintaining accurate identity mapping ensures correct attribution and profile traceability.
+Because contributor avatars are displayed with usernames as hover tooltips, a username change may cause outdated tooltips if not updated in the contributors table. Maintaining accurate identity mapping ensures correct attribution and traceability while preserving the uniform avatar grid.
 
 To request a username update, the contributor should open an issue in the repository with the following information:
 
@@ -116,89 +115,77 @@ Username updates do not change contribution order and do not create duplicate en
 <table>
 <tr>
 <td align="center">
-<a href="https://github.com/ViratiAkiraNandhanReddy" target="_blank">
-<img src="https://github.com/ViratiAkiraNandhanReddy.png" width="96px" alt="username1"/>
-</a><br/>
-<a href="https://github.com/ViratiAkiraNandhanReddy" target="_blank"><strong>@ViratiAkiraNandhanReddy</strong></a>
+<a href="https://github.com/ViratiAkiraNandhanReddy" target="_blank" title="@ViratiAkiraNandhanReddy">
+<img src="https://github.com/ViratiAkiraNandhanReddy.png" width="96px" alt="@ViratiAkiraNandhanReddy"/>
+</a>
 </td>
 
 <td align="center">
-<a href="https://github.com/USERNAME" target="_blank">
-<img src="https://github.com/USERNAME.png" width="96px" alt="USERNAME"/>
-</a><br/>
-<a href="https://github.com/USERNAME" target="_blank"><strong>@USERNAME</strong></a>
+<a href="https://github.com/USERNAME" target="_blank" title="@USERNAME">
+<img src="https://github.com/USERNAME.png" width="96px" alt="@USERNAME"/>
+</a>
 </td>
 
 <td align="center">
-<a href="https://github.com/USERNAME" target="_blank">
-<img src="https://github.com/USERNAME.png" width="96px" alt="USERNAME"/>
-</a><br/>
-<a href="https://github.com/USERNAME" target="_blank"><strong>@USERNAME</strong></a>
+<a href="https://github.com/USERNAME" target="_blank" title="@USERNAME">
+<img src="https://github.com/USERNAME.png" width="96px" alt="@USERNAME"/>
+</a>
 </td>
 
 <td align="center">
-<a href="https://github.com/USERNAME" target="_blank">
-<img src="https://github.com/USERNAME.png" width="96px" alt="USERNAME"/>
-</a><br/>
-<a href="https://github.com/USERNAME" target="_blank"><strong>@USERNAME</strong></a>
+<a href="https://github.com/USERNAME" target="_blank" title="@USERNAME">
+<img src="https://github.com/USERNAME.png" width="96px" alt="@USERNAME"/>
+</a>
 </td>
 
 <td align="center">
-<a href="https://github.com/USERNAME" target="_blank">
-<img src="https://github.com/USERNAME.png" width="96px" alt="USERNAME"/>
-</a><br/>
-<a href="https://github.com/USERNAME" target="_blank"><strong>@USERNAME</strong></a>
+<a href="https://github.com/USERNAME" target="_blank" title="@USERNAME">
+<img src="https://github.com/USERNAME.png" width="96px" alt="@USERNAME"/>
+</a>
 </td>
 
 <td align="center">
-<a href="https://github.com/USERNAME" target="_blank">
-<img src="https://github.com/USERNAME.png" width="96px" alt="USERNAME"/>
-</a><br/>
-<a href="https://github.com/USERNAME" target="_blank"><strong>@USERNAME</strong></a>
+<a href="https://github.com/USERNAME" target="_blank" title="@USERNAME">
+<img src="https://github.com/USERNAME.png" width="96px" alt="@USERNAME"/>
+</a>
 </td>
 </tr>
 
 <tr>
 <td align="center">
-<a href="https://github.com/USERNAME" target="_blank">
-<img src="https://github.com/USERNAME.png" width="96px" alt="USERNAME"/>
-</a><br/>
-<a href="https://github.com/USERNAME" target="_blank"><strong>@USERNAME</strong></a>
+<a href="https://github.com/USERNAME" target="_blank" title="@USERNAME">
+<img src="https://github.com/USERNAME.png" width="96px" alt="@USERNAME"/>
+</a>
 </td>
 
 <td align="center">
-<a href="https://github.com/USERNAME" target="_blank">
-<img src="https://github.com/USERNAME.png" width="96px" alt="USERNAME"/>
-</a><br/>
-<a href="https://github.com/USERNAME" target="_blank"><strong>@USERNAME</strong></a>
+<a href="https://github.com/USERNAME" target="_blank" title="@USERNAME">
+<img src="https://github.com/USERNAME.png" width="96px" alt="@USERNAME"/>
+</a>
 </td>
 
 <td align="center">
-<a href="https://github.com/USERNAME" target="_blank">
-<img src="https://github.com/USERNAME.png" width="96px" alt="USERNAME"/>
-</a><br/>
-<a href="https://github.com/USERNAME" target="_blank"><strong>@USERNAME</strong></a>
+<a href="https://github.com/USERNAME" target="_blank" title="@USERNAME">
+<img src="https://github.com/USERNAME.png" width="96px" alt="@USERNAME"/>
+</a>
 </td>
 
 <td align="center">
-<a href="https://github.com/USERNAME" target="_blank">
-<img src="https://github.com/USERNAME.png" width="96px" alt="USERNAME"/>
-</a><br/>
-<a href="https://github.com/USERNAME" target="_blank"><strong>@USERNAME</strong></a>
+<a href="https://github.com/USERNAME" target="_blank" title="@USERNAME">
+<img src="https://github.com/USERNAME.png" width="96px" alt="@USERNAME"/>
+</a>
 </td>
 
 <td align="center">
-<a href="https://github.com/USERNAME" target="_blank">
-<img src="https://github.com/USERNAME.png" width="96px" alt="USERNAME"/>
-</a><br/>
-<a href="https://github.com/USERNAME" target="_blank"><strong>@USERNAME</strong></a>
+<a href="https://github.com/USERNAME" target="_blank" title="@USERNAME">
+<img src="https://github.com/USERNAME.png" width="96px" alt="@USERNAME"/>
+</a>
 </td>
 
 <td align="center">
-<a href="https://github.com/USERNAME" target="_blank">
-<img src="https://github.com/USERNAME.png" width="96px" alt="USERNAME"/>
-</a><br/>
-<a href="https://github.com/USERNAME" target="_blank"><strong>@USERNAME</strong></a>
+<a href="https://github.com/USERNAME" target="_blank" title="@USERNAME">
+<img src="https://github.com/USERNAME.png" width="96px" alt="@USERNAME"/>
+</a>
 </td>
 </tr>
 
@@ -213,16 +200,15 @@ Username updates do not change contribution order and do not create duplicate en
 
 When a new contribution is accepted and merged into the repository, the contributor must be added to the Contributors table to preserve attribution continuity.
 
-Follow the exact structure below when adding a new entry. New contributors must always be appended at the **end of the table**, preserving chronological order of first accepted contribution.
+Follow the exact structure below when adding a new entry. New contributors must always be appended at the **end of the table**, preserving chronological order of first accepted contribution. Only the contributor avatar is displayed, with the GitHub username shown as a tooltip on hover.
 
 ### Contributor Entry Template
 
 ```
 <td align="center">
-<a href="https://github.com/USERNAME" target="_blank">
-<img src="https://github.com/USERNAME.png" width="96px" alt="USERNAME"/>
-</a><br/>
-<a href="https://github.com/USERNAME" target="_blank"><strong>@USERNAME</strong></a>
+<a href="https://github.com/USERNAME" target="_blank" title="@USERNAME">
+<img src="https://github.com/USERNAME.png" width="96px" alt="@USERNAME"/>
+</a>
 </td>
 ```
 
@@ -239,10 +225,9 @@ Follow the exact structure below when adding a new entry. New contributors must 
 
 ```
 <td align="center">
-<a href="https://github.com/octocat" target="_blank">
-<img src="https://github.com/octocat.png" width="96px" alt="octocat"/>
-</a><br/>
-<a href="https://github.com/octocat" target="_blank"><strong>@octocat</strong></a>
+<a href="https://github.com/octocat" target="_blank" title="@octocat">
+<img src="https://github.com/octocat.png" width="96px" alt="@octocat"/>
+</a>
 </td>
 ```
 
