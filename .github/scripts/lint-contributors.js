@@ -16,7 +16,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const CONTRIBUTORS_FILE = path.join(__dirname, '..', 'CONTRIBUTORS.md');
+const CONTRIBUTORS_FILE = path.resolve(process.cwd(), 'CONTRIBUTORS.md');
 
 // ---
 // READ CONTRIBUTORS
