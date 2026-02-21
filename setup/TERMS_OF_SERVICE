@@ -1,1 +1,568 @@
+================================================================================
+TERMS OF SERVICE AND END-USER LICENSE AGREEMENT
+================================================================================
 
+Software / Project Name: Bank-With-High-Functionalities
+Original Author & Maintainer: ViratiAkiraNandhanReddy
+Effective Date: February 19, 2026
+Last Updated: February 19, 2026
+
+This Master Terms of Service and End-User License Agreement (the "Agreement" or 
+"Terms") constitutes a legally binding contract governing the access to, 
+deployment of, and use of the Bank-With-High-Functionalities software 
+infrastructure. This includes, but is not limited to, its source code, compiled 
+binaries, setup programs, executable scripts, configuration files, application 
+programming interfaces (APIs), graphical user interfaces (GUIs), official 
+documentation, and all related collateral materials (collectively referred to 
+herein as the "Software").
+
+IMPORTANT NOTICE: PLEASE READ CAREFULLY. By downloading, cloning, installing, 
+executing, compiling, modifying, distributing, hosting, integrating, or 
+otherwise interacting with the Software in any capacity, you acknowledge that 
+you have read, understood, and unequivocally agree to be bound by these Terms. 
+If you do not agree to all the terms and conditions set forth herein, you are 
+strictly prohibited from accessing or utilizing the Software and must 
+immediately delete all copies in your possession.
+
+--------------------------------------------------------------------------------
+1. COMPREHENSIVE DEFINITIONS
+--------------------------------------------------------------------------------
+
+For the purposes of this Agreement, the following capitalized terms shall have 
+the meanings ascribed to them below:
+
+  1.1 "Software" refers to the entirety of the Bank-With-High-Functionalities 
+      project in any tangible or intangible form. This encompasses the raw 
+      source code, compiled artifacts, installer packages, automation scripts, 
+      configuration files, database schemas, documentation, and all associated 
+      digital assets.
+  1.2 "Project" acts as a collective designation referring to the Software and 
+      its broader ecosystem. This includes remote repositories (e.g., GitHub, 
+      GitLab), release versions, technical documentation, issue trackers, 
+      discussion forums, and official community spaces.
+  1.3 "Author" specifically designates ViratiAkiraNandhanReddy, acting as the 
+      original architect, creator, and primary maintainer of the Project.
+  1.4 "Contributors" means any third-party individual, corporate entity, or 
+      automated system that voluntarily submits code, documentation, language 
+      translations, architectural designs, or any other modifications intended 
+      for inclusion in the Project.
+  1.5 "User" (or "You/Your") encompasses any individual, corporate entity, 
+      academic institution, or automated agent that accesses, installs, deploys, 
+      modifies, or otherwise interacts with the Software.
+  1.6 "Open Source License" means the specific permissive or copyleft license 
+      file (e.g., MIT, GPL, Apache) physically included within the root of the 
+      Project repository, which strictly governs the foundational copyright 
+      permissions, modification rights, and redistribution parameters.
+  1.7 "Derivative Work" means any software, product, or system that is modified, 
+      adapted, extended, directly integrated into, or redistributed from the 
+      original Software, whether for private, academic, or commercial purposes.
+
+--------------------------------------------------------------------------------
+2. NATURE AND PURPOSE OF THE SOFTWARE
+--------------------------------------------------------------------------------
+
+  2.1 Educational & Sandbox Environment: The Software is exclusively engineered 
+      as an educational, experimental, and functional simulation of a banking-
+      style system. It is strictly intended for academic learning, architectural 
+      experimentation, rapid prototyping, load simulation, and operation within 
+      highly controlled, non-production deployment environments.
+  2.2 Non-Financial Entity: The Software, the Project, and the Author do not 
+      constitute, nor do they operate as, a regulated financial institution, a 
+      chartered bank, a licensed payment processor, a money transmitter, or a 
+      financial intermediary in any jurisdiction globally.
+  2.3 Absence of Real-World Financial Utility: Out of the box, the Software does 
+      not facilitate real-world banking services, the custody of fiat or 
+      cryptocurrency funds, monetary storage, wealth management, or any 
+      financial guarantees. If a User chooses to connect the Software to real-
+      world financial rails, they do so entirely independently and at their own 
+      absolute risk.
+  2.4 Contextual Data Value: Any financial interpretation, monetary value 
+      representation, or transactional meaning assigned to the data structures, 
+      databases, or ledgers within the Software exists solely within the 
+      abstract context of the User's specific and isolated deployment environment.
+
+--------------------------------------------------------------------------------
+3. MECHANISMS OF ACCEPTANCE
+--------------------------------------------------------------------------------
+
+  3.1 Binding Agreement: Active use of the Software in any capacity constitutes 
+      an irrevocable acceptance of these Terms.
+  3.2 Triggering Actions: Legal acceptance is immediately recognized upon the 
+      execution of any of the following actions:
+      (a) Downloading, pulling, or cloning the Project from any repository.
+      (b) Running setup installers, executable files, or containerized images.
+      (c) Compiling or building the source code from scratch.
+      (d) Modifying, adapting, or integrating the Software into other codebases.
+      (e) Redistributing copies of the Software to third parties.
+      (f) Deploying the Software on local machines, private servers, or cloud 
+          infrastructure.
+  3.3 Corporate Representation: If You are accessing or using the Software on 
+      behalf of a corporation, partnership, government agency, or other legal 
+      entity, You represent and strictly warrant that You possess the full legal 
+      authority to bind said entity to these Terms.
+
+--------------------------------------------------------------------------------
+4. AGE, ELIGIBILITY, AND COMPLIANCE
+--------------------------------------------------------------------------------
+
+  4.1 Global Accessibility: The Software is inherently open and accessible to 
+      users of any age, across any geographic territory worldwide.
+  4.2 Absence of Native Age Restrictions: The Author imposes no foundational 
+      minimum age restriction to download or review the underlying source code.
+  4.3 Strict Local Compliance: Notwithstanding the above, Users assume total 
+      and sole responsibility for ensuring their usage strictly complies with 
+      all local, state, federal, and international laws, specifically those 
+      governing:
+      (a) Software deployment and data transmission.
+      (b) Simulated or actual financial technology (FinTech) operations.
+      (c) Provisioning of digital services to the public.
+      (d) Minors' access to technology and data privacy.
+      (e) The handling, storage, and processing of personally identifiable 
+          information (PII).
+  4.4 Supervisory Duty: Where required by applicable jurisdictional law, legal 
+      guardians or supervisors bear full, unmitigated responsibility for the 
+      actions of minors utilizing the Software.
+
+--------------------------------------------------------------------------------
+5. OPEN SOURCE LICENSE INTERSECTION
+--------------------------------------------------------------------------------
+
+  5.1 Free and Open Heritage: The Software is distributed as a free and open-
+      source technological asset.
+  5.2 License Supremacy on Copyright: All rights pertaining to the copying, 
+      modification, distribution, and creation of Derivative Works are 
+      perpetually governed by the specific Open Source License distributed 
+      alongside the Project.
+  5.3 Supplementary Nature of Terms: These Terms of Service are designed to 
+      supplement the operational, liability, and behavioral expectations 
+      surrounding the Software. They do not supersede or abrogate the 
+      fundamental freedoms granted by the Open Source License.
+  5.4 Conflict Resolution: In the event of a direct legal conflict between these 
+      Terms and the Open Source License, the Open Source License shall hold 
+      supremacy regarding copyright permissions and redistribution, whereas 
+      these Terms shall aggressively govern acceptable usage behavior, liability 
+      limitations, and indemnification.
+
+--------------------------------------------------------------------------------
+6. SCOPE OF PERMITTED USE
+--------------------------------------------------------------------------------
+
+Subject to strict adherence to these Terms, Users are granted broad latitude to 
+utilize the Software. Users are expressly permitted to:
+  (a) Execute, run, and deeply study the operational mechanics of the Software.
+  (b) Inspect, audit, and modify the underlying source code to suit specific 
+      architectural needs.
+  (c) Redistribute the original or modified iterations of the Software.
+  (d) Deploy the Software securely within private networks, corporate intranets, 
+      or public-facing cloud environments.
+  (e) Integrate the Software's modules into larger, pre-existing proprietary or 
+      open-source systems.
+  (f) Author and distribute Derivative Works.
+  (g) Leverage the platform for academic research, penetration testing, 
+      educational demonstrations, or experimental sandboxing.
+  (h) Utilize the Software for commercial endeavors, strictly subject to the 
+      stipulations of the included Open Source License.
+
+--------------------------------------------------------------------------------
+7. USER RESPONSIBILITIES AND ACCOUNTABILITY
+--------------------------------------------------------------------------------
+
+  7.1 Total Deployment Assumption: The User assumes exhaustive, 100% 
+      responsibility for the configuration, maintenance, and security of all 
+      deployments and instances of the Software.
+  7.2 Core Operational Duties: The User is strictly accountable for engineering 
+      and managing the following elements:
+      (a) Ensuring absolute data accuracy and ledger integrity.
+      (b) Implementing rigorous Identity and Access Management (IAM).
+      (c) Hardening network and server security configurations.
+      (d) Utilizing industry-standard encryption protocols.
+      (e) Maintaining robust, redundant data backup and disaster recovery.
+      (f) Ensuring absolute regulatory and statutory compliance.
+      (g) Guaranteeing the operational and uptime integrity.
+      (h) Validating the mathematical and programmatic correctness of all 
+          simulated or actual financial transactions.
+  7.3 Suitability Evaluation: The User bears the sole burden of performing 
+      rigorous due diligence and evaluating the Software's suitability before 
+      deploying it in mission-critical or sensitive data environments.
+  7.4 Safeguarding Real Data: Should the User recklessly or intentionally choose 
+      to process real-world financial instruments or Personally Identifiable 
+      Information (PII) through the Software, they must unilaterally implement 
+      all necessary legal and technical safeguards.
+
+--------------------------------------------------------------------------------
+8. STRICTLY PROHIBITED USES
+--------------------------------------------------------------------------------
+
+  8.1 Unlawful Application: Under no circumstances shall the Software be 
+      utilized for any purpose that violates local, national, or international 
+      law.
+  8.2 Explicit Prohibitions: The following activities are strictly prohibited:
+      (a) Orchestrating or participating in financial fraud or digital theft.
+      (b) Facilitating money laundering or terrorist financing activities.
+      (c) Impersonating legally registered financial institutions.
+      (d) Constructing deceptive "phishing" banking interfaces.
+      (e) Engaging in credential harvesting or unauthorized network access.
+      (f) Executing identity theft or systemic misrepresentation.
+      (g) Storing illicit, illegal, or heavily sanctioned data.
+      (h) Evading financial regulatory oversight or taxation.
+      (i) Deploying malicious automation, botnets, or systemic API abuse.
+      (j) Facilitating unlawful digital surveillance or privacy violations.
+      (k) Running illegal or unlicensed shadow financial operations.
+  8.3 Absolution of the Author: The Author and all Contributors bear zero 
+      liability, legal or ethical, for any misuse, abuse, or unlawful 
+      application of the Software by any User or third party.
+
+--------------------------------------------------------------------------------
+9. EXPLICIT DISCLAIMER OF FINANCIAL SERVICES
+--------------------------------------------------------------------------------
+
+  9.1 Not a Bank: The Software is code; it is not a banking service. It does 
+      not possess a banking charter, nor does it operate under any financial 
+      regulatory umbrella.
+  9.2 Isolated Ledgers: Any deposits, account balances, wire transfers, or 
+      digital portfolios represented within the Software are strictly simulated 
+      data points. They do not exist outside of the User's isolated, self-hosted 
+      environment.
+  9.3 No Custodial Authority: The Software is inherently incapable of holding, 
+      transmitting, insuring, collateralizing, or managing real-world fiat 
+      currency or digital assets.
+
+--------------------------------------------------------------------------------
+10. TOTAL DISCLAIMER OF WARRANTIES
+--------------------------------------------------------------------------------
+
+  10.1 "AS-IS" Provision: THE SOFTWARE, IN ITS ENTIRETY, IS PROVIDED STRICTLY ON 
+       AN "AS-IS" AND "AS-AVAILABLE" BASIS, WITH ALL FAULTS, BUGS, AND 
+       IMPERFECTIONS.
+  10.2 Absence of Express/Implied Warranties: THE AUTHOR AND CONTRIBUTORS 
+       EXPLICITLY DISCLAIM ALL WARRANTIES, WHETHER EXPRESS, IMPLIED, STATUTORY, 
+       OR OTHERWISE, TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE JURISPRUDENCE.
+  10.3 Specific Disclaimers: This comprehensive disclaimer explicitly covers, 
+       but is not limited to, implied warranties of:
+       (a) Merchantability or commercial viability.
+       (b) Fitness for any specific, general, or niche purpose.
+       (c) Non-infringement of third-party intellectual property rights.
+       (d) Long-term system reliability or stability.
+       (e) Guaranteed uptime or network availability.
+       (f) Impermeable cybersecurity or cryptographic resilience.
+       (g) Protection against data corruption or loss.
+       (h) Absolute programmatic or financial correctness of internal logic.
+  10.4 Assumption of Risk: All risk associated with the quality, performance, 
+       and execution of the Software lies entirely and unilaterally with the 
+       User.
+
+--------------------------------------------------------------------------------
+11. ABSOLUTE LIMITATION OF LIABILITY
+--------------------------------------------------------------------------------
+
+  11.1 Cap on Damages: TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO 
+       EVENT SHALL THE AUTHOR, MAINTAINERS, OR CONTRIBUTORS BE HELD LIABLE FOR 
+       ANY DAMAGES OF ANY KIND ARISING OUT OF OR IN CONNECTION WITH THE USE OR 
+       INABILITY TO USE THE SOFTWARE.
+  11.2 Covered Damages: This absolute limitation of liability explicitly covers 
+       all forms of damages, including but not limited to:
+       (a) Direct, indirect, or catastrophic financial loss.
+       (b) Irreversible data loss, breaches, or corruption.
+       (c) Database or ledger corruption.
+       (d) Costly system downtime or network latency.
+       (e) Catastrophic system failure or hardware degradation.
+       (f) Widespread operational disruption to business processes.
+       (g) Fines, sanctions, or penalties levied by regulatory bodies.
+       (h) Loss of goodwill, trust, or reputational harm.
+       (i) Any other indirect, incidental, special, exemplary, or consequential 
+           damages.
+  11.3 Application of Theory: This exhaustive exclusion of liability applies 
+       regardless of the legal theory under which damages are sought, even if 
+       the Author has been previously advised of the precise possibility of 
+       such damages.
+
+--------------------------------------------------------------------------------
+12. DATA OWNERSHIP AND SECURITY POSTURE
+--------------------------------------------------------------------------------
+
+  12.1 Localized Data Sovereignty: The Software is architected to store data 
+       strictly locally or within the explicit cloud, server, or hardware 
+       environments defined and provisioned by the User.
+  12.2 No Default Telemetry: Except for the highly specific initialization 
+       process detailed meticulously in Section 12A, the Project does not 
+       natively collect, transmit, intercept, or scrape User data by default.
+  12.3 User Security Imperatives: Users maintain the exclusive and non-
+       transferable responsibility for:
+       (a) Securing physical and digital storage mediums.
+       (b) Managing cryptographic keys and encryption standards.
+       (c) Engineering robust authentication and authorization gateways.
+       (d) Executing verifiable and redundant backups.
+       (e) Maintaining strict legal compliance regarding data residency and 
+           privacy.
+  12.4 Zero Author Access: The Author possesses zero administrative rights, 
+       backdoor access, or visibility into any User's private deployment.
+
+--------------------------------------------------------------------------------
+12A. SETUP NOTIFICATION TO THE AUTHOR (TELEMETRY DISCLOSURE)
+--------------------------------------------------------------------------------
+
+  12A.1 Automated Initialization Ping: During the initial installation setup, 
+        bootstrap phase, or first-time execution of the Software, a one-time 
+        automated notification payload is securely transmitted to the Author.
+  12A.2 Mandatory Component: This telemetry ping is engineered as an embedded, 
+        mandatory component of the standard Software setup workflow. It is not 
+        an optional toggle in the official, unedited distributions of the 
+        Project.
+  12A.3 Minimalist Metadata Scope: The payload transmitted is strictly limited 
+        to non-sensitive, high-level installation metadata. Specifically, it 
+        includes only:
+        (a) Generalized Geographic Region (e.g., North America, Europe).
+        (b) Country of Origin (derived locally or via IP).
+        (c) The exact Timestamp of the setup execution.
+        (d) The specific Version Number of the Software being deployed.
+  12A.4 Strict Exclusion of PII: Absolutely NO personal identifiable information 
+        (PII), administrative credentials, financial data, internal IP schemas, 
+        or user records are scraped, bundled, or transmitted.
+  12A.5 Stated Purpose of Notification: The exclusive purpose of this mechanism 
+        is to provide the Author with macro-level visibility into the global 
+        reach of the Project. It serves as a psychological and professional 
+        incentive to continue dedicating unpaid time to open-source development.
+        In the Author's own words:
+        "When you install and run my project somewhere in the world, a small 
+        note reaches me telling me the region and country. It genuinely 
+        motivates me to keep building and improving the Software knowing it is 
+        being used globally. This is only about encouragement and awareness -- 
+        nothing more."
+  12A.6 Operational Limitations of the Ping: The setup notification is highly 
+        restricted. It explicitly:
+        (a) Does not track, monitor, or log ongoing day-to-day usage or 
+            transactions.
+        (b) Does not monitor user behavior, keystrokes, or network traffic.
+        (c) Does not identify specific individuals, corporations, or hostnames.
+        (d) Does not create longitudinal behavioral profiles.
+        (e) Does not persist any background telemetry daemons after the initial 
+            setup completes.
+  12A.7 Informed Consent: By willingly installing, compiling, or executing the 
+        Software, the User explicitly acknowledges, understands, and freely 
+        consents to this one-time network transmission.
+  12A.8 Zero Functional Impact: The success or failure of this notification 
+        mechanism has absolutely zero bearing on the core functionality, data 
+        processing capabilities, or financial logic of the Software.
+  12A.9 Offline Environments: If the Software is deployed in a strictly air-
+        gapped or offline network environment, the notification script is 
+        designed to fail silently and gracefully without causing application 
+        crashes or blocking the setup.
+  12A.10 Rights of Derivative Authors: Developers authoring Derivative Works are 
+         fully within their rights under the Open Source License to strip, 
+         alter, or bypass this notification mechanism in their own distributed 
+         forks.
+  12A.11 Data Stewardship: The sparse metadata emails received by the Author 
+         are treated with respect. They are not sold to data brokers, shared 
+         with marketing agencies, published publicly, or utilized for any 
+         targeted advertising.
+
+--------------------------------------------------------------------------------
+13. GOVERNANCE OF CONTRIBUTIONS
+--------------------------------------------------------------------------------
+
+  13.1 Licensing of Submissions: Any individual contributing code implicitly and 
+       explicitly grants rights to their contribution under the exact terms of 
+       the Project's repository license (Inbound=Outbound principle).
+  13.2 Lawfulness and Originality: All submitted code, documentation, and assets 
+       must be strictly lawful and represent the original work of the 
+       Contributor, devoid of stolen intellectual property.
+  13.3 Affirmation of Rights: Contributors legally affirm and warrant that they 
+       possess the unencumbered rights, titles, and permissions necessary to 
+       submit the content to the public domain or under the Project's license.
+  13.4 Integration into Open Source: Upon acceptance, contributions permanently 
+       become part of the collective open-source Project ecosystem.
+
+--------------------------------------------------------------------------------
+14. MANAGEMENT OF DERIVATIVE WORKS
+--------------------------------------------------------------------------------
+
+  14.1 Freedom to Fork: Users are actively encouraged and legally permitted to 
+       fork the codebase and create robust Derivative Works.
+  14.2 License Compliance: The creation, distribution, and monetization of any 
+       Derivative Work must be executed in absolute compliance with the 
+       strictures of the foundational Open Source License.
+  14.3 Prohibition of Misrepresentation: Modified versions, forks, or derivative 
+       platforms must not deceptively misrepresent their origin, nor should they 
+       fraudulently claim to be the official "Bank-With-High-Functionalities" 
+       release.
+  14.4 Severance of Responsibility: The Author bears zero technical, legal, or 
+       moral responsibility for bugs, vulnerabilities, or legal infractions 
+       introduced by third parties in Derivative Works.
+
+--------------------------------------------------------------------------------
+15. MANDATORY ATTRIBUTION
+--------------------------------------------------------------------------------
+
+  15.1 Preservation of Credit: Where strictly required by the specific Open 
+       Source License utilized, original copyright headers, inline attribution, 
+       and credit to ViratiAkiraNandhanReddy must be carefully preserved and 
+       left intact.
+  15.2 Plagiarism Prohibition: Users, corporations, and third-party developers 
+       are strictly forbidden from systematically removing copyright notices to 
+       falsely claim original authorship of the foundational Software.
+
+--------------------------------------------------------------------------------
+16. THIRD-PARTY COMPONENTS AND DEPENDENCIES
+--------------------------------------------------------------------------------
+
+  16.1 Ecosystem Reliance: The Software is built upon modern development 
+       frameworks and may inherently include, link to, or reference third-party 
+       libraries, APIs, packages, and components.
+  16.2 Autonomous Licensing: These upstream third-party components are wholly 
+       governed by their own respective creators and their distinct software 
+       licenses.
+  16.3 Independent Review Burden: It is the exclusive duty of the User to 
+       independently identify, review, and ensure strict compliance with all 
+       third-party licenses bundled within the Software dependency tree.
+
+--------------------------------------------------------------------------------
+17. RIGOROUS REGULATORY COMPLIANCE
+--------------------------------------------------------------------------------
+
+  17.1 Jurisdictional Burden: Users shoulder the absolute and exclusive 
+       responsibility for guaranteeing that their deployment and utilization of 
+       the Software complies entirely with all applicable laws within their 
+       specific operational jurisdiction.
+  17.2 Scope of Compliance: This regulatory burden specifically includes, but is 
+       widely not limited to, laws pertaining to:
+       (a) Banking, securities, and financial technology regulations.
+       (b) Cryptography, encryption export controls, and import restrictions.
+       (c) Software patent laws and intellectual property rights.
+       (d) Comprehensive data protection frameworks.
+       (e) The provisioning of digital, telecom, and internet services.
+       (f) Consumer protection, truth-in-advertising, and anti-deception 
+           statutes.
+  17.3 Absence of Safe Harbor: The Author provides absolutely zero assurances, 
+       certifications, or guarantees that the Software is legally compliant for 
+       use in any specific regulated industry or territory out of the box.
+
+--------------------------------------------------------------------------------
+18. INTERNATIONAL USAGE AND EXPORT CONTROLS
+--------------------------------------------------------------------------------
+
+  18.1 Global Availability: The Software is hosted on the public internet and is 
+       inherently available to a worldwide audience.
+  18.2 Variable Legal Permissibility: The legal permissibility of utilizing 
+       banking simulation software, cryptographic libraries, or specific data 
+       structures varies wildly from nation to nation.
+  18.3 User Affirmation: Users must unilaterally ensure that their access to, 
+       and use of, the Software is wholly lawful in their physical location, 
+       strictly avoiding deployment in comprehensively sanctioned or embargoed 
+       territories where open-source distribution is prohibited by international 
+       law.
+
+--------------------------------------------------------------------------------
+19. SUPPORT, MAINTENANCE, AND SLAS
+--------------------------------------------------------------------------------
+
+  19.1 No Guaranteed Support: The Software is strictly a community-driven, open-
+       source initiative and is provided absolutely without any guarantee of 
+       technical support, bug fixes, or security patches.
+  19.2 Voluntary Community Assistance: Any support that does exist is entirely 
+       voluntary, community-led, and provided via public forums or issue 
+       trackers without urgency or obligation.
+  19.3 Absence of Service Level Agreements: Absolutely no Service-Level 
+       Agreements (SLAs), uptime guarantees, or response-time commitments apply 
+       to the Software or the Project in any capacity.
+
+--------------------------------------------------------------------------------
+20. TERMINATION AND REVOCATION
+--------------------------------------------------------------------------------
+
+  20.1 Active Term: The strictures, liabilities, and behavioral mandates 
+       outlined in these Terms apply dynamically for the entire duration that 
+       the Software is possessed, deployed, or utilized by the User.
+  20.2 Survival of License Rights: The foundational copyright rights granted to 
+       the User under the Open Source License continue perpetually, provided the 
+       User remains in compliance with that specific license.
+  20.3 Project Discontinuation: The Author reserves the sovereign right to 
+       permanently archive, update, modify, or completely discontinue the 
+       Project, its repositories, and its development at any time, without prior 
+       notice or liability to existing Users.
+
+--------------------------------------------------------------------------------
+21. MODIFICATIONS TO THESE TERMS
+--------------------------------------------------------------------------------
+
+  21.1 Right to Update: The Author reserves the right to formally update, 
+       modify, or completely overhaul these Terms of Service at their sole 
+       discretion periodically.
+  21.2 Effective Publication: Updated versions of these Terms become immediately 
+       legally binding upon their formal publication and commit to the primary 
+       Project repository.
+  21.3 Implicit Acceptance: The User's continued possession, deployment, or 
+       interaction with the Software following the publication of revised Terms 
+       constitutes their irrevocable acceptance of the updated agreement.
+
+--------------------------------------------------------------------------------
+22. SEVERABILITY CLAUSE
+--------------------------------------------------------------------------------
+
+  22.1 Protection of the Agreement: If any individual provision, clause, or sub-
+       section of these Terms is deemed by a court of competent jurisdiction to 
+       be invalid, illegal, or unenforceable, such determination shall not 
+       affect the validity of the remainder of the Agreement. 
+  22.2 Continued Enforcement: All remaining provisions shall remain in full 
+       force and effect, interpreted in a manner that most closely aligns with 
+       the original intent of the Author.
+
+--------------------------------------------------------------------------------
+23. GOVERNING PRINCIPLES AND JURISDICTION
+--------------------------------------------------------------------------------
+
+  23.1 Global Intent: These Terms are fundamentally drafted to be universally 
+       enforceable and globally applicable to all Users, regardless of geographic 
+       location.
+  23.2 Local Mandates: In the event that local, sovereign law mandates a specific 
+       jurisdiction for dispute resolution regarding software licensing, the 
+       applicable local laws of the User's jurisdiction shall govern.
+  23.3 General Principles: In the absence of such specific legal mandates, the 
+       broad, general principles of international open-source software licensing 
+       and contract law shall exclusively apply.
+
+--------------------------------------------------------------------------------
+24. DISCLAIMER OF PROFESSIONAL ADVICE
+--------------------------------------------------------------------------------
+
+  24.1 Non-Advisory Status: The Software, its internal logic, and all associated 
+       technical documentation do not, under any circumstances, constitute or 
+       substitute for professional advice. Specifically, they do not provide:
+       (a) Binding legal counsel or compliance advice.
+       (b) Certified financial, investment, or banking advice.
+       (c) Professional accounting, tax, or auditing guidance.
+       (d) Regulatory interpretation or institutional compliance guidance.
+  24.2 Mandate for Professional Counsel: Users attempting to utilize the 
+       concepts embedded within the Software for real-world business 
+       applications must independently retain and consult with certified, 
+       licensed professionals in the relevant fields.
+
+--------------------------------------------------------------------------------
+25. ENTIRE AGREEMENT (INTEGRATION CLAUSE)
+--------------------------------------------------------------------------------
+
+  25.1 Comprehensive Contract: These Terms of Service, when read in strict 
+       conjunction with the accompanying Open Source License file, constitute 
+       the entire, exhaustive, and integrated legal agreement between the User 
+       and the Author regarding the access and use of the Software.
+  25.2 Superseding Authority: This Agreement fully supersedes and replaces any 
+       prior or contemporaneous understandings, proposals, agreements, or 
+       communications--whether oral, written, or implied--relating to the 
+       subject matter contained herein.
+
+--------------------------------------------------------------------------------
+26. OFFICIAL CONTACT INFORMATION
+--------------------------------------------------------------------------------
+
+For inquiries, security disclosures, or formal communications regarding the 
+Project:
+
+  Author: Virati Akiranandhan Reddy
+  GitHub: ViratiAkiraNandhanReddy
+  Communication Channels: Please refer exclusively to the official Project 
+  repository homepage (e.g., the GitHub README.md or SECURITY.md) for the most 
+  current, monitored, and official contact channels and security vulnerability 
+  reporting guidelines.
+
+================================================================================
+END OF TERMS OF SERVICE
+================================================================================
