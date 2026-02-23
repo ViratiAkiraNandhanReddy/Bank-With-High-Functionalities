@@ -121,8 +121,8 @@ Username updates do not change contribution order and do not create duplicate en
 </td>
 
 <td align="center">
-<a href="https://github.com/exampleUSERNAME1" target="_blank" title="@exampleUSERNAME1">
-<img src="https://github.com/exampleUSERNAME1.png" width="96px" alt="@exampleUSERNAME1"/>
+<a href="https://github.com/ZeroMergeConflicts" target="_blank" title="@ZeroMergeConflicts">
+<img src="https://github.com/ZeroMergeConflicts.png" width="96px" alt="@ZeroMergeConflicts"/>
 </a>
 </td>
 
