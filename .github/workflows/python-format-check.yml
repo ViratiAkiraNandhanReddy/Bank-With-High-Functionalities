@@ -1,4 +1,4 @@
-name: Python Code Formatting Check (Black)
+name: python-format-check
 
 on:
 
@@ -9,6 +9,8 @@ on:
   pull_request:
     paths:
       - "**/*.py"
+
+  workflow_dispatch:
 
 jobs:
   black:
