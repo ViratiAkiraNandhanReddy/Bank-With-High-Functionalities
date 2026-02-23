@@ -1,4 +1,4 @@
-name: Lint Contributors (Markdown)
+name: lint-contributors
 
 on:
 
