@@ -31,6 +31,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 [unreleased]: https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/compare/v0.0.0...HEAD
-[0.0.0]: https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/compare/v0.0.0...v0.0.0
-[0.0.0]: https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/compare/v0.0.0...v0.0.0
 [0.0.0]: https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/releases/tag/v0.0.0
