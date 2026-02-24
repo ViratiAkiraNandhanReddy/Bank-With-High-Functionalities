@@ -141,9 +141,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 -
 
-[unreleased]: https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/compare/v0.0.0...HEAD
-[0.0.0]: https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/compare/v0.0.0...v0.0.0
-[0.0.0]: https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/compare/v0.0.0...v0.0.0
+[unreleased]: https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/releases/tag/v1.0.0
 [0.0.0]: https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/releases/tag/v0.0.0
 ```
 
@@ -226,6 +225,38 @@ changelog: [Unreleased] - prepare entries for v1.0.0
 
 ### Security
 - Sanitize user input in transfer module
+```
+
+---
+
+## 9. Link References in CHANGELOG.md
+
+The bottom of `CHANGELOG.md` contains reference links for version comparisons and releases.  
+These links enable GitHub to automatically create clickable version headings and compare views.
+
+### Purpose
+
+- `[unreleased]` → compares latest released version to current `HEAD`
+- `[x.y.z]` → links to the GitHub release tag for that version
+- Keeps changelog headings clean and clickable
+- Follows Keep a Changelog recommended style
+
+---
+
+### When Releasing a New Version
+
+When releasing `vX.Y.Z`:
+
+1. Move Unreleased content → new version section
+2. Update comparison base in `[unreleased]`
+3. Add new version link
+
+Example for `v1.0.0`:
+
+```md
+[unreleased]: https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/releases/tag/v1.0.0
+[0.0.0]: https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/releases/tag/v0.0.0
 ```
 
 ---
