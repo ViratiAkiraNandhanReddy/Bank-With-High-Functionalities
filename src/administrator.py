@@ -1,10 +1,6 @@
 from . import *
 from PIL import Image
 
-icon__developer_mode_tv = Image.open(
-    rf"{DIR_PATH}\assets\icons\material icons\developer_mode_tv.png"
-)
-
 
 class administrator:
     def __init__(self, parent: customtkinter.CTk):
