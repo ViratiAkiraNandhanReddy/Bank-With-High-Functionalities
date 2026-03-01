@@ -2,32 +2,66 @@ import subprocess
 
 
 def Open_Browser_For_Specified_URL(url: str) -> None:
+    """
+    Opens the given URL using the system's default browser via Windows shell command.
+    Windows-only functionality.
 
-    '''
-	## Purpose
-	The `Open_Browser_For_Specified_URL` function is designed to open a specified URL in the default web browser.  
-    It supports only Windows operating systems.
+    ### Parameters
+    - **url** (`str`): The URL to be opened in the browser.
 
-	## Parameters
-	- `url` (str): The url to be opened in the browser.
+    ### Returns
+    - `None`
 
-	## Return Type
-	- `None`: This function does not return any value.
+    ### Example
+    ```python
+    Open_Browser_For_Specified_URL("https://www.example.com")
+    ```
 
-	## Exception Handling
-	The function includes exception handling to log errors and provide a fallback message if the URL cannot be opened. Errors are logged in the log files.
+    ### Notes
+    - Requires Windows operating system
+    - Ensure system has a default browser configured
+    - Uses `subprocess.run()` to execute shell command
+    - Errors are logged to log files
+    """
 
-	## Example Usage
-	```python
-	# Example usage of Open_Browser_For_Specified_URL
-	Open_Browser_For_Specified_URL("https://www.example.com")
-	```
+    try:
+        subprocess.run(f"START {url}", shell=True)
 
-	## Notes
-	- Ensure that the system has a default browser configured.
-	- The `subprocess.run` method is used to execute the command in the shell.
-	'''
+    except:
+        raise NotImplementedError
 
-    try: subprocess.run(f"START {url}", shell = True)
 
-    except : raise NotImplementedError
+def Open_Browser_For_Specified_Internal_File(file_dir: str) -> None:
+    """Open an internal file in the default web browser using file:// URL.
+
+    Converts the provided file path to a `file:///` URL and opens it in the system's
+    default browser. Windows-only functionality.
+
+    ### Parameters
+    - **file_dir** (`str`): The absolute or relative path of the internal file to open.
+
+    ### Returns
+    - `None`
+
+    ### Example
+    ```python
+    Open_Browser_For_Specified_Internal_File("C:/<...>/Bank-With-High-Functionalities/LICENSE")
+    ```
+
+    ### Notes
+    - Requires Windows operating system
+    - File path is internally converted to valid `file:///` URL format
+    - Backslashes are automatically converted to forward slashes
+    - Uses `subprocess.run()` to execute command via Windows shell
+    - Default browser must be configured on the system
+    - Errors are logged to log files
+    """
+
+    try:
+        subprocess.run(
+            ["cmd", "/c", "START", "", f'file:///{file_dir.replace("\\\\", "/")}'],
+            shell=True,
+        )
+
+    except:
+        raise NotImplementedError
