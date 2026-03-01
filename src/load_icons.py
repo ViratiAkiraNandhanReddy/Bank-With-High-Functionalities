@@ -6,6 +6,7 @@ DIR_PATH: str = str(os.environ.get("LOCALAPPDATA")) + r"\Bank-With-High-Function
 # --- common --- #
 
 icon__close = Image.open(rf"{DIR_PATH}\assets\icons\material icons\close.png")
+icon__more_horiz = Image.open(rf"{DIR_PATH}\assets\icons\material icons\more_horiz.png")
 
 # --- login.py --- #
 
