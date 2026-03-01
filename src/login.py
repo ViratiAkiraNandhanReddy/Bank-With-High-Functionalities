@@ -39,6 +39,13 @@ class login_interface:
             apply_style(self.window, "transparent")
             title_bar.hide(self.window, no_span=True)
 
+            self.window.bind(
+                "<Button-1>",
+                lambda event: move_tk_with_no_titlebar_winos_native_ctypes(
+                    event, self.window
+                ),
+            )
+
             self.window.after(600, self.show_login_rtl)
 
             # --- Login Screen Configuration --- #
