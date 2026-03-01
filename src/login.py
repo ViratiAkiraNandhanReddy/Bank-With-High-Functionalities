@@ -1,18 +1,7 @@
 from . import *
-from PIL import Image
-from random import randint
-from .signup import signup_interface
 from .dashboard import dashboard
+from .signup import signup_interface
 from .administrator import administrator
-
-icon__password = Image.open(rf"{DIR_PATH}\assets\icons\material icons\password.png")
-icon__security = Image.open(rf"{DIR_PATH}\assets\icons\material icons\security.png")
-icon__account_circle = Image.open(
-    rf"{DIR_PATH}\assets\icons\material icons\account_circle.png"
-)
-icon__developer_mode_tv = Image.open(
-    rf"{DIR_PATH}\assets\icons\material icons\developer_mode_tv.png"
-)
 
 
 class login_interface:
@@ -43,9 +32,12 @@ class login_interface:
 
             self.window = customtkinter.CTk()
             self.window.title("Bank With High Functionalities")
-            self.window.geometry("950x600+100+40")
-            self.window.resizable(False, False)
-            self.window.protocol("WM_DELETE_WINDOW", self.popup_at_exit_root)
+            self.window.geometry("1100x650+100+40")
+            self.window.minsize(1000, 650)
+            self.window.maxsize(1000, 650)
+
+            apply_style(self.window, "transparent")
+            title_bar.hide(self.window, no_span=True)
 
             self.window.after(600, self.show_login_rtl)
 
@@ -60,12 +52,14 @@ class login_interface:
                 font=("Freestyle Script", 42, "bold"),
                 width=5,
             )
+
             self.__greet_login = customtkinter.CTkLabel(
                 self.frame__login,
                 text="Welcome Back!",
                 font=("Roboto", 30, "bold"),
                 text_color="#57D956",
             )
+
             self.__subheading_login = customtkinter.CTkLabel(
                 self.frame__login,
                 text="Sign in to Your Account",
@@ -86,6 +80,7 @@ class login_interface:
                 ),
                 compound="top",
             )
+
             self.__username = customtkinter.CTkEntry(
                 self.frame__login,
                 placeholder_text="Example: Virati Akira Nandhan Reddy",
@@ -106,6 +101,7 @@ class login_interface:
                 ),
                 compound="top",
             )
+
             self.__forgot_password_button_login = customtkinter.CTkButton(
                 self.frame__login,
                 text="Forgot Password",
@@ -117,6 +113,7 @@ class login_interface:
                 text_color="#218CFF",
                 command=self.hide_login_frame__show_reset_password_frame,
             )
+
             self.__password = customtkinter.CTkEntry(
                 self.frame__login,
                 placeholder_text="Example: Viratiaki@Akki#2008",
@@ -138,6 +135,7 @@ class login_interface:
                 font=("Roboto", 16, "bold"),
                 command=self.validate_and_redirect_to_dashboard,
             )
+
             self.__sign_up_message_login = customtkinter.CTkLabel(
                 self.frame__login,
                 text="Don't You Have An Account? ",
@@ -145,6 +143,7 @@ class login_interface:
                 width=0,
                 height=0,
             )
+
             self.__sign_up_button_login = customtkinter.CTkButton(
                 self.frame__login,
                 text="Sign Up",
@@ -162,6 +161,7 @@ class login_interface:
             self.frame__reset_password = customtkinter.CTkFrame(
                 self.window, corner_radius=0
             )
+
             self.frame__reset_password.configure(width=400, height=560)
             self.frame__reset_password.place(x=self.x_axis_ltr, y=20)
             self.__heading_reset_password = customtkinter.CTkLabel(
@@ -170,12 +170,14 @@ class login_interface:
                 font=("Freestyle Script", 42, "bold"),
                 width=5,
             )
+
             self.__greet_reset_password = customtkinter.CTkLabel(
                 self.frame__reset_password,
                 text="Get Your Account Back!",
                 font=("Roboto", 20, "bold"),
                 text_color="#57D956",
             )
+
             self.__subheading_reset_password = customtkinter.CTkLabel(
                 self.frame__reset_password,
                 text="Enter Required Credentials",
@@ -196,6 +198,7 @@ class login_interface:
                 ),
                 compound="top",
             )
+
             self.__username_at_reset_password = customtkinter.CTkEntry(
                 self.frame__reset_password,
                 placeholder_text="Example: Virati Akira Nandhan Reddy",
@@ -217,6 +220,7 @@ class login_interface:
                 compound="top",
                 height=0,
             )
+
             self.__forgot_security_code_button_reset_password = customtkinter.CTkButton(
                 self.frame__reset_password,
                 text="Forgot Security Code",
@@ -228,6 +232,7 @@ class login_interface:
                 text_color="#218CFF",
                 command=self.forgot_security_code,
             )
+
             self.__security_code_at_reset_password = customtkinter.CTkEntry(
                 self.frame__reset_password,
                 placeholder_text="Example: Viratiaki@Akki",
@@ -250,6 +255,7 @@ class login_interface:
                 hover_color="Light Blue",
                 command=self.request_for_password_reset,
             )
+
             self.__cancel_reset_password = customtkinter.CTkButton(
                 self.frame__reset_password,
                 text="Cancel",
@@ -432,15 +438,33 @@ class login_interface:
 
         def redirect_to_signup(self) -> None:  # Redirects To The Signup Module
 
-            self.window.withdraw()  # Hiding The Login Window
-
             try:
 
                 signup_window = signup_interface.signup(
                     self.window
                 )  # Opening The Signup Window
-                self.window.wait_window(signup_window.window__signup)
-                self.window.deiconify()  # Re-Opening The Login Window After Signing Up
+                self.hide_contents_login()
+                self.hide_login_rtl()
+
+                def cancel_signup_action():
+                    signup_window.hide_frame()
+                    self.show_login_rtl()
+                    self.show_contents_login()
+
+                self.window.after(480, signup_window.show_frame)
+                customtkinter.CTkButton(
+                    signup_window.frame__signup,
+                    text="",
+                    image=customtkinter.CTkImage(
+                        light_image=icon__close, dark_image=icon__close, size=(20, 20)
+                    ),
+                    command=cancel_signup_action,
+                    width=0,
+                    corner_radius=0,
+                    hover_color="#C42B1C",
+                    fg_color="transparent",
+                ).place(x=882, y=0)
+                # self.window.wait_window(signup_window.window__signup)
 
             except:
 
