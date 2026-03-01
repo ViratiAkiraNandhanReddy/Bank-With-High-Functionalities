@@ -22,22 +22,23 @@ class login_interface:
             # --- X-Axis Configuration For Animation --- #
 
             self.x_axis_rtl = (
-                +960
+                +1110
             )  # login screen frame starts from right to left (initially outside the window) -- rtl
             self.x_axis_ltr = (
-                -410
+                -910
             )  # reset password screen frame starts from left to right (initially outside the window) -- ltr
 
             # --- Main Window Configuration --- #
 
             self.window = customtkinter.CTk()
-            self.window.title("Bank With High Functionalities")
+            self.window.title(" ")
             self.window.geometry("1100x650+100+40")
-            self.window.minsize(1000, 650)
-            self.window.maxsize(1000, 650)
 
             apply_style(self.window, "transparent")
             title_bar.hide(self.window, no_span=True)
+
+            self.window.minsize(1100, 650)
+            self.window.maxsize(1100, 650)
 
             self.window.bind(
                 "<Button-1>",
@@ -48,10 +49,28 @@ class login_interface:
 
             self.window.after(600, self.show_login_rtl)
 
+            self.more_button = customtkinter.CTkButton(
+                self.window,
+                text="",
+                image=customtkinter.CTkImage(
+                    light_image=icon__more_horiz,
+                    dark_image=icon__more_horiz,
+                    size=(12, 12),
+                ),
+                width=0,
+                height=0,
+                corner_radius=5,
+                hover_color="#43545F",
+                fg_color="transparent",
+                command=self.popup_at_exit_root,
+            )
+            
+            self.more_button.place(x=1080, y=0)
+
             # --- Login Screen Configuration --- #
 
             self.frame__login = customtkinter.CTkFrame(self.window, corner_radius=0)
-            self.frame__login.configure(width=400, height=560)
+            self.frame__login.configure(width=900, height=610)
             self.frame__login.place(x=self.x_axis_rtl, y=20)
             self.__heading_login = customtkinter.CTkLabel(
                 self.frame__login,
@@ -169,7 +188,7 @@ class login_interface:
                 self.window, corner_radius=0
             )
 
-            self.frame__reset_password.configure(width=400, height=560)
+            self.frame__reset_password.configure(width=900, height=610)
             self.frame__reset_password.place(x=self.x_axis_ltr, y=20)
             self.__heading_reset_password = customtkinter.CTkLabel(
                 self.frame__reset_password,
@@ -288,12 +307,12 @@ class login_interface:
 
             self.x_axis_rtl -= 10
 
-            if self.x_axis_rtl >= 530:
+            if self.x_axis_rtl >= 180:
 
                 self.frame__login.place(x=self.x_axis_rtl, y=20)
                 self.window.after(10, self.show_login_rtl)
 
-            if self.x_axis_rtl < 530:
+            if self.x_axis_rtl < 180:
 
                 return
 
@@ -304,12 +323,12 @@ class login_interface:
 
             self.x_axis_rtl += 10
 
-            if self.x_axis_rtl <= 960:
+            if self.x_axis_rtl <= 1110:
 
                 self.frame__login.place(x=self.x_axis_rtl, y=20)
                 self.window.after(10, self.hide_login_rtl)
 
-            if self.x_axis_rtl > 960:
+            if self.x_axis_rtl > 1110:
 
                 return
 
@@ -340,12 +359,12 @@ class login_interface:
 
             self.x_axis_ltr -= 10
 
-            if self.x_axis_ltr >= -410:
+            if self.x_axis_ltr >= -910:
 
                 self.frame__reset_password.place(x=self.x_axis_ltr, y=20)
                 self.window.after(10, self.hide_reset_password_ltr)
 
-            if self.x_axis_ltr < -410:
+            if self.x_axis_ltr < -910:
 
                 return
 
@@ -470,7 +489,7 @@ class login_interface:
                     corner_radius=0,
                     hover_color="#C42B1C",
                     fg_color="transparent",
-                ).place(x=882, y=0)
+                ).place(x=1032, y=0)
                 # self.window.wait_window(signup_window.window__signup)
 
             except:
