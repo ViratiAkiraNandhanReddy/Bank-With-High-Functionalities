@@ -30,12 +30,6 @@ class login_interface:
 
         def __init__(self) -> None:  # Initialize The Login Interface
 
-            # --- Background Image Configuration --- #
-
-            self.background__login = Image.open(
-                rf"{DIR_PATH}\assets\images\login_backgrounds\{randint(0, 30)}.jpg"
-            )
-
             # --- X-Axis Configuration For Animation --- #
 
             self.x_axis_rtl = (
@@ -52,15 +46,7 @@ class login_interface:
             self.window.geometry("950x600+100+40")
             self.window.resizable(False, False)
             self.window.protocol("WM_DELETE_WINDOW", self.popup_at_exit_root)
-            customtkinter.CTkLabel(
-                self.window,
-                text="",
-                image=customtkinter.CTkImage(
-                    light_image=self.background__login,
-                    dark_image=self.background__login,
-                    size=(950, 600),
-                ),
-            ).place(x=0, y=0)
+
             self.window.after(600, self.show_login_rtl)
 
             # --- Login Screen Configuration --- #
