@@ -21,3 +21,6 @@ icon__account_circle = Image.open(
 icon__developer_mode_tv = Image.open(
     rf"{DIR_PATH}\assets\icons\material icons\developer_mode_tv.png"
 )
+
+
+image_banner__login = Image.open(r"C:\Users\Virati Akira Nandhan Reddy\Downloads\login.jpg")

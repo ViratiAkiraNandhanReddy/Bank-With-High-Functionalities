@@ -6,7 +6,7 @@ from . import utils
 import customtkinter
 from . import __mail__
 from typing import Any
-from .load_icons import *
+from .loadAssets import *
 from dotenv import load_dotenv
 from .__server__ import SERVER
 from hPyT import title_bar, get_accent_color
