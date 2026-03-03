@@ -1,29 +1,29 @@
-from . import *
-from .dashboard import dashboard
-from .signup import signup_interface
-from .administrator import administrator
+from .. import *
+from ..dashboard import dashboard_interface
+from ..sign_up import sign_up_interface
+from .more_actions import more_actions_interface
 
 
-class login_interface:
+class sign_in_interface:
     """
-    Docstring for login_interface
+    Docstring for sign_in_interface
     """
 
     def __init__(self) -> None:
         pass
 
-    class login:
+    class sign_in:
         """
-        Docstring for login
+        Docstring for sign_in
         """
 
-        def __init__(self) -> None:  # Initialize The Login Interface
+        def __init__(self) -> None:  # Initialize The Sign In Interface
 
             # --- X-Axis Configuration For Animation --- #
 
             self.x_axis_rtl = (
                 +1110
-            )  # login screen frame starts from right to left (initially outside the window) -- rtl
+            )  # sign in screen frame starts from right to left (initially outside the window) -- rtl
             self.x_axis_ltr = (
                 -910
             )  # reset password screen frame starts from left to right (initially outside the window) -- ltr
@@ -31,7 +31,7 @@ class login_interface:
             # --- Main Window Configuration --- #
 
             self.window = customtkinter.CTk()
-            self.window.title(" ")
+            self.window.title("Bank With High Functionalities")
             self.window.geometry("1100x650+100+40")
 
             apply_style(self.window, "transparent")
@@ -47,7 +47,7 @@ class login_interface:
                 ),
             )
 
-            self.window.after(800, self.show_login_rtl)
+            self.window.after(800, self.show_sign_in_rtl)
 
             self.more_button = customtkinter.CTkButton(
                 self.window,
@@ -62,55 +62,55 @@ class login_interface:
                 corner_radius=0,
                 hover_color="#43545F",
                 fg_color="black",
-                command=self.popup_at_exit_root,
+                command=self.more_action__overlay_frame,
             )
 
             self.more_button.place(x=1080, y=0)
 
-            # --- Login Screen Configuration --- #
+            # --- Sign In Screen Configuration --- #
 
-            self.frame__login = customtkinter.CTkFrame(self.window, corner_radius=0)
-            self.frame__login.configure(width=900, height=610)
-            self.frame__login.place(x=self.x_axis_rtl, y=20)
+            self.frame__sign_in = customtkinter.CTkFrame(self.window, corner_radius=0)
+            self.frame__sign_in.configure(width=900, height=610)
+            self.frame__sign_in.place(x=self.x_axis_rtl, y=20)
 
-            self.internal_frame_00__login = customtkinter.CTkFrame(
-                self.frame__login,
+            self.internal_frame_00__sign_in = customtkinter.CTkFrame(
+                self.frame__sign_in,
                 width=450,
                 height=610,
                 fg_color="#000000",
                 corner_radius=0,
             )
 
-            # self.internal_frame_00__login.place(x=0, y=0)
+            # self.internal_frame_00__sign_in.place(x=0, y=0)
 
-            set_opacity(self.internal_frame_00__login.winfo_id(), 1)
+            set_opacity(self.internal_frame_00__sign_in.winfo_id(), 1)
 
-            self.__login_banner = customtkinter.CTkLabel(
-                self.internal_frame_00__login,
+            self.__sign_in_banner = customtkinter.CTkLabel(
+                self.internal_frame_00__sign_in,
                 text="",
                 image=customtkinter.CTkImage(
-                    light_image=image__banner_login,
-                    dark_image=image__banner_login,
+                    light_image=image__banner_sign_in,
+                    dark_image=image__banner_sign_in,
                     size=(450, 610),
                 ),
             )
 
-            self.__login_banner.place(x=0, y=0)
+            self.__sign_in_banner.place(x=0, y=0)
 
-            set_opacity(self.__login_banner.winfo_id(), 1)
+            set_opacity(self.__sign_in_banner.winfo_id(), 1)
 
-            self.internal_frame_01__login = customtkinter.CTkFrame(
-                self.frame__login,
+            self.internal_frame_01__sign_in = customtkinter.CTkFrame(
+                self.frame__sign_in,
                 width=450,
                 height=610,
                 fg_color="transparent",
                 corner_radius=0,
             )
 
-            # self.internal_frame_01__login.place(x=450, y=0)
+            # self.internal_frame_01__sign_in.place(x=450, y=0)
 
             customtkinter.CTkLabel(
-                self.internal_frame_01__login,
+                self.internal_frame_01__sign_in,
                 text="Sign in to BWHF!",
                 font=("Segoe UI", 29, "bold"),
                 text_color="#FFFFFF",
@@ -126,8 +126,8 @@ class login_interface:
 
             # --- Username Entry --- #
 
-            container_frame__username_login = customtkinter.CTkFrame(
-                self.internal_frame_01__login,
+            container_frame__username_sign_in = customtkinter.CTkFrame(
+                self.internal_frame_01__sign_in,
                 width=350,
                 height=40,
                 fg_color="transparent",
@@ -136,8 +136,8 @@ class login_interface:
                 corner_radius=6,
             )
 
-            container_frame__username_label_login = customtkinter.CTkLabel(
-                self.internal_frame_01__login,
+            container_frame__username_label_sign_in = customtkinter.CTkLabel(
+                self.internal_frame_01__sign_in,
                 text="username or uuid",
                 font=("Roboto", 10),
                 height=12,
@@ -146,7 +146,7 @@ class login_interface:
             )
 
             customtkinter.CTkLabel(
-                container_frame__username_login,
+                container_frame__username_sign_in,
                 image=customtkinter.CTkImage(
                     light_image=icon__account_circle,
                     dark_image=icon__account_circle,
@@ -155,10 +155,10 @@ class login_interface:
                 text="",
             ).place(x=8, rely=0.5, anchor="w")
 
-            container_frame__username_login.place(x=50, y=280)
+            container_frame__username_sign_in.place(x=50, y=280)
 
             self.__username = customtkinter.CTkEntry(
-                container_frame__username_login,
+                container_frame__username_sign_in,
                 placeholder_text="username or uuid",
                 width=350 - 40,
                 height=40 - 8,
@@ -172,7 +172,7 @@ class login_interface:
             self.__username.bind(
                 "<FocusIn>",
                 lambda event: (
-                    container_frame__username_label_login.place(x=70, y=273)
+                    container_frame__username_label_sign_in.place(x=70, y=273)
                     if not self.__username.get()
                     else None
                 ),
@@ -180,7 +180,7 @@ class login_interface:
             self.__username.bind(
                 "<FocusOut>",
                 lambda event: (
-                    container_frame__username_label_login.place_forget()
+                    container_frame__username_label_sign_in.place_forget()
                     if not self.__username.get()
                     else None
                 ),
@@ -188,8 +188,8 @@ class login_interface:
 
             # --- Password Entry And Reset Password --- #
 
-            container_frame__password_login = customtkinter.CTkFrame(
-                self.internal_frame_01__login,
+            container_frame__password_sign_in = customtkinter.CTkFrame(
+                self.internal_frame_01__sign_in,
                 width=350,
                 height=40,
                 fg_color="transparent",
@@ -198,8 +198,8 @@ class login_interface:
                 corner_radius=6,
             )
 
-            container_frame__password_label_login = customtkinter.CTkLabel(
-                self.internal_frame_01__login,
+            container_frame__password_label_sign_in = customtkinter.CTkLabel(
+                self.internal_frame_01__sign_in,
                 text="password",
                 font=("Roboto", 10),
                 height=12,
@@ -208,7 +208,7 @@ class login_interface:
             )
 
             customtkinter.CTkLabel(
-                container_frame__password_login,
+                container_frame__password_sign_in,
                 image=customtkinter.CTkImage(
                     light_image=icon__password,
                     dark_image=icon__password,
@@ -217,10 +217,10 @@ class login_interface:
                 text="",
             ).place(x=8, rely=0.5, anchor="w")
 
-            container_frame__password_login.place(x=50, y=340)
+            container_frame__password_sign_in.place(x=50, y=340)
 
             customtkinter.CTkButton(
-                self.internal_frame_01__login,
+                self.internal_frame_01__sign_in,
                 text="forgot password?",
                 height=0,
                 width=76,  # 74
@@ -229,11 +229,11 @@ class login_interface:
                 font=("Roboto", 9),
                 text_color="#218CFF",
                 border_spacing=0,
-                command=self.hide_login_frame__show_reset_password_frame,
+                command=self.hide_sign_in_frame__show_reset_password_frame,
             ).place(x=302, y=371)
 
             self.__password = customtkinter.CTkEntry(
-                container_frame__password_login,
+                container_frame__password_sign_in,
                 placeholder_text="password",
                 width=350 - 40,
                 height=40 - 8,
@@ -248,7 +248,7 @@ class login_interface:
             self.__password.bind(
                 "<FocusIn>",
                 lambda event: (
-                    container_frame__password_label_login.place(x=70, y=333)
+                    container_frame__password_label_sign_in.place(x=70, y=333)
                     if not self.__password.get()
                     else None
                 ),
@@ -256,16 +256,16 @@ class login_interface:
             self.__password.bind(
                 "<FocusOut>",
                 lambda event: (
-                    container_frame__password_label_login.place_forget()
+                    container_frame__password_label_sign_in.place_forget()
                     if not self.__password.get()
                     else None
                 ),
             )
 
-            # --- Login And Sign Up Buttons --- #
+            # --- Sign In And Sign Up Buttons --- #
 
-            login_btn = customtkinter.CTkButton(
-                self.internal_frame_01__login,
+            sign_in_btn = customtkinter.CTkButton(
+                self.internal_frame_01__sign_in,
                 text="Sign in",
                 width=350,
                 height=40,
@@ -278,12 +278,12 @@ class login_interface:
                 corner_radius=6,
                 command=self.validate_and_redirect_to_dashboard,
             )
-            login_btn.place(x=50, y=430)
+            sign_in_btn.place(x=50, y=430)
 
-            set_opacity(login_btn.winfo_id(), 0.5)
+            set_opacity(sign_in_btn.winfo_id(), 0.5)
 
             customtkinter.CTkLabel(
-                self.internal_frame_01__login,
+                self.internal_frame_01__sign_in,
                 text="New to Bank With High Functionalities? ",
                 font=("Roboto", 12),
                 width=0,
@@ -291,7 +291,7 @@ class login_interface:
             ).place(x=65, y=480)
 
             customtkinter.CTkButton(
-                self.internal_frame_01__login,
+                self.internal_frame_01__sign_in,
                 text="Create an account",
                 width=0,
                 height=0,
@@ -430,55 +430,55 @@ class login_interface:
 
             self.__cancel_reset_password = customtkinter.CTkButton(
                 self.frame__reset_password,
-                text="Cancel",
+                text="",
                 fg_color="transparent",
                 height=15,
-                border_width=1,
+                border_width=0,
                 hover_color="#A1FB8E",
                 width=45,
-                command=self.hide_reset_password_frame__show_login_frame,
+                command=self.hide_reset_password_frame__show_sign_in_frame,
             )
 
             self.window.after(
                 1500,
                 lambda: [
-                    self.internal_frame_00__login.place(x=0, y=0),
-                    self.internal_frame_01__login.place(x=450, y=0),
+                    self.internal_frame_00__sign_in.place(x=0, y=0),
+                    self.internal_frame_01__sign_in.place(x=450, y=0),
                 ],
             )
 
             # --- Miscellaneous --- #
-            self.is_popped_up = False
+            self.is_more_action_overlaid = False
 
             self.window.mainloop()
 
-        def show_login_rtl(self) -> None:  # show login frame -- MOVE: right to left
+        def show_sign_in_rtl(self) -> None:  # show sign in frame -- MOVE: right to left
             """
-            ## Shows the login frame moving from right to left
+            ## Shows the sign in frame moving from right to left
             """
 
             self.x_axis_rtl -= 10
 
             if self.x_axis_rtl >= 180:
 
-                self.frame__login.place(x=self.x_axis_rtl, y=20)
-                self.window.after(10, self.show_login_rtl)
+                self.frame__sign_in.place(x=self.x_axis_rtl, y=20)
+                self.window.after(10, self.show_sign_in_rtl)
 
             if self.x_axis_rtl < 180:
 
                 return
 
-        def hide_login_rtl(self) -> None:  # hide login frame -- MOVE: left to right
+        def hide_sign_in_rtl(self) -> None:  # hide sign in frame -- MOVE: left to right
             """
-            ## Hides the login frame moving from left to right
+            ## Hides the sign in frame moving from left to right
             """
 
             self.x_axis_rtl += 10
 
             if self.x_axis_rtl <= 1110:
 
-                self.frame__login.place(x=self.x_axis_rtl, y=20)
-                self.window.after(10, self.hide_login_rtl)
+                self.frame__sign_in.place(x=self.x_axis_rtl, y=20)
+                self.window.after(10, self.hide_sign_in_rtl)
 
             if self.x_axis_rtl > 1110:
 
@@ -520,27 +520,29 @@ class login_interface:
 
                 return
 
-        def hide_reset_password_frame__show_login_frame(
+        def hide_reset_password_frame__show_sign_in_frame(
             self,
         ) -> (
             None
-        ):  # Hides The Reset Password Screen Then Shows The Login Screen in The Window
+        ):  # Hides The Reset Password Screen Then Shows The Sign In Screen in The Window
 
             self.hide_contents_reset_password()
             self.hide_reset_password_ltr()
-            self.show_login_rtl()
+            self.show_sign_in_rtl()
 
-        def hide_login_frame__show_reset_password_frame(
+        def hide_sign_in_frame__show_reset_password_frame(
             self,
         ) -> (
             None
-        ):  # Hides The Login Screen Then Shows The Reset Password Screen in The Window
+        ):  # Hides The Sign In Screen Then Shows The Reset Password Screen in The Window
 
-            self.hide_contents_login()
-            self.hide_login_rtl()
+            self.hide_contents_sign_in()
+            self.hide_sign_in_rtl()
             self.show_reset_password_ltr()
 
-        def hide_contents_login(self) -> None:  # Hides The Contents Of The Login Screen
+        def hide_contents_sign_in(
+            self,
+        ) -> None:  # Hides The Contents Of The Sign In Screen
 
             for widget in []:
 
@@ -589,8 +591,8 @@ class login_interface:
                 self.window.after(
                     900,
                     lambda: [
-                        self.internal_frame_00__login.place(x=0, y=0),
-                        self.internal_frame_01__login.place(x=450, y=0),
+                        self.internal_frame_00__sign_in.place(x=0, y=0),
+                        self.internal_frame_01__sign_in.place(x=450, y=0),
                     ],
                 )
 
@@ -598,26 +600,27 @@ class login_interface:
 
             try:
 
-                signup_window = signup_interface.signup(
+                overlay_frame__signup = sign_up_interface.sign_up(
                     self.window
                 )  # Opening The Signup Window
-                self.hide_contents_login()
-                self.hide_login_rtl()
+                self.hide_contents_sign_in()
+                self.hide_sign_in_rtl()
 
                 def cancel_signup_action():
-                    signup_window.hide_frame()
-                    self.show_login_rtl()
+                    overlay_frame__signup.hide_frame()
+                    self.show_sign_in_rtl()
                     self.window.after(
                         900,
                         lambda: [
-                            self.internal_frame_00__login.place(x=0, y=0),
-                            self.internal_frame_01__login.place(x=450, y=0),
+                            self.internal_frame_00__sign_in.place(x=0, y=0),
+                            self.internal_frame_01__sign_in.place(x=450, y=0),
                         ],
                     )
 
-                self.window.after(480, signup_window.show_frame)
+                self.window.after(1860, overlay_frame__signup.show_frame)
+
                 customtkinter.CTkButton(
-                    signup_window.frame__signup,
+                    overlay_frame__signup.frame__signup,
                     text="",
                     image=customtkinter.CTkImage(
                         light_image=icon__close, dark_image=icon__close, size=(20, 20)
@@ -628,11 +631,11 @@ class login_interface:
                     hover_color="#C42B1C",
                     fg_color="transparent",
                 ).place(x=1032, y=0)
-                # self.window.wait_window(signup_window.window__signup)
 
             except:
 
-                self.window.deiconify()  # Re-Opening The Login Window If Any Error Occurs
+                raise NotImplementedError
+                self.window.deiconify()  # Re-Opening The Sign In Window If Any Error Occurs
 
         def validate_and_redirect_to_dashboard(
             self,
@@ -648,7 +651,9 @@ class login_interface:
                     if SERVER.traversal().is_user_exists(username):
 
                         self.window.withdraw()
-                        dashboard_window = dashboard(username, self.window)
+                        dashboard_window = dashboard_interface.dashboard(
+                            username, self.window
+                        )
                         self.window.wait_window(dashboard_window.window__dashboard)
                         self.window.deiconify()
 
@@ -658,7 +663,7 @@ class login_interface:
 
             if (not username) and password:  # username: false -- password: true
                 auth__username_error = customtkinter.CTkLabel(
-                    self.frame__login,
+                    self.frame__sign_in,
                     text="USERNAME IS INCOMPLETE",
                     text_color="Orange",
                 )
@@ -669,7 +674,7 @@ class login_interface:
                 username and not SERVER.traversal().is_user_exists(username)
             ) and password:  # username: true (not exists) -- password: true
                 auth__username_not_exists_error = customtkinter.CTkLabel(
-                    self.frame__login,
+                    self.frame__sign_in,
                     text="THE GIVEN USERNAME DOES NOT EXISTS",
                     text_color="Orange",
                 )
@@ -682,7 +687,7 @@ class login_interface:
                 not password
             ):  # username: false -- password: false
                 auth__username_password_error = customtkinter.CTkLabel(
-                    self.frame__login,
+                    self.frame__sign_in,
                     text="USERNAME AND PASSWORD IS INCOMPLETE",
                     text_color="Orange",
                 )
@@ -693,7 +698,7 @@ class login_interface:
 
             elif (not password) and username:  # username: true -- password: false
                 auth__password_error = customtkinter.CTkLabel(
-                    self.frame__login,
+                    self.frame__sign_in,
                     text="PASSWORD IS INCOMPLETE",
                     text_color="Orange",
                 )
@@ -704,7 +709,7 @@ class login_interface:
                 not SERVER.authentication().authenticate_password(username, password)
             ):  # username: true -- password: true (wrong)
                 auth__password_rule_error = customtkinter.CTkLabel(
-                    self.frame__login,
+                    self.frame__sign_in,
                     text="THE PASSWORD IS INCORRECT. TRY AGAIN!",
                     text_color="Orange",
                 )
@@ -713,68 +718,109 @@ class login_interface:
 
             else:  # passed all the criteria
                 auth__processing = customtkinter.CTkLabel(
-                    self.frame__login, text="PROCESSING...", text_color="Orange"
+                    self.frame__sign_in, text="PROCESSING...", text_color="Orange"
                 )
                 auth__processing.place(x=166, y=442)
                 auth__processing.after(2000, redirect_to_dashboard)
 
-        def popup_at_exit_root(self) -> None:
+        def more_action__overlay_frame(self) -> None:
 
-            if self.is_popped_up:
-                return
+            try:
 
-            def reset_popup() -> None:
-                self.is_popped_up = False
-                exit_root__popup.destroy()
+                overlay_frame__more_actions = more_actions_interface.more_actions(
+                    self.window,
+                    self.more_button,
+                )  # Opening The More Action Overlay Frame
 
-            # Shows The Developer Window
-            def Show_Developer_Window():
-                reset_popup()
+                self.window.after(480, overlay_frame__more_actions.show_frame)
 
-                # raise NotImplementedError('build a auth for developer')
-                self.window.withdraw()
-                developer_window = administrator(self.window)
-                self.window.wait_window(developer_window.window__developer)
-                self.window.deiconify()
+                customtkinter.CTkButton(
+                    overlay_frame__more_actions.frame__more_actions,
+                    text="",
+                    image=customtkinter.CTkImage(
+                        light_image=icon__close, dark_image=icon__close, size=(20, 20)
+                    ),
+                    command=overlay_frame__more_actions.hide_frame,
+                    width=0,
+                    corner_radius=0,
+                    hover_color="#C42B1C",
+                    fg_color="transparent",
+                ).place(x=1032, y=0)
 
-            # Main Window For The License, Developer, Documentation
-            exit_root__popup = customtkinter.CTkToplevel()
-            exit_root__popup.geometry("220x182")
-            exit_root__popup.resizable(False, False)
-            exit_root__popup.protocol("WM_DELETE_WINDOW", reset_popup)
-            exit_root__popup.title("")
-            exit_root__popup.attributes("-topmost", True)
+            except:
 
-            # self.frame__login For The License, Developer, Documentation
-            frame__exit_root__popup = customtkinter.CTkFrame(exit_root__popup)
-            frame__exit_root__popup.configure(width=200, height=162)
-            frame__exit_root__popup.place(x=10, y=10)
+                raise NotImplementedError
 
-            customtkinter.CTkButton(
-                frame__exit_root__popup,
-                text="Developer",
-                font=("Roboto", 16, "bold"),
-                fg_color="Orange",
-                hover_color="Yellow",
-                text_color="Black",
-                width=180,
-                height=38,
-                command=Show_Developer_Window,
-            ).place(x=10, y=12)
+            # if self.is_more_action_overlaid:
+            #     return
 
-            customtkinter.CTkButton(
-                frame__exit_root__popup,
-                text="Documentation",
-                font=("Roboto", 16, "bold"),
-                width=180,
-                height=38,
-                fg_color="#E63B60",
-                hover_color="#067FD0",
-                command=lambda: utils.Open_Browser_For_Specified_Internal_File(
-                    rf"{DIR_PATH}\docs\index.html"
-                ),
-            ).place(x=10, y=62)
-            self.is_popped_up = True
+            # def reset_more_action_overlay() -> None:
+            #     self.is_more_action_overlaid = False
+            #     overlay_frame__more_actions.destroy()
+
+            # # Shows The Developer Window
+            # def redirect_to_developer_window():
+            #     reset_more_action_overlay()
+
+            #     # raise NotImplementedError('build a auth for developer')
+            #     self.window.withdraw()
+            #     developer_window = administrator(self.window)
+            #     self.window.wait_window(developer_window.window__developer)
+            #     self.window.deiconify()
+
+            # # Main Window For The License, Developer, Documentation
+            # overlay_frame__more_actions = customtkinter.CTkFrame(
+            #     self.window, width=1060, height=610, corner_radius=0
+            # )
+
+            # overlay_frame__more_actions.place(x=20, y=20)
+
+            # customtkinter.CTkButton(
+            #     overlay_frame__more_actions,
+            #     text="",
+            #     image=customtkinter.CTkImage(
+            #         light_image=icon__close, dark_image=icon__close, size=(20, 20)
+            #     ),
+            #     command=reset_more_action_overlay,
+            #     width=0,
+            #     corner_radius=0,
+            #     hover_color="#C42B1C",
+            #     fg_color="transparent",
+            # ).place(x=1032, y=0)
+
+            # # self.frame__sign_in For The License, Developer, Documentation
+            # frame__exit_root__popup = customtkinter.CTkFrame(
+            #     overlay_frame__more_actions
+            # )
+            # frame__exit_root__popup.configure(width=200, height=162)
+            # frame__exit_root__popup.place(x=10, y=10)
+
+            # customtkinter.CTkButton(
+            #     frame__exit_root__popup,
+            #     text="Developer",
+            #     font=("Roboto", 16, "bold"),
+            #     fg_color="Orange",
+            #     hover_color="Yellow",
+            #     text_color="Black",
+            #     width=180,
+            #     height=38,
+            #     command=redirect_to_developer_window,
+            # ).place(x=10, y=12)
+
+            # customtkinter.CTkButton(
+            #     frame__exit_root__popup,
+            #     text="Documentation",
+            #     font=("Roboto", 16, "bold"),
+            #     width=180,
+            #     height=38,
+            #     fg_color="#E63B60",
+            #     hover_color="#067FD0",
+            #     command=lambda: utils.Open_Browser_For_Specified_Internal_File(
+            #         rf"{DIR_PATH}\docs\index.html"
+            #     ),
+            # ).place(x=10, y=62)
+
+            self.is_more_action_overlaid = True
 
         def forgot_security_code(self):  # Handles The Forgot Security Code Action
 
@@ -840,7 +886,7 @@ class login_interface:
                     self.__username_at_reset_password.delete(0, "end")
                     self.__security_code_at_reset_password.delete(0, "end")
 
-                    self.hide_reset_password_frame__show_login_frame()
+                    self.hide_reset_password_frame__show_sign_in_frame()
 
                 def change_password():
 
@@ -926,7 +972,7 @@ class login_interface:
 
                             Change_Successful = customtkinter.CTkLabel(
                                 self.frame__reset_password,
-                                text="PASSWORD CHANGED SUCCESSFULLU!\nREDIRECTING TO LOGIN SCREEN",
+                                text="PASSWORD CHANGED SUCCESSFULLU!\nREDIRECTING TO SIGN IN SCREEN",
                                 text_color="Orange",
                             )
                             Change_Successful.place(x=105, y=442)
@@ -971,7 +1017,7 @@ class login_interface:
 
                 subeading_change_password = customtkinter.CTkLabel(
                     self.frame__reset_password,
-                    text="Enter Required Credentials To Log into Your Account",
+                    text="Enter Required Credentials To Sign In Into Your Account",
                     font=("Roboto", 9),
                     height=0,
                 )

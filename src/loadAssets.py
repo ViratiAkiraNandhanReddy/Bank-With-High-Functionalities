@@ -9,7 +9,7 @@ icon__close = Image.open(rf"{DIR_PATH}\assets\icons\material icons\close.png")
 
 icon__more_horiz = Image.open(rf"{DIR_PATH}\assets\icons\material icons\more_horiz.png")
 
-# --- login.py --- #
+# --- sign-in --- #
 
 icon__password = Image.open(rf"{DIR_PATH}\assets\icons\material icons\password.png")
 
@@ -23,14 +23,16 @@ icon__assured_workload = Image.open(
     rf"{DIR_PATH}\assets\icons\material icons\assured_workload.png"
 )
 
-# --- administrator.py --- #
+# --- administrator --- #
 
 icon__developer_mode_tv = Image.open(
     rf"{DIR_PATH}\assets\icons\material icons\developer_mode_tv.png"
 )
 
 
-image__banner_login = Image.open(rf"{DIR_PATH}\assets\banners\root_banner__login.jpg")
+image__banner_sign_in = Image.open(
+    rf"{DIR_PATH}\assets\banners\root_banner__sign_in.jpg"
+)
 
 image__banner_reset_password = Image.open(
     rf"{DIR_PATH}\assets\banners\root_banner__reset_password.jpg"
