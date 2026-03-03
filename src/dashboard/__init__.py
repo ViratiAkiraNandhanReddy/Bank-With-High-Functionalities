@@ -1,12 +1,17 @@
-from . import *
+from .. import *
 
 
-class dashboard:
+class dashboard_interface:
 
-    def __init__(self, username: str, parent: customtkinter.CTk) -> None:
-        self.username = username
+    def __init__(self) -> None:
+        pass
 
-        self.window__dashboard = customtkinter.CTkToplevel(parent)
+    class dashboard:
+
+        def __init__(self, username: str, parent: customtkinter.CTk) -> None:
+            self.username = username
+
+            self.window__dashboard = customtkinter.CTkToplevel(parent)
 
     class transactions:
 

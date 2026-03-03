@@ -5,7 +5,7 @@ Docstring for main
 import datetime
 from src import *
 import src.utils as utils
-from src.login import login_interface
+from src.sign_in import sign_in_interface
 
 PRODUCTKEYS = [  # 10 Product Keys
     "2030-GITH-UBGC-AKKI-DIST-FIRS-TPRJ-INDI-AUSA-2026",
@@ -131,4 +131,4 @@ print("program started")
 CONFIGURATION_JSON["Recently Used On"] = datetime.datetime.now().strftime(
     "%d-%b-%Y -- %A @ %I:%M:%S %p"
 )
-login_interface().login()
+sign_in_interface().sign_in()

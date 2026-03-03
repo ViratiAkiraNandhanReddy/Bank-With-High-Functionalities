@@ -22,7 +22,7 @@ class two_factor_authentication:
         self.email = email_msg()
 
         self.email["Subject"] = (
-            f"{self.otp} is your 2FA code to login at Bank With High Functionalities."
+            f"{self.otp} is your 2FA code to sign in at Bank With High Functionalities."
         )
         self.email["From"] = "Bank With High Functionalities"
         self.email["To"] = receiver_mail_address

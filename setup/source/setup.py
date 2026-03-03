@@ -4761,8 +4761,8 @@ class Setup:
         ManagerModeinfoFrame.place(x=500, y=5)
         CTk.CTkLabel(
             ManagerModeinfoFrame,
-            text=f"NOTE: Greetings and official emails will be sent and\nreceived using the Manager Name provided. Please\nensure it is accurate and authentic, as it will represent\nyour identity in all communications. The Username you\nchoose will be used to log in "
-            "to your Manager Profile\nwithin the application. Make sure it is unique.\n\n\nThe credentials provided here are used to log in to the\nManager Profile within the application. It is essential\nthat you enter accurate and legitimate information to\nensure a secure and seamless "
+            text=f"NOTE: Greetings and official emails will be sent and\nreceived using the Manager Name provided. Please\nensure it is accurate and authentic, as it will represent\nyour identity in all communications. The Username you\nchoose will be used to sign in "
+            "to your Manager Profile\nwithin the application. Make sure it is unique.\n\n\nThe credentials provided here are used to sign in to the\nManager Profile within the application. It is essential\nthat you enter accurate and legitimate information to\nensure a secure and seamless "
             "experience.\n\nIn case you need to reset your password, a security code\nis required. Normally, a verification code will be sent to\nyour registered email address for this process. However,\nin situations where internet connectivity is lost and\nemail delivery is not possible, the security "
             "code serves as\na fallback method to help you regain access.\n\nTo maintain the integrity of your profile and security of\nthe system, please use authentic details and a legitimate\nidentity at all times. This ensures that you receive proper\nsupport and a better, more secure experience while "
             "using\nthe application.",

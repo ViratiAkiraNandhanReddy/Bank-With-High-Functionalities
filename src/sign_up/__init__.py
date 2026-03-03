@@ -1,9 +1,9 @@
-from . import *
+from .. import *
 
 
-class signup_interface:
+class sign_up_interface:
 
-    class signup:
+    class sign_up:
 
         def __init__(self, parent_window: customtkinter.CTk):
 
