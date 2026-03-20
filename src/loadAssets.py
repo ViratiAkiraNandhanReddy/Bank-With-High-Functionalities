@@ -5,28 +5,32 @@ DIR_PATH: str = str(os.environ.get("LOCALAPPDATA")) + r"\Bank-With-High-Function
 
 # --- common --- #
 
-icon__close = Image.open(rf"{DIR_PATH}\assets\icons\material icons\close.png")
+icon__close = Image.open(rf"{DIR_PATH}\assets\icons\material-icons\close.png")
 
-icon__more_horiz = Image.open(rf"{DIR_PATH}\assets\icons\material icons\more_horiz.png")
+icon__more_horiz = Image.open(rf"{DIR_PATH}\assets\icons\material-icons\more_horiz.png")
 
 # --- sign-in --- #
 
-icon__password = Image.open(rf"{DIR_PATH}\assets\icons\material icons\password.png")
+icon__password = Image.open(rf"{DIR_PATH}\assets\icons\material-icons\password.png")
 
-icon__security = Image.open(rf"{DIR_PATH}\assets\icons\material icons\security.png")
+icon__security = Image.open(rf"{DIR_PATH}\assets\icons\material-icons\security.png")
 
 icon__account_circle = Image.open(
-    rf"{DIR_PATH}\assets\icons\material icons\account_circle.png"
+    rf"{DIR_PATH}\assets\icons\material-icons\account_circle.png"
 )
 
 icon__assured_workload = Image.open(
-    rf"{DIR_PATH}\assets\icons\material icons\assured_workload.png"
+    rf"{DIR_PATH}\assets\icons\material-icons\assured_workload.png"
+)
+
+icon__manage_accounts = Image.open(
+    rf"{DIR_PATH}\assets\icons\material-icons\manage_accounts.png"
 )
 
 # --- administrator --- #
 
 icon__developer_mode_tv = Image.open(
-    rf"{DIR_PATH}\assets\icons\material icons\developer_mode_tv.png"
+    rf"{DIR_PATH}\assets\icons\material-icons\developer_mode_tv.png"
 )
 
 
