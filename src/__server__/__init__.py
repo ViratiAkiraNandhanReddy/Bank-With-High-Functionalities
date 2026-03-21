@@ -47,4 +47,4 @@ match CONFIGURATION_JSON.get("DATABASE TYPE"):
     case "SQLite3":
         from .SQLite3 import SERVER
 
-__all__ = ["SERVER"]
+__all__ = ["SERVER", "_uuids"]
