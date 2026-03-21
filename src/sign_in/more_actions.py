@@ -9,10 +9,19 @@ class more_actions_interface:
 
     class frame__administrator:
 
-        def __init__(self, parent_frame: customtkinter.CTkFrame):
+        def __init__(
+            self,
+            parent_frame: customtkinter.CTkFrame,
+            parent_window: customtkinter.CTk,
+            _callback: Callable,
+        ) -> None:
+
+            self.parent_frame: customtkinter.CTkFrame = parent_frame
+            self.parent_window: customtkinter.CTk = parent_window
+            self.hide_overlay_callback: Callable = _callback
 
             self.internal_frame_00_more_actions = customtkinter.CTkFrame(
-                parent_frame,
+                self.parent_frame,
                 width=306,
                 height=406,
                 border_width=2,
@@ -48,7 +57,7 @@ class more_actions_interface:
                 width=0,
             ).place(x=36, y=68)
 
-            container_frame__username_admin_sign_in = customtkinter.CTkFrame(
+            self.container_frame__username_admin_sign_in = customtkinter.CTkFrame(
                 self.if_00_container_frame_admin_sign_in__flow_sign_in,
                 width=260,
                 height=40,
@@ -58,7 +67,7 @@ class more_actions_interface:
                 corner_radius=6,
             )
 
-            container_frame__username_label_admin_sign_in = customtkinter.CTkLabel(
+            self.container_frame__username_label_admin_sign_in = customtkinter.CTkLabel(
                 self.if_00_container_frame_admin_sign_in__flow_sign_in,
                 text="username",
                 font=("Roboto", 10),
@@ -68,7 +77,7 @@ class more_actions_interface:
             )
 
             customtkinter.CTkLabel(
-                container_frame__username_admin_sign_in,
+                self.container_frame__username_admin_sign_in,
                 image=customtkinter.CTkImage(
                     light_image=icon__account_circle,
                     dark_image=icon__account_circle,
@@ -77,10 +86,10 @@ class more_actions_interface:
                 text="",
             ).place(x=8, rely=0.5, anchor="w")
 
-            container_frame__username_admin_sign_in.place(x=20, y=200)
+            self.container_frame__username_admin_sign_in.place(x=20, y=200)
 
             self.__username = customtkinter.CTkEntry(
-                container_frame__username_admin_sign_in,
+                self.container_frame__username_admin_sign_in,
                 placeholder_text="username",
                 width=260 - 40,
                 height=40 - 8,
@@ -94,7 +103,9 @@ class more_actions_interface:
             self.__username.bind(
                 "<FocusIn>",
                 lambda event: (
-                    container_frame__username_label_admin_sign_in.place(x=40, y=193)
+                    self.container_frame__username_label_admin_sign_in.place(
+                        x=40, y=193
+                    )
                     if not self.__username.get()
                     else None
                 ),
@@ -102,13 +113,13 @@ class more_actions_interface:
             self.__username.bind(
                 "<FocusOut>",
                 lambda event: (
-                    container_frame__username_label_admin_sign_in.place_forget()
+                    self.container_frame__username_label_admin_sign_in.place_forget()
                     if not self.__username.get()
                     else None
                 ),
             )
 
-            container_frame__password_admin_sign_in = customtkinter.CTkFrame(
+            self.container_frame__password_admin_sign_in = customtkinter.CTkFrame(
                 self.if_00_container_frame_admin_sign_in__flow_sign_in,
                 width=260,
                 height=40,
@@ -118,7 +129,7 @@ class more_actions_interface:
                 corner_radius=6,
             )
 
-            container_frame__password_label_admin_sign_in = customtkinter.CTkLabel(
+            self.container_frame__password_label_admin_sign_in = customtkinter.CTkLabel(
                 self.if_00_container_frame_admin_sign_in__flow_sign_in,
                 text="password",
                 font=("Roboto", 10),
@@ -128,7 +139,7 @@ class more_actions_interface:
             )
 
             customtkinter.CTkLabel(
-                container_frame__password_admin_sign_in,
+                self.container_frame__password_admin_sign_in,
                 image=customtkinter.CTkImage(
                     light_image=icon__password,
                     dark_image=icon__password,
@@ -137,7 +148,7 @@ class more_actions_interface:
                 text="",
             ).place(x=8, rely=0.5, anchor="w")
 
-            container_frame__password_admin_sign_in.place(x=20, y=260)
+            self.container_frame__password_admin_sign_in.place(x=20, y=260)
 
             customtkinter.CTkButton(
                 self.if_00_container_frame_admin_sign_in__flow_sign_in,
@@ -153,7 +164,7 @@ class more_actions_interface:
             ).place(x=182, y=291)
 
             self.__password = customtkinter.CTkEntry(
-                container_frame__password_admin_sign_in,
+                self.container_frame__password_admin_sign_in,
                 placeholder_text="password",
                 width=260 - 40,
                 height=40 - 8,
@@ -168,7 +179,9 @@ class more_actions_interface:
             self.__password.bind(
                 "<FocusIn>",
                 lambda event: (
-                    container_frame__password_label_admin_sign_in.place(x=40, y=253)
+                    self.container_frame__password_label_admin_sign_in.place(
+                        x=40, y=253
+                    )
                     if not self.__password.get()
                     else None
                 ),
@@ -176,7 +189,7 @@ class more_actions_interface:
             self.__password.bind(
                 "<FocusOut>",
                 lambda event: (
-                    container_frame__password_label_admin_sign_in.place_forget()
+                    self.container_frame__password_label_admin_sign_in.place_forget()
                     if not self.__password.get()
                     else None
                 ),
@@ -203,8 +216,134 @@ class more_actions_interface:
         def forgot_administrator_password(self):
             self.if_00_container_frame_admin_sign_in__flow_sign_in.place_forget()
 
-        def validate_administrator_password(self):
-            pass
+        def validate_administrator_password(self) -> None:
+
+            admin_username = self.__username.get().strip()
+            admin_password = self.__password.get().strip()
+
+            self.__username.bind(
+                "<KeyPress>",
+                lambda event: self.container_frame__username_admin_sign_in.configure(
+                    border_color="#FFFFFF"
+                )
+                or self.container_frame__username_label_admin_sign_in.configure(
+                    text_color="#FFFFFF"
+                )
+                or self.container_frame__username_label_admin_sign_in.configure(
+                    text="username",
+                    width=50,  # 44
+                )
+                or self.__username.unbind("<KeyPress>"),
+            )
+
+            self.__password.bind(
+                "<KeyPress>",
+                lambda event: self.container_frame__password_admin_sign_in.configure(
+                    border_color="#FFFFFF"
+                )
+                or self.container_frame__password_label_admin_sign_in.configure(
+                    text_color="#FFFFFF"
+                )
+                or self.container_frame__password_label_admin_sign_in.configure(
+                    text="password",
+                    width=50,  # 44
+                )
+                or self.__password.unbind("<KeyPress>"),
+            )
+
+            if (not admin_username) and admin_password:
+
+                self.container_frame__username_admin_sign_in.configure(
+                    border_color="#FF0000"
+                )
+                self.container_frame__username_label_admin_sign_in.configure(
+                    text_color="#FF0000"
+                )
+                self.container_frame__username_label_admin_sign_in.configure(
+                    text="invalid username", width=81
+                )
+
+                return
+
+            elif admin_username and (not admin_password):
+
+                self.container_frame__password_admin_sign_in.configure(
+                    border_color="#FF0000"
+                )
+                self.container_frame__password_label_admin_sign_in.configure(
+                    text_color="#FF0000"
+                )
+                self.container_frame__password_label_admin_sign_in.configure(
+                    text="invalid password", width=81
+                )
+
+                return
+
+            elif (not admin_username) and (not admin_password):
+
+                self.container_frame__username_admin_sign_in.configure(
+                    border_color="#FF0000"
+                )
+                self.container_frame__password_admin_sign_in.configure(
+                    border_color="#FF0000"
+                )
+                self.container_frame__username_label_admin_sign_in.configure(
+                    text="invalid username", width=81
+                )
+
+                self.container_frame__username_label_admin_sign_in.configure(
+                    text_color="#FF0000"
+                )
+                self.container_frame__password_label_admin_sign_in.configure(
+                    text_color="#FF0000"
+                )
+                self.container_frame__password_label_admin_sign_in.configure(
+                    text="invalid password", width=81
+                )
+
+                return
+
+            elif (admin_username and admin_password) and (
+                (not SERVER.traversal().is_admin_exists(admin_username))
+                or (
+                    not SERVER.authentication().authenticate_admin(
+                        admin_username, admin_password
+                    )
+                )
+            ):
+
+                self.container_frame__username_admin_sign_in.configure(
+                    border_color="#FF0000"
+                )
+                self.container_frame__username_label_admin_sign_in.configure(
+                    text_color="#FF0000"
+                )
+                self.container_frame__username_label_admin_sign_in.configure(
+                    text="invalid username or password", width=137
+                )
+
+                self.container_frame__password_admin_sign_in.configure(
+                    border_color="#FF0000"
+                )
+                self.container_frame__password_label_admin_sign_in.configure(
+                    text_color="#FF0000"
+                )
+                self.container_frame__password_label_admin_sign_in.configure(
+                    text="invalid username or password", width=137
+                )
+
+                return
+
+            else:
+                self.parent_window.withdraw()
+                self.hide_overlay_callback()
+                self.toplevel__admin_dashboard = administrator_interface.administrator(
+                    self.parent_window
+                )
+                self.parent_window.wait_window(
+                    self.toplevel__admin_dashboard.window__developer
+                )
+                self.parent_window.deiconify()
 
     class more_actions:
 
@@ -217,13 +356,15 @@ class more_actions_interface:
             )
             self.frame__more_actions.configure(width=1060, height=610)
 
-            self.show_frame = lambda: (
+            self.show_frame: Callable = lambda: (
                 self.frame__more_actions.place(x=20, y=20),
                 _btn.configure(state="disabled"),
             )
-            self.hide_frame = lambda: (
-                self.frame__more_actions.place_forget(),
+            self.hide_frame: Callable = lambda: (
+                self.frame__more_actions.destroy(),
                 _btn.configure(state="normal"),
             )
 
-            more_actions_interface.frame__administrator(self.frame__more_actions)
+            more_actions_interface.frame__administrator(
+                self.frame__more_actions, parent_window, self.hide_frame
+            )
