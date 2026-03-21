@@ -7,6 +7,205 @@ class more_actions_interface:
     def __init__(self) -> None:
         pass
 
+    class frame__administrator:
+
+        def __init__(self, parent_frame: customtkinter.CTkFrame):
+
+            self.internal_frame_00_more_actions = customtkinter.CTkFrame(
+                parent_frame,
+                width=306,
+                height=406,
+                border_width=2,
+                border_color="gray",
+                fg_color="transparent",
+            )
+
+            self.internal_frame_00_more_actions.place(x=724, y=30)
+
+            self.if_00_container_frame_admin_sign_in__flow_sign_in = (
+                customtkinter.CTkFrame(
+                    self.internal_frame_00_more_actions,
+                    width=300,
+                    height=400,
+                    fg_color="transparent",
+                )
+            )
+
+            self.if_00_container_frame_admin_sign_in__flow_sign_in.place(x=3, y=3)
+
+            customtkinter.CTkLabel(
+                self.if_00_container_frame_admin_sign_in__flow_sign_in,
+                text="Sign in to Admin's Dashboard",
+                font=("Segoe UI", 16, "bold"),
+                text_color="#FFFFFF",
+                image=customtkinter.CTkImage(
+                    light_image=icon__manage_accounts,
+                    dark_image=icon__manage_accounts,
+                    size=(42, 42),
+                ),
+                compound="top",
+                height=0,
+                width=0,
+            ).place(x=36, y=68)
+
+            container_frame__username_admin_sign_in = customtkinter.CTkFrame(
+                self.if_00_container_frame_admin_sign_in__flow_sign_in,
+                width=260,
+                height=40,
+                fg_color="transparent",
+                border_width=1,
+                border_color="#FFFFFF",
+                corner_radius=6,
+            )
+
+            container_frame__username_label_admin_sign_in = customtkinter.CTkLabel(
+                self.if_00_container_frame_admin_sign_in__flow_sign_in,
+                text="username",
+                font=("Roboto", 10),
+                height=12,
+                width=50,  # 44
+                text_color="#FFFFFF",
+            )
+
+            customtkinter.CTkLabel(
+                container_frame__username_admin_sign_in,
+                image=customtkinter.CTkImage(
+                    light_image=icon__account_circle,
+                    dark_image=icon__account_circle,
+                    size=(20, 20),
+                ),
+                text="",
+            ).place(x=8, rely=0.5, anchor="w")
+
+            container_frame__username_admin_sign_in.place(x=20, y=200)
+
+            self.__username = customtkinter.CTkEntry(
+                container_frame__username_admin_sign_in,
+                placeholder_text="username",
+                width=260 - 40,
+                height=40 - 8,
+                corner_radius=0,
+                border_width=0,
+                fg_color="transparent",
+                font=("Roboto", 16),
+            )
+            self.__username.place(x=28, rely=0.5, anchor="w")
+
+            self.__username.bind(
+                "<FocusIn>",
+                lambda event: (
+                    container_frame__username_label_admin_sign_in.place(x=40, y=193)
+                    if not self.__username.get()
+                    else None
+                ),
+            )
+            self.__username.bind(
+                "<FocusOut>",
+                lambda event: (
+                    container_frame__username_label_admin_sign_in.place_forget()
+                    if not self.__username.get()
+                    else None
+                ),
+            )
+
+            container_frame__password_admin_sign_in = customtkinter.CTkFrame(
+                self.if_00_container_frame_admin_sign_in__flow_sign_in,
+                width=260,
+                height=40,
+                fg_color="transparent",
+                border_width=1,
+                border_color="#FFFFFF",
+                corner_radius=6,
+            )
+
+            container_frame__password_label_admin_sign_in = customtkinter.CTkLabel(
+                self.if_00_container_frame_admin_sign_in__flow_sign_in,
+                text="password",
+                font=("Roboto", 10),
+                height=12,
+                width=50,  # 44
+                text_color="#FFFFFF",
+            )
+
+            customtkinter.CTkLabel(
+                container_frame__password_admin_sign_in,
+                image=customtkinter.CTkImage(
+                    light_image=icon__password,
+                    dark_image=icon__password,
+                    size=(20, 20),
+                ),
+                text="",
+            ).place(x=8, rely=0.5, anchor="w")
+
+            container_frame__password_admin_sign_in.place(x=20, y=260)
+
+            customtkinter.CTkButton(
+                self.if_00_container_frame_admin_sign_in__flow_sign_in,
+                text="forgot password?",
+                height=0,
+                width=76,  # 74
+                fg_color="transparent",
+                hover=False,
+                font=("Roboto", 9),
+                text_color="#218CFF",
+                border_spacing=0,
+                command=self.forgot_administrator_password,
+            ).place(x=182, y=291)
+
+            self.__password = customtkinter.CTkEntry(
+                container_frame__password_admin_sign_in,
+                placeholder_text="password",
+                width=260 - 40,
+                height=40 - 8,
+                corner_radius=0,
+                border_width=0,
+                fg_color="transparent",
+                font=("Roboto", 16),
+                show="•",
+            )
+            self.__password.place(x=28, rely=0.5, anchor="w")
+
+            self.__password.bind(
+                "<FocusIn>",
+                lambda event: (
+                    container_frame__password_label_admin_sign_in.place(x=40, y=253)
+                    if not self.__password.get()
+                    else None
+                ),
+            )
+            self.__password.bind(
+                "<FocusOut>",
+                lambda event: (
+                    container_frame__password_label_admin_sign_in.place_forget()
+                    if not self.__password.get()
+                    else None
+                ),
+            )
+
+            administrator_sign_in_btn = customtkinter.CTkButton(
+                self.if_00_container_frame_admin_sign_in__flow_sign_in,
+                text="Sign in",
+                width=260,
+                height=40,
+                border_width=0,
+                text_color="#000000",
+                bg_color="transparent",
+                fg_color="#FFFFFF",
+                font=("Roboto", 16, "bold"),
+                hover_color="light grey",
+                corner_radius=6,
+                command=self.validate_administrator_password,
+            )
+            administrator_sign_in_btn.place(x=20, y=340)
+
+            set_opacity(administrator_sign_in_btn.winfo_id(), 0.5)
+
+        def forgot_administrator_password(self):
+            self.if_00_container_frame_admin_sign_in__flow_sign_in.place_forget()
+
+        def validate_administrator_password(self):
+            pass
+
     class more_actions:
 
         def __init__(
@@ -26,3 +225,5 @@ class more_actions_interface:
                 self.frame__more_actions.place_forget(),
                 _btn.configure(state="normal"),
             )
+
+            more_actions_interface.frame__administrator(self.frame__more_actions)
