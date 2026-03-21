@@ -10,11 +10,15 @@ class more_actions_interface:
     class frame__administrator:
 
         def __init__(
-            self, parent_frame: customtkinter.CTkFrame, parent_window: customtkinter.CTk
+            self,
+            parent_frame: customtkinter.CTkFrame,
+            parent_window: customtkinter.CTk,
+            _callback: Callable,
         ) -> None:
 
             self.parent_frame: customtkinter.CTkFrame = parent_frame
             self.parent_window: customtkinter.CTk = parent_window
+            self.hide_overlay_callback: Callable = _callback
 
             self.internal_frame_00_more_actions = customtkinter.CTkFrame(
                 self.parent_frame,
@@ -332,8 +336,7 @@ class more_actions_interface:
 
             else:
                 self.parent_window.withdraw()
-                self.__username.delete(0, "end")
-                self.__password.delete(0, "end")
+                self.hide_overlay_callback()
                 self.toplevel__admin_dashboard = administrator_interface.administrator(
                     self.parent_window
                 )
@@ -353,15 +356,15 @@ class more_actions_interface:
             )
             self.frame__more_actions.configure(width=1060, height=610)
 
-            self.show_frame = lambda: (
+            self.show_frame: Callable = lambda: (
                 self.frame__more_actions.place(x=20, y=20),
                 _btn.configure(state="disabled"),
             )
-            self.hide_frame = lambda: (
+            self.hide_frame: Callable = lambda: (
                 self.frame__more_actions.destroy(),
                 _btn.configure(state="normal"),
             )
 
             more_actions_interface.frame__administrator(
-                self.frame__more_actions, parent_window
+                self.frame__more_actions, parent_window, self.hide_frame
             )
