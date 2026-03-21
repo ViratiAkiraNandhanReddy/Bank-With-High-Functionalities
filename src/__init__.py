@@ -8,7 +8,7 @@ from . import __mail__
 from typing import Any
 from .loadAssets import *
 from dotenv import load_dotenv
-from .__server__ import SERVER
+from .__server__ import SERVER, _uuids
 from hPyT import title_bar, get_accent_color
 from pywinstyles import apply_style, set_opacity
 

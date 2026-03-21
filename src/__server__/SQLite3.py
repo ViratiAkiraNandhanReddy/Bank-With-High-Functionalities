@@ -44,6 +44,17 @@ class SERVER:
 
             connection.commit()
 
+        def define_admins_table(self):
+
+            self.cursor.execute("""
+                CREATE TABLE IF NOT EXISTS ADMINS (
+                USERNAME VARCHAR(100) NOT NULL PRIMARY KEY,
+                PASSWORD TEXT NOT NULL,
+                CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
+                """)
+
+            connection.commit()
+
     class traversal:
 
         def __init__(self):
@@ -55,6 +66,17 @@ class SERVER:
             self.cursor.execute(
                 """
                 SELECT 1 FROM USERS WHERE USERNAME = ?
+                """,
+                (username,),
+            )
+
+            return self.cursor.fetchone() is not None
+
+        def is_admin_exists(self, username: str) -> bool:
+
+            self.cursor.execute(
+                """
+                SELECT 1 FROM ADMINS WHERE USERNAME = ?
                 """,
                 (username,),
             )
@@ -91,6 +113,20 @@ class SERVER:
             )
 
             return self.cursor.fetchone()[0] == security_code
+
+        def authenticate_admin(self, username: str, password: str) -> bool:
+
+            self.cursor.execute(
+                """
+                SELECT password FROM ADMINS WHERE username = ?
+                """,
+                (username,),
+            )
+
+            return (
+                self.cursor.fetchone()[0]
+                == Encryption(password, shift=53, alterNumbers=True).encrypt()
+            )
 
     class accountactions:
 
