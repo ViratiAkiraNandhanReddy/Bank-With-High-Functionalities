@@ -30,11 +30,80 @@ class activation:
 
         customtkinter.CTkLabel(
             self.window,
-            text="BANK WITH HIGH FUNCTIONALITIES",
-            font=("Segoe UI", 10),
+            text="Enter a product key",
+            font=("Segoe UI", 21),
             bg_color="black",
             height=0,
             width=0,
-        ).place(x=5, y=5)
+            pady=20,
+            justify="left",
+        ).place(x=20, y=0)
+
+        customtkinter.CTkLabel(
+            self.window,
+            text="""Bank With High Functionalities activation keys are available exclusively through
+our official GitHub repository, offering source, product keys, software updates,
+release notices, setup guidance, and important information for all users.""",
+            font=("Segoe UI", 13),
+            bg_color="black",
+            height=0,
+            width=0,
+            justify="left",
+        ).place(x=20, y=74)
+
+        customtkinter.CTkLabel(
+            self.window,
+            text="Product Key",
+            font=("Segoe UI", 13),
+            bg_color="black",
+            height=0,
+            width=0,
+            pady=20,
+            justify="left",
+        ).place(x=20, y=129)
+
+        self.container_frame__activation_entry = customtkinter.CTkFrame(
+            self.window,
+            width=470,
+            height=34,
+            fg_color="black",
+            bg_color="black",
+            border_width=1,
+            border_color="#FFFFFF",
+            corner_radius=6,
+        )
+
+        self.container_frame__activation_label = customtkinter.CTkLabel(
+            self.window,
+            text="",
+            font=("Roboto", 10),
+            height=12,
+            width=0,
+            text_color="#FFFFFF",
+        )
+
+        customtkinter.CTkLabel(
+            self.container_frame__activation_entry,
+            image=customtkinter.CTkImage(
+                light_image=icon__shield_lock,
+                dark_image=icon__shield_lock,
+                size=(20, 20),
+            ),
+            text="",
+        ).place(x=8, rely=0.5, anchor="w")
+
+        self.container_frame__activation_entry.place(x=20, y=173)
+
+        self.__activation_code = customtkinter.CTkEntry(
+            self.container_frame__activation_entry,
+            placeholder_text="XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX",
+            width=470 - 40,
+            height=34 - 8,
+            corner_radius=0,
+            border_width=0,
+            fg_color="transparent",
+            font=("Roboto", 14),
+        )
+        self.__activation_code.place(x=28, rely=0.5, anchor="w")
 
         self.window.mainloop()
