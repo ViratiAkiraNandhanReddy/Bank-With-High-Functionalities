@@ -27,6 +27,10 @@ icon__manage_accounts = Image.open(
     rf"{DIR_PATH}\assets\icons\material-icons\manage_accounts.png"
 )
 
+icon__shield_lock = Image.open(
+    rf"{DIR_PATH}\assets\icons\material-icons\shield_lock.png"
+)
+
 # --- administrator --- #
 
 icon__developer_mode_tv = Image.open(
