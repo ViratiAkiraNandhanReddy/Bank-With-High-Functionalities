@@ -106,4 +106,17 @@ release notices, setup guidance, and important information for all users.""",
         )
         self.__activation_code.place(x=28, rely=0.5, anchor="w")
 
+        self.cancel_and_close__button = customtkinter.CTkButton(
+            self.window,
+            text="Cancel",
+            width=90,
+            height=30,
+            bg_color="black",
+            fg_color="#333333",
+            text_color="#FFFFFF",
+            hover_color="#3D3D3D",
+            command=lambda: [self.window.destroy(), exit()],
+        )
+        self.cancel_and_close__button.place(x=430, y=234)
+
         self.window.mainloop()
