@@ -67,6 +67,7 @@ def Open_Browser_For_Specified_Internal_File(file_dir: str) -> None:
     except:
         raise NotImplementedError
 
+
 def get_hvr_accent_color(accent_color: str, depth: float = 0.8) -> str:
     """
     Calculate a hover accent color by darkening the original accent color.
