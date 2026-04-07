@@ -109,6 +109,26 @@ release notices, setup guidance, and important information for all users.""",
         )
         self.__activation_code.place(x=28, rely=0.5, anchor="w")
 
+        self.visit_repository__button = customtkinter.CTkButton(
+            self.window,
+            text="Repository",
+            width=120,
+            height=30,
+            bg_color="black",
+            fg_color="#333333",
+            text_color="#FFFFFF",
+            hover_color="#3D3D3D",
+            image=customtkinter.CTkImage(
+                light_image=icon__platform_github,
+                dark_image=icon__platform_github,
+                size=(17, 17),
+            ),
+            command=lambda: utils.Open_Browser_For_Specified_URL(
+                CONSTANTS["WEBSITES"]["GITHUB_REPOSITORY"]
+            ),
+        )
+        self.visit_repository__button.place(x=196, y=234)
+
         self.next_and_activate__button = customtkinter.CTkButton(
             self.window,
             text="Next",
@@ -120,7 +140,7 @@ release notices, setup guidance, and important information for all users.""",
             hover_color=self.__hvr_accent_color,
             command=self._verify_product_key_and_redirect_to_activate,
         )
-        self.next_and_activate__button.place(x=330, y=234)
+        self.next_and_activate__button.place(x=328, y=234)
 
         self.cancel_and_close__button = customtkinter.CTkButton(
             self.window,
