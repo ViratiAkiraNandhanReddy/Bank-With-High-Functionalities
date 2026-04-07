@@ -6,6 +6,9 @@ class activation:
     def __init__(self, _keys: list[str]) -> None:
         self._keys = _keys
 
+        self.__raw_accent_color = get_accent_color()
+        self.__hvr_accent_color = utils.get_hvr_accent_color(self.__raw_accent_color)
+
         self.window = customtkinter.CTk()
 
         _width, _height = 532, 276
@@ -106,6 +109,19 @@ release notices, setup guidance, and important information for all users.""",
         )
         self.__activation_code.place(x=28, rely=0.5, anchor="w")
 
+        self.next_and_activate__button = customtkinter.CTkButton(
+            self.window,
+            text="Next",
+            width=90,
+            height=30,
+            bg_color="black",
+            fg_color=self.__raw_accent_color,
+            text_color="#FFFFFF",
+            hover_color=self.__hvr_accent_color,
+            command=self._verify_product_key_and_redirect_to_activate,
+        )
+        self.next_and_activate__button.place(x=330, y=234)
+
         self.cancel_and_close__button = customtkinter.CTkButton(
             self.window,
             text="Cancel",
@@ -120,3 +136,6 @@ release notices, setup guidance, and important information for all users.""",
         self.cancel_and_close__button.place(x=430, y=234)
 
         self.window.mainloop()
+
+    def _verify_product_key_and_redirect_to_activate(self):
+        pass
