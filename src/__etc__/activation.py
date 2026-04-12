@@ -24,7 +24,7 @@ class activation:
         self.window.minsize(_width, _height)
         self.window.maxsize(_width, _height)
 
-        self.window.bind(
+        self.window.bind(  # Allowing the user to move the window by dragging anywhere on it, since there is no title bar.
             "<Button-1>",
             lambda event: move_tk_with_no_titlebar_winos_native_ctypes(
                 event, self.window
@@ -80,9 +80,10 @@ release notices, setup guidance, and important information for all users.""",
             self.window,
             text="",
             font=("Roboto", 10),
-            height=12,
-            width=0,
-            text_color="#FFFFFF",
+            height=0,
+            width=268,
+            text_color="#FF0000",
+            bg_color="black",
         )
 
         customtkinter.CTkLabel(
@@ -157,5 +158,46 @@ release notices, setup guidance, and important information for all users.""",
 
         self.window.mainloop()
 
-    def _verify_product_key_and_redirect_to_activate(self):
-        pass
+    def _verify_product_key_and_redirect_to_activate(self) -> None:
+
+        entered_key = self.__activation_code.get().strip()
+
+        self.__activation_code.bind(
+            "<KeyPress>",
+            lambda event: self.container_frame__activation_entry.configure(
+                border_color="#FFFFFF"
+            )
+            or self.container_frame__activation_label.place_forget()
+            or self.__activation_code.unbind("<KeyPress>"),
+        )
+
+        if entered_key not in self._keys:
+            self.container_frame__activation_entry.configure(border_color="#FF0000")
+            self.container_frame__activation_label.configure(
+                text="Invalid product key. Please check the repository for valid keys"
+            )
+            self.container_frame__activation_label.place(x=200, y=167)
+
+            return
+
+        for widget in self.window.winfo_children():
+            if isinstance(widget, customtkinter.CTkLabel) or isinstance(
+                widget, customtkinter.CTkFrame
+            ):
+                widget.destroy()
+        else:
+            self.visit_repository__button.destroy()
+
+        self.next_and_activate__button.configure(
+            text="Activate",
+            command=self._activate_and_proceed,
+        )
+
+    def _activate_and_proceed(self) -> None:
+
+        self.next_and_activate__button.destroy()
+        self.cancel_and_close__button.configure(
+            text="Close",
+            fg_color=self.__raw_accent_color,
+            hover_color=self.__hvr_accent_color,
+        )
