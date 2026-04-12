@@ -5,7 +5,7 @@ import logging
 from . import utils
 import customtkinter
 from . import __mail__
-from .loadAssets import *
+from ._assets import *
 from dotenv import load_dotenv
 from typing import Any, Callable
 from .__server__ import SERVER, _uuids
