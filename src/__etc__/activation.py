@@ -131,7 +131,7 @@ release notices, setup guidance, and important information for all users.""",
                 size=(17, 17),
             ),
             command=lambda: utils.Open_Browser_For_Specified_URL(
-                CONSTANTS["WEBSITES"]["GITHUB_REPOSITORY"]
+                CONSTANTS["github"]["repository"]
             ),
         )
         self.visit_repository__button.place(x=196, y=234)
@@ -247,10 +247,99 @@ process and start using Bank With High Functionalities.""",
             self.next_and_activate__button.destroy()
 
         try:
-            ...
+
+            CONFIGURATION_JSON["is_activated"] = True
+            saved = utils.save_configuration_json(CONFIGURATION_JSON)
+
+            if saved:
+
+                customtkinter.CTkLabel(
+                    self.window,
+                    text="Activation successful!",
+                    font=("Segoe UI", 21),
+                    bg_color="black",
+                    height=0,
+                    width=0,
+                    pady=20,
+                    justify="left",
+                    text_color="#00FF00",
+                ).place(x=20, y=0)
+
+                customtkinter.CTkLabel(
+                    self.window,
+                    text="""Thank you for activating Bank With High Functionalities!
+
+Your support plays an important role in helping us enhance features, improve performance,
+and deliver a smoother and more reliable experience. This project is continuously evolving,
+with a focus on usability, efficiency, and meaningful functionality for users like you.
+
+If you have any questions, feedback, or need assistance at any point, feel free to reach out
+through GitHub Discussions. Your input helps shape future updates and improvements,
+and we are always open to suggestions that make the project better.
+""",
+                    font=("Segoe UI", 12),
+                    bg_color="black",
+                    height=0,
+                    width=0,
+                    justify="left",
+                ).place(x=20, y=74)
+
+            else:
+
+                customtkinter.CTkLabel(
+                    self.window,
+                    text="Activation failed!",
+                    font=("Segoe UI", 21),
+                    bg_color="black",
+                    height=0,
+                    width=0,
+                    pady=20,
+                    justify="left",
+                    text_color="#FF0000",
+                ).place(x=20, y=0)
+
+                customtkinter.CTkLabel(
+                    self.window,
+                    text="""We encountered an issue while attempting to save your activation status. This may be due to a
+temporary system interruption or an unexpected internal error.
+
+What you can try:
+
+• Restart the application and attempt activation again.
+
+Need help?
+Please contact support through our GitHub Issues page, where you can report the issue and
+receive guidance from the community. We apologize for any inconvenience caused and
+appreciate your patience.
+""",
+                    font=("Segoe UI", 11),
+                    bg_color="black",
+                    height=0,
+                    width=0,
+                    justify="left",
+                ).place(x=20, y=74)
+
+                customtkinter.CTkButton(
+                    self.window,
+                    text="Report Issue",
+                    width=120,
+                    height=30,
+                    bg_color="black",
+                    fg_color="#333333",
+                    text_color="#FFFFFF",
+                    hover_color="#3D3D3D",
+                    image=customtkinter.CTkImage(
+                        light_image=icon__platform_github,
+                        dark_image=icon__platform_github,
+                        size=(17, 17),
+                    ),
+                    command=lambda: utils.Open_Browser_For_Specified_URL(
+                        CONSTANTS["github"]["issues"]
+                    ),
+                ).place(x=298, y=234)
 
         except Exception as e:
-            ...
+            raise NotImplementedError
 
         self.cancel_and_close__button.configure(
             text="Close",
