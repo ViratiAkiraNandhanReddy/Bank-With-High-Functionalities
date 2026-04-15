@@ -13,16 +13,20 @@ from hPyT import title_bar, get_accent_color
 from pywinstyles import apply_style, set_opacity
 
 CONSTANTS: dict[str, dict[str, Any]] = {
-    "WEBSITES": {
-        "GITHUB_REPOSITORY": "https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities",
-        "PROJECT_WEBSITE": "https://viratiakiranandhanreddy.github.io/Bank-With-High-Functionalities/",
+    "website": {
+        "home": "https://viratiakiranandhanreddy.github.io/Bank-With-High-Functionalities/",
     },
-    "SOCIALS": {
-        "GITHUB": "https://github.com/ViratiAkiraNandhanReddy",
-        "INSTAGRAM": "https://www.instagram.com/viratiakiranandhanreddy",
-        "TWITTER": "https://twitter.com/akiranandhan_",
-        "LINKEDIN": "https://www.linkedin.com/in/viratiakiranandhanreddy",
-        "YOUTUBE": "https://www.youtube.com/@ViratiAkiraNandhanReddy",
+    "socials": {
+        "github": "https://github.com/ViratiAkiraNandhanReddy",
+        "instagram": "https://www.instagram.com/viratiakiranandhanreddy",
+        "twitter": "https://twitter.com/akiranandhan_",
+        "linkedin": "https://www.linkedin.com/in/viratiakiranandhanreddy",
+        "youtube": "https://www.youtube.com/@ViratiAkiraNandhanReddy",
+    },
+    "github": {
+        "repository": "https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities",
+        "issues": "https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/issues",
+        "discussions": "https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/discussions",
     },
 }
 
