@@ -98,6 +98,11 @@ release notices, setup guidance, and important information for all users.""",
 
         self.container_frame__activation_entry.place(x=20, y=173)
 
+        self.curr_key = customtkinter.StringVar()
+        self.curr_key.trace_add(
+            "write", lambda *args: self.curr_key.set(self.curr_key.get().upper()[:49])
+        )
+
         self.__activation_code = customtkinter.CTkEntry(
             self.container_frame__activation_entry,
             placeholder_text="XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX",
@@ -107,6 +112,7 @@ release notices, setup guidance, and important information for all users.""",
             border_width=0,
             fg_color="transparent",
             font=("Roboto", 14),
+            textvariable=self.curr_key,
         )
         self.__activation_code.place(x=28, rely=0.5, anchor="w")
 
@@ -181,12 +187,50 @@ release notices, setup guidance, and important information for all users.""",
             return
 
         for widget in self.window.winfo_children():
+
             if isinstance(widget, customtkinter.CTkLabel) or isinstance(
                 widget, customtkinter.CTkFrame
             ):
                 widget.destroy()
         else:
             self.visit_repository__button.destroy()
+
+        customtkinter.CTkLabel(
+            self.window,
+            text="Ready to activate",
+            font=("Segoe UI", 21),
+            bg_color="black",
+            height=0,
+            width=0,
+            pady=20,
+            justify="left",
+        ).place(x=20, y=0)
+
+        customtkinter.CTkLabel(
+            self.window,
+            text="""By activating Bank With High Functionalities, you will unlock the full potential of
+our software, gaining access to all features and functionalities. We appreciate
+your support and trust in our product. If you have any questions or need
+assistance, please don't hesitate to contact via github discussions.""",
+            font=("Segoe UI", 13),
+            bg_color="black",
+            height=0,
+            width=0,
+            justify="left",
+            text_color="#FFFB00",
+        ).place(x=20, y=74)
+
+        customtkinter.CTkLabel(
+            self.window,
+            text="""Everything is ready! Click the 'Activate' button below to complete the activation
+process and start using Bank With High Functionalities.""",
+            font=("Segoe UI", 13),
+            bg_color="black",
+            height=0,
+            width=0,
+            justify="left",
+            text_color="#00FF00",
+        ).place(x=20, y=170)
 
         self.next_and_activate__button.configure(
             text="Activate",
@@ -195,7 +239,19 @@ release notices, setup guidance, and important information for all users.""",
 
     def _activate_and_proceed(self) -> None:
 
-        self.next_and_activate__button.destroy()
+        for widget in self.window.winfo_children():
+
+            if isinstance(widget, customtkinter.CTkLabel):
+                widget.destroy()
+        else:
+            self.next_and_activate__button.destroy()
+
+        try:
+            ...
+
+        except Exception as e:
+            ...
+
         self.cancel_and_close__button.configure(
             text="Close",
             fg_color=self.__raw_accent_color,
