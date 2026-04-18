@@ -18,12 +18,9 @@ class administrator_interface:
                 self.window__developer, width=980, height=480
             )
             self.frame__developer.place(x=10, y=10)
-
-            def hover(_):
-                rame = customtkinter.CTkFrame(
-                    self.frame__developer, width=100, height=100
-                )
-                rame.place(x=300, y=100)
+            self.frame = customtkinter.CTkFrame(
+                self.frame__developer, width=100, height=100
+            )
 
             dev = customtkinter.CTkButton(
                 self.frame__developer,
@@ -39,9 +36,11 @@ class administrator_interface:
                 height=0,
             )
             dev.place(x=89, y=100)
-            dev.bind("<Motion>", hover)
+            dev.bind("<Motion>", lambda _: self.frame.place(x=0, y=0))
             customtkinter.CTkButton(
                 self.frame__developer,
                 text="Exit",
                 command=self.window__developer.destroy,
             ).place(x=200, y=300)
+
+            dev.bind("<Leave>", lambda _: self.frame.place_forget())
