@@ -111,7 +111,7 @@ release notices, setup guidance, and important information for all users.""",
             corner_radius=0,
             border_width=0,
             fg_color="transparent",
-            font=("Roboto", 14),
+            font=("Consolas", 14),  # Consolas / Roboto
         )
         self.__activation_code.place(x=28, rely=0.5, anchor="w")
 
