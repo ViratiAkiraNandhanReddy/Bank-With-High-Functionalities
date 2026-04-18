@@ -112,9 +112,19 @@ release notices, setup guidance, and important information for all users.""",
             border_width=0,
             fg_color="transparent",
             font=("Roboto", 14),
-            textvariable=self.curr_key,
         )
         self.__activation_code.place(x=28, rely=0.5, anchor="w")
+
+        self.__activation_code.bind(
+            "<FocusIn>",
+            lambda event: self.__activation_code.configure(textvariable=self.curr_key),
+        )
+
+        self.__activation_code.bind(
+            "<FocusOut>",
+            lambda event: self.__activation_code.configure(textvariable=None)
+            or self.__activation_code.unbind("<FocusIn>"),
+        )
 
         self.visit_repository__button = customtkinter.CTkButton(
             self.window,
