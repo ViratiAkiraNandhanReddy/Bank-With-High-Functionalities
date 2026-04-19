@@ -203,15 +203,13 @@ class more_actions_interface:
                 border_width=0,
                 text_color="#000000",
                 bg_color="transparent",
-                fg_color="#FFFFFF",
+                fg_color="#818181",
                 font=("Roboto", 16, "bold"),
-                hover_color="light grey",
+                hover_color="#929090",
                 corner_radius=6,
                 command=self.validate_administrator_password,
             )
             administrator_sign_in_btn.place(x=20, y=340)
-
-            set_opacity(administrator_sign_in_btn.winfo_id(), 0.5)
 
         def forgot_administrator_password(self):
             self.if_00_container_frame_admin_sign_in__flow_sign_in.place_forget()
