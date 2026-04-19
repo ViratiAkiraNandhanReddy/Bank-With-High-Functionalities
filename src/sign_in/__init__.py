@@ -30,17 +30,22 @@ class sign_in_interface:
 
             # --- Main Window Configuration --- #
 
-            self.window = customtkinter.CTk()
+            self.window: customtkinter.CTk = customtkinter.CTk()
+
+            _width, _height = 1100, 650
+            _x_pos: int = int((self.window.winfo_screenwidth() / 2) - (_width / 2))
+            _y_pos: int = int((self.window.winfo_screenheight() / 2) - (_height / 2))
+
             self.window.title("Bank With High Functionalities")
-            self.window.geometry("1100x650+100+40")
+            self.window.geometry(f"{_width}x{_height}+{_x_pos}+{_y_pos}")
 
             apply_style(self.window, "transparent")
             title_bar.hide(self.window, no_span=True)
 
-            self.window.minsize(1100, 650)
-            self.window.maxsize(1100, 650)
+            self.window.minsize(_width, _height)
+            self.window.maxsize(_width, _height)
 
-            self.window.bind(
+            self.window.bind(  # Allowing the user to move the window by dragging anywhere on it, since there is no title bar.
                 "<Button-1>",
                 lambda event: move_tk_with_no_titlebar_winos_native_ctypes(
                     event, self.window
@@ -49,43 +54,49 @@ class sign_in_interface:
 
             self.window.after(800, self.show_sign_in_rtl)
 
-            self.more_button = customtkinter.CTkButton(
-                self.window,
-                text="",
-                image=customtkinter.CTkImage(
-                    light_image=icon__more_horiz,
-                    dark_image=icon__more_horiz,
-                    size=(12, 12),
-                ),
-                width=0,
-                height=0,
-                corner_radius=0,
-                hover_color="#43545F",
-                fg_color="black",
-                command=self.more_action__overlay_frame,
+            self.more_button: customtkinter.CTkButton = (
+                customtkinter.CTkButton(
+                    self.window,
+                    text="",
+                    image=customtkinter.CTkImage(
+                        light_image=icon__more_horiz,
+                        dark_image=icon__more_horiz,
+                        size=(12, 12),
+                    ),
+                    width=0,
+                    height=0,
+                    corner_radius=0,
+                    hover_color="#43545F",
+                    fg_color="black",
+                    command=self.more_action__overlay_frame,
+                )
             )
 
             self.more_button.place(x=1080, y=0)
 
             # --- Sign In Screen Configuration --- #
 
-            self.frame__sign_in = customtkinter.CTkFrame(self.window, corner_radius=0)
+            self.frame__sign_in: customtkinter.CTkFrame = customtkinter.CTkFrame(
+                self.window, corner_radius=0
+            )
             self.frame__sign_in.configure(width=900, height=610)
             self.frame__sign_in.place(x=self.x_axis_rtl, y=20)
 
-            self.internal_frame_00__sign_in = customtkinter.CTkFrame(
-                self.frame__sign_in,
-                width=450,
-                height=610,
-                fg_color="#000000",
-                corner_radius=0,
+            self.internal_frame_00__sign_in: customtkinter.CTkFrame = (
+                customtkinter.CTkFrame(
+                    self.frame__sign_in,
+                    width=450,
+                    height=610,
+                    fg_color="#000000",
+                    corner_radius=0,
+                )
             )
 
             # self.internal_frame_00__sign_in.place(x=0, y=0)
 
             set_opacity(self.internal_frame_00__sign_in.winfo_id(), 1)
 
-            self.__sign_in_banner = customtkinter.CTkLabel(
+            self.__sign_in_banner: customtkinter.CTkLabel = customtkinter.CTkLabel(
                 self.internal_frame_00__sign_in,
                 text="",
                 image=customtkinter.CTkImage(
@@ -99,12 +110,14 @@ class sign_in_interface:
 
             set_opacity(self.__sign_in_banner.winfo_id(), 1)
 
-            self.internal_frame_01__sign_in = customtkinter.CTkFrame(
-                self.frame__sign_in,
-                width=450,
-                height=610,
-                fg_color="transparent",
-                corner_radius=0,
+            self.internal_frame_01__sign_in: customtkinter.CTkFrame = (
+                customtkinter.CTkFrame(
+                    self.frame__sign_in,
+                    width=450,
+                    height=610,
+                    fg_color="transparent",
+                    corner_radius=0,
+                )
             )
 
             # self.internal_frame_01__sign_in.place(x=450, y=0)
@@ -126,23 +139,27 @@ class sign_in_interface:
 
             # --- Username Entry --- #
 
-            container_frame__username_sign_in = customtkinter.CTkFrame(
-                self.internal_frame_01__sign_in,
-                width=350,
-                height=40,
-                fg_color="transparent",
-                border_width=1,
-                border_color="#FFFFFF",
-                corner_radius=6,
+            container_frame__username_sign_in: customtkinter.CTkFrame = (
+                customtkinter.CTkFrame(
+                    self.internal_frame_01__sign_in,
+                    width=350,
+                    height=40,
+                    fg_color="transparent",
+                    border_width=1,
+                    border_color="#FFFFFF",
+                    corner_radius=6,
+                )
             )
 
-            container_frame__username_label_sign_in = customtkinter.CTkLabel(
-                self.internal_frame_01__sign_in,
-                text="username or uuid",
-                font=("Roboto", 10),
-                height=12,
-                width=83,  # 77
-                text_color="#FFFFFF",
+            container_frame__username_label_sign_in: customtkinter.CTkLabel = (
+                customtkinter.CTkLabel(
+                    self.internal_frame_01__sign_in,
+                    text="username or uuid",
+                    font=("Roboto", 10),
+                    height=12,
+                    width=83,  # 77
+                    text_color="#FFFFFF",
+                )
             )
 
             customtkinter.CTkLabel(
@@ -157,7 +174,7 @@ class sign_in_interface:
 
             container_frame__username_sign_in.place(x=50, y=280)
 
-            self.__username = customtkinter.CTkEntry(
+            self.__username: customtkinter.CTkEntry = customtkinter.CTkEntry(
                 container_frame__username_sign_in,
                 placeholder_text="username or uuid",
                 width=350 - 40,
