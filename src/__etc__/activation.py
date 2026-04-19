@@ -4,16 +4,18 @@ from . import *
 class activation:
 
     def __init__(self, _keys: list[str]) -> None:
-        self._keys = _keys
+        self._keys: list[str] = _keys
 
-        self.__raw_accent_color = get_accent_color()
-        self.__hvr_accent_color = utils.get_hvr_accent_color(self.__raw_accent_color)
+        self.__raw_accent_color: str = get_accent_color()
+        self.__hvr_accent_color: str = utils.get_hvr_accent_color(
+            self.__raw_accent_color
+        )
 
-        self.window = customtkinter.CTk()
+        self.window: customtkinter.CTk = customtkinter.CTk()
 
         _width, _height = 532, 276
-        _x_pos = int((self.window.winfo_screenwidth() / 2) - (_width / 2))
-        _y_pos = int((self.window.winfo_screenheight() / 2) - (_height / 2))
+        _x_pos: int = int((self.window.winfo_screenwidth() / 2) - (_width / 2))
+        _y_pos: int = int((self.window.winfo_screenheight() / 2) - (_height / 2))
 
         self.window.title("Bank With High Functionalities")
         self.window.geometry(f"{_width}x{_height}+{_x_pos}+{_y_pos}")
@@ -65,25 +67,29 @@ release notices, setup guidance, and important information for all users.""",
             justify="left",
         ).place(x=20, y=129)
 
-        self.container_frame__activation_entry = customtkinter.CTkFrame(
-            self.window,
-            width=470,
-            height=34,
-            fg_color="black",
-            bg_color="black",
-            border_width=1,
-            border_color="#FFFFFF",
-            corner_radius=6,
+        self.container_frame__activation_entry: customtkinter.CTkFrame = (
+            customtkinter.CTkFrame(
+                self.window,
+                width=470,
+                height=34,
+                fg_color="black",
+                bg_color="black",
+                border_width=1,
+                border_color="#FFFFFF",
+                corner_radius=6,
+            )
         )
 
-        self.container_frame__activation_label = customtkinter.CTkLabel(
-            self.window,
-            text="",
-            font=("Roboto", 10),
-            height=0,
-            width=268,
-            text_color="#FF0000",
-            bg_color="black",
+        self.container_frame__activation_label: customtkinter.CTkLabel = (
+            customtkinter.CTkLabel(
+                self.window,
+                text="",
+                font=("Roboto", 10),
+                height=0,
+                width=268,
+                text_color="#FF0000",
+                bg_color="black",
+            )
         )
 
         customtkinter.CTkLabel(
@@ -98,12 +104,12 @@ release notices, setup guidance, and important information for all users.""",
 
         self.container_frame__activation_entry.place(x=20, y=173)
 
-        self.curr_key = customtkinter.StringVar()
+        self.curr_key: customtkinter.StringVar = customtkinter.StringVar()
         self.curr_key.trace_add(
             "write", lambda *args: self.curr_key.set(self.curr_key.get().upper()[:49])
         )
 
-        self.__activation_code = customtkinter.CTkEntry(
+        self.__activation_code: customtkinter.CTkEntry = customtkinter.CTkEntry(
             self.container_frame__activation_entry,
             placeholder_text="XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX",
             width=470 - 40,
@@ -126,49 +132,55 @@ release notices, setup guidance, and important information for all users.""",
             or self.__activation_code.unbind("<FocusIn>"),
         )
 
-        self.visit_repository__button = customtkinter.CTkButton(
-            self.window,
-            text="Repository",
-            width=120,
-            height=30,
-            bg_color="black",
-            fg_color="#333333",
-            text_color="#FFFFFF",
-            hover_color="#3D3D3D",
-            image=customtkinter.CTkImage(
-                light_image=icon__platform_github,
-                dark_image=icon__platform_github,
-                size=(17, 17),
-            ),
-            command=lambda: utils.Open_Browser_For_Specified_URL(
-                CONSTANTS["github"]["repository"]
-            ),
+        self.visit_repository__button: customtkinter.CTkButton = (
+            customtkinter.CTkButton(
+                self.window,
+                text="Repository",
+                width=120,
+                height=30,
+                bg_color="black",
+                fg_color="#333333",
+                text_color="#FFFFFF",
+                hover_color="#3D3D3D",
+                image=customtkinter.CTkImage(
+                    light_image=icon__platform_github,
+                    dark_image=icon__platform_github,
+                    size=(17, 17),
+                ),
+                command=lambda: utils.Open_Browser_For_Specified_URL(
+                    CONSTANTS["github"]["repository"]
+                ),
+            )
         )
         self.visit_repository__button.place(x=196, y=234)
 
-        self.next_and_activate__button = customtkinter.CTkButton(
-            self.window,
-            text="Next",
-            width=90,
-            height=30,
-            bg_color="black",
-            fg_color=self.__raw_accent_color,
-            text_color="#FFFFFF",
-            hover_color=self.__hvr_accent_color,
-            command=self._verify_product_key_and_redirect_to_activate,
+        self.next_and_activate__button: customtkinter.CTkButton = (
+            customtkinter.CTkButton(
+                self.window,
+                text="Next",
+                width=90,
+                height=30,
+                bg_color="black",
+                fg_color=self.__raw_accent_color,
+                text_color="#FFFFFF",
+                hover_color=self.__hvr_accent_color,
+                command=self._verify_product_key_and_redirect_to_activate,
+            )
         )
         self.next_and_activate__button.place(x=328, y=234)
 
-        self.cancel_and_close__button = customtkinter.CTkButton(
-            self.window,
-            text="Cancel",
-            width=90,
-            height=30,
-            bg_color="black",
-            fg_color="#333333",
-            text_color="#FFFFFF",
-            hover_color="#3D3D3D",
-            command=lambda: [self.window.destroy(), exit()],
+        self.cancel_and_close__button: customtkinter.CTkButton = (
+            customtkinter.CTkButton(
+                self.window,
+                text="Cancel",
+                width=90,
+                height=30,
+                bg_color="black",
+                fg_color="#333333",
+                text_color="#FFFFFF",
+                hover_color="#3D3D3D",
+                command=lambda: [self.window.destroy(), exit()],
+            )
         )
         self.cancel_and_close__button.place(x=430, y=234)
 
@@ -176,7 +188,7 @@ release notices, setup guidance, and important information for all users.""",
 
     def _verify_product_key_and_redirect_to_activate(self) -> None:
 
-        entered_key = self.__activation_code.get().strip()
+        entered_key: str = self.__activation_code.get().strip()
 
         self.__activation_code.bind(
             "<KeyPress>",
@@ -259,7 +271,7 @@ process and start using Bank With High Functionalities.""",
         try:
 
             CONFIGURATION_JSON["is_activated"] = True
-            saved = utils.save_configuration_json(CONFIGURATION_JSON)
+            saved: bool = utils.save_configuration_json(CONFIGURATION_JSON)
 
             if saved:
 
