@@ -1,6 +1,6 @@
 from .. import *
-from ..dashboard import dashboard_interface
 from ..sign_up import sign_up_interface
+from ..dashboard import dashboard_interface
 from .more_actions import more_actions_interface
 
 
@@ -54,22 +54,20 @@ class sign_in_interface:
 
             self.window.after(800, self.show_sign_in_rtl)
 
-            self.more_button: customtkinter.CTkButton = (
-                customtkinter.CTkButton(
-                    self.window,
-                    text="",
-                    image=customtkinter.CTkImage(
-                        light_image=icon__more_horiz,
-                        dark_image=icon__more_horiz,
-                        size=(12, 12),
-                    ),
-                    width=0,
-                    height=0,
-                    corner_radius=0,
-                    hover_color="#43545F",
-                    fg_color="black",
-                    command=self.more_action__overlay_frame,
-                )
+            self.more_button: customtkinter.CTkButton = customtkinter.CTkButton(
+                self.window,
+                text="",
+                image=customtkinter.CTkImage(
+                    light_image=icon__more_horiz,
+                    dark_image=icon__more_horiz,
+                    size=(12, 12),
+                ),
+                width=0,
+                height=0,
+                corner_radius=0,
+                hover_color="#43545F",
+                fg_color="black",
+                command=self.more_action__overlay_frame,
             )
 
             self.more_button.place(x=1080, y=0)
@@ -139,7 +137,7 @@ class sign_in_interface:
 
             # --- Username Entry --- #
 
-            container_frame__username_sign_in: customtkinter.CTkFrame = (
+            self.container_frame__username_sign_in: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
                     self.internal_frame_01__sign_in,
                     width=350,
@@ -151,7 +149,7 @@ class sign_in_interface:
                 )
             )
 
-            container_frame__username_label_sign_in: customtkinter.CTkLabel = (
+            self.container_frame__username_label_sign_in: customtkinter.CTkLabel = (
                 customtkinter.CTkLabel(
                     self.internal_frame_01__sign_in,
                     text="username or uuid",
@@ -163,7 +161,7 @@ class sign_in_interface:
             )
 
             customtkinter.CTkLabel(
-                container_frame__username_sign_in,
+                self.container_frame__username_sign_in,
                 image=customtkinter.CTkImage(
                     light_image=icon__account_circle,
                     dark_image=icon__account_circle,
@@ -172,10 +170,10 @@ class sign_in_interface:
                 text="",
             ).place(x=8, rely=0.5, anchor="w")
 
-            container_frame__username_sign_in.place(x=50, y=280)
+            self.container_frame__username_sign_in.place(x=50, y=280)
 
             self.__username: customtkinter.CTkEntry = customtkinter.CTkEntry(
-                container_frame__username_sign_in,
+                self.container_frame__username_sign_in,
                 placeholder_text="username or uuid",
                 width=350 - 40,
                 height=40 - 8,
@@ -189,7 +187,7 @@ class sign_in_interface:
             self.__username.bind(
                 "<FocusIn>",
                 lambda event: (
-                    container_frame__username_label_sign_in.place(x=70, y=273)
+                    self.container_frame__username_label_sign_in.place(x=70, y=273)
                     if not self.__username.get()
                     else None
                 ),
@@ -197,7 +195,7 @@ class sign_in_interface:
             self.__username.bind(
                 "<FocusOut>",
                 lambda event: (
-                    container_frame__username_label_sign_in.place_forget()
+                    self.container_frame__username_label_sign_in.place_forget()
                     if not self.__username.get()
                     else None
                 ),
@@ -205,7 +203,7 @@ class sign_in_interface:
 
             # --- Password Entry And Reset Password --- #
 
-            container_frame__password_sign_in = customtkinter.CTkFrame(
+            self.container_frame__password_sign_in = customtkinter.CTkFrame(
                 self.internal_frame_01__sign_in,
                 width=350,
                 height=40,
@@ -215,7 +213,7 @@ class sign_in_interface:
                 corner_radius=6,
             )
 
-            container_frame__password_label_sign_in = customtkinter.CTkLabel(
+            self.container_frame__password_label_sign_in = customtkinter.CTkLabel(
                 self.internal_frame_01__sign_in,
                 text="password",
                 font=("Roboto", 10),
@@ -225,7 +223,7 @@ class sign_in_interface:
             )
 
             customtkinter.CTkLabel(
-                container_frame__password_sign_in,
+                self.container_frame__password_sign_in,
                 image=customtkinter.CTkImage(
                     light_image=icon__password,
                     dark_image=icon__password,
@@ -234,7 +232,7 @@ class sign_in_interface:
                 text="",
             ).place(x=8, rely=0.5, anchor="w")
 
-            container_frame__password_sign_in.place(x=50, y=340)
+            self.container_frame__password_sign_in.place(x=50, y=340)
 
             customtkinter.CTkButton(
                 self.internal_frame_01__sign_in,
@@ -250,7 +248,7 @@ class sign_in_interface:
             ).place(x=302, y=371)
 
             self.__password = customtkinter.CTkEntry(
-                container_frame__password_sign_in,
+                self.container_frame__password_sign_in,
                 placeholder_text="password",
                 width=350 - 40,
                 height=40 - 8,
@@ -265,7 +263,7 @@ class sign_in_interface:
             self.__password.bind(
                 "<FocusIn>",
                 lambda event: (
-                    container_frame__password_label_sign_in.place(x=70, y=333)
+                    self.container_frame__password_label_sign_in.place(x=70, y=333)
                     if not self.__password.get()
                     else None
                 ),
@@ -273,7 +271,7 @@ class sign_in_interface:
             self.__password.bind(
                 "<FocusOut>",
                 lambda event: (
-                    container_frame__password_label_sign_in.place_forget()
+                    self.container_frame__password_label_sign_in.place_forget()
                     if not self.__password.get()
                     else None
                 ),
@@ -656,8 +654,38 @@ class sign_in_interface:
             self,
         ) -> None:  # Validates The User Credentials And Redirects To The Dashboard
 
-            username = self.__username.get()
-            password = self.__password.get()
+            username = self.__username.get().strip()
+            password = self.__password.get().strip()
+
+            self.__username.bind(
+                "<KeyPress>",
+                lambda event: self.container_frame__username_sign_in.configure(
+                    border_color="#FFFFFF"
+                )
+                or self.container_frame__username_label_sign_in.configure(
+                    text_color="#FFFFFF"
+                )
+                or self.container_frame__username_label_sign_in.configure(
+                    text="username or uuid",
+                    width=83,  # 77
+                )
+                or self.__username.unbind("<KeyPress>"),
+            )
+
+            self.__password.bind(
+                "<KeyPress>",
+                lambda event: self.container_frame__password_sign_in.configure(
+                    border_color="#FFFFFF"
+                )
+                or self.container_frame__password_label_sign_in.configure(
+                    text_color="#FFFFFF"
+                )
+                or self.container_frame__password_label_sign_in.configure(
+                    text="password",
+                    width=50,  # 44
+                )
+                or self.__password.unbind("<KeyPress>"),
+            )
 
             def redirect_to_dashboard():  # Redirects To The Dashboard
 
@@ -677,66 +705,84 @@ class sign_in_interface:
                     ...
 
             if (not username) and password:  # username: false -- password: true
-                auth__username_error = customtkinter.CTkLabel(
-                    self.frame__sign_in,
-                    text="USERNAME IS INCOMPLETE",
-                    text_color="Orange",
-                )
-                auth__username_error.place(x=133, y=442)
-                auth__username_error.after(2000, auth__username_error.destroy)
 
-            elif (
-                username and not SERVER.traversal().is_user_exists(username)
-            ) and password:  # username: true (not exists) -- password: true
-                auth__username_not_exists_error = customtkinter.CTkLabel(
-                    self.frame__sign_in,
-                    text="THE GIVEN USERNAME DOES NOT EXISTS",
-                    text_color="Orange",
+                self.container_frame__username_sign_in.configure(border_color="#FF0000")
+
+                self.container_frame__username_label_sign_in.configure(
+                    text="invalid username or uuid", width=112
                 )
-                auth__username_not_exists_error.place(x=98, y=442)
-                auth__username_not_exists_error.after(
-                    2000, auth__username_not_exists_error.destroy
+                self.container_frame__username_label_sign_in.configure(
+                    text_color="#FF0000"
                 )
+
+                return
+
+            elif (not password) and username:  # username: true -- password: false
+
+                self.container_frame__password_sign_in.configure(border_color="#FF0000")
+
+                self.container_frame__password_label_sign_in.configure(
+                    text="invalid password", width=81
+                )
+                self.container_frame__password_label_sign_in.configure(
+                    text_color="#FF0000"
+                )
+
+                return
 
             elif (not username) and (
                 not password
             ):  # username: false -- password: false
-                auth__username_password_error = customtkinter.CTkLabel(
-                    self.frame__sign_in,
-                    text="USERNAME AND PASSWORD IS INCOMPLETE",
-                    text_color="Orange",
+
+                self.container_frame__username_sign_in.configure(border_color="#FF0000")
+                self.container_frame__password_sign_in.configure(border_color="#FF0000")
+
+                self.container_frame__username_label_sign_in.configure(
+                    text="invalid username or uuid", width=112
                 )
-                auth__username_password_error.place(x=96, y=442)
-                auth__username_password_error.after(
-                    2000, auth__username_password_error.destroy
+                self.container_frame__username_label_sign_in.configure(
+                    text_color="#FF0000"
                 )
 
-            elif (not password) and username:  # username: true -- password: false
-                auth__password_error = customtkinter.CTkLabel(
-                    self.frame__sign_in,
-                    text="PASSWORD IS INCOMPLETE",
-                    text_color="Orange",
+                self.container_frame__password_label_sign_in.configure(
+                    text="invalid password", width=81
                 )
-                auth__password_error.place(x=133, y=442)
-                auth__password_error.after(2000, auth__password_error.destroy)
+                self.container_frame__password_label_sign_in.configure(
+                    text_color="#FF0000"
+                )
 
-            elif username and (
-                not SERVER.authentication().authenticate_password(username, password)
-            ):  # username: true -- password: true (wrong)
-                auth__password_rule_error = customtkinter.CTkLabel(
-                    self.frame__sign_in,
-                    text="THE PASSWORD IS INCORRECT. TRY AGAIN!",
-                    text_color="Orange",
-                )
-                auth__password_rule_error.place(x=100, y=442)
-                auth__password_rule_error.after(2000, auth__password_rule_error.destroy)
+                return
 
-            else:  # passed all the criteria
-                auth__processing = customtkinter.CTkLabel(
-                    self.frame__sign_in, text="PROCESSING...", text_color="Orange"
+            elif (username and password) and (
+                (not SERVER.traversal().is_user_exists(username))
+                or (
+                    not SERVER.authentication().authenticate_password(
+                        username, password
+                    )
                 )
-                auth__processing.place(x=166, y=442)
-                auth__processing.after(2000, redirect_to_dashboard)
+            ):  # username: true (not exists) -- password: true --[or]-- username: true (exists) -- password: true (wrong)
+
+                self.container_frame__username_sign_in.configure(border_color="#FF0000")
+                self.container_frame__password_sign_in.configure(border_color="#FF0000")
+
+                self.container_frame__username_label_sign_in.configure(
+                    text_color="#FF0000"
+                )
+                self.container_frame__password_label_sign_in.configure(
+                    text_color="#FF0000"
+                )
+
+                self.container_frame__username_label_sign_in.configure(
+                    text="invalid username/uuid or password", width=160
+                )
+                self.container_frame__password_label_sign_in.configure(
+                    text="invalid username/uuid or password", width=160
+                )
+
+                return
+
+            else:
+                raise NotImplementedError
 
         def more_action__overlay_frame(self) -> None:
 
