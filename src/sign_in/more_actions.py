@@ -249,7 +249,9 @@ class more_actions_interface:
                 or self.__password.unbind("<KeyPress>"),
             )
 
-            if (not admin_username) and admin_password:
+            if (
+                not admin_username
+            ) and admin_password:  # admin_username: false -- admin_password: true
 
                 self.container_frame__username_admin_sign_in.configure(
                     border_color="#FF0000"
@@ -263,7 +265,9 @@ class more_actions_interface:
 
                 return
 
-            elif admin_username and (not admin_password):
+            elif admin_username and (
+                not admin_password
+            ):  # admin_username: true -- admin_password: false
 
                 self.container_frame__password_admin_sign_in.configure(
                     border_color="#FF0000"
@@ -277,7 +281,9 @@ class more_actions_interface:
 
                 return
 
-            elif (not admin_username) and (not admin_password):
+            elif (not admin_username) and (
+                not admin_password
+            ):  # admin_username: false -- admin_password: false
 
                 self.container_frame__username_admin_sign_in.configure(
                     border_color="#FF0000"
@@ -308,7 +314,7 @@ class more_actions_interface:
                         admin_username, admin_password
                     )
                 )
-            ):
+            ):  # admin_username: true (not exists) -- admin_password: true --[or]-- admin_username: true (exists) -- admin_password: true (wrong)
 
                 self.container_frame__username_admin_sign_in.configure(
                     border_color="#FF0000"
