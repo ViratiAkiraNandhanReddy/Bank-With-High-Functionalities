@@ -122,7 +122,7 @@ class SERVER:
                 """
                 SELECT password FROM users WHERE username = ?
                 """,
-                (username_or_uuid),
+                (username_or_uuid,),
             )
 
             return (
