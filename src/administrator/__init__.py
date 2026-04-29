@@ -8,14 +8,26 @@ class administrator_interface:
 
     class administrator:
 
-        def __init__(self, parent: customtkinter.CTk):
+        def __init__(
+            self, parent_window: customtkinter.CTk, _btn: customtkinter.CTkButton
+        ):
 
-            self.window__developer = customtkinter.CTkToplevel(parent)
-            self.window__developer.geometry("1000x500")
-            self.window__developer.title("Developer")
-            self.window__developer.resizable(False, False)
+            self.frame__administrator = customtkinter.CTkFrame(
+                parent_window, corner_radius=0, fg_color="black"
+            )
+            self.frame__administrator.configure(width=1100, height=650)
+
+            self.show_frame: Callable = lambda: (
+                self.frame__administrator.place(x=0, y=0),
+                _btn.place_forget(),
+            )
+            self.hide_frame: Callable = lambda: (
+                self.frame__administrator.place_forget(),
+                _btn.place(x=1080, y=0),
+            )
+
             self.frame__developer = customtkinter.CTkFrame(
-                self.window__developer, width=980, height=480
+                self.frame__administrator, width=980, height=480
             )
             self.frame__developer.place(x=10, y=10)
             self.frame = customtkinter.CTkFrame(
@@ -40,7 +52,7 @@ class administrator_interface:
             customtkinter.CTkButton(
                 self.frame__developer,
                 text="Exit",
-                command=self.window__developer.destroy,
+                command=self.frame__administrator.destroy,
             ).place(x=200, y=300)
 
             dev.bind("<Leave>", lambda _: self.frame.place_forget())
