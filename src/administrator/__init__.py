@@ -1,4 +1,5 @@
 from .. import *
+from ._navigation import navigation
 
 
 class administrator_interface:
@@ -10,7 +11,7 @@ class administrator_interface:
 
         def __init__(
             self, parent_window: customtkinter.CTk, _btn: customtkinter.CTkButton
-        ):
+        ) -> None:
 
             self.frame__administrator = customtkinter.CTkFrame(
                 parent_window, corner_radius=0, fg_color="black"
@@ -26,10 +27,12 @@ class administrator_interface:
                 _btn.place(x=1080, y=0),
             )
 
+            navigation(self.frame__administrator)
+
             self.frame__developer = customtkinter.CTkFrame(
-                self.frame__administrator, width=980, height=480
+                self.frame__administrator, width=870, height=480
             )
-            self.frame__developer.place(x=10, y=10)
+            self.frame__developer.place(x=220, y=10)
             self.frame = customtkinter.CTkFrame(
                 self.frame__developer, width=100, height=100
             )
