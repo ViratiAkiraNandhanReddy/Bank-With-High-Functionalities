@@ -1,0 +1,14 @@
+{
+    "latest": "1.0.0",
+    "stable": "1.0.0",
+    "installer": "1.0.0",
+    "releases": [
+        {
+            "stable": true,
+            "tag": "v1.0.0",
+            "version": "1.0.0",
+            "published_at": "YYYY-MM-DDTHH:MM:SSZ",
+            "notes_url": "/releases/1.0.0/notes/"
+        }
+    ]
+}
