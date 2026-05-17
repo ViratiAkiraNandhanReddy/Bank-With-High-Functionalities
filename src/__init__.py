@@ -44,8 +44,30 @@ except FileNotFoundError, json.JSONDecodeError:
 load_dotenv(rf"{DIR_PATH}\.env")
 
 
-def move_tk_with_no_titlebar_winos_native_ctypes(event, window: customtkinter.CTk):
+class borderless_window_utils:
 
-    hwnd = ctypes.windll.user32.GetParent(window.winfo_id())
-    ctypes.windll.user32.ReleaseCapture()
-    ctypes.windll.user32.PostMessageW(hwnd, 0xA1, 2, 0)
+    @staticmethod
+    def enable_native_window_drag_via_win32_message(_event, window: customtkinter.CTk):
+
+        hwnd = ctypes.windll.user32.GetParent(window.winfo_id())
+        ctypes.windll.user32.ReleaseCapture()
+        ctypes.windll.user32.PostMessageW(hwnd, 0xA1, 2, 0)
+
+    @staticmethod
+    def disable_minimize_btn_and_force_window_frame_refresh(window: customtkinter.CTk):
+
+        hwnd: int = ctypes.windll.user32.GetParent(window.winfo_id())
+        style = ctypes.windll.user32.GetWindowLongW(hwnd, -16)
+
+        style &= ~0x00020000
+
+        ctypes.windll.user32.SetWindowLongW(hwnd, -16, style)
+        ctypes.windll.user32.SetWindowPos(
+            hwnd,
+            None,
+            0,
+            0,
+            0,
+            0,
+            0x0002 | 0x0001 | 0x0020,  # SWP_NOMOVE | SWP_NOSIZE | SWP_FRAMECHANGED
+        )
