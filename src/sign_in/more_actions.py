@@ -367,7 +367,9 @@ class more_actions_interface:
 
             else:
                 self.overlay_frame__admin_dashboard = (
-                    administrator_interface.administrator(self.parent_window, self._btn)
+                    administrator_interface.administrator(
+                        self.parent_window, self._btn, admin_username
+                    )
                 )
                 self.overlay_frame__admin_dashboard.show_frame()
                 self.parent_frame.after(800, self.hide_overlay_callback)

@@ -11,13 +11,15 @@ class administrator_interface:
     class administrator:
 
         def __init__(
-            self, parent_window: customtkinter.CTk, _btn: customtkinter.CTkButton
+            self,
+            parent_window: customtkinter.CTk,
+            _btn: customtkinter.CTkButton,
+            username: str,
         ) -> None:
 
-            self.frame__administrator = customtkinter.CTkFrame(
-                parent_window, corner_radius=0, fg_color="black"
+            self.frame__administrator: customtkinter.CTkFrame = customtkinter.CTkFrame(
+                parent_window, width=1100, height=650, corner_radius=0, fg_color="black"
             )
-            self.frame__administrator.configure(width=1100, height=650)
 
             self.show_frame: Callable = lambda: (
                 self.frame__administrator.place(x=0, y=0),
@@ -28,7 +30,7 @@ class administrator_interface:
                 _btn.place(x=1080, y=0),
             )
 
-            navigation(self.frame__administrator)
+            navigation(self.frame__administrator, username)
             status_panel(self.frame__administrator)
 
             customtkinter.CTkButton(
@@ -49,9 +51,10 @@ class administrator_interface:
             ).place(x=1060, y=10)
 
             self.frame__developer = customtkinter.CTkFrame(
-                self.frame__administrator, width=870, height=480
+                self.frame__administrator, width=870, height=590
             )
-            self.frame__developer.place(x=220, y=50)
+            # self.frame__developer.place(x=220, y=50)
+
             self.frame = customtkinter.CTkFrame(
                 self.frame__developer, width=100, height=100
             )
