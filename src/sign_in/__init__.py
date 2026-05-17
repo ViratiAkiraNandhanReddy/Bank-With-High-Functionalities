@@ -44,11 +44,14 @@ class sign_in_interface:
 
             self.window.minsize(_width, _height)
             self.window.maxsize(_width, _height)
+            borderless_window_utils.disable_minimize_btn_and_force_window_frame_refresh(
+                self.window
+            )
 
             self.window.bind(  # Allowing the user to move the window by dragging anywhere on it, since there is no title bar.
                 "<Button-1>",
-                lambda event: move_tk_with_no_titlebar_winos_native_ctypes(
-                    event, self.window
+                lambda _event: borderless_window_utils.enable_native_window_drag_via_win32_message(
+                    _event, self.window
                 ),
             )
 
