@@ -1,5 +1,6 @@
 from .. import *
 from ._navigation import navigation
+from ._status_panel import status_panel
 
 
 class administrator_interface:
@@ -28,11 +29,29 @@ class administrator_interface:
             )
 
             navigation(self.frame__administrator)
+            status_panel(self.frame__administrator)
+
+            customtkinter.CTkButton(
+                self.frame__administrator,
+                text="",
+                image=customtkinter.CTkImage(
+                    light_image=icon__exit_to_app,
+                    dark_image=icon__exit_to_app,
+                    size=(25, 25),
+                ),
+                width=0,
+                height=0,
+                corner_radius=0,
+                hover=False,
+                fg_color="black",
+                border_spacing=0,
+                command=self.hide_frame,
+            ).place(x=1060, y=10)
 
             self.frame__developer = customtkinter.CTkFrame(
                 self.frame__administrator, width=870, height=480
             )
-            self.frame__developer.place(x=220, y=10)
+            self.frame__developer.place(x=220, y=50)
             self.frame = customtkinter.CTkFrame(
                 self.frame__developer, width=100, height=100
             )
@@ -52,10 +71,4 @@ class administrator_interface:
             )
             dev.place(x=89, y=100)
             dev.bind("<Motion>", lambda _: self.frame.place(x=0, y=0))
-            customtkinter.CTkButton(
-                self.frame__developer,
-                text="Exit",
-                command=self.frame__administrator.destroy,
-            ).place(x=200, y=300)
-
             dev.bind("<Leave>", lambda _: self.frame.place_forget())
