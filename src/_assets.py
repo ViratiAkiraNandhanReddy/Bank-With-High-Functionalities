@@ -9,6 +9,10 @@ icon__close = Image.open(rf"{DIR_PATH}\assets\icons\material-icons\close.png")
 
 icon__more_horiz = Image.open(rf"{DIR_PATH}\assets\icons\material-icons\more_horiz.png")
 
+icon__exit_to_app = Image.open(
+    rf"{DIR_PATH}\assets\icons\material-icons\exit_to_app.png"
+)
+
 # --- platform --- #
 
 icon__platform_github = Image.open(

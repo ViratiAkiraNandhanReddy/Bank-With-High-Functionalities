@@ -49,7 +49,7 @@ class borderless_window_utils:
     @staticmethod
     def enable_native_window_drag_via_win32_message(_event, window: customtkinter.CTk):
 
-        hwnd = ctypes.windll.user32.GetParent(window.winfo_id())
+        hwnd: int = ctypes.windll.user32.GetParent(window.winfo_id())
         ctypes.windll.user32.ReleaseCapture()
         ctypes.windll.user32.PostMessageW(hwnd, 0xA1, 2, 0)
 
