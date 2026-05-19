@@ -38,6 +38,7 @@ class sign_in_interface:
 
             self.window.title("Bank With High Functionalities")
             self.window.geometry(f"{_width}x{_height}+{_x_pos}+{_y_pos}")
+            self.window.iconbitmap(rf"{DIR_PATH}\assets\brand\logo\favicon.ico")
 
             apply_style(self.window, "transparent")
             title_bar.hide(self.window, no_span=True)
