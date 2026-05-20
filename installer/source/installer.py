@@ -10,10 +10,19 @@ from PIL import Image
 from hPyT import title_bar
 from pywinstyles import apply_style
 
+__dir_path: str = (
+    str(os.environ.get("LOCALAPPDATA")) + r"\Bank-With-High-Functionalities"
+)
+
 
 class images:
 
-    pass
+    class icons:
+
+        @staticmethod
+        def get(icon_name: str, icon_type: str) -> Image.Image:
+
+            return Image.open(rf"assets\icons\{icon_type}\{icon_name}.png")
 
 
 class utils:
@@ -80,5 +89,50 @@ class installer:
                 _event, self.window
             ),
         )
+
+        ## --- image assets --- ##
+
+        self.icon__close: Image.Image = images.icons.get("close", "material-icons")
+        self.icon__remove: Image.Image = images.icons.get("remove", "material-icons")
+
+        self.frame__title_bar: customtkinter.CTkFrame = customtkinter.CTkFrame(
+            self.window,
+            width=650,
+            height=20,
+            fg_color="#0f0f0f",
+            bg_color="black",
+            corner_radius=0,
+        )
+        self.frame__title_bar.place(x=0, y=0)
+
+        customtkinter.CTkButton(
+            self.frame__title_bar,
+            text="",
+            width=0,
+            height=0,
+            fg_color="transparent",
+            image=customtkinter.CTkImage(
+                light_image=self.icon__close, dark_image=self.icon__close, size=(14, 14)
+            ),
+            corner_radius=0,
+            border_spacing=0,
+            hover_color="#ff0000",
+        ).place(x=630, y=0)
+
+        customtkinter.CTkButton(
+            self.frame__title_bar,
+            text="",
+            width=0,
+            height=0,
+            fg_color="transparent",
+            image=customtkinter.CTkImage(
+                light_image=self.icon__remove,
+                dark_image=self.icon__remove,
+                size=(14, 14),
+            ),
+            corner_radius=0,
+            border_spacing=0,
+            hover_color="#202020",
+        ).place(x=610, y=0)
 
         self.window.mainloop()
