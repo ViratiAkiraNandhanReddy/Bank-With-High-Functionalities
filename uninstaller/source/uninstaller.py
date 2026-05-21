@@ -5,16 +5,35 @@ import subprocess
 import customtkinter
 from PIL import Image
 from hPyT import title_bar
-from pywinstyles import apply_style
+from pywinstyles import apply_style, set_opacity
 
-__dir_path: str = (
+_dir_path: str = (
     str(os.environ.get("LOCALAPPDATA")) + r"\Bank-With-High-Functionalities"
 )
 
 
 class images:
 
-    pass
+    class icons:
+
+        @staticmethod
+        def get(name: str, _type: str, extension: str) -> Image.Image:
+
+            return Image.open(rf"{_dir_path}\assets\icons\{_type}\{name}.{extension}")
+
+    class brand:
+
+        @staticmethod
+        def get(name: str, _type: str, extension: str) -> Image.Image:
+
+            return Image.open(rf"{_dir_path}\assets\brand\{_type}\{name}.{extension}")
+
+    class banners:
+
+        @staticmethod
+        def get(name: str) -> Image.Image:
+
+            return Image.open(rf"{_dir_path}\assets\banners\{name}.jpg")
 
 
 class utils:
@@ -65,7 +84,7 @@ class uninstaller:
 
         self.window.title("Bank With High Functionalities")
         self.window.geometry(f"{_width}x{_height}+{_x_pos}+{_y_pos}")
-        # self.window.iconbitmap("favicon.ico")
+        self.window.iconbitmap(rf"{_dir_path}\assets\brand\logo\favicon.ico")
 
         apply_style(self.window, "transparent")
         title_bar.hide(self.window, no_span=True)
@@ -94,4 +113,78 @@ class uninstaller:
             ),
         )
 
+        ## --- image assets --- ##
+
+        self.icon__close: Image.Image = images.icons.get(
+            "close", "material-icons", "png"
+        )
+        self.icon__remove: Image.Image = images.icons.get(
+            "remove", "material-icons", "png"
+        )
+        self.brand__logo_circle: Image.Image = images.brand.get(
+            "logo-circle", "logo", "png"
+        )
+        self.banner__setup_wizard_sidebar_banner: Image.Image = images.banners.get(
+            "setup-wizard-sidebar-banner"
+        )
+
+        self.frame__title_bar: customtkinter.CTkFrame = customtkinter.CTkFrame(
+            self.window,
+            width=470,
+            height=20,
+            fg_color="#0f0f0f",
+            bg_color="black",
+            corner_radius=0,
+        )
+        self.frame__title_bar.place(x=180, y=0)
+
+        self.banner = customtkinter.CTkLabel(
+            self.window,
+            text="",
+            width=0,
+            height=0,
+            image=customtkinter.CTkImage(
+                light_image=self.banner__setup_wizard_sidebar_banner,
+                dark_image=self.banner__setup_wizard_sidebar_banner,
+                size=(180, 400),
+            ),
+        )
+        self.banner.place(x=0, y=0)
+
+        set_opacity(self.banner.winfo_id(), 1)
+
+        customtkinter.CTkButton(
+            self.frame__title_bar,
+            text="",
+            width=0,
+            height=0,
+            fg_color="transparent",
+            image=customtkinter.CTkImage(
+                light_image=self.icon__remove,
+                dark_image=self.icon__remove,
+                size=(14, 14),
+            ),
+            corner_radius=0,
+            border_spacing=0,
+            hover_color="#202020",
+            command=lambda: self.window.state("iconic"),
+        ).place(x=430, y=0)
+
+        customtkinter.CTkButton(
+            self.frame__title_bar,
+            text="",
+            width=0,
+            height=0,
+            fg_color="transparent",
+            image=customtkinter.CTkImage(
+                light_image=self.icon__close, dark_image=self.icon__close, size=(14, 14)
+            ),
+            corner_radius=0,
+            border_spacing=0,
+            hover_color="#ff0000",
+        ).place(x=450, y=0)
+
         self.window.mainloop()
+
+
+uninstaller()
