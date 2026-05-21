@@ -7,6 +7,10 @@ from PIL import Image
 from hPyT import title_bar
 from pywinstyles import apply_style
 
+__dir_path: str = (
+    str(os.environ.get("LOCALAPPDATA")) + r"\Bank-With-High-Functionalities"
+)
+
 
 class images:
 
@@ -28,6 +32,7 @@ class utils:
 
         @staticmethod
         def disable_minimize_btn_and_force_window_frame_refresh(
+            _event,
             window: customtkinter.CTk,
         ):
 
@@ -67,13 +72,24 @@ class uninstaller:
 
         self.window.minsize(_width, _height)
         self.window.maxsize(_width, _height)
-        utils.borderless_window_utils.disable_minimize_btn_and_force_window_frame_refresh(
-            self.window
-        )
 
-        self.window.bind(  # Allowing the user to move the window by dragging anywhere on it, since there is no title bar.
+        self.window.bind(
+            # Enables native Win32 window dragging for the borderless window by simulating a standard title bar drag operation.
+            # This restores default Windows drag behavior, including smooth movement and proper DWM-managed window interactions
+            # despite the absence of a native title bar.
             "<Button-1>",
             lambda _event: utils.borderless_window_utils.enable_native_window_drag_via_win32_message(
+                _event, self.window
+            ),
+        )
+
+        self.window.bind(
+            # Fixes the hPyT title_bar.hide(no_span=True) side effect where Windows restores the window with stale non-client
+            # frame metrics after minimization, causing unintended geometry expansion and an extra bottom gap. Reapplying the
+            # modified window styles and forcing a native frame recalculation on the <Map> event ensures the borderless window
+            # is restored with the correct dimensions and frame layout.
+            "<Map>",
+            lambda _event: utils.borderless_window_utils.disable_minimize_btn_and_force_window_frame_refresh(
                 _event, self.window
             ),
         )
