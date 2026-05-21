@@ -54,7 +54,9 @@ class borderless_window_utils:
         ctypes.windll.user32.PostMessageW(hwnd, 0xA1, 2, 0)
 
     @staticmethod
-    def disable_minimize_btn_and_force_window_frame_refresh(window: customtkinter.CTk):
+    def disable_minimize_btn_and_force_window_frame_refresh(
+        _event, window: customtkinter.CTk
+    ):
 
         hwnd: int = ctypes.windll.user32.GetParent(window.winfo_id())
         style = ctypes.windll.user32.GetWindowLongW(hwnd, -16)
