@@ -10,7 +10,7 @@ from PIL import Image
 from hPyT import title_bar
 from pywinstyles import apply_style, set_opacity
 
-__dir_path: str = (
+_dir_path: str = (
     str(os.environ.get("LOCALAPPDATA")) + r"\Bank-With-High-Functionalities"
 )
 
