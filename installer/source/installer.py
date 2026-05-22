@@ -140,7 +140,7 @@ class installer:
         )
         self.frame__title_bar.place(x=180, y=0)
 
-        self.banner = customtkinter.CTkLabel(
+        self.banner: customtkinter.CTkLabel = customtkinter.CTkLabel(  # Sidebar Banner
             self.window,
             text="",
             width=0,
@@ -155,7 +155,7 @@ class installer:
 
         set_opacity(self.banner.winfo_id(), 1)
 
-        customtkinter.CTkButton(
+        customtkinter.CTkButton(  # Minimize Button (-)
             self.frame__title_bar,
             text="",
             width=0,
@@ -172,7 +172,7 @@ class installer:
             command=lambda: self.window.state("iconic"),
         ).place(x=430, y=0)
 
-        customtkinter.CTkButton(
+        customtkinter.CTkButton(  # Close Button (X)
             self.frame__title_bar,
             text="",
             width=0,
@@ -184,7 +184,18 @@ class installer:
             corner_radius=0,
             border_spacing=0,
             hover_color="#ff0000",
+            command=self.window.destroy,
         ).place(x=450, y=0)
+
+        self.container__main_content: customtkinter.CTkFrame = customtkinter.CTkFrame(
+            self.window,
+            width=460,
+            height=370,
+            fg_color="#0f0f0f",
+            bg_color="black",
+            corner_radius=0,
+        )
+        self.container__main_content.place(x=185, y=25)
 
         self.window.mainloop()
 
