@@ -8,9 +8,9 @@ import subprocess
 import customtkinter
 from PIL import Image
 from hPyT import title_bar
-from pywinstyles import apply_style
+from pywinstyles import apply_style, set_opacity
 
-__dir_path: str = (
+_dir_path: str = (
     str(os.environ.get("LOCALAPPDATA")) + r"\Bank-With-High-Functionalities"
 )
 
@@ -20,9 +20,23 @@ class images:
     class icons:
 
         @staticmethod
-        def get(icon_name: str, icon_type: str) -> Image.Image:
+        def get(name: str, _type: str, extension: str) -> Image.Image:
 
-            return Image.open(rf"assets\icons\{icon_type}\{icon_name}.png")
+            return Image.open(rf"assets\icons\{_type}\{name}.{extension}")
+
+    class brand:
+
+        @staticmethod
+        def get(name: str, _type: str, extension: str) -> Image.Image:
+
+            return Image.open(rf"assets\brand\{_type}\{name}.{extension}")
+
+    class banners:
+
+        @staticmethod
+        def get(name: str) -> Image.Image:
+
+            return Image.open(rf"assets\banners\{name}.jpg")
 
 
 class utils:
@@ -40,7 +54,7 @@ class utils:
 
         @staticmethod
         def disable_minimize_btn_and_force_window_frame_refresh(
-            window: customtkinter.CTk,
+            _event, window: customtkinter.CTk
         ):
 
             hwnd: int = ctypes.windll.user32.GetParent(window.winfo_id())
@@ -79,47 +93,69 @@ class installer:
 
         self.window.minsize(_width, _height)
         self.window.maxsize(_width, _height)
-        utils.borderless_window_utils.disable_minimize_btn_and_force_window_frame_refresh(
-            self.window
-        )
 
-        self.window.bind(  # Allowing the user to move the window by dragging anywhere on it, since there is no title bar.
+        self.window.bind(
+            # Enables native Win32 window dragging for the borderless window by simulating a standard title bar drag operation.
+            # This restores default Windows drag behavior, including smooth movement and proper DWM-managed window interactions
+            # despite the absence of a native title bar.
             "<Button-1>",
             lambda _event: utils.borderless_window_utils.enable_native_window_drag_via_win32_message(
                 _event, self.window
             ),
         )
 
+        self.window.bind(
+            # Fixes the hPyT title_bar.hide(no_span=True) side effect where Windows restores the window with stale non-client
+            # frame metrics after minimization, causing unintended geometry expansion and an extra bottom gap. Reapplying the
+            # modified window styles and forcing a native frame recalculation on the <Map> event ensures the borderless window
+            # is restored with the correct dimensions and frame layout.
+            "<Map>",
+            lambda _event: utils.borderless_window_utils.disable_minimize_btn_and_force_window_frame_refresh(
+                _event, self.window
+            ),
+        )
+
         ## --- image assets --- ##
 
-        self.icon__close: Image.Image = images.icons.get("close", "material-icons")
-        self.icon__remove: Image.Image = images.icons.get("remove", "material-icons")
+        self.icon__close: Image.Image = images.icons.get(
+            "close", "material-icons", "png"
+        )
+        self.icon__remove: Image.Image = images.icons.get(
+            "remove", "material-icons", "png"
+        )
+        self.brand__logo_circle: Image.Image = images.brand.get(
+            "logo-circle", "logo", "png"
+        )
+        self.banner__setup_wizard_sidebar_banner: Image.Image = images.banners.get(
+            "setup-wizard-sidebar-banner"
+        )
 
         self.frame__title_bar: customtkinter.CTkFrame = customtkinter.CTkFrame(
             self.window,
-            width=650,
+            width=470,
             height=20,
             fg_color="#0f0f0f",
             bg_color="black",
             corner_radius=0,
         )
-        self.frame__title_bar.place(x=0, y=0)
+        self.frame__title_bar.place(x=180, y=0)
 
-        customtkinter.CTkButton(
-            self.frame__title_bar,
+        self.banner: customtkinter.CTkLabel = customtkinter.CTkLabel(  # Sidebar Banner
+            self.window,
             text="",
             width=0,
             height=0,
-            fg_color="transparent",
             image=customtkinter.CTkImage(
-                light_image=self.icon__close, dark_image=self.icon__close, size=(14, 14)
+                light_image=self.banner__setup_wizard_sidebar_banner,
+                dark_image=self.banner__setup_wizard_sidebar_banner,
+                size=(180, 400),
             ),
-            corner_radius=0,
-            border_spacing=0,
-            hover_color="#ff0000",
-        ).place(x=630, y=0)
+        )
+        self.banner.place(x=0, y=0)
 
-        customtkinter.CTkButton(
+        set_opacity(self.banner.winfo_id(), 1)
+
+        customtkinter.CTkButton(  # Minimize Button (-)
             self.frame__title_bar,
             text="",
             width=0,
@@ -133,6 +169,35 @@ class installer:
             corner_radius=0,
             border_spacing=0,
             hover_color="#202020",
-        ).place(x=610, y=0)
+            command=lambda: self.window.state("iconic"),
+        ).place(x=430, y=0)
+
+        customtkinter.CTkButton(  # Close Button (X)
+            self.frame__title_bar,
+            text="",
+            width=0,
+            height=0,
+            fg_color="transparent",
+            image=customtkinter.CTkImage(
+                light_image=self.icon__close, dark_image=self.icon__close, size=(14, 14)
+            ),
+            corner_radius=0,
+            border_spacing=0,
+            hover_color="#ff0000",
+            command=self.window.destroy,
+        ).place(x=450, y=0)
+
+        self.container__main_content: customtkinter.CTkFrame = customtkinter.CTkFrame(
+            self.window,
+            width=460,
+            height=370,
+            fg_color="#0f0f0f",
+            bg_color="black",
+            corner_radius=0,
+        )
+        self.container__main_content.place(x=185, y=25)
 
         self.window.mainloop()
+
+
+installer()
