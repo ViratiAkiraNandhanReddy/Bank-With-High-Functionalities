@@ -23,6 +23,7 @@ icon__chevron_forward = Image.open(
     rf"{DIR_PATH}\assets\icons\material-icons\chevron_forward.png"
 )
 
+icon__wifi_off = Image.open(rf"{DIR_PATH}\assets\icons\material-icons\wifi_off.png")
 
 # --- platform --- #
 

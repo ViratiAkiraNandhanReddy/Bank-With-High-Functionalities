@@ -238,6 +238,8 @@ class more_actions_interface:
 
             # --- --- --- --- --- --- --- --- --- --- --- #
 
+            _is_internet_connection_available: bool
+
             self.if_01_container_frame_admin_sign_in: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
                     self.internal_frame_00_more_actions,
@@ -286,6 +288,29 @@ one-time password sent to your email address.""",
                 )
             )
             self.btn__email_verification_via_otp.place(x=20, y=200)
+
+            if not _is_internet_connection_available:
+
+                self.btn__email_verification_via_otp.configure(
+                    state="disabled",
+                    fg_color="#3a3a3a",
+                    text_color_disabled="#a0a0a0",
+                )
+
+                customtkinter.CTkLabel(
+                    self.btn__email_verification_via_otp,
+                    text="  No internet connection available",
+                    font=("Segoe UI", 9),
+                    text_color="#a0a0a0",
+                    width=0,
+                    height=0,
+                    image=customtkinter.CTkImage(
+                        light_image=icon__wifi_off,
+                        dark_image=icon__wifi_off,
+                        size=(12, 12),
+                    ),
+                    compound="left",
+                ).place(x=58, y=46)
 
             self.btn__backup_code_verification: customtkinter.CTkButton = (
                 customtkinter.CTkButton(
