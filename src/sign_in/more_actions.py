@@ -250,7 +250,7 @@ class more_actions_interface:
 
             customtkinter.CTkLabel(
                 self.if_01_container_frame_admin_sign_in,
-                text="Choose a verification method",
+                text="Choose a Verification Method",
                 font=("Segoe UI", 16, "bold"),
                 text_color="#FFFFFF",
                 image=customtkinter.CTkImage(
@@ -261,21 +261,28 @@ class more_actions_interface:
                 compound="top",
                 height=0,
                 width=0,
-            ).place(x=38, y=68)
+            ).place(x=36, y=68)
 
             self.btn__email_verification_via_otp: customtkinter.CTkButton = (
                 customtkinter.CTkButton(
                     self.if_01_container_frame_admin_sign_in,
-                    text="",
+                    text="""Verify administrator account ownership using the
+one-time password sent to your email address.""",
                     width=260,
                     height=60,
                     border_width=0,
                     text_color="#FFFFFF",
                     bg_color="transparent",
                     fg_color="#1B1B1B",
-                    font=("Roboto", 16, "bold"),
+                    font=("Roboto", 9),
                     hover_color="#252525",
                     corner_radius=6,
+                    image=customtkinter.CTkImage(
+                        light_image=icon__chevron_forward,
+                        dark_image=icon__chevron_forward,
+                        size=(30, 30),
+                    ),
+                    compound="right",
                 )
             )
             self.btn__email_verification_via_otp.place(x=20, y=200)
@@ -283,16 +290,23 @@ class more_actions_interface:
             self.btn__backup_code_verification: customtkinter.CTkButton = (
                 customtkinter.CTkButton(
                     self.if_01_container_frame_admin_sign_in,
-                    text="",
+                    text="""Verify administrator account ownership using the
+backup recovery code linked to your account.""",
                     width=260,
                     height=60,
                     border_width=0,
                     text_color="#FFFFFF",
                     bg_color="transparent",
                     fg_color="#1B1B1B",
-                    font=("Roboto", 16, "bold"),
+                    font=("Roboto", 9),
                     hover_color="#252525",
                     corner_radius=6,
+                    image=customtkinter.CTkImage(
+                        light_image=icon__chevron_forward,
+                        dark_image=icon__chevron_forward,
+                        size=(30, 30),
+                    ),
+                    compound="right",
                 )
             )
             self.btn__backup_code_verification.place(x=20, y=272)
@@ -310,8 +324,8 @@ class more_actions_interface:
                     size=(20, 20),
                 ),
                 command=lambda: (
-                    self.if_01_container_frame_admin_sign_in.destroy(),
                     self.if_00_container_frame_admin_sign_in.place(x=3, y=3),
+                    self.if_01_container_frame_admin_sign_in.destroy(),
                 ),
             )
             self.btn__back_if_01.place(x=20, y=352)
