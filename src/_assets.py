@@ -13,6 +13,13 @@ icon__exit_to_app = Image.open(
     rf"{DIR_PATH}\assets\icons\material-icons\exit_to_app.png"
 )
 
+icon__lock_person = Image.open(
+    rf"{DIR_PATH}\assets\icons\material-icons\lock_person.png"
+)
+
+icon__arrow_back = Image.open(rf"{DIR_PATH}\assets\icons\material-icons\arrow_back.png")
+
+
 # --- platform --- #
 
 icon__platform_github = Image.open(
