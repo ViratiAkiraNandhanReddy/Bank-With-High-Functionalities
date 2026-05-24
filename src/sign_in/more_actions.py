@@ -284,6 +284,11 @@ class more_actions_interface:
                 )
                 if_backupcode_container_frame_admin_sign_in.place(x=3, y=3)
 
+                def validate_backup_code() -> None:
+
+                    username: str = __username.get().strip()
+                    backup_code: str = __backup_code.get().strip()
+
                 container_frame__username_admin_reset_password: (
                     customtkinter.CTkFrame
                 ) = customtkinter.CTkFrame(
@@ -335,7 +340,7 @@ class more_actions_interface:
                     "<FocusIn>",
                     lambda event: (
                         container_frame__username_label_admin_reset_password.place(
-                            x=40, y=193
+                            x=40, y=225
                         )
                         if not __username.get()
                         else None
@@ -346,6 +351,73 @@ class more_actions_interface:
                     lambda event: (
                         container_frame__username_label_admin_reset_password.place_forget()
                         if not __username.get()
+                        else None
+                    ),
+                )
+
+                container_frame__backup_code_admin_reset_password: (
+                    customtkinter.CTkFrame
+                ) = customtkinter.CTkFrame(
+                    if_backupcode_container_frame_admin_sign_in,
+                    width=260,
+                    height=40,
+                    fg_color="transparent",
+                    border_width=1,
+                    border_color="#FFFFFF",
+                    corner_radius=6,
+                )
+
+                container_frame__backup_code_label_admin_reset_backup_code: (
+                    customtkinter.CTkLabel
+                ) = customtkinter.CTkLabel(
+                    if_backupcode_container_frame_admin_sign_in,
+                    text="backup code",
+                    font=("Roboto", 10),
+                    height=12,
+                    width=63,  # 57
+                    text_color="#FFFFFF",
+                )
+
+                customtkinter.CTkLabel(
+                    container_frame__backup_code_admin_reset_password,
+                    image=customtkinter.CTkImage(
+                        light_image=icon__password,
+                        dark_image=icon__password,
+                        size=(20, 20),
+                    ),
+                    text="",
+                ).place(x=8, rely=0.5, anchor="w")
+
+                container_frame__backup_code_admin_reset_password.place(x=20, y=292)
+
+                __backup_code: customtkinter.CTkEntry = customtkinter.CTkEntry(
+                    container_frame__backup_code_admin_reset_password,
+                    placeholder_text="backup code",
+                    width=260 - 40,
+                    height=40 - 8,
+                    corner_radius=0,
+                    border_width=0,
+                    fg_color="transparent",
+                    font=("Roboto", 16),
+                    show="•",
+                )
+                __backup_code.place(x=28, rely=0.5, anchor="w")
+
+                __backup_code.bind(
+                    "<FocusIn>",
+                    lambda event: (
+                        container_frame__backup_code_label_admin_reset_backup_code.place(
+                            x=40, y=285
+                        )
+                        if not __backup_code.get()
+                        else None
+                    ),
+                )
+                __backup_code.bind(
+                    "<FocusOut>",
+                    lambda event: (
+                        container_frame__backup_code_label_admin_reset_backup_code.place_forget()
+                        if not __backup_code.get()
                         else None
                     ),
                 )
