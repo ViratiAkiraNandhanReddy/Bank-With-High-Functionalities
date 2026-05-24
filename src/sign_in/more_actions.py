@@ -284,6 +284,72 @@ class more_actions_interface:
                 )
                 if_backupcode_container_frame_admin_sign_in.place(x=3, y=3)
 
+                container_frame__username_admin_reset_password: (
+                    customtkinter.CTkFrame
+                ) = customtkinter.CTkFrame(
+                    if_backupcode_container_frame_admin_sign_in,
+                    width=260,
+                    height=40,
+                    fg_color="transparent",
+                    border_width=1,
+                    border_color="#FFFFFF",
+                    corner_radius=6,
+                )
+
+                container_frame__username_label_admin_reset_password: (
+                    customtkinter.CTkLabel
+                ) = customtkinter.CTkLabel(
+                    if_backupcode_container_frame_admin_sign_in,
+                    text="username",
+                    font=("Roboto", 10),
+                    height=12,
+                    width=50,  # 44
+                    text_color="#FFFFFF",
+                )
+
+                customtkinter.CTkLabel(
+                    container_frame__username_admin_reset_password,
+                    image=customtkinter.CTkImage(
+                        light_image=icon__account_circle,
+                        dark_image=icon__account_circle,
+                        size=(20, 20),
+                    ),
+                    text="",
+                ).place(x=8, rely=0.5, anchor="w")
+
+                container_frame__username_admin_reset_password.place(x=20, y=232)
+
+                __username: customtkinter.CTkEntry = customtkinter.CTkEntry(
+                    container_frame__username_admin_reset_password,
+                    placeholder_text="username",
+                    width=260 - 40,
+                    height=40 - 8,
+                    corner_radius=0,
+                    border_width=0,
+                    fg_color="transparent",
+                    font=("Roboto", 16),
+                )
+                __username.place(x=28, rely=0.5, anchor="w")
+
+                __username.bind(
+                    "<FocusIn>",
+                    lambda event: (
+                        container_frame__username_label_admin_reset_password.place(
+                            x=40, y=193
+                        )
+                        if not __username.get()
+                        else None
+                    ),
+                )
+                __username.bind(
+                    "<FocusOut>",
+                    lambda event: (
+                        container_frame__username_label_admin_reset_password.place_forget()
+                        if not __username.get()
+                        else None
+                    ),
+                )
+
                 btn__back_if_backupcode: customtkinter.CTkButton = (
                     customtkinter.CTkButton(
                         if_backupcode_container_frame_admin_sign_in,
