@@ -228,17 +228,83 @@ class more_actions_interface:
 
             self.if_00_container_frame_admin_sign_in.place_forget()
 
-            # --- --- --- --- --- --- --- --- --- --- --- #
-
-            # None: not opted yet (default)
-            # False: backup code verification
-            # True: email verification via OTP
-
-            _opted_verification_method: bool | None = None
-
-            # --- --- --- --- --- --- --- --- --- --- --- #
-
             _is_internet_connection_available: bool = utils.connection.is_connected()
+
+            def _password_reset() -> None:
+
+                pass
+
+            def opted_email_verification_via_otp() -> None:
+
+                self.if_01_container_frame_admin_sign_in.place_forget()
+
+                if_emailotp_container_frame_admin_sign_in: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        self.internal_frame_00_more_actions,
+                        width=300,
+                        height=400,
+                        fg_color="transparent",
+                    )
+                )
+                if_emailotp_container_frame_admin_sign_in.place(x=3, y=3)
+
+                btn__back_if_emailotp: customtkinter.CTkButton = (
+                    customtkinter.CTkButton(
+                        if_emailotp_container_frame_admin_sign_in,
+                        text="",
+                        width=0,
+                        height=0,
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=icon__arrow_back,
+                            dark_image=icon__arrow_back,
+                            size=(20, 20),
+                        ),
+                        command=lambda: (
+                            self.if_01_container_frame_admin_sign_in.place(x=3, y=3),
+                            if_emailotp_container_frame_admin_sign_in.place_forget(),
+                            if_emailotp_container_frame_admin_sign_in.destroy(),
+                        ),
+                    )
+                )
+                btn__back_if_emailotp.place(x=20, y=352)
+
+            def opted_backup_code_verification() -> None:
+
+                self.if_01_container_frame_admin_sign_in.place_forget()
+
+                if_backupcode_container_frame_admin_sign_in: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        self.internal_frame_00_more_actions,
+                        width=300,
+                        height=400,
+                        fg_color="transparent",
+                    )
+                )
+                if_backupcode_container_frame_admin_sign_in.place(x=3, y=3)
+
+                btn__back_if_backupcode: customtkinter.CTkButton = (
+                    customtkinter.CTkButton(
+                        if_backupcode_container_frame_admin_sign_in,
+                        text="",
+                        width=0,
+                        height=0,
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=icon__arrow_back,
+                            dark_image=icon__arrow_back,
+                            size=(20, 20),
+                        ),
+                        command=lambda: (
+                            self.if_01_container_frame_admin_sign_in.place(x=3, y=3),
+                            if_backupcode_container_frame_admin_sign_in.place_forget(),
+                            if_backupcode_container_frame_admin_sign_in.destroy(),
+                        ),
+                    )
+                )
+                btn__back_if_backupcode.place(x=20, y=352)
 
             self.if_01_container_frame_admin_sign_in: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
@@ -285,6 +351,7 @@ one-time password sent to your email address.""",
                         size=(30, 30),
                     ),
                     compound="right",
+                    command=opted_email_verification_via_otp,
                 )
             )
             self.btn__email_verification_via_otp.place(x=20, y=200)
@@ -332,6 +399,7 @@ backup recovery code linked to your account.""",
                         size=(30, 30),
                     ),
                     compound="right",
+                    command=opted_backup_code_verification,
                 )
             )
             self.btn__backup_code_verification.place(x=20, y=272)
