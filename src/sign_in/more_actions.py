@@ -238,7 +238,7 @@ class more_actions_interface:
 
             # --- --- --- --- --- --- --- --- --- --- --- #
 
-            _is_internet_connection_available: bool
+            _is_internet_connection_available: bool = utils.connection.is_connected()
 
             self.if_01_container_frame_admin_sign_in: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
@@ -350,6 +350,7 @@ backup recovery code linked to your account.""",
                 ),
                 command=lambda: (
                     self.if_00_container_frame_admin_sign_in.place(x=3, y=3),
+                    self.if_01_container_frame_admin_sign_in.place_forget(),
                     self.if_01_container_frame_admin_sign_in.destroy(),
                 ),
             )
@@ -455,7 +456,9 @@ backup recovery code linked to your account.""",
                         admin_username, admin_password
                     )
                 )
-            ):  # admin_username: true (not exists) -- admin_password: true --[or]-- admin_username: true (exists) -- admin_password: true (wrong)
+            ):
+                # admin_username: true (not exists) -- admin_password: true [or]
+                # admin_username: true (exists) -- admin_password: true (wrong)
 
                 self.container_frame__username_admin_sign_in.configure(
                     border_color="#FF0000"
