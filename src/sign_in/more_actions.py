@@ -289,6 +289,131 @@ class more_actions_interface:
                     username: str = __username.get().strip()
                     backup_code: str = __backup_code.get().strip()
 
+                    __username.bind(
+                        "<KeyPress>",
+                        lambda event: container_frame__username_admin_reset_password.configure(
+                            border_color="#FFFFFF"
+                        )
+                        or container_frame__username_label_admin_reset_password.configure(
+                            text_color="#FFFFFF"
+                        )
+                        or container_frame__username_label_admin_reset_password.configure(
+                            text="username",
+                            width=50,  # 44
+                        )
+                        or self.__username.unbind("<KeyPress>"),
+                    )
+                    __backup_code.bind(
+                        "<KeyPress>",
+                        lambda event: container_frame__backup_code_admin_reset_password.configure(
+                            border_color="#FFFFFF"
+                        )
+                        or container_frame__backup_code_label_admin_reset_backup_code.configure(
+                            text_color="#FFFFFF"
+                        )
+                        or container_frame__backup_code_label_admin_reset_backup_code.configure(
+                            text="backup code",
+                            width=63,  # 57
+                        )
+                        or __backup_code.unbind("<KeyPress>"),
+                    )
+
+                    if (
+                        not username
+                    ) and backup_code:  # username: false -- backup_code: true
+
+                        container_frame__username_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__username_label_admin_reset_password.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__username_label_admin_reset_password.configure(
+                            text="invalid username", width=81
+                        )
+
+                        return
+
+                    elif username and (
+                        not backup_code
+                    ):  # username: true -- backup_code: false
+
+                        container_frame__backup_code_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__backup_code_label_admin_reset_backup_code.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__backup_code_label_admin_reset_backup_code.configure(
+                            text="invalid backup code", width=93
+                        )
+
+                        return
+
+                    elif (not username) and (
+                        not backup_code
+                    ):  # username: false -- backup_code: false
+
+                        container_frame__username_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__backup_code_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__username_label_admin_reset_password.configure(
+                            text="invalid username", width=81
+                        )
+
+                        container_frame__username_label_admin_reset_password.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__backup_code_label_admin_reset_backup_code.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__backup_code_label_admin_reset_backup_code.configure(
+                            text="invalid backup code", width=93
+                        )
+
+                        return
+
+                    elif (username and backup_code) and (
+                        (not SERVER.traversal().is_admin_exists(username))
+                        or (
+                            not SERVER.authentication().authenticate_admin_backup_code(
+                                username, backup_code
+                            )
+                        )
+                    ):
+                        # username: true (not exists) -- backup_code: true [or]
+                        # username: true (exists) -- backup_code: true (wrong)
+
+                        container_frame__username_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__username_label_admin_reset_password.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__username_label_admin_reset_password.configure(
+                            text="invalid username or backup code", width=150
+                        )
+
+                        container_frame__backup_code_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__backup_code_label_admin_reset_backup_code.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__backup_code_label_admin_reset_backup_code.configure(
+                            text="invalid username or backup code", width=150
+                        )
+
+                        return
+
+                    else:
+                        _password_reset()
+                        if_backupcode_container_frame_admin_sign_in.place_forget()
+                        if_backupcode_container_frame_admin_sign_in.destroy()
+
                 container_frame__username_admin_reset_password: (
                     customtkinter.CTkFrame
                 ) = customtkinter.CTkFrame(
@@ -426,8 +551,8 @@ class more_actions_interface:
                     customtkinter.CTkButton(
                         if_backupcode_container_frame_admin_sign_in,
                         text="",
-                        width=0,
-                        height=0,
+                        width=0,  # 28
+                        height=0,  # 28
                         fg_color="transparent",
                         hover=False,
                         image=customtkinter.CTkImage(
@@ -443,6 +568,24 @@ class more_actions_interface:
                     )
                 )
                 btn__back_if_backupcode.place(x=20, y=352)
+
+                btn__forward_if_backupcode: customtkinter.CTkButton = (
+                    customtkinter.CTkButton(
+                        if_backupcode_container_frame_admin_sign_in,
+                        text="",
+                        width=0,  # 28
+                        height=0,  # 28
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=icon__arrow_forward,
+                            dark_image=icon__arrow_forward,
+                            size=(20, 20),
+                        ),
+                        command=validate_backup_code,
+                    )
+                )
+                btn__forward_if_backupcode.place(x=252, y=352)
 
             self.if_01_container_frame_admin_sign_in: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
@@ -545,8 +688,8 @@ backup recovery code linked to your account.""",
             self.btn__back_if_01: customtkinter.CTkButton = customtkinter.CTkButton(
                 self.if_01_container_frame_admin_sign_in,
                 text="",
-                width=0,
-                height=0,
+                width=0,  # 28
+                height=0,  # 28
                 fg_color="transparent",
                 hover=False,
                 image=customtkinter.CTkImage(
@@ -581,7 +724,6 @@ backup recovery code linked to your account.""",
                 )
                 or self.__username.unbind("<KeyPress>"),
             )
-
             self.__password.bind(
                 "<KeyPress>",
                 lambda event: self.container_frame__password_admin_sign_in.configure(

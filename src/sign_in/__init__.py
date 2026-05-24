@@ -1206,13 +1206,13 @@ class sign_in_interface:
                 auth__password_error.after(2000, auth__password_error.destroy)
 
             elif username_at_reset_password and (
-                not SERVER.authentication().authenticate_security_code(
+                not SERVER.authentication().authenticate_backup_code(
                     username_at_reset_password, user_security_code_at_reset_password
                 )
             ):  # username: true -- code: true (wrong)
                 auth__password_rule_error = customtkinter.CTkLabel(
                     self.frame__reset_password,
-                    text="THE SECURITY CODE IS INCORRECT. TRY AGAIN!",
+                    text="THE BACKUP CODE IS INCORRECT. TRY AGAIN!",
                     text_color="Orange",
                 )
                 auth__password_rule_error.place(x=87, y=442)
