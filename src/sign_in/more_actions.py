@@ -228,17 +228,390 @@ class more_actions_interface:
 
             self.if_00_container_frame_admin_sign_in.place_forget()
 
-            # --- --- --- --- --- --- --- --- --- --- --- #
-
-            # None: not opted yet (default)
-            # False: backup code verification
-            # True: email verification via OTP
-
-            _opted_verification_method: bool | None = None
-
-            # --- --- --- --- --- --- --- --- --- --- --- #
-
             _is_internet_connection_available: bool = utils.connection.is_connected()
+
+            def _password_reset() -> None:
+
+                pass
+
+            def opted_email_verification_via_otp() -> None:
+
+                self.if_01_container_frame_admin_sign_in.place_forget()
+
+                if_emailotp_container_frame_admin_sign_in: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        self.internal_frame_00_more_actions,
+                        width=300,
+                        height=400,
+                        fg_color="transparent",
+                    )
+                )
+                if_emailotp_container_frame_admin_sign_in.place(x=3, y=3)
+
+                btn__back_if_emailotp: customtkinter.CTkButton = (
+                    customtkinter.CTkButton(
+                        if_emailotp_container_frame_admin_sign_in,
+                        text="",
+                        width=0,
+                        height=0,
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=icon__arrow_back,
+                            dark_image=icon__arrow_back,
+                            size=(20, 20),
+                        ),
+                        command=lambda: (
+                            self.if_01_container_frame_admin_sign_in.place(x=3, y=3),
+                            if_emailotp_container_frame_admin_sign_in.place_forget(),
+                            if_emailotp_container_frame_admin_sign_in.destroy(),
+                        ),
+                    )
+                )
+                btn__back_if_emailotp.place(x=20, y=352)
+
+            def opted_backup_code_verification() -> None:
+
+                self.if_01_container_frame_admin_sign_in.place_forget()
+
+                if_backupcode_container_frame_admin_sign_in: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        self.internal_frame_00_more_actions,
+                        width=300,
+                        height=400,
+                        fg_color="transparent",
+                    )
+                )
+                if_backupcode_container_frame_admin_sign_in.place(x=3, y=3)
+
+                customtkinter.CTkLabel(
+                    if_backupcode_container_frame_admin_sign_in,
+                    text="Verify Account Ownership",
+                    font=("Segoe UI", 16, "bold"),
+                    text_color="#FFFFFF",
+                    image=customtkinter.CTkImage(
+                        light_image=icon__shield_lock,
+                        dark_image=icon__shield_lock,
+                        size=(42, 42),
+                    ),
+                    compound="top",
+                    height=0,
+                    width=0,
+                ).place(x=50, y=53)
+
+                customtkinter.CTkLabel(
+                    if_backupcode_container_frame_admin_sign_in,
+                    text="""Use the permanent backup recovery code
+associated with your administrator account
+to continue secure recovery verification.""",
+                    font=("Roboto", 11),
+                    text_color="#FFFFFF",
+                    height=0,
+                    width=260,
+                ).place(x=20, y=169)
+
+                def validate_backup_code() -> None:
+
+                    username: str = __username.get().strip()
+                    backup_code: str = __backup_code.get().strip()
+
+                    __username.bind(
+                        "<KeyPress>",
+                        lambda event: container_frame__username_admin_reset_password.configure(
+                            border_color="#FFFFFF"
+                        )
+                        or container_frame__username_label_admin_reset_password.configure(
+                            text_color="#FFFFFF"
+                        )
+                        or container_frame__username_label_admin_reset_password.configure(
+                            text="username",
+                            width=50,  # 44
+                        )
+                        or self.__username.unbind("<KeyPress>"),
+                    )
+                    __backup_code.bind(
+                        "<KeyPress>",
+                        lambda event: container_frame__backup_code_admin_reset_password.configure(
+                            border_color="#FFFFFF"
+                        )
+                        or container_frame__backup_code_label_admin_reset_backup_code.configure(
+                            text_color="#FFFFFF"
+                        )
+                        or container_frame__backup_code_label_admin_reset_backup_code.configure(
+                            text="backup code",
+                            width=63,  # 57
+                        )
+                        or __backup_code.unbind("<KeyPress>"),
+                    )
+
+                    if (
+                        not username
+                    ) and backup_code:  # username: false -- backup_code: true
+
+                        container_frame__username_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__username_label_admin_reset_password.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__username_label_admin_reset_password.configure(
+                            text="invalid username", width=81
+                        )
+
+                        return
+
+                    elif username and (
+                        not backup_code
+                    ):  # username: true -- backup_code: false
+
+                        container_frame__backup_code_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__backup_code_label_admin_reset_backup_code.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__backup_code_label_admin_reset_backup_code.configure(
+                            text="invalid backup code", width=93
+                        )
+
+                        return
+
+                    elif (not username) and (
+                        not backup_code
+                    ):  # username: false -- backup_code: false
+
+                        container_frame__username_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__backup_code_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__username_label_admin_reset_password.configure(
+                            text="invalid username", width=81
+                        )
+
+                        container_frame__username_label_admin_reset_password.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__backup_code_label_admin_reset_backup_code.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__backup_code_label_admin_reset_backup_code.configure(
+                            text="invalid backup code", width=93
+                        )
+
+                        return
+
+                    elif (username and backup_code) and (
+                        (not SERVER.traversal().is_admin_exists(username))
+                        or (
+                            not SERVER.authentication().authenticate_admin_backup_code(
+                                username, backup_code
+                            )
+                        )
+                    ):
+                        # username: true (not exists) -- backup_code: true [or]
+                        # username: true (exists) -- backup_code: true (wrong)
+
+                        container_frame__username_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__username_label_admin_reset_password.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__username_label_admin_reset_password.configure(
+                            text="invalid username or backup code", width=150
+                        )
+
+                        container_frame__backup_code_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__backup_code_label_admin_reset_backup_code.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__backup_code_label_admin_reset_backup_code.configure(
+                            text="invalid username or backup code", width=150
+                        )
+
+                        return
+
+                    else:
+                        _password_reset()
+                        if_backupcode_container_frame_admin_sign_in.place_forget()
+                        if_backupcode_container_frame_admin_sign_in.destroy()
+
+                container_frame__username_admin_reset_password: (
+                    customtkinter.CTkFrame
+                ) = customtkinter.CTkFrame(
+                    if_backupcode_container_frame_admin_sign_in,
+                    width=260,
+                    height=40,
+                    fg_color="transparent",
+                    border_width=1,
+                    border_color="#FFFFFF",
+                    corner_radius=6,
+                )
+
+                container_frame__username_label_admin_reset_password: (
+                    customtkinter.CTkLabel
+                ) = customtkinter.CTkLabel(
+                    if_backupcode_container_frame_admin_sign_in,
+                    text="username",
+                    font=("Roboto", 10),
+                    height=12,
+                    width=50,  # 44
+                    text_color="#FFFFFF",
+                )
+
+                customtkinter.CTkLabel(
+                    container_frame__username_admin_reset_password,
+                    image=customtkinter.CTkImage(
+                        light_image=icon__account_circle,
+                        dark_image=icon__account_circle,
+                        size=(20, 20),
+                    ),
+                    text="",
+                ).place(x=8, rely=0.5, anchor="w")
+
+                container_frame__username_admin_reset_password.place(x=20, y=232)
+
+                __username: customtkinter.CTkEntry = customtkinter.CTkEntry(
+                    container_frame__username_admin_reset_password,
+                    placeholder_text="username",
+                    width=260 - 40,
+                    height=40 - 8,
+                    corner_radius=0,
+                    border_width=0,
+                    fg_color="transparent",
+                    font=("Roboto", 16),
+                )
+                __username.place(x=28, rely=0.5, anchor="w")
+
+                __username.bind(
+                    "<FocusIn>",
+                    lambda event: (
+                        container_frame__username_label_admin_reset_password.place(
+                            x=40, y=225
+                        )
+                        if not __username.get()
+                        else None
+                    ),
+                )
+                __username.bind(
+                    "<FocusOut>",
+                    lambda event: (
+                        container_frame__username_label_admin_reset_password.place_forget()
+                        if not __username.get()
+                        else None
+                    ),
+                )
+
+                container_frame__backup_code_admin_reset_password: (
+                    customtkinter.CTkFrame
+                ) = customtkinter.CTkFrame(
+                    if_backupcode_container_frame_admin_sign_in,
+                    width=260,
+                    height=40,
+                    fg_color="transparent",
+                    border_width=1,
+                    border_color="#FFFFFF",
+                    corner_radius=6,
+                )
+
+                container_frame__backup_code_label_admin_reset_backup_code: (
+                    customtkinter.CTkLabel
+                ) = customtkinter.CTkLabel(
+                    if_backupcode_container_frame_admin_sign_in,
+                    text="backup code",
+                    font=("Roboto", 10),
+                    height=12,
+                    width=63,  # 57
+                    text_color="#FFFFFF",
+                )
+
+                customtkinter.CTkLabel(
+                    container_frame__backup_code_admin_reset_password,
+                    image=customtkinter.CTkImage(
+                        light_image=icon__password,
+                        dark_image=icon__password,
+                        size=(20, 20),
+                    ),
+                    text="",
+                ).place(x=8, rely=0.5, anchor="w")
+
+                container_frame__backup_code_admin_reset_password.place(x=20, y=292)
+
+                __backup_code: customtkinter.CTkEntry = customtkinter.CTkEntry(
+                    container_frame__backup_code_admin_reset_password,
+                    placeholder_text="backup code",
+                    width=260 - 40,
+                    height=40 - 8,
+                    corner_radius=0,
+                    border_width=0,
+                    fg_color="transparent",
+                    font=("Roboto", 16),
+                    show="•",
+                )
+                __backup_code.place(x=28, rely=0.5, anchor="w")
+
+                __backup_code.bind(
+                    "<FocusIn>",
+                    lambda event: (
+                        container_frame__backup_code_label_admin_reset_backup_code.place(
+                            x=40, y=285
+                        )
+                        if not __backup_code.get()
+                        else None
+                    ),
+                )
+                __backup_code.bind(
+                    "<FocusOut>",
+                    lambda event: (
+                        container_frame__backup_code_label_admin_reset_backup_code.place_forget()
+                        if not __backup_code.get()
+                        else None
+                    ),
+                )
+
+                btn__back_if_backupcode: customtkinter.CTkButton = (
+                    customtkinter.CTkButton(
+                        if_backupcode_container_frame_admin_sign_in,
+                        text="",
+                        width=0,  # 28
+                        height=0,  # 28
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=icon__arrow_back,
+                            dark_image=icon__arrow_back,
+                            size=(20, 20),
+                        ),
+                        command=lambda: (
+                            self.if_01_container_frame_admin_sign_in.place(x=3, y=3),
+                            if_backupcode_container_frame_admin_sign_in.place_forget(),
+                            if_backupcode_container_frame_admin_sign_in.destroy(),
+                        ),
+                    )
+                )
+                btn__back_if_backupcode.place(x=20, y=352)
+
+                btn__forward_if_backupcode: customtkinter.CTkButton = (
+                    customtkinter.CTkButton(
+                        if_backupcode_container_frame_admin_sign_in,
+                        text="",
+                        width=0,  # 28
+                        height=0,  # 28
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=icon__arrow_forward,
+                            dark_image=icon__arrow_forward,
+                            size=(20, 20),
+                        ),
+                        command=validate_backup_code,
+                    )
+                )
+                btn__forward_if_backupcode.place(x=252, y=352)
 
             self.if_01_container_frame_admin_sign_in: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
@@ -285,6 +658,7 @@ one-time password sent to your email address.""",
                         size=(30, 30),
                     ),
                     compound="right",
+                    command=opted_email_verification_via_otp,
                 )
             )
             self.btn__email_verification_via_otp.place(x=20, y=200)
@@ -332,6 +706,7 @@ backup recovery code linked to your account.""",
                         size=(30, 30),
                     ),
                     compound="right",
+                    command=opted_backup_code_verification,
                 )
             )
             self.btn__backup_code_verification.place(x=20, y=272)
@@ -339,8 +714,8 @@ backup recovery code linked to your account.""",
             self.btn__back_if_01: customtkinter.CTkButton = customtkinter.CTkButton(
                 self.if_01_container_frame_admin_sign_in,
                 text="",
-                width=0,
-                height=0,
+                width=0,  # 28
+                height=0,  # 28
                 fg_color="transparent",
                 hover=False,
                 image=customtkinter.CTkImage(
@@ -375,7 +750,6 @@ backup recovery code linked to your account.""",
                 )
                 or self.__username.unbind("<KeyPress>"),
             )
-
             self.__password.bind(
                 "<KeyPress>",
                 lambda event: self.container_frame__password_admin_sign_in.configure(

@@ -26,7 +26,7 @@ class SERVER:
                 UUID CHAR(36) NOT NULL,
                 PASSWORD TEXT NOT NULL,
                 EMAIL TEXT,
-                SECURITY_CODE TEXT NOT NULL,
+                BACKUP_CODE TEXT NOT NULL,
                 CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
                 """)
 
@@ -52,6 +52,8 @@ class SERVER:
                 CREATE TABLE IF NOT EXISTS ADMINS (
                 USERNAME VARCHAR(100) NOT NULL PRIMARY KEY,
                 PASSWORD TEXT NOT NULL,
+                EMAIL TEXT,
+                BACKUP_CODE TEXT NOT NULL,
                 CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
                 """)
 
@@ -130,16 +132,16 @@ class SERVER:
                 == Encryption(password, shift=8, alterNumbers=True).encrypt()
             )
 
-        def authenticate_security_code(self, username: str, security_code: str) -> bool:
+        def authenticate_backup_code(self, username: str, backup_code: str) -> bool:
 
             self.cursor.execute(
                 """
-                SELECT security_code FROM users WHERE username = ?
+                SELECT backup_code FROM users WHERE username = ?
                 """,
                 (username,),
             )
 
-            return self.cursor.fetchone()[0] == security_code
+            return self.cursor.fetchone()[0] == backup_code
 
         def authenticate_admin(self, username: str, password: str) -> bool:
 
@@ -154,6 +156,19 @@ class SERVER:
                 self.cursor.fetchone()[0]
                 == Encryption(password, shift=53, alterNumbers=True).encrypt()
             )
+
+        def authenticate_admin_backup_code(
+            self, username: str, backup_code: str
+        ) -> bool:
+
+            self.cursor.execute(
+                """
+                SELECT backup_code FROM ADMINS WHERE username = ?
+                """,
+                (username,),
+            )
+
+            return self.cursor.fetchone()[0] == backup_code
 
     class accountactions:
 
