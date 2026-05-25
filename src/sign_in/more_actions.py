@@ -284,6 +284,32 @@ class more_actions_interface:
                 )
                 if_backupcode_container_frame_admin_sign_in.place(x=3, y=3)
 
+                customtkinter.CTkLabel(
+                    if_backupcode_container_frame_admin_sign_in,
+                    text="Verify Account Ownership",
+                    font=("Segoe UI", 16, "bold"),
+                    text_color="#FFFFFF",
+                    image=customtkinter.CTkImage(
+                        light_image=icon__shield_lock,
+                        dark_image=icon__shield_lock,
+                        size=(42, 42),
+                    ),
+                    compound="top",
+                    height=0,
+                    width=0,
+                ).place(x=50, y=53)
+
+                customtkinter.CTkLabel(
+                    if_backupcode_container_frame_admin_sign_in,
+                    text="""Use the permanent backup recovery code
+associated with your administrator account
+to continue secure recovery verification.""",
+                    font=("Roboto", 11),
+                    text_color="#FFFFFF",
+                    height=0,
+                    width=260,
+                ).place(x=20, y=169)
+
                 def validate_backup_code() -> None:
 
                     username: str = __username.get().strip()
