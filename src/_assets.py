@@ -19,6 +19,10 @@ icon__lock_person = Image.open(
 
 icon__arrow_back = Image.open(rf"{DIR_PATH}\assets\icons\material-icons\arrow_back.png")
 
+icon__arrow_forward = Image.open(
+    rf"{DIR_PATH}\assets\icons\material-icons\arrow_forward.png"
+)
+
 icon__chevron_forward = Image.open(
     rf"{DIR_PATH}\assets\icons\material-icons\chevron_forward.png"
 )
