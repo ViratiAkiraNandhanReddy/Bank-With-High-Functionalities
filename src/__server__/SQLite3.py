@@ -170,6 +170,19 @@ class SERVER:
 
             return self.cursor.fetchone()[0] == backup_code
 
+        def authenticate_admin_email_address(
+            self, username: str, email_address: str
+        ) -> bool:
+
+            self.cursor.execute(
+                """
+                SELECT email FROM ADMINS WHERE username = ?
+                """,
+                (username,),
+            )
+
+            return self.cursor.fetchone()[0] == email_address
+
     class accountactions:
 
         def __init__(self) -> None:

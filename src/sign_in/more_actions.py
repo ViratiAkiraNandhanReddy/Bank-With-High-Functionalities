@@ -263,7 +263,152 @@ class more_actions_interface:
                     width=0,
                 ).place(x=50, y=53)
 
-                def validate_email_address() -> None: ...
+                customtkinter.CTkLabel(
+                    if_emailotp_container_frame_admin_sign_in,
+                    text="""Use the registered recovery email associated
+with your administrator account to continue
+secure OTP verification.""",
+                    font=("Roboto", 11),
+                    text_color="#FFFFFF",
+                    height=0,  # 39
+                    width=260,
+                ).place(x=20, y=169)
+
+                def _recovery_confirmation_state_emailotp() -> None: ...
+
+                def validate_email_address() -> None:
+
+                    username: str = __username.get().strip()
+                    email_address: str = __email_address.get().strip()
+
+                    print(
+                        container_frame__email_address_label_admin_reset_password.winfo_width()
+                    )
+
+                    __username.bind(
+                        "<KeyPress>",
+                        lambda event: container_frame__username_admin_reset_password.configure(
+                            border_color="#FFFFFF"
+                        )
+                        or container_frame__username_label_admin_reset_password.configure(
+                            text_color="#FFFFFF"
+                        )
+                        or container_frame__username_label_admin_reset_password.configure(
+                            text="username",
+                            width=50,  # 44
+                        )
+                        or self.__username.unbind("<KeyPress>"),
+                    )
+                    __email_address.bind(
+                        "<KeyPress>",
+                        lambda event: container_frame__email_address_admin_reset_password.configure(
+                            border_color="#FFFFFF"
+                        )
+                        or container_frame__email_address_label_admin_reset_password.configure(
+                            text_color="#FFFFFF"
+                        )
+                        or container_frame__email_address_label_admin_reset_password.configure(
+                            text="email address",
+                            width=100,  # 94
+                        )
+                        or __email_address.unbind("<KeyPress>"),
+                    )
+
+                    if (
+                        not username
+                    ) and email_address:  # username: false -- email_address: true
+
+                        container_frame__username_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__username_label_admin_reset_password.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__username_label_admin_reset_password.configure(
+                            text="invalid username", width=81
+                        )
+
+                        return
+
+                    elif username and (
+                        not email_address
+                    ):  # username: true -- email_address: false
+
+                        container_frame__email_address_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__email_address_label_admin_reset_password.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__email_address_label_admin_reset_password.configure(
+                            text="invalid email address", width=96
+                        )
+
+                        return
+
+                    elif (not username) and (
+                        not email_address
+                    ):  # username: false -- email_address: false
+
+                        container_frame__username_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__email_address_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__username_label_admin_reset_password.configure(
+                            text="invalid username", width=81
+                        )
+
+                        container_frame__username_label_admin_reset_password.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__email_address_label_admin_reset_password.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__email_address_label_admin_reset_password.configure(
+                            text="invalid email address", width=96
+                        )
+
+                        return
+
+                    elif (username and email_address) and (
+                        (not SERVER.traversal().is_admin_exists(username))
+                        or (
+                            not SERVER.authentication().authenticate_admin_email_address(
+                                username, email_address
+                            )
+                        )
+                    ):
+                        # username: true (not exists) -- email_address: true [or]
+                        # username: true (exists) -- email_address: true (wrong)
+
+                        container_frame__username_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__username_label_admin_reset_password.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__username_label_admin_reset_password.configure(
+                            text="invalid username or email address", width=153
+                        )
+
+                        container_frame__email_address_admin_reset_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__email_address_label_admin_reset_password.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__email_address_label_admin_reset_password.configure(
+                            text="invalid username or email address", width=153
+                        )
+
+                        return
+
+                    else:
+                        _recovery_confirmation_state_emailotp()
+                        if_emailotp_container_frame_admin_sign_in.place_forget()
+                        if_emailotp_container_frame_admin_sign_in.destroy()
 
                 container_frame__username_admin_reset_password: (
                     customtkinter.CTkFrame
@@ -474,7 +619,7 @@ associated with your administrator account
 to continue secure recovery verification.""",
                     font=("Roboto", 11),
                     text_color="#FFFFFF",
-                    height=0,
+                    height=0,  # 39
                     width=260,
                 ).place(x=20, y=169)
 
