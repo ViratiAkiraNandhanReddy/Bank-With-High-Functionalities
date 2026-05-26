@@ -274,16 +274,46 @@ secure OTP verification.""",
                     width=260,
                 ).place(x=20, y=169)
 
-                def _recovery_confirmation_state_emailotp() -> None: ...
+                def _recovery_confirmation_state_emailotp() -> None:
+
+                    if_emailotp_confirmation_state_container_frame_admin_sign_in: (
+                        customtkinter.CTkFrame
+                    ) = customtkinter.CTkFrame(
+                        self.internal_frame_00_more_actions,
+                        width=300,
+                        height=400,
+                        fg_color="transparent",
+                    )
+                    if_emailotp_confirmation_state_container_frame_admin_sign_in.place(
+                        x=3, y=3
+                    )
+
+                    btn__back_if_emailotp_confirmation_state: (
+                        customtkinter.CTkButton
+                    ) = customtkinter.CTkButton(
+                        if_emailotp_confirmation_state_container_frame_admin_sign_in,
+                        text="",
+                        width=0,  # 28
+                        height=0,  # 28
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=icon__arrow_back,
+                            dark_image=icon__arrow_back,
+                            size=(20, 20),
+                        ),
+                        command=lambda: (
+                            if_emailotp_container_frame_admin_sign_in.place(x=3, y=3),
+                            if_emailotp_confirmation_state_container_frame_admin_sign_in.place_forget(),
+                            if_emailotp_confirmation_state_container_frame_admin_sign_in.destroy(),
+                        ),
+                    )
+                    btn__back_if_emailotp_confirmation_state.place(x=20, y=352)
 
                 def validate_email_address() -> None:
 
                     username: str = __username.get().strip()
                     email_address: str = __email_address.get().strip()
-
-                    print(
-                        container_frame__email_address_label_admin_reset_password.winfo_width()
-                    )
 
                     __username.bind(
                         "<KeyPress>",
@@ -309,7 +339,7 @@ secure OTP verification.""",
                         )
                         or container_frame__email_address_label_admin_reset_password.configure(
                             text="email address",
-                            width=100,  # 94
+                            width=66,  # 60
                         )
                         or __email_address.unbind("<KeyPress>"),
                     )
@@ -408,7 +438,6 @@ secure OTP verification.""",
                     else:
                         _recovery_confirmation_state_emailotp()
                         if_emailotp_container_frame_admin_sign_in.place_forget()
-                        if_emailotp_container_frame_admin_sign_in.destroy()
 
                 container_frame__username_admin_reset_password: (
                     customtkinter.CTkFrame
