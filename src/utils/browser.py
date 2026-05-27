@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 
 class browser:
@@ -68,5 +69,83 @@ class browser:
 
             # Use the native Windows shell association system
             # to launch the URL with the user's default browser.
+
+            return False
+
+    @staticmethod
+    def open_internal_html_file(file_path: str) -> bool:
+        """
+        ### Open a local HTML file using the system's default browser.
+
+        This method is restricted exclusively to `.html`
+        and `.htm` files for security and behavioral consistency.
+
+        The target file is opened using the native Windows
+        shell association system through `os.startfile()`.
+
+        ### Parameters
+
+        - **file_path** (`str`)
+            Absolute or relative path to the HTML file.
+
+        ### Returns
+
+        - `bool`
+            - `True` if the file launch request succeeds
+            - `False` if validation or launch fails
+
+        ### Example
+
+        ```python
+        browser.open_internal_html_file(
+            r"docs\\index.html"
+        )
+        ```
+
+        ### Notes
+
+        - Only `.html` and `.htm` files are allowed
+        - Uses native Windows browser/file associations
+        - Prevents unsupported file-type execution
+        - Automatically normalizes file paths
+        - Avoids unsafe subprocess shell execution
+        - Designed primarily for Windows environments
+        """
+
+        if not isinstance(file_path, str) or not file_path.strip():
+
+            # Validate the provided input type and reject
+            # empty or whitespace-only values early before
+            # performing any filesystem operations.
+
+            return False
+
+        # Normalize the path and resolve it into an absolute filesystem path.
+        normalized_path: Path = Path(file_path.strip()).expanduser().resolve()
+
+        if not normalized_path.exists():
+
+            # Ensure the target file actually exists before
+            # attempting to open it through the operating system.
+
+            return False
+
+        # Restrict execution strictly to supported HTML-based file extensions.
+        if normalized_path.suffix.lower() not in (".html", ".htm"):
+
+            return False
+
+        try:
+
+            # Open the HTML file using the system's
+            # default browser association.
+            os.startfile(str(normalized_path))
+
+            return True
+
+        except OSError:
+
+            # Return False if Windows fails to launch
+            # the associated browser/application.
 
             return False
