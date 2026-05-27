@@ -5,43 +5,6 @@ import subprocess
 DIR_PATH: str = str(os.environ.get("LOCALAPPDATA")) + r"\Bank-With-High-Functionalities"
 
 
-def Open_Browser_For_Specified_Internal_File(file_dir: str) -> None:
-    """
-    Open an internal file in the default web browser using file:// URL.
-
-    Converts the provided file path to a `file:///` URL and opens it in the system's
-    default browser. Windows-only functionality.
-
-    ### Parameters
-    - **file_dir** (`str`): The absolute or relative path of the internal file to open.
-
-    ### Returns
-    - `None`
-
-    ### Example
-    ```python
-    Open_Browser_For_Specified_Internal_File("C:/<...>/Bank-With-High-Functionalities/LICENSE")
-    ```
-
-    ### Notes
-    - Requires Windows operating system
-    - File path is internally converted to valid `file:///` URL format
-    - Backslashes are automatically converted to forward slashes
-    - Uses `subprocess.run()` to execute command via Windows shell
-    - Default browser must be configured on the system
-    - Errors are logged to log files
-    """
-
-    try:
-        subprocess.run(
-            ["cmd", "/c", "START", "", f'file:///{file_dir.replace("\\\\", "/")}'],
-            shell=True,
-        )
-
-    except:
-        raise NotImplementedError
-
-
 def get_hvr_accent_color(accent_color: str, depth: float = 0.8) -> str:
     """
     Calculate a hover accent color by darkening the original accent color.
