@@ -1,51 +1,7 @@
 import os
 import json
-import subprocess
 
 DIR_PATH: str = str(os.environ.get("LOCALAPPDATA")) + r"\Bank-With-High-Functionalities"
-
-
-def get_hvr_accent_color(accent_color: str, depth: float = 0.8) -> str:
-    """
-    Calculate a hover accent color by darkening the original accent color.
-
-    This function takes an RGB hex color code and returns a darker version of it
-    suitable for hover effects in UI design. The depth parameter controls how much
-    darker the hover color will be compared to the original.
-
-    ### Parameters
-    - **accent_color** (`str`): The original accent color in RGB hex format (e.g., "#RRGGBB").
-    - **depth** (`float`, optional): A value between 0 and 1 that determines how much darker the hover color will be. Default is 0.8.
-
-    ### Returns
-    - `str`: The calculated hover accent color in RGB hex format.
-
-    ### Example
-    ```python
-    original_color = "#21968B"
-    hover_color = get_hvr_accent_color(original_color, depth=0.8)
-    print(hover_color)  # Output will be a darker shade of #21968B
-    ```
-
-    ### Notes
-    - The function assumes the input color is a valid RGB hex code.
-    - The depth parameter should be between 0 and 1; values closer to 0 will produce a much darker color, while values closer to 1 will produce a slightly darker color.
-    - Errors are logged to log files if the input color format is invalid.
-    """
-
-    try:
-        r = int(accent_color[1:3], 16)
-        g = int(accent_color[3:5], 16)
-        b = int(accent_color[5:7], 16)
-
-        r = max(0, min(255, int(r * depth)))
-        g = max(0, min(255, int(g * depth)))
-        b = max(0, min(255, int(b * depth)))
-
-        return f"#{r:02X}{g:02X}{b:02X}"
-
-    except:
-        raise NotImplementedError
 
 
 def save_configuration_json(_json: dict) -> bool:
