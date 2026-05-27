@@ -288,6 +288,47 @@ secure OTP verification.""",
                         x=3, y=3
                     )
 
+                    customtkinter.CTkLabel(
+                        if_emailotp_confirmation_state_container_frame_admin_sign_in,
+                        text="Recovery Email Confirmation",
+                        font=("Segoe UI", 16, "bold"),
+                        text_color="#FFFFFF",
+                        image=customtkinter.CTkImage(
+                            light_image=icon__mail,
+                            dark_image=icon__mail,
+                            size=(42, 42),
+                        ),
+                        compound="top",
+                        height=0,  # 63
+                        width=0,  # 223
+                    ).place(x=38, y=53)
+
+                    customtkinter.CTkLabel(
+                        if_emailotp_confirmation_state_container_frame_admin_sign_in,
+                        text="""A verification OTP will be sent to the
+registered recovery email associated with
+your administrator account.""",
+                        font=("Roboto", 11),
+                        text_color="#FFFFFF",
+                        height=0,  # 39
+                        width=260,
+                    ).place(x=20, y=169)
+
+                    frame__container_masked_email_address_emailotp_confirmation_state: (
+                        customtkinter.CTkFrame
+                    ) = customtkinter.CTkFrame(
+                        if_emailotp_confirmation_state_container_frame_admin_sign_in,
+                        width=260,
+                        height=40,
+                        fg_color="transparent",
+                        border_width=1,
+                        border_color="#FFFFFF",
+                        corner_radius=6,
+                    )
+                    frame__container_masked_email_address_emailotp_confirmation_state.place(
+                        x=20, y=260
+                    )
+
                     btn__back_if_emailotp_confirmation_state: (
                         customtkinter.CTkButton
                     ) = customtkinter.CTkButton(
@@ -309,6 +350,23 @@ secure OTP verification.""",
                         ),
                     )
                     btn__back_if_emailotp_confirmation_state.place(x=20, y=352)
+
+                    btn__forward_if_emailotp_confirmation_state: (
+                        customtkinter.CTkButton
+                    ) = customtkinter.CTkButton(
+                        if_emailotp_confirmation_state_container_frame_admin_sign_in,
+                        text="",
+                        width=0,  # 28
+                        height=0,  # 28
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=icon__arrow_forward,
+                            dark_image=icon__arrow_forward,
+                            size=(20, 20),
+                        ),
+                    )
+                    btn__forward_if_emailotp_confirmation_state.place(x=252, y=352)
 
                 def validate_email_address() -> None:
 
@@ -531,8 +589,8 @@ secure OTP verification.""",
                 customtkinter.CTkLabel(
                     container_frame__email_address_admin_reset_password,
                     image=customtkinter.CTkImage(
-                        light_image=icon__password,
-                        dark_image=icon__password,
+                        light_image=icon__mail,
+                        dark_image=icon__mail,
                         size=(20, 20),
                     ),
                     text="",
