@@ -3,7 +3,6 @@ class masking:
     @staticmethod
     def mask_email(
         email_address: str,
-        max_length: int = 32,
         mask_char: str = "*",
     ) -> str:
 
@@ -51,25 +50,6 @@ class masking:
 
         # Reconstruct masked email address.
         masked_email: str = f"{masked_username}@{domain}"
-
-        if len(masked_email) > max_length:
-
-            # Enforce a fixed maximum display length for UI consistency.
-            # Prevents layout overflow and abrupt geometry shifts in
-            # authentication/recovery interfaces.
-
-            # Calculate how many characters exceed the allowed limit.
-            overflow: int = len(masked_email) - max_length
-
-            # Ensure domain truncation remains safe and visually meaningful.
-            if overflow < len(domain) - 3:
-
-                # Truncate the beginning portion of the domain and prepend
-                # ellipsis to preserve recognizable trailing identity.
-                domain = "..." + domain[overflow + 3 :]
-
-            # Rebuild the final masked email after domain truncation.
-            masked_email = f"{masked_username}@{domain}"
 
         # Return the securely masked and UI-safe email address.
         return masked_email
