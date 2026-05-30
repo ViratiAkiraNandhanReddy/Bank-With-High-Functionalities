@@ -320,7 +320,7 @@ your administrator account.""",
                         if_emailotp_confirmation_state_container_frame_admin_sign_in,
                         width=260,
                         height=40,
-                        font=("Roboto", 16),
+                        font=("Consolas", 16),
                         fg_color="transparent",
                         border_width=1,
                         border_color="#FFFFFF",
@@ -338,6 +338,48 @@ your administrator account.""",
                     entry__container_masked_email_address_emailotp_confirmation_state.configure(
                         state="readonly"
                     )
+
+                    if (
+                        len(_email) > 27
+                    ):  # if email length exceeds entry width, show scroll buttons
+
+                        moveleft_btn = customtkinter.CTkButton(
+                            if_emailotp_confirmation_state_container_frame_admin_sign_in,
+                            text="",
+                            height=0,
+                            width=0,
+                            border_spacing=0,
+                            fg_color="transparent",
+                            hover=False,
+                            image=customtkinter.CTkImage(
+                                light_image=icon__chevron_backward,
+                                dark_image=icon__chevron_backward,
+                                size=(14, 14),
+                            ),
+                            command=lambda: entry__container_masked_email_address_emailotp_confirmation_state.xview_scroll(
+                                -5, "units"
+                            ),
+                        )
+                        moveleft_btn.place(x=120, y=300)
+
+                        moveright_btn = customtkinter.CTkButton(
+                            if_emailotp_confirmation_state_container_frame_admin_sign_in,
+                            text="",
+                            height=0,
+                            width=0,
+                            border_spacing=0,
+                            fg_color="transparent",
+                            hover=False,
+                            image=customtkinter.CTkImage(
+                                light_image=icon__chevron_forward,
+                                dark_image=icon__chevron_forward,
+                                size=(14, 14),
+                            ),
+                            command=lambda: entry__container_masked_email_address_emailotp_confirmation_state.xview_scroll(
+                                5, "units"
+                            ),
+                        )
+                        moveright_btn.place(x=160, y=300)
 
                     btn__back_if_emailotp_confirmation_state: (
                         customtkinter.CTkButton
