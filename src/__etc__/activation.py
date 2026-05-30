@@ -7,7 +7,7 @@ class activation:
         self._keys: list[str] = _keys
 
         self.__raw_accent_color: str = get_accent_color()
-        self.__hvr_accent_color: str = utils.get_hvr_accent_color(
+        self.__hvr_accent_color: str = utils.colors.get_hover_accent_color(
             self.__raw_accent_color
         )
 
@@ -162,7 +162,7 @@ release notices, setup guidance, and important information for all users.""",
                     dark_image=icon__platform_github,
                     size=(17, 17),
                 ),
-                command=lambda: utils.Open_Browser_For_Specified_URL(
+                command=lambda: utils.browser.open_url(
                     CONSTANTS["github"]["repository"]
                 ),
             )
@@ -370,7 +370,7 @@ appreciate your patience.
                         dark_image=icon__platform_github,
                         size=(17, 17),
                     ),
-                    command=lambda: utils.Open_Browser_For_Specified_URL(
+                    command=lambda: utils.browser.open_url(
                         CONSTANTS["github"]["issues"]
                     ),
                 ).place(x=298, y=234)
