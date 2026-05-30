@@ -274,7 +274,7 @@ secure OTP verification.""",
                     width=260,
                 ).place(x=20, y=169)
 
-                def _recovery_confirmation_state_emailotp() -> None:
+                def _recovery_confirmation_state_emailotp(_email: str) -> None:
 
                     if_emailotp_confirmation_state_container_frame_admin_sign_in: (
                         customtkinter.CTkFrame
@@ -314,19 +314,29 @@ your administrator account.""",
                         width=260,
                     ).place(x=20, y=169)
 
-                    frame__container_masked_email_address_emailotp_confirmation_state: (
-                        customtkinter.CTkFrame
-                    ) = customtkinter.CTkFrame(
+                    entry__container_masked_email_address_emailotp_confirmation_state: (
+                        customtkinter.CTkEntry
+                    ) = customtkinter.CTkEntry(
                         if_emailotp_confirmation_state_container_frame_admin_sign_in,
                         width=260,
                         height=40,
+                        font=("Roboto", 16),
                         fg_color="transparent",
                         border_width=1,
                         border_color="#FFFFFF",
                         corner_radius=6,
+                        justify="center",
                     )
-                    frame__container_masked_email_address_emailotp_confirmation_state.place(
+                    entry__container_masked_email_address_emailotp_confirmation_state.place(
                         x=20, y=260
+                    )
+
+                    entry__container_masked_email_address_emailotp_confirmation_state.insert(
+                        0,
+                        utils.masking.mask_email(_email),
+                    )
+                    entry__container_masked_email_address_emailotp_confirmation_state.configure(
+                        state="readonly"
                     )
 
                     btn__back_if_emailotp_confirmation_state: (
@@ -494,7 +504,7 @@ your administrator account.""",
                         return
 
                     else:
-                        _recovery_confirmation_state_emailotp()
+                        _recovery_confirmation_state_emailotp(email_address)
                         if_emailotp_container_frame_admin_sign_in.place_forget()
 
                 container_frame__username_admin_reset_password: (
