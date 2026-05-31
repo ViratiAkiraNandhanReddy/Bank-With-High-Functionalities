@@ -1,5 +1,5 @@
 from .views import *
-from .. import customtkinter, icon__manage_accounts
+from .. import customtkinter, assets
 
 
 class navigation:
@@ -15,8 +15,8 @@ class navigation:
             self.frame__navigation,
             text="",
             image=customtkinter.CTkImage(
-                light_image=icon__manage_accounts,
-                dark_image=icon__manage_accounts,
+                light_image=assets.icons.material.manage_accounts,
+                dark_image=assets.icons.material.manage_accounts,
                 size=(64, 64),
             ),
             width=0,
