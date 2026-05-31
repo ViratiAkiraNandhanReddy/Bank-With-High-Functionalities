@@ -73,8 +73,8 @@ class sign_in_interface:
                 self.window,
                 text="",
                 image=customtkinter.CTkImage(
-                    light_image=icon__more_horiz,
-                    dark_image=icon__more_horiz,
+                    light_image=assets.icons.material.more_horiz,
+                    dark_image=assets.icons.material.more_horiz,
                     size=(12, 12),
                 ),
                 width=0,
@@ -141,8 +141,8 @@ class sign_in_interface:
                 font=("Segoe UI", 29, "bold"),
                 text_color="#FFFFFF",
                 image=customtkinter.CTkImage(
-                    light_image=icon__assured_workload,
-                    dark_image=icon__assured_workload,
+                    light_image=assets.icons.material.assured_workload,
+                    dark_image=assets.icons.material.assured_workload,
                     size=(64, 64),
                 ),
                 compound="top",
@@ -178,8 +178,8 @@ class sign_in_interface:
             customtkinter.CTkLabel(
                 self.container_frame__username_sign_in,
                 image=customtkinter.CTkImage(
-                    light_image=icon__account_circle,
-                    dark_image=icon__account_circle,
+                    light_image=assets.icons.material.account_circle,
+                    dark_image=assets.icons.material.account_circle,
                     size=(20, 20),
                 ),
                 text="",
@@ -240,8 +240,8 @@ class sign_in_interface:
             customtkinter.CTkLabel(
                 self.container_frame__password_sign_in,
                 image=customtkinter.CTkImage(
-                    light_image=icon__password,
-                    dark_image=icon__password,
+                    light_image=assets.icons.material.password,
+                    dark_image=assets.icons.material.password,
                     size=(20, 20),
                 ),
                 text="",
@@ -392,8 +392,8 @@ class sign_in_interface:
                 text="Username",
                 font=("Roboto", 24, "bold"),
                 image=customtkinter.CTkImage(
-                    light_image=icon__account_circle,
-                    dark_image=icon__account_circle,
+                    light_image=assets.icons.material.account_circle,
+                    dark_image=assets.icons.material.account_circle,
                     size=(40, 40),
                 ),
                 compound="top",
@@ -415,7 +415,9 @@ class sign_in_interface:
                 text="Security Code",
                 font=("Roboto", 24, "bold"),
                 image=customtkinter.CTkImage(
-                    light_image=icon__security, dark_image=icon__security, size=(40, 40)
+                    light_image=assets.icons.material.security,
+                    dark_image=assets.icons.material.security,
+                    size=(40, 40),
                 ),
                 compound="top",
                 height=0,
@@ -651,7 +653,9 @@ class sign_in_interface:
                     overlay_frame__signup.frame__signup,
                     text="",
                     image=customtkinter.CTkImage(
-                        light_image=icon__close, dark_image=icon__close, size=(20, 20)
+                        light_image=assets.icons.material.close,
+                        dark_image=assets.icons.material.close,
+                        size=(20, 20),
                     ),
                     command=cancel_signup_action,
                     width=0,
@@ -814,7 +818,9 @@ class sign_in_interface:
                     overlay_frame__more_actions.frame__more_actions,
                     text="",
                     image=customtkinter.CTkImage(
-                        light_image=icon__close, dark_image=icon__close, size=(20, 20)
+                        light_image=assets.icons.material.close,
+                        dark_image=assets.icons.material.close,
+                        size=(20, 20),
                     ),
                     command=overlay_frame__more_actions.hide_frame,
                     width=0,

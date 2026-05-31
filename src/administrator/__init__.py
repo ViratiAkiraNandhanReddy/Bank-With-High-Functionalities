@@ -37,8 +37,8 @@ class administrator_interface:
                 self.frame__administrator,
                 text="",
                 image=customtkinter.CTkImage(
-                    light_image=icon__exit_to_app,
-                    dark_image=icon__exit_to_app,
+                    light_image=assets.icons.material.exit_to_app,
+                    dark_image=assets.icons.material.exit_to_app,
                     size=(25, 25),
                 ),
                 width=0,
@@ -63,8 +63,8 @@ class administrator_interface:
                 self.frame__developer,
                 text="",
                 image=customtkinter.CTkImage(
-                    light_image=icon__developer_mode_tv,
-                    dark_image=icon__developer_mode_tv,
+                    light_image=assets.icons.material.developer_mode_tv,
+                    dark_image=assets.icons.material.developer_mode_tv,
                     size=(10, 10),
                 ),
                 fg_color="transparent",

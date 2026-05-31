@@ -110,8 +110,8 @@ release notices, setup guidance, and important information for all users.""",
         customtkinter.CTkLabel(
             self.container_frame__activation_entry,
             image=customtkinter.CTkImage(
-                light_image=icon__shield_lock,
-                dark_image=icon__shield_lock,
+                light_image=assets.icons.material.shield_lock,
+                dark_image=assets.icons.material.shield_lock,
                 size=(20, 20),
             ),
             text="",
@@ -158,8 +158,8 @@ release notices, setup guidance, and important information for all users.""",
                 text_color="#FFFFFF",
                 hover_color="#3D3D3D",
                 image=customtkinter.CTkImage(
-                    light_image=icon__platform_github,
-                    dark_image=icon__platform_github,
+                    light_image=assets.icons.platform.github,
+                    dark_image=assets.icons.platform.github,
                     size=(17, 17),
                 ),
                 command=lambda: utils.browser.open_url(
@@ -366,8 +366,8 @@ appreciate your patience.
                     text_color="#FFFFFF",
                     hover_color="#3D3D3D",
                     image=customtkinter.CTkImage(
-                        light_image=icon__platform_github,
-                        dark_image=icon__platform_github,
+                        light_image=assets.icons.platform.github,
+                        dark_image=assets.icons.platform.github,
                         size=(17, 17),
                     ),
                     command=lambda: utils.browser.open_url(
