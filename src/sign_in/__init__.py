@@ -113,8 +113,8 @@ class sign_in_interface:
                 self.internal_frame_00__sign_in,
                 text="",
                 image=customtkinter.CTkImage(
-                    light_image=image__banner_sign_in,
-                    dark_image=image__banner_sign_in,
+                    light_image=assets.banners.signin_sidebar_bg,
+                    dark_image=assets.banners.signin_sidebar_bg,
                     size=(450, 610),
                 ),
             )
@@ -355,8 +355,8 @@ class sign_in_interface:
                 self.internal_frame_00__reset_password,
                 text="",
                 image=customtkinter.CTkImage(
-                    light_image=image__banner_reset_password,
-                    dark_image=image__banner_reset_password,
+                    light_image=assets.banners.reset_pwd_sidebar_bg,
+                    dark_image=assets.banners.reset_pwd_sidebar_bg,
                     size=(450, 610),
                 ),
             )
