@@ -114,8 +114,8 @@ class navigation:
             hover_color="#1a1a1a",
             font=("Segoe UI", 14),
             image=customtkinter.CTkImage(
-                light_image=assets.icons.material.overview,
-                dark_image=assets.icons.material.overview,
+                light_image=assets.icons.material.settings,
+                dark_image=assets.icons.material.settings,
                 size=(20, 20),
             ),
             compound="left",
