@@ -74,6 +74,10 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "security.png"
         )
 
+        settings: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "settings.png"
+        )
+
         shield_lock: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "shield_lock.png"
         )
