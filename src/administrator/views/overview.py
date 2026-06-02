@@ -3,7 +3,7 @@ from .. import customtkinter, Callable
 
 class overview:
 
-    def __init__(self, parent_frame: customtkinter.CTkFrame) -> None:
+    def __init__(self, parent_frame: customtkinter.CTkFrame, username: str) -> None:
 
         self.frame__overview: customtkinter.CTkFrame = customtkinter.CTkFrame(
             parent_frame, width=870, height=590, fg_color="#0a0a0a"

@@ -58,6 +58,10 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "more_horiz.png"
         )
 
+        overview: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "overview.png"
+        )
+
         password: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "password.png"
         )
