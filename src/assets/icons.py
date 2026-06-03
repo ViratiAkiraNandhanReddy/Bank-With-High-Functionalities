@@ -22,6 +22,10 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "assured_workload.png"
         )
 
+        campaign: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "campaign.png"
+        )
+
         chevron_backward: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "chevron_backward.png"
         )

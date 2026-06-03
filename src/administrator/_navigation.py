@@ -12,7 +12,10 @@ class navigation:
         )
         self.frame__navigation.place(x=10, y=10)
 
-        self.current_frame: tuple[overview | users | settings, customtkinter.CTkButton]
+        self.current_frame: tuple[
+            overview | users_and_access | issues_and_broadcasts | settings,
+            customtkinter.CTkButton,
+        ]
 
         customtkinter.CTkLabel(
             self.frame__navigation,
@@ -27,7 +30,12 @@ class navigation:
         ).place(x=68, y=20)
 
         self.overview: overview = overview(parent_frame, username)
-        self.users: users = users(parent_frame)
+        self.users_and_access: users_and_access = users_and_access(
+            parent_frame, username
+        )
+        self.issues_and_broadcasts: issues_and_broadcasts = issues_and_broadcasts(
+            parent_frame, username
+        )
         self.settings: settings = settings(parent_frame, username)
 
         self._overview_button: customtkinter.CTkButton = customtkinter.CTkButton(
@@ -53,46 +61,55 @@ class navigation:
 
         self.place_views(self._overview_button, self.overview)
 
-        self._users_button: customtkinter.CTkButton = customtkinter.CTkButton(
-            self.frame__navigation,
-            text="Users",
-            width=190,
-            height=44,
-            fg_color="#0a0a0a",
-            hover_color="#1a1a1a",
-            text_color_disabled="#DCE4EE",
-            font=("Segoe UI", 14),
-            image=customtkinter.CTkImage(
-                light_image=assets.icons.material.groups,
-                dark_image=assets.icons.material.groups,
-                size=(20, 20),
-            ),
-            command=lambda: self.place_views(self._users_button, self.users),
-            compound="left",
-            border_spacing=10,
-            anchor="w",
+        self._users_and_access_button: customtkinter.CTkButton = (
+            customtkinter.CTkButton(
+                self.frame__navigation,
+                text="Users & Access",
+                width=190,
+                height=44,
+                fg_color="#0a0a0a",
+                hover_color="#1a1a1a",
+                text_color_disabled="#DCE4EE",
+                font=("Segoe UI", 14),
+                image=customtkinter.CTkImage(
+                    light_image=assets.icons.material.groups,
+                    dark_image=assets.icons.material.groups,
+                    size=(20, 20),
+                ),
+                command=lambda: self.place_views(
+                    self._users_and_access_button, self.users_and_access
+                ),
+                compound="left",
+                border_spacing=10,
+                anchor="w",
+            )
         )
-        self._users_button.place(x=5, y=319)
+        self._users_and_access_button.place(x=5, y=319)
 
-        self._3_button: customtkinter.CTkButton = customtkinter.CTkButton(
-            self.frame__navigation,
-            text="Button 3",
-            width=190,
-            height=44,
-            fg_color="#0a0a0a",
-            hover_color="#1a1a1a",
-            text_color_disabled="#DCE4EE",
-            font=("Segoe UI", 14),
-            image=customtkinter.CTkImage(
-                light_image=assets.icons.material.overview,
-                dark_image=assets.icons.material.overview,
-                size=(20, 20),
-            ),
-            compound="left",
-            border_spacing=10,
-            anchor="w",
+        self._issues_and_broadcasts_button: customtkinter.CTkButton = (
+            customtkinter.CTkButton(
+                self.frame__navigation,
+                text="Issues & Broadcasts",
+                width=190,
+                height=44,
+                fg_color="#0a0a0a",
+                hover_color="#1a1a1a",
+                text_color_disabled="#DCE4EE",
+                font=("Segoe UI", 14),
+                image=customtkinter.CTkImage(
+                    light_image=assets.icons.material.campaign,
+                    dark_image=assets.icons.material.campaign,
+                    size=(20, 20),
+                ),
+                command=lambda: self.place_views(
+                    self._issues_and_broadcasts_button, self.issues_and_broadcasts
+                ),
+                compound="left",
+                border_spacing=10,
+                anchor="w",
+            )
         )
-        self._3_button.place(x=5, y=368)
+        self._issues_and_broadcasts_button.place(x=5, y=368)
 
         self._4_button: customtkinter.CTkButton = customtkinter.CTkButton(
             self.frame__navigation,
@@ -138,7 +155,9 @@ class navigation:
         transaction_carousel(self.frame__navigation)
 
     def place_views(
-        self, _button: customtkinter.CTkButton, view_object: overview | users | settings
+        self,
+        _button: customtkinter.CTkButton,
+        view_object: overview | users_and_access | issues_and_broadcasts | settings,
     ) -> None:
 
         if hasattr(self, "current_frame"):
