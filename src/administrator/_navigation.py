@@ -12,7 +12,7 @@ class navigation:
         )
         self.frame__navigation.place(x=10, y=10)
 
-        self.current_frame: tuple[overview | settings, customtkinter.CTkButton]
+        self.current_frame: tuple[overview | users | settings, customtkinter.CTkButton]
 
         customtkinter.CTkLabel(
             self.frame__navigation,
@@ -27,6 +27,7 @@ class navigation:
         ).place(x=68, y=20)
 
         self.overview: overview = overview(parent_frame, username)
+        self.users: users = users(parent_frame)
         self.settings: settings = settings(parent_frame, username)
 
         self._overview_button: customtkinter.CTkButton = customtkinter.CTkButton(
@@ -52,9 +53,9 @@ class navigation:
 
         self.place_views(self._overview_button, self.overview)
 
-        self._2_button: customtkinter.CTkButton = customtkinter.CTkButton(
+        self._users_button: customtkinter.CTkButton = customtkinter.CTkButton(
             self.frame__navigation,
-            text="Button 2",
+            text="Users",
             width=190,
             height=44,
             fg_color="#0a0a0a",
@@ -62,15 +63,16 @@ class navigation:
             text_color_disabled="#DCE4EE",
             font=("Segoe UI", 14),
             image=customtkinter.CTkImage(
-                light_image=assets.icons.material.overview,
-                dark_image=assets.icons.material.overview,
+                light_image=assets.icons.material.groups,
+                dark_image=assets.icons.material.groups,
                 size=(20, 20),
             ),
+            command=lambda: self.place_views(self._users_button, self.users),
             compound="left",
             border_spacing=10,
             anchor="w",
         )
-        self._2_button.place(x=5, y=319)
+        self._users_button.place(x=5, y=319)
 
         self._3_button: customtkinter.CTkButton = customtkinter.CTkButton(
             self.frame__navigation,
@@ -136,7 +138,7 @@ class navigation:
         transaction_carousel(self.frame__navigation)
 
     def place_views(
-        self, _button: customtkinter.CTkButton, view_object: overview | settings
+        self, _button: customtkinter.CTkButton, view_object: overview | users | settings
     ) -> None:
 
         if hasattr(self, "current_frame"):
