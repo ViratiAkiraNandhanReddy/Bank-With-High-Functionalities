@@ -13,7 +13,11 @@ class navigation:
         self.frame__navigation.place(x=10, y=10)
 
         self.current_frame: tuple[
-            overview | users_and_access | issues_and_broadcasts | settings,
+            overview
+            | users_and_access
+            | issues_and_broadcasts
+            | activity_and_history
+            | settings,
             customtkinter.CTkButton,
         ]
 
@@ -35,6 +39,9 @@ class navigation:
         )
         self.issues_and_broadcasts: issues_and_broadcasts = issues_and_broadcasts(
             parent_frame, username
+        )
+        self.activity_and_history: activity_and_history = activity_and_history(
+            parent_frame
         )
         self.settings: settings = settings(parent_frame, username)
 
@@ -111,25 +118,30 @@ class navigation:
         )
         self._issues_and_broadcasts_button.place(x=5, y=368)
 
-        self._4_button: customtkinter.CTkButton = customtkinter.CTkButton(
-            self.frame__navigation,
-            text="Button 4",
-            width=190,
-            height=44,
-            fg_color="#0a0a0a",
-            hover_color="#1a1a1a",
-            text_color_disabled="#DCE4EE",
-            font=("Segoe UI", 14),
-            image=customtkinter.CTkImage(
-                light_image=assets.icons.material.overview,
-                dark_image=assets.icons.material.overview,
-                size=(20, 20),
-            ),
-            compound="left",
-            border_spacing=10,
-            anchor="w",
+        self._activity_and_history_button: customtkinter.CTkButton = (
+            customtkinter.CTkButton(
+                self.frame__navigation,
+                text="Activity & History",
+                width=190,
+                height=44,
+                fg_color="#0a0a0a",
+                hover_color="#1a1a1a",
+                text_color_disabled="#DCE4EE",
+                font=("Segoe UI", 14),
+                image=customtkinter.CTkImage(
+                    light_image=assets.icons.material.history_toggle_off,
+                    dark_image=assets.icons.material.history_toggle_off,
+                    size=(20, 20),
+                ),
+                command=lambda: self.place_views(
+                    self._activity_and_history_button, self.activity_and_history
+                ),
+                compound="left",
+                border_spacing=10,
+                anchor="w",
+            )
         )
-        self._4_button.place(x=5, y=417)
+        self._activity_and_history_button.place(x=5, y=417)
 
         self._settings_button: customtkinter.CTkButton = customtkinter.CTkButton(
             self.frame__navigation,
@@ -157,7 +169,13 @@ class navigation:
     def place_views(
         self,
         _button: customtkinter.CTkButton,
-        view_object: overview | users_and_access | issues_and_broadcasts | settings,
+        view_object: (
+            overview
+            | users_and_access
+            | issues_and_broadcasts
+            | activity_and_history
+            | settings
+        ),
     ) -> None:
 
         if hasattr(self, "current_frame"):
