@@ -42,6 +42,10 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "exit_to_app.png"
         )
 
+        groups: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "groups.png"
+        )
+
         lock_person: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "lock_person.png"
         )
