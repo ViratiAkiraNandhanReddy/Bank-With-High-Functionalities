@@ -12,7 +12,7 @@ class navigation:
         )
         self.frame__navigation.place(x=10, y=10)
 
-        self.current_frame: customtkinter.CTkFrame
+        self.current_frame: tuple[overview | settings, customtkinter.CTkButton]
 
         customtkinter.CTkLabel(
             self.frame__navigation,
@@ -36,17 +36,21 @@ class navigation:
             height=44,
             fg_color="#0a0a0a",
             hover_color="#1a1a1a",
+            text_color_disabled="#DCE4EE",
             font=("Segoe UI", 14),
             image=customtkinter.CTkImage(
                 light_image=assets.icons.material.overview,
                 dark_image=assets.icons.material.overview,
                 size=(20, 20),
             ),
+            command=lambda: self.place_views(self._overview_button, self.overview),
             compound="left",
             border_spacing=10,
             anchor="w",
         )
         self._overview_button.place(x=5, y=270)
+
+        self.place_views(self._overview_button, self.overview)
 
         self._2_button: customtkinter.CTkButton = customtkinter.CTkButton(
             self.frame__navigation,
@@ -55,6 +59,7 @@ class navigation:
             height=44,
             fg_color="#0a0a0a",
             hover_color="#1a1a1a",
+            text_color_disabled="#DCE4EE",
             font=("Segoe UI", 14),
             image=customtkinter.CTkImage(
                 light_image=assets.icons.material.overview,
@@ -74,6 +79,7 @@ class navigation:
             height=44,
             fg_color="#0a0a0a",
             hover_color="#1a1a1a",
+            text_color_disabled="#DCE4EE",
             font=("Segoe UI", 14),
             image=customtkinter.CTkImage(
                 light_image=assets.icons.material.overview,
@@ -93,6 +99,7 @@ class navigation:
             height=44,
             fg_color="#0a0a0a",
             hover_color="#1a1a1a",
+            text_color_disabled="#DCE4EE",
             font=("Segoe UI", 14),
             image=customtkinter.CTkImage(
                 light_image=assets.icons.material.overview,
@@ -112,12 +119,14 @@ class navigation:
             height=44,
             fg_color="#0a0a0a",
             hover_color="#1a1a1a",
+            text_color_disabled="#DCE4EE",
             font=("Segoe UI", 14),
             image=customtkinter.CTkImage(
                 light_image=assets.icons.material.settings,
                 dark_image=assets.icons.material.settings,
                 size=(20, 20),
             ),
+            command=lambda: self.place_views(self._settings_button, self.settings),
             compound="left",
             border_spacing=10,
             anchor="w",
@@ -125,3 +134,17 @@ class navigation:
         self._settings_button.place(x=5, y=466)
 
         transaction_carousel(self.frame__navigation)
+
+    def place_views(
+        self, _button: customtkinter.CTkButton, view_object: overview | settings
+    ) -> None:
+
+        if hasattr(self, "current_frame"):
+
+            self.current_frame[0].hide_frame()
+            self.current_frame[1].configure(fg_color="#0a0a0a", state="normal")
+
+        _button.configure(fg_color="#1a1a1a", state="disabled")
+        view_object.show_frame()
+
+        self.current_frame = (view_object, _button)
