@@ -50,6 +50,10 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "groups.png"
         )
 
+        history_toggle_off: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "history_toggle_off.png"
+        )
+
         lock_person: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "lock_person.png"
         )
