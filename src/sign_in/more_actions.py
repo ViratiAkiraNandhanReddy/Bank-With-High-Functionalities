@@ -274,16 +274,55 @@ secure OTP verification.""",
                     width=260,
                 ).place(x=20, y=169)
 
+                if_emailotp_confirmation_state_container_frame_admin_sign_in: (
+                    customtkinter.CTkFrame
+                ) = customtkinter.CTkFrame(
+                    self.internal_frame_00_more_actions,
+                    width=300,
+                    height=400,
+                    fg_color="transparent",
+                )
+
+                if_send_mail_and_validate_otp_container_frame_admin_sign_in: (
+                    customtkinter.CTkFrame
+                ) = customtkinter.CTkFrame(
+                    self.internal_frame_00_more_actions,
+                    width=300,
+                    height=400,
+                    fg_color="transparent",
+                )
+
+                def send_mail_and_validate_otp(_email: str) -> None:
+
+                    if_send_mail_and_validate_otp_container_frame_admin_sign_in.place(
+                        x=3, y=3
+                    )
+
+                    btn__back_if_emailotp_confirmation_state: (
+                        customtkinter.CTkButton
+                    ) = customtkinter.CTkButton(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        text="",
+                        width=0,  # 28
+                        height=0,  # 28
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=assets.icons.material.arrow_back,
+                            dark_image=assets.icons.material.arrow_back,
+                            size=(20, 20),
+                        ),
+                        command=lambda: (
+                            if_emailotp_confirmation_state_container_frame_admin_sign_in.place(
+                                x=3, y=3
+                            ),
+                            if_send_mail_and_validate_otp_container_frame_admin_sign_in.place_forget(),
+                        ),
+                    )
+                    btn__back_if_emailotp_confirmation_state.place(x=20, y=352)
+
                 def _recovery_confirmation_state_emailotp(_email: str) -> None:
 
-                    if_emailotp_confirmation_state_container_frame_admin_sign_in: (
-                        customtkinter.CTkFrame
-                    ) = customtkinter.CTkFrame(
-                        self.internal_frame_00_more_actions,
-                        width=300,
-                        height=400,
-                        fg_color="transparent",
-                    )
                     if_emailotp_confirmation_state_container_frame_admin_sign_in.place(
                         x=3, y=3
                     )
@@ -398,7 +437,6 @@ your administrator account.""",
                         command=lambda: (
                             if_emailotp_container_frame_admin_sign_in.place(x=3, y=3),
                             if_emailotp_confirmation_state_container_frame_admin_sign_in.place_forget(),
-                            if_emailotp_confirmation_state_container_frame_admin_sign_in.destroy(),
                         ),
                     )
                     btn__back_if_emailotp_confirmation_state.place(x=20, y=352)
@@ -416,6 +454,28 @@ your administrator account.""",
                             light_image=assets.icons.material.arrow_forward,
                             dark_image=assets.icons.material.arrow_forward,
                             size=(20, 20),
+                        ),
+                        command=lambda: (
+                            (
+                                send_mail_and_validate_otp(_email),
+                                if_emailotp_confirmation_state_container_frame_admin_sign_in.place_forget(),
+                            )
+                            if utils.connection.is_connected()
+                            else (
+                                no_internet_connection_warning := customtkinter.CTkLabel(
+                                    if_emailotp_confirmation_state_container_frame_admin_sign_in,
+                                    text="No internet connection.\nPlease connect to the internet and try again.",
+                                    text_color="#FFFFFF",
+                                    font=("Segoe UI", 8),
+                                    width=0,  # 160
+                                    height=28,
+                                ),
+                                no_internet_connection_warning.place(x=70, y=352),
+                                no_internet_connection_warning.after(
+                                    3000,
+                                    no_internet_connection_warning.place_forget,
+                                ),
+                            )
                         ),
                     )
                     btn__forward_if_emailotp_confirmation_state.place(x=252, y=352)
