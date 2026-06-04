@@ -1,67 +1,42 @@
-import subprocess
+import os
+import json
+
+DIR_PATH: str = str(os.environ.get("LOCALAPPDATA")) + r"\Bank-With-High-Functionalities"
 
 
-def Open_Browser_For_Specified_URL(url: str) -> None:
+def save_configuration_json(_json: dict) -> bool:
     """
-    Opens the given URL using the system's default browser via Windows shell command.
-    Windows-only functionality.
+    Save the provided configuration dictionary to a JSON file.
+
+    This function takes a dictionary containing configuration data and saves it to a
+    specified JSON file path. The file is overwritten if it already exists.
 
     ### Parameters
-    - **url** (`str`): The URL to be opened in the browser.
+    - **_json** (`dict`): The configuration data to be saved as a dictionary.
 
     ### Returns
-    - `None`
+    - `bool`: Returns `True` if the configuration was successfully saved, otherwise returns `False`.
 
     ### Example
     ```python
-    Open_Browser_For_Specified_URL("https://www.example.com")
+    config_data = {...}  # Some configuration data as a dictionary
+    save_configuration_json(config_data)
     ```
 
     ### Notes
-    - Requires Windows operating system
-    - Ensure system has a default browser configured
-    - Uses `subprocess.run()` to execute shell command
-    - Errors are logged to log files
+    - The function assumes the provided dictionary can be serialized to JSON format.
+    - The file path is determined by the `DIR_PATH` constant and is typically located in the user's local application data directory.
+    - Errors during file writing are logged to log files.
     """
 
     try:
-        subprocess.run(f"START {url}", shell=True)
+
+        with open(rf"{DIR_PATH}\database\config.json", "w") as config:
+            json.dump(_json, config, indent=4)
+
+        return True
 
     except:
         raise NotImplementedError
 
-
-def Open_Browser_For_Specified_Internal_File(file_dir: str) -> None:
-    """Open an internal file in the default web browser using file:// URL.
-
-    Converts the provided file path to a `file:///` URL and opens it in the system's
-    default browser. Windows-only functionality.
-
-    ### Parameters
-    - **file_dir** (`str`): The absolute or relative path of the internal file to open.
-
-    ### Returns
-    - `None`
-
-    ### Example
-    ```python
-    Open_Browser_For_Specified_Internal_File("C:/<...>/Bank-With-High-Functionalities/LICENSE")
-    ```
-
-    ### Notes
-    - Requires Windows operating system
-    - File path is internally converted to valid `file:///` URL format
-    - Backslashes are automatically converted to forward slashes
-    - Uses `subprocess.run()` to execute command via Windows shell
-    - Default browser must be configured on the system
-    - Errors are logged to log files
-    """
-
-    try:
-        subprocess.run(
-            ["cmd", "/c", "START", "", f'file:///{file_dir.replace("\\\\", "/")}'],
-            shell=True,
-        )
-
-    except:
-        raise NotImplementedError
+    return False

@@ -4,25 +4,29 @@ import ctypes
 import logging
 from . import utils
 import customtkinter
+from .assets import *
 from . import __mail__
-from typing import Any
-from .loadAssets import *
 from dotenv import load_dotenv
+from typing import Any, Callable
 from .__server__ import SERVER, _uuids
 from hPyT import title_bar, get_accent_color
 from pywinstyles import apply_style, set_opacity
 
 CONSTANTS: dict[str, dict[str, Any]] = {
-    "WEBSITES": {
-        "GITHUB_REPOSITORY": "https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities",
-        "PROJECT_WEBSITE": "https://viratiakiranandhanreddy.github.io/Bank-With-High-Functionalities/",
+    "website": {
+        "home": "https://viratiakiranandhanreddy.github.io/Bank-With-High-Functionalities/",
     },
-    "SOCIALS": {
-        "GITHUB": "https://github.com/ViratiAkiraNandhanReddy",
-        "INSTAGRAM": "https://www.instagram.com/viratiakiranandhanreddy",
-        "TWITTER": "https://twitter.com/akiranandhan_",
-        "LINKEDIN": "https://www.linkedin.com/in/viratiakiranandhanreddy",
-        "YOUTUBE": "https://www.youtube.com/@ViratiAkiraNandhanReddy",
+    "socials": {
+        "github": "https://github.com/ViratiAkiraNandhanReddy",
+        "instagram": "https://www.instagram.com/viratiakiranandhanreddy",
+        "twitter": "https://twitter.com/akiranandhan_",
+        "linkedin": "https://www.linkedin.com/in/viratiakiranandhanreddy",
+        "youtube": "https://www.youtube.com/@ViratiAkiraNandhanReddy",
+    },
+    "github": {
+        "repository": "https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities",
+        "issues": "https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/issues",
+        "discussions": "https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/discussions",
     },
 }
 
@@ -40,8 +44,32 @@ except FileNotFoundError, json.JSONDecodeError:
 load_dotenv(rf"{DIR_PATH}\.env")
 
 
-def move_tk_with_no_titlebar_winos_native_ctypes(event, window: customtkinter.CTk):
+class borderless_window_utils:
 
-    hwnd = ctypes.windll.user32.GetParent(window.winfo_id())
-    ctypes.windll.user32.ReleaseCapture()
-    ctypes.windll.user32.PostMessageW(hwnd, 0xA1, 2, 0)
+    @staticmethod
+    def enable_native_window_drag_via_win32_message(_event, window: customtkinter.CTk):
+
+        hwnd: int = ctypes.windll.user32.GetParent(window.winfo_id())
+        ctypes.windll.user32.ReleaseCapture()
+        ctypes.windll.user32.PostMessageW(hwnd, 0xA1, 2, 0)
+
+    @staticmethod
+    def disable_minimize_btn_and_force_window_frame_refresh(
+        _event, window: customtkinter.CTk
+    ):
+
+        hwnd: int = ctypes.windll.user32.GetParent(window.winfo_id())
+        style = ctypes.windll.user32.GetWindowLongW(hwnd, -16)
+
+        style &= ~0x00020000
+
+        ctypes.windll.user32.SetWindowLongW(hwnd, -16, style)
+        ctypes.windll.user32.SetWindowPos(
+            hwnd,
+            None,
+            0,
+            0,
+            0,
+            0,
+            0x0002 | 0x0001 | 0x0020,  # SWP_NOMOVE | SWP_NOSIZE | SWP_FRAMECHANGED
+        )

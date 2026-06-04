@@ -1,6 +1,7 @@
 import sqlite3
-from CaesarCipher import Encryption
 from . import os
+from . import _uuids
+from CaesarCipher import Encryption
 
 connection = sqlite3.connect(
     rf"{ os.environ.get('LOCALAPPDATA') }\Bank-With-High-Functionalities\database\sqlite3\database.sqlite3"
@@ -22,9 +23,10 @@ class SERVER:
             self.cursor.execute("""
                 CREATE TABLE IF NOT EXISTS USERS (
                 USERNAME VARCHAR(100) NOT NULL PRIMARY KEY,
+                UUID CHAR(36) NOT NULL,
                 PASSWORD TEXT NOT NULL,
                 EMAIL TEXT,
-                SECURITY_CODE TEXT NOT NULL,
+                BACKUP_CODE TEXT NOT NULL,
                 CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
                 """)
 
@@ -50,6 +52,8 @@ class SERVER:
                 CREATE TABLE IF NOT EXISTS ADMINS (
                 USERNAME VARCHAR(100) NOT NULL PRIMARY KEY,
                 PASSWORD TEXT NOT NULL,
+                EMAIL TEXT,
+                BACKUP_CODE TEXT NOT NULL,
                 CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
                 """)
 
@@ -61,13 +65,24 @@ class SERVER:
 
             self.cursor = SERVER.cursor
 
-        def is_user_exists(self, username: str) -> bool:
+        def is_user_exists(self, username_or_uuid: str) -> bool:
+
+            if _uuids.validate_uuid5(username_or_uuid):
+
+                self.cursor.execute(
+                    """
+                    SELECT 1 FROM USERS WHERE UUID = ?
+                    """,
+                    (username_or_uuid,),
+                )
+
+                return self.cursor.fetchone() is not None
 
             self.cursor.execute(
                 """
                 SELECT 1 FROM USERS WHERE USERNAME = ?
                 """,
-                (username,),
+                (username_or_uuid,),
             )
 
             return self.cursor.fetchone() is not None
@@ -89,13 +104,27 @@ class SERVER:
 
             self.cursor = SERVER.cursor
 
-        def authenticate_password(self, username: str, password: str) -> bool:
+        def authenticate_password(self, username_or_uuid: str, password: str) -> bool:
+
+            if _uuids.validate_uuid5(username_or_uuid):
+
+                self.cursor.execute(
+                    """
+                    SELECT password FROM users WHERE uuid = ?
+                    """,
+                    (username_or_uuid,),
+                )
+
+                return (
+                    self.cursor.fetchone()[0]
+                    == Encryption(password, shift=8, alterNumbers=True).encrypt()
+                )
 
             self.cursor.execute(
                 """
                 SELECT password FROM users WHERE username = ?
                 """,
-                (username,),
+                (username_or_uuid,),
             )
 
             return (
@@ -103,16 +132,16 @@ class SERVER:
                 == Encryption(password, shift=8, alterNumbers=True).encrypt()
             )
 
-        def authenticate_security_code(self, username: str, security_code: str) -> bool:
+        def authenticate_backup_code(self, username: str, backup_code: str) -> bool:
 
             self.cursor.execute(
                 """
-                SELECT security_code FROM users WHERE username = ?
+                SELECT backup_code FROM users WHERE username = ?
                 """,
                 (username,),
             )
 
-            return self.cursor.fetchone()[0] == security_code
+            return self.cursor.fetchone()[0] == backup_code
 
         def authenticate_admin(self, username: str, password: str) -> bool:
 
@@ -127,6 +156,32 @@ class SERVER:
                 self.cursor.fetchone()[0]
                 == Encryption(password, shift=53, alterNumbers=True).encrypt()
             )
+
+        def authenticate_admin_backup_code(
+            self, username: str, backup_code: str
+        ) -> bool:
+
+            self.cursor.execute(
+                """
+                SELECT backup_code FROM ADMINS WHERE username = ?
+                """,
+                (username,),
+            )
+
+            return self.cursor.fetchone()[0] == backup_code
+
+        def authenticate_admin_email_address(
+            self, username: str, email_address: str
+        ) -> bool:
+
+            self.cursor.execute(
+                """
+                SELECT email FROM ADMINS WHERE username = ?
+                """,
+                (username,),
+            )
+
+            return self.cursor.fetchone()[0] == email_address
 
     class accountactions:
 
