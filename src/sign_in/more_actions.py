@@ -292,6 +292,40 @@ secure OTP verification.""",
                         x=3, y=3
                     )
 
+                    ctk_report_var = customtkinter.CTkLabel(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        text="testing!",
+                        font=("Roboto", 11),
+                        text_color="#FFFFFF",
+                        height=0,  # 65
+                        width=260,
+                    )  # x=20, y=336
+
+                    email_object = forgot_password(
+                        receiver_mail_address=_email,
+                        ctk_report=(
+                            ctk_report_var,
+                            20,
+                            336,
+                            "OTP sent successfully.",
+                            "Failed to send OTP.",
+                        ),
+                        receiver_type="Administrator",
+                    )
+
+                    btn__resend_otp = customtkinter.CTkButton(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        text="Resend OTP",
+                        height=0,  # 15
+                        width=0,  # 54
+                        hover=False,
+                        font=("Roboto", 9),
+                        fg_color="transparent",
+                        text_color="#218CFF",
+                        border_spacing=0,
+                    )
+                    btn__resend_otp.place(x=123, y=304)
+
                     customtkinter.CTkLabel(
                         if_send_mail_and_validate_otp_container_frame_admin_sign_in,
                         text="Email OTP Verification",
@@ -316,9 +350,41 @@ Enter the verification code below to
 continue account recovery.""",
                         font=("Roboto", 11),
                         text_color="#FFFFFF",
-                        height=0,
+                        height=0,  # 65
                         width=260,
                     ).place(x=20, y=169)
+
+                    def validate_otp(*args) -> None:
+
+                        curr_otp.set(curr_otp.get().upper()[:10])
+
+                    curr_otp: customtkinter.StringVar = customtkinter.StringVar()
+                    curr_otp.trace_add("write", validate_otp)
+
+                    __otp_code = customtkinter.CTkEntry(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        placeholder_text="XXXXXXXXXX",
+                        width=140,
+                        height=30,
+                        font=("Consolas", 16),
+                        fg_color="transparent",
+                        border_width=1,
+                        border_color="#FFFFFF",
+                        corner_radius=6,
+                        justify="center",
+                    )
+                    __otp_code.place(x=80, y=264)
+
+                    __otp_code.bind(
+                        "<FocusIn>",
+                        lambda event: __otp_code.configure(textvariable=curr_otp),
+                    )
+
+                    __otp_code.bind(
+                        "<FocusOut>",
+                        lambda event: __otp_code.configure(textvariable=None)
+                        or __otp_code.unbind("<FocusIn>"),
+                    )
 
                     btn__send_mail_and_validate: customtkinter.CTkButton = (
                         customtkinter.CTkButton(
