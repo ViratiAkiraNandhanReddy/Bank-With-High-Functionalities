@@ -1,4 +1,4 @@
-from . import *
+from ._imports import *
 
 
 class email_verification:
@@ -8,7 +8,7 @@ class email_verification:
         self.otp: str = otp_code()
 
         with open(
-            rf"{DIR_PATH}\src\__mail__\templates\email_verification.html"
+            root / "src" / "__mail__" / "templates" / "email_verification.html"
         ) as file:
 
             self.email_html = (
