@@ -22,6 +22,10 @@ class more_actions_interface:
             self.hide_overlay_callback: Callable = _callback
             self._btn: customtkinter.CTkButton = _btn
 
+            self.temp_ctk_frame_instance: (
+                customtkinter.CTkFrame
+            )  # for caching current frame instance to be used in nested functions
+
             self.internal_frame_00_more_actions: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
                     self.parent_frame,
@@ -274,57 +278,85 @@ secure OTP verification.""",
                     width=260,
                 ).place(x=20, y=169)
 
-                if_emailotp_confirmation_state_container_frame_admin_sign_in: (
-                    customtkinter.CTkFrame
-                ) = customtkinter.CTkFrame(
-                    self.internal_frame_00_more_actions,
-                    width=300,
-                    height=400,
-                    fg_color="transparent",
-                )
-
-                if_send_mail_and_validate_otp_container_frame_admin_sign_in: (
-                    customtkinter.CTkFrame
-                ) = customtkinter.CTkFrame(
-                    self.internal_frame_00_more_actions,
-                    width=300,
-                    height=400,
-                    fg_color="transparent",
-                )
-
                 def send_mail_and_validate_otp(_email: str) -> None:
 
+                    if_send_mail_and_validate_otp_container_frame_admin_sign_in: (
+                        customtkinter.CTkFrame
+                    ) = customtkinter.CTkFrame(
+                        self.internal_frame_00_more_actions,
+                        width=300,
+                        height=400,
+                        fg_color="transparent",
+                    )
                     if_send_mail_and_validate_otp_container_frame_admin_sign_in.place(
                         x=3, y=3
                     )
 
-                    btn__back_if_emailotp_confirmation_state: (
-                        customtkinter.CTkButton
-                    ) = customtkinter.CTkButton(
+                    customtkinter.CTkLabel(
                         if_send_mail_and_validate_otp_container_frame_admin_sign_in,
-                        text="",
-                        width=0,  # 28
-                        height=0,  # 28
-                        fg_color="transparent",
-                        hover=False,
+                        text="Email OTP Verification",
+                        font=("Segoe UI", 16, "bold"),
+                        text_color="#FFFFFF",
                         image=customtkinter.CTkImage(
-                            light_image=assets.icons.material.arrow_back,
-                            dark_image=assets.icons.material.arrow_back,
-                            size=(20, 20),
+                            light_image=assets.icons.material.mark_email_unread,
+                            dark_image=assets.icons.material.mark_email_unread,
+                            size=(42, 42),
                         ),
-                        command=lambda: (
-                            if_emailotp_confirmation_state_container_frame_admin_sign_in.place(
-                                x=3, y=3
+                        compound="top",
+                        height=0,
+                        width=260,
+                    ).place(x=20, y=53)
+
+                    customtkinter.CTkLabel(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        text="""A one-time password (OTP) has been sent
+to your registered recovery email address.
+
+Enter the verification code below to
+continue account recovery.""",
+                        font=("Roboto", 11),
+                        text_color="#FFFFFF",
+                        height=0,
+                        width=260,
+                    ).place(x=20, y=169)
+
+                    btn__send_mail_and_validate: customtkinter.CTkButton = (
+                        customtkinter.CTkButton(
+                            if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                            text="",
+                            width=0,  # 28
+                            height=0,  # 28
+                            fg_color="transparent",
+                            hover=False,
+                            image=customtkinter.CTkImage(
+                                light_image=assets.icons.material.arrow_back,
+                                dark_image=assets.icons.material.arrow_back,
+                                size=(20, 20),
                             ),
-                            if_send_mail_and_validate_otp_container_frame_admin_sign_in.place_forget(),
-                        ),
+                            command=lambda: (
+                                self.temp_ctk_frame_instance.place(x=3, y=3),
+                                if_send_mail_and_validate_otp_container_frame_admin_sign_in.place_forget(),
+                            ),
+                        )
                     )
-                    btn__back_if_emailotp_confirmation_state.place(x=20, y=352)
+                    btn__send_mail_and_validate.place(x=20, y=352)
 
                 def _recovery_confirmation_state_emailotp(_email: str) -> None:
 
+                    if_emailotp_confirmation_state_container_frame_admin_sign_in: (
+                        customtkinter.CTkFrame
+                    ) = customtkinter.CTkFrame(
+                        self.internal_frame_00_more_actions,
+                        width=300,
+                        height=400,
+                        fg_color="transparent",
+                    )
                     if_emailotp_confirmation_state_container_frame_admin_sign_in.place(
                         x=3, y=3
+                    )
+
+                    self.temp_ctk_frame_instance = (
+                        if_emailotp_confirmation_state_container_frame_admin_sign_in
                     )
 
                     customtkinter.CTkLabel(
