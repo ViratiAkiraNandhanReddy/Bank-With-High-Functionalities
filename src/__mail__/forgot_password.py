@@ -54,14 +54,27 @@ class forgot_password:
 
                 self._time_on_sent = datetime.datetime.now()
 
-                self.ctk_report[0].place(x=self.ctk_report[1], y=self.ctk_report[2])
-                self.ctk_report[0].configure(text=self.ctk_report[3])
-                self.ctk_report[0].after(3000, self.ctk_report[0].place_forget)
-
+                self.ctk_report[0].after(
+                    0,
+                    lambda: (
+                        self.ctk_report[0].place(
+                            x=self.ctk_report[1], y=self.ctk_report[2]
+                        ),
+                        self.ctk_report[0].configure(text=self.ctk_report[3]),
+                        self.ctk_report[0].after(3000, self.ctk_report[0].place_forget),
+                    ),
+                )
         except Exception as e:
-            self.ctk_report[0].place(x=self.ctk_report[1], y=self.ctk_report[2])
-            self.ctk_report[0].configure(text=self.ctk_report[4])
-            self.ctk_report[0].after(3000, self.ctk_report[0].place_forget)
+            self.ctk_report[0].after(
+                0,
+                lambda: (
+                    self.ctk_report[0].place(
+                        x=self.ctk_report[1], y=self.ctk_report[2]
+                    ),
+                    self.ctk_report[0].configure(text=self.ctk_report[4]),
+                    self.ctk_report[0].after(3000, self.ctk_report[0].place_forget),
+                ),
+            )
 
     def start_timer(
         self,

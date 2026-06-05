@@ -313,6 +313,8 @@ secure OTP verification.""",
                         receiver_type="Administrator",
                     )
 
+                    threading.Thread(target=email_object.send_mail, daemon=True).start()
+
                     btn__resend_otp = customtkinter.CTkButton(
                         if_send_mail_and_validate_otp_container_frame_admin_sign_in,
                         text="Resend OTP",
