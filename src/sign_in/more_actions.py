@@ -294,10 +294,10 @@ secure OTP verification.""",
 
                     ctk_report_var = customtkinter.CTkLabel(
                         if_send_mail_and_validate_otp_container_frame_admin_sign_in,
-                        text="testing!",
+                        text="",
                         font=("Roboto", 11),
                         text_color="#FFFFFF",
-                        height=0,  # 65
+                        height=0,
                         width=260,
                     )  # x=20, y=336
 
@@ -313,7 +313,10 @@ secure OTP verification.""",
                         receiver_type="Administrator",
                     )
 
-                    threading.Thread(target=email_object.send_mail, daemon=True).start()
+                    mail_thread = lambda: threading.Thread(
+                        target=email_object.send_mail, daemon=True
+                    ).start()
+                    mail_thread()
 
                     btn__resend_otp = customtkinter.CTkButton(
                         if_send_mail_and_validate_otp_container_frame_admin_sign_in,
@@ -376,6 +379,22 @@ continue account recovery.""",
                         justify="center",
                     )
                     __otp_code.place(x=80, y=264)
+
+                    _otp_countdown: customtkinter.CTkLabel = customtkinter.CTkLabel(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        text="",
+                        font=("Roboto", 10),
+                        height=12,
+                        width=32,  # 26
+                        text_color="#FFFFFF",
+                    )
+                    _otp_countdown.place(x=134, y=257)
+
+                    email_object.start_timer(
+                        timer_widget=_otp_countdown,
+                        report_widget=(ctk_report_var, 20, 336),
+                        resend_callback=mail_thread,
+                    )
 
                     __otp_code.bind(
                         "<FocusIn>",
