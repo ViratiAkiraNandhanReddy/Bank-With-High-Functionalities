@@ -86,6 +86,9 @@ class forgot_password:
         remaining_seconds: int = OTP_LIFETIME,
     ) -> None:
 
+        if not timer_widget.winfo_exists():
+            return
+
         minutes, seconds = divmod(remaining_seconds, 60)
         timer_widget.configure(text=f"{minutes:02d}:{seconds:02d}")
 
