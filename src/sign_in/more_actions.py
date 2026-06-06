@@ -280,6 +280,21 @@ secure OTP verification.""",
 
                 def send_mail_and_validate_otp(_email: str) -> None:
 
+                    def _timer(
+                        widget: customtkinter.CTkButton,
+                        remaining_seconds: int,
+                        _text: str = "Resend OTP",
+                    ) -> None:
+
+                        widget.configure(text=f"00:{remaining_seconds:02d}")
+
+                        if remaining_seconds > 0:
+                            widget.after(
+                                1000, _timer, widget, remaining_seconds - 1, _text
+                            )
+                        else:
+                            widget.configure(text=_text, state="normal")
+
                     if_send_mail_and_validate_otp_container_frame_admin_sign_in: (
                         customtkinter.CTkFrame
                     ) = customtkinter.CTkFrame(
@@ -318,18 +333,26 @@ secure OTP verification.""",
                     ).start()
                     mail_thread()
 
+                    def resend_otp() -> None:
+                        btn__resend_otp.configure(state="disabled")
+                        _timer(btn__resend_otp, 30)
+
                     btn__resend_otp = customtkinter.CTkButton(
                         if_send_mail_and_validate_otp_container_frame_admin_sign_in,
                         text="Resend OTP",
                         height=0,  # 15
-                        width=0,  # 54
+                        width=54,  # 54
                         hover=False,
                         font=("Roboto", 9),
                         fg_color="transparent",
                         text_color="#218CFF",
                         border_spacing=0,
+                        state="disabled",
+                        text_color_disabled="#FFFFFF",
+                        command=resend_otp,
                     )
                     btn__resend_otp.place(x=123, y=304)
+                    _timer(btn__resend_otp, 30)
 
                     customtkinter.CTkLabel(
                         if_send_mail_and_validate_otp_container_frame_admin_sign_in,
@@ -359,9 +382,17 @@ continue account recovery.""",
                         width=260,
                     ).place(x=20, y=169)
 
+                    otp_validated = False
+
                     def validate_otp(*args) -> None:
 
+                        nonlocal otp_validated
+
                         curr_otp.set(curr_otp.get().upper()[:10])
+
+                        if len(curr_otp.get()) == 10:
+
+                            otp_validated = email_object.validate_code(curr_otp.get())
 
                     curr_otp: customtkinter.StringVar = customtkinter.StringVar()
                     curr_otp.trace_add("write", validate_otp)
