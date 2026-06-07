@@ -22,6 +22,10 @@ class more_actions_interface:
             self.hide_overlay_callback: Callable = _callback
             self._btn: customtkinter.CTkButton = _btn
 
+            self.temp_ctk_frame_instance: (
+                customtkinter.CTkFrame
+            )  # for caching current frame instance to be used in nested functions
+
             self.internal_frame_00_more_actions: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
                     self.parent_frame,
@@ -274,6 +278,223 @@ secure OTP verification.""",
                     width=260,
                 ).place(x=20, y=169)
 
+                def send_mail_and_validate_otp(_email: str) -> None:
+
+                    def _timer(
+                        widget: customtkinter.CTkButton,
+                        remaining_seconds: int,
+                        _text: str = "Resend OTP",
+                    ) -> None:
+
+                        widget.configure(text=f"00:{remaining_seconds:02d}")
+
+                        if remaining_seconds > 0:
+                            widget.after(
+                                1000, _timer, widget, remaining_seconds - 1, _text
+                            )
+                        else:
+                            widget.configure(text=_text, state="normal")
+
+                    if_send_mail_and_validate_otp_container_frame_admin_sign_in: (
+                        customtkinter.CTkFrame
+                    ) = customtkinter.CTkFrame(
+                        self.internal_frame_00_more_actions,
+                        width=300,
+                        height=400,
+                        fg_color="transparent",
+                    )
+                    if_send_mail_and_validate_otp_container_frame_admin_sign_in.place(
+                        x=3, y=3
+                    )
+
+                    ctk_report_var = customtkinter.CTkLabel(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        text="",
+                        font=("Roboto", 11),
+                        text_color="#FFFFFF",
+                        height=0,
+                        width=260,
+                    )  # x=20, y=336
+
+                    email_object = forgot_password(
+                        receiver_mail_address=_email,
+                        ctk_report=(
+                            ctk_report_var,
+                            20,
+                            336,
+                            "OTP sent successfully.",
+                            "Failed to send OTP.",
+                        ),
+                        receiver_type="Administrator",
+                    )
+
+                    mail_thread = lambda: threading.Thread(
+                        target=email_object.send_mail, daemon=True
+                    ).start()
+                    mail_thread()
+
+                    def resend_otp() -> None:
+                        btn__resend_otp.configure(state="disabled")
+                        _timer(btn__resend_otp, 30)
+
+                        email_object.stop_timer(_otp_countdown)
+
+                        email_object.start_timer(
+                            timer_widget=_otp_countdown,
+                            report_widget=(ctk_report_var, 20, 336),
+                            resend_callback=mail_thread,
+                        )
+
+                        mail_thread()
+
+                    btn__resend_otp = customtkinter.CTkButton(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        text="Resend OTP",
+                        height=0,  # 15
+                        width=54,  # 54
+                        hover=False,
+                        font=("Roboto", 9),
+                        fg_color="transparent",
+                        text_color="#218CFF",
+                        border_spacing=0,
+                        state="disabled",
+                        text_color_disabled="#FFFFFF",
+                        command=resend_otp,
+                    )
+                    btn__resend_otp.place(x=123, y=304)
+                    _timer(btn__resend_otp, 30)
+
+                    customtkinter.CTkLabel(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        text="Email OTP Verification",
+                        font=("Segoe UI", 16, "bold"),
+                        text_color="#FFFFFF",
+                        image=customtkinter.CTkImage(
+                            light_image=assets.icons.material.mark_email_unread,
+                            dark_image=assets.icons.material.mark_email_unread,
+                            size=(42, 42),
+                        ),
+                        compound="top",
+                        height=0,
+                        width=260,
+                    ).place(x=20, y=53)
+
+                    customtkinter.CTkLabel(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        text="""A one-time password (OTP) has been sent
+to your registered recovery email address.
+
+Enter the verification code below to
+continue account recovery.""",
+                        font=("Roboto", 11),
+                        text_color="#FFFFFF",
+                        height=0,  # 65
+                        width=260,
+                    ).place(x=20, y=169)
+
+                    def validate_otp(*args) -> None:
+
+                        otp_validated = False
+
+                        curr_otp.set(curr_otp.get().upper()[:10])
+
+                        if len(curr_otp.get()) == 10:
+
+                            otp_validated = email_object.validate_code(curr_otp.get())
+
+                        if not otp_validated and len(curr_otp.get()) == 10:
+
+                            ctk_report_var.configure(
+                                text="Invalid OTP. Please try again."
+                            )
+                            ctk_report_var.place(x=20, y=336)
+                            ctk_report_var.after(3000, ctk_report_var.place_forget)
+
+                        if otp_validated and len(curr_otp.get()) == 10:
+
+                            email_object.stop_timer(_otp_countdown)
+
+                            ctk_report_var.configure(
+                                text="Verification successful. Redirecting..."
+                            )
+                            ctk_report_var.place(x=20, y=336)
+                            ctk_report_var.after(2000, ctk_report_var.place_forget)
+
+                            if_send_mail_and_validate_otp_container_frame_admin_sign_in.after(
+                                2000,
+                                lambda: (
+                                    _password_reset(),
+                                    if_send_mail_and_validate_otp_container_frame_admin_sign_in.place_forget(),
+                                    if_send_mail_and_validate_otp_container_frame_admin_sign_in.destroy(),
+                                ),
+                            )
+
+                    curr_otp: customtkinter.StringVar = customtkinter.StringVar()
+                    curr_otp.trace_add("write", validate_otp)
+
+                    __otp_code = customtkinter.CTkEntry(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        placeholder_text="XXXXXXXXXX",
+                        width=140,
+                        height=30,
+                        font=("Consolas", 16),
+                        fg_color="transparent",
+                        border_width=1,
+                        border_color="#FFFFFF",
+                        corner_radius=6,
+                        justify="center",
+                    )
+                    __otp_code.place(x=80, y=264)
+
+                    _otp_countdown: customtkinter.CTkLabel = customtkinter.CTkLabel(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        text="",
+                        font=("Roboto", 10),
+                        height=12,
+                        width=32,  # 26
+                        text_color="#FFFFFF",
+                    )
+                    _otp_countdown.place(x=134, y=257)
+
+                    email_object.start_timer(
+                        timer_widget=_otp_countdown,
+                        report_widget=(ctk_report_var, 20, 336),
+                        resend_callback=mail_thread,
+                    )
+
+                    __otp_code.bind(
+                        "<FocusIn>",
+                        lambda event: __otp_code.configure(textvariable=curr_otp),
+                    )
+
+                    __otp_code.bind(
+                        "<FocusOut>",
+                        lambda event: __otp_code.configure(textvariable=None)
+                        or __otp_code.unbind("<FocusIn>"),
+                    )
+
+                    btn__send_mail_and_validate: customtkinter.CTkButton = (
+                        customtkinter.CTkButton(
+                            if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                            text="",
+                            width=0,  # 28
+                            height=0,  # 28
+                            fg_color="transparent",
+                            hover=False,
+                            image=customtkinter.CTkImage(
+                                light_image=assets.icons.material.arrow_back,
+                                dark_image=assets.icons.material.arrow_back,
+                                size=(20, 20),
+                            ),
+                            command=lambda: (
+                                email_object.stop_timer(_otp_countdown),
+                                self.temp_ctk_frame_instance.place(x=3, y=3),
+                                if_send_mail_and_validate_otp_container_frame_admin_sign_in.destroy(),
+                            ),
+                        )
+                    )
+                    btn__send_mail_and_validate.place(x=20, y=352)
+
                 def _recovery_confirmation_state_emailotp(_email: str) -> None:
 
                     if_emailotp_confirmation_state_container_frame_admin_sign_in: (
@@ -286,6 +507,10 @@ secure OTP verification.""",
                     )
                     if_emailotp_confirmation_state_container_frame_admin_sign_in.place(
                         x=3, y=3
+                    )
+
+                    self.temp_ctk_frame_instance = (
+                        if_emailotp_confirmation_state_container_frame_admin_sign_in
                     )
 
                     customtkinter.CTkLabel(
@@ -398,7 +623,6 @@ your administrator account.""",
                         command=lambda: (
                             if_emailotp_container_frame_admin_sign_in.place(x=3, y=3),
                             if_emailotp_confirmation_state_container_frame_admin_sign_in.place_forget(),
-                            if_emailotp_confirmation_state_container_frame_admin_sign_in.destroy(),
                         ),
                     )
                     btn__back_if_emailotp_confirmation_state.place(x=20, y=352)
@@ -416,6 +640,28 @@ your administrator account.""",
                             light_image=assets.icons.material.arrow_forward,
                             dark_image=assets.icons.material.arrow_forward,
                             size=(20, 20),
+                        ),
+                        command=lambda: (
+                            (
+                                send_mail_and_validate_otp(_email),
+                                if_emailotp_confirmation_state_container_frame_admin_sign_in.place_forget(),
+                            )
+                            if utils.connection.is_connected()
+                            else (
+                                no_internet_connection_warning := customtkinter.CTkLabel(
+                                    if_emailotp_confirmation_state_container_frame_admin_sign_in,
+                                    text="No internet connection.\nPlease connect to the internet and try again.",
+                                    text_color="#FFFFFF",
+                                    font=("Segoe UI", 8),
+                                    width=0,  # 160
+                                    height=28,
+                                ),
+                                no_internet_connection_warning.place(x=70, y=352),
+                                no_internet_connection_warning.after(
+                                    3000,
+                                    no_internet_connection_warning.place_forget,
+                                ),
+                            )
                         ),
                     )
                     btn__forward_if_emailotp_confirmation_state.place(x=252, y=352)
