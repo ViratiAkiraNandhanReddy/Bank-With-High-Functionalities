@@ -47,7 +47,7 @@ class icons:
         )
 
         first_page: Image.Image = Image.open(
-            root / "assets" / " icons" / "material-icons" / "first_page.png"
+            root / "assets" / "icons" / "material-icons" / "first_page.png"
         )
 
         groups: Image.Image = Image.open(
