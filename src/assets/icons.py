@@ -46,6 +46,10 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "exit_to_app.png"
         )
 
+        first_page: Image.Image = Image.open(
+            root / "assets" / " icons" / "material-icons" / "first_page.png"
+        )
+
         groups: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "groups.png"
         )
@@ -98,8 +102,16 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "shield_lock.png"
         )
 
+        verified_user: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "verified_user.png"
+        )
+
         wifi_off: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "wifi_off.png"
+        )
+
+        wifi: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "wifi.png"
         )
 
     class platform:
