@@ -236,7 +236,78 @@ class more_actions_interface:
 
             def _password_reset() -> None:
 
-                pass
+                frame__recovery_verified_frame: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        self.internal_frame_00_more_actions,
+                        width=300,
+                        height=400,
+                        fg_color="transparent",
+                    )
+                )
+                frame__password_reset_frame: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        self.internal_frame_00_more_actions,
+                        width=300,
+                        height=400,
+                        fg_color="transparent",
+                    )
+                )
+                frame__recovery_completed_frame: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        self.internal_frame_00_more_actions,
+                        width=300,
+                        height=400,
+                        fg_color="transparent",
+                    )
+                )
+
+                frame__recovery_verified_frame.place(x=3, y=3)
+
+                ### --- ---  frame__recovery_verified_frame  --- --- ###
+
+                btn_exit_to_sign_in: customtkinter.CTkButton = customtkinter.CTkButton(
+                    frame__recovery_verified_frame,
+                    text="",
+                    width=0,
+                    height=0,
+                    fg_color="transparent",
+                    hover=False,
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.first_page,
+                        dark_image=assets.icons.material.first_page,
+                        size=(20, 20),
+                    ),
+                    command=lambda: (
+                        self.if_00_container_frame_admin_sign_in.place(x=3, y=3),
+                        frame__recovery_verified_frame.place_forget(),
+                        frame__recovery_verified_frame.destroy(),
+                    ),
+                )
+                btn_exit_to_sign_in.place(x=20, y=352)
+
+                ### --- ---  frame__password_reset_frame  --- --- ###
+
+                btn_exit_to_sign_in: customtkinter.CTkButton = customtkinter.CTkButton(
+                    frame__password_reset_frame,
+                    text="",
+                    width=0,
+                    height=0,
+                    fg_color="transparent",
+                    hover=False,
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.first_page,
+                        dark_image=assets.icons.material.first_page,
+                        size=(20, 20),
+                    ),
+                    command=lambda: (
+                        self.if_00_container_frame_admin_sign_in.place(x=3, y=3),
+                        frame__password_reset_frame.place_forget(),
+                        frame__password_reset_frame.destroy(),
+                    ),
+                )
+                btn_exit_to_sign_in.place(x=20, y=352)
+
+                ### --- ---  frame__recovery_completed_frame  --- --- ###
 
             def opted_email_verification_via_otp() -> None:
 
