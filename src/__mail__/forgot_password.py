@@ -51,8 +51,8 @@ class forgot_password:
 
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as gmail:
 
-                # gmail.login(f"{SMTP__MAIL_ADDRESS}", f"{SMTP__APP_PASSWORD}")
-                # gmail.send_message(self.email)
+                gmail.login(f"{SMTP__MAIL_ADDRESS}", f"{SMTP__APP_PASSWORD}")
+                gmail.send_message(self.email)
 
                 self.sent_at = datetime.datetime.now()
 
