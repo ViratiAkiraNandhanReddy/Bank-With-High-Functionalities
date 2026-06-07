@@ -3,7 +3,7 @@ Docstring for main
 """
 
 import datetime
-from src import *
+from src import CONFIGURATION_JSON
 from src.sign_in import sign_in_interface
 from src.__etc__.activation import activation
 

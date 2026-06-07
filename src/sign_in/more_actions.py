@@ -337,6 +337,16 @@ secure OTP verification.""",
                         btn__resend_otp.configure(state="disabled")
                         _timer(btn__resend_otp, 30)
 
+                        email_object.stop_timer(_otp_countdown)
+
+                        email_object.start_timer(
+                            timer_widget=_otp_countdown,
+                            report_widget=(ctk_report_var, 20, 336),
+                            resend_callback=mail_thread,
+                        )
+
+                        mail_thread()
+
                     btn__resend_otp = customtkinter.CTkButton(
                         if_send_mail_and_validate_otp_container_frame_admin_sign_in,
                         text="Resend OTP",
@@ -382,17 +392,42 @@ continue account recovery.""",
                         width=260,
                     ).place(x=20, y=169)
 
-                    otp_validated = False
-
                     def validate_otp(*args) -> None:
 
-                        nonlocal otp_validated
+                        otp_validated = False
 
                         curr_otp.set(curr_otp.get().upper()[:10])
 
                         if len(curr_otp.get()) == 10:
 
                             otp_validated = email_object.validate_code(curr_otp.get())
+
+                        if not otp_validated and len(curr_otp.get()) == 10:
+
+                            ctk_report_var.configure(
+                                text="Invalid OTP. Please try again."
+                            )
+                            ctk_report_var.place(x=20, y=336)
+                            ctk_report_var.after(3000, ctk_report_var.place_forget)
+
+                        if otp_validated and len(curr_otp.get()) == 10:
+
+                            email_object.stop_timer(_otp_countdown)
+
+                            ctk_report_var.configure(
+                                text="Verification successful. Redirecting..."
+                            )
+                            ctk_report_var.place(x=20, y=336)
+                            ctk_report_var.after(2000, ctk_report_var.place_forget)
+
+                            if_send_mail_and_validate_otp_container_frame_admin_sign_in.after(
+                                2000,
+                                lambda: (
+                                    _password_reset(),
+                                    if_send_mail_and_validate_otp_container_frame_admin_sign_in.place_forget(),
+                                    if_send_mail_and_validate_otp_container_frame_admin_sign_in.destroy(),
+                                ),
+                            )
 
                     curr_otp: customtkinter.StringVar = customtkinter.StringVar()
                     curr_otp.trace_add("write", validate_otp)
@@ -452,8 +487,9 @@ continue account recovery.""",
                                 size=(20, 20),
                             ),
                             command=lambda: (
+                                email_object.stop_timer(_otp_countdown),
                                 self.temp_ctk_frame_instance.place(x=3, y=3),
-                                if_send_mail_and_validate_otp_container_frame_admin_sign_in.place_forget(),
+                                if_send_mail_and_validate_otp_container_frame_admin_sign_in.destroy(),
                             ),
                         )
                     )
