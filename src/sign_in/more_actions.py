@@ -285,6 +285,28 @@ class more_actions_interface:
                 )
                 btn_exit_to_sign_in.place(x=20, y=352)
 
+                continue_to_frame__password_reset_frame: customtkinter.CTkButton = (
+                    customtkinter.CTkButton(
+                        frame__recovery_verified_frame,
+                        text="",
+                        width=0,  # 28
+                        height=0,  # 28
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=assets.icons.material.arrow_forward,
+                            dark_image=assets.icons.material.arrow_forward,
+                            size=(20, 20),
+                        ),
+                        command=lambda: (
+                            frame__password_reset_frame.place(x=3, y=3),
+                            frame__recovery_verified_frame.place_forget(),
+                            frame__recovery_verified_frame.destroy(),
+                        ),
+                    )
+                )
+                continue_to_frame__password_reset_frame.place(x=252, y=352)
+
                 ### --- ---  frame__password_reset_frame  --- --- ###
 
                 btn_exit_to_sign_in: customtkinter.CTkButton = customtkinter.CTkButton(
