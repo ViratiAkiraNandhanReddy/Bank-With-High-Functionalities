@@ -331,6 +331,26 @@ class more_actions_interface:
 
                 ### --- ---  frame__recovery_completed_frame  --- --- ###
 
+                continue_to_sign_in_frame: customtkinter.CTkButton = (
+                    customtkinter.CTkButton(
+                        frame__recovery_completed_frame,
+                        text="",
+                        width=0,  # 28
+                        height=0,  # 28
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=assets.icons.material.arrow_forward,
+                            dark_image=assets.icons.material.arrow_forward,
+                            size=(20, 20),
+                        ),
+                        command=self.if_00_container_frame_admin_sign_in.place(
+                            x=3, y=3
+                        ),
+                    )
+                )
+                continue_to_sign_in_frame.place(x=252, y=352)
+
             def opted_email_verification_via_otp() -> None:
 
                 self.if_01_container_frame_admin_sign_in.place_forget()
