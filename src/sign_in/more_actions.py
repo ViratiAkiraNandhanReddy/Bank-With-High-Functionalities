@@ -341,6 +341,150 @@ the password reset process is completed.""",
 
                 ### --- ---  frame__password_reset_frame  --- --- ###
 
+                customtkinter.CTkLabel(
+                    frame__password_reset_frame,
+                    text="Administrator Password Reset",
+                    font=("Segoe UI", 16, "bold"),
+                    text_color="#FFFFFF",
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.lock_person,
+                        dark_image=assets.icons.material.lock_person,
+                        size=(42, 42),
+                    ),
+                    compound="top",
+                    height=0,
+                    width=260,
+                ).place(x=20, y=68)
+
+                container_frame__new_password: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        frame__password_reset_frame,
+                        width=260,
+                        height=40,
+                        fg_color="transparent",
+                        border_width=1,
+                        border_color="#FFFFFF",
+                        corner_radius=6,
+                    )
+                )
+
+                container_frame__new_password_label: customtkinter.CTkLabel = (
+                    customtkinter.CTkLabel(
+                        frame__password_reset_frame,
+                        text="new password",
+                        font=("Roboto", 10),
+                        height=12,
+                        width=71,  # 65
+                        text_color="#FFFFFF",
+                    )
+                )
+
+                customtkinter.CTkLabel(
+                    container_frame__new_password,
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.password,
+                        dark_image=assets.icons.material.password,
+                        size=(20, 20),
+                    ),
+                    text="",
+                ).place(x=8, rely=0.5, anchor="w")
+
+                container_frame__new_password.place(x=20, y=200)
+
+                __new_password: customtkinter.CTkEntry = customtkinter.CTkEntry(
+                    container_frame__new_password,
+                    placeholder_text="new password",
+                    width=260 - 40,
+                    height=40 - 8,
+                    corner_radius=0,
+                    border_width=0,
+                    fg_color="transparent",
+                    font=("Roboto", 16),
+                )
+                __new_password.place(x=28, rely=0.5, anchor="w")
+
+                __new_password.bind(
+                    "<FocusIn>",
+                    lambda event: (
+                        container_frame__new_password_label.place(x=40, y=193)
+                        if not __new_password.get()
+                        else None
+                    ),
+                )
+                __new_password.bind(
+                    "<FocusOut>",
+                    lambda event: (
+                        container_frame__new_password_label.place_forget()
+                        if not __new_password.get()
+                        else None
+                    ),
+                )
+
+                container_frame__confirm_password: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        frame__password_reset_frame,
+                        width=260,
+                        height=40,
+                        fg_color="transparent",
+                        border_width=1,
+                        border_color="#FFFFFF",
+                        corner_radius=6,
+                    )
+                )
+
+                container_frame__confirm_password_label: customtkinter.CTkLabel = (
+                    customtkinter.CTkLabel(
+                        frame__password_reset_frame,
+                        text="confirm password",
+                        font=("Roboto", 10),
+                        height=12,
+                        width=86,  # 80
+                        text_color="#FFFFFF",
+                    )
+                )
+
+                customtkinter.CTkLabel(
+                    container_frame__confirm_password,
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.password,
+                        dark_image=assets.icons.material.password,
+                        size=(20, 20),
+                    ),
+                    text="",
+                ).place(x=8, rely=0.5, anchor="w")
+
+                container_frame__confirm_password.place(x=20, y=260)
+
+                __confirm_password: customtkinter.CTkEntry = customtkinter.CTkEntry(
+                    container_frame__confirm_password,
+                    placeholder_text="confirm password",
+                    width=260 - 40,
+                    height=40 - 8,
+                    corner_radius=0,
+                    border_width=0,
+                    fg_color="transparent",
+                    font=("Roboto", 16),
+                    show="•",
+                )
+                __confirm_password.place(x=28, rely=0.5, anchor="w")
+
+                __confirm_password.bind(
+                    "<FocusIn>",
+                    lambda event: (
+                        container_frame__confirm_password_label.place(x=40, y=253)
+                        if not __confirm_password.get()
+                        else None
+                    ),
+                )
+                __confirm_password.bind(
+                    "<FocusOut>",
+                    lambda event: (
+                        container_frame__confirm_password_label.place_forget()
+                        if not __confirm_password.get()
+                        else None
+                    ),
+                )
+
                 btn_exit_to_sign_in: customtkinter.CTkButton = customtkinter.CTkButton(
                     frame__password_reset_frame,
                     text="",
