@@ -265,6 +265,38 @@ class more_actions_interface:
 
                 ### --- ---  frame__recovery_verified_frame  --- --- ###
 
+                customtkinter.CTkLabel(
+                    frame__recovery_verified_frame,
+                    text="Administrator Identity Verified",
+                    font=("Segoe UI", 16, "bold"),
+                    text_color="#FFFFFF",
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.verified_user,
+                        dark_image=assets.icons.material.verified_user,
+                        size=(42, 42),
+                    ),
+                    compound="top",
+                    height=0,  # 63
+                    width=260,  # 235
+                ).place(x=20, y=53)
+
+                customtkinter.CTkLabel(
+                    frame__recovery_verified_frame,
+                    text="""Your administrator identity has been 
+successfully verified using the selected
+recovery method.
+
+You may now proceed to create a new 
+administrator password.
+
+This recovery session remains active until 
+the password reset process is completed.""",
+                    font=("Roboto", 11),
+                    text_color="#FFFFFF",
+                    height=0,  # 117
+                    width=260,  # 214
+                ).place(x=20, y=175)
+
                 btn_exit_to_sign_in: customtkinter.CTkButton = customtkinter.CTkButton(
                     frame__recovery_verified_frame,
                     text="",
@@ -344,8 +376,10 @@ class more_actions_interface:
                             dark_image=assets.icons.material.arrow_forward,
                             size=(20, 20),
                         ),
-                        command=self.if_00_container_frame_admin_sign_in.place(
-                            x=3, y=3
+                        command=lambda: (
+                            self.if_00_container_frame_admin_sign_in.place(x=3, y=3),
+                            frame__recovery_completed_frame.place_forget(),
+                            frame__recovery_completed_frame.destroy(),
                         ),
                     )
                 )
