@@ -234,7 +234,7 @@ class more_actions_interface:
 
             _is_internet_connection_available: bool = utils.connection.is_connected()
 
-            def _password_reset() -> None:
+            def _password_reset(username: str) -> None:
 
                 frame__recovery_verified_frame: customtkinter.CTkFrame = (
                     customtkinter.CTkFrame(
@@ -341,7 +341,7 @@ the password reset process is completed.""",
 
                 ### --- ---  frame__password_reset_frame  --- --- ###
 
-                def validate_new_passwords() -> None:
+                def validate_new_passwords_and_reset() -> None:
 
                     new_password: str = __new_password.get().strip()
                     confirm_password: str = __confirm_password.get().strip()
@@ -463,7 +463,15 @@ the password reset process is completed.""",
 
                     else:
 
-                        pass
+                        is_password_changed = (
+                            SERVER.accountactions().change_admin_password(
+                                username, new_password
+                            )
+                        )
+
+                        frame__recovery_completed_frame.place(x=3, y=3)
+                        frame__password_reset_frame.place_forget()
+                        frame__password_reset_frame.destroy()
 
                 customtkinter.CTkLabel(
                     frame__password_reset_frame,
@@ -641,7 +649,7 @@ the password reset process is completed.""",
                             dark_image=assets.icons.material.arrow_forward,
                             size=(20, 20),
                         ),
-                        command=validate_new_passwords,
+                        command=validate_new_passwords_and_reset,
                     )
                 )
                 continue_to_frame__recovery_completed_frame.place(x=252, y=352)
@@ -710,7 +718,7 @@ secure OTP verification.""",
                     width=260,
                 ).place(x=20, y=169)
 
-                def send_mail_and_validate_otp(_email: str) -> None:
+                def send_mail_and_validate_otp(username, _email: str) -> None:
 
                     def _timer(
                         widget: customtkinter.CTkButton,
@@ -855,7 +863,7 @@ continue account recovery.""",
                             if_send_mail_and_validate_otp_container_frame_admin_sign_in.after(
                                 2000,
                                 lambda: (
-                                    _password_reset(),
+                                    _password_reset(username),
                                     if_send_mail_and_validate_otp_container_frame_admin_sign_in.place_forget(),
                                     if_send_mail_and_validate_otp_container_frame_admin_sign_in.destroy(),
                                 ),
@@ -927,7 +935,9 @@ continue account recovery.""",
                     )
                     btn__send_mail_and_validate.place(x=20, y=352)
 
-                def _recovery_confirmation_state_emailotp(_email: str) -> None:
+                def _recovery_confirmation_state_emailotp(
+                    username: str, _email: str
+                ) -> None:
 
                     if_emailotp_confirmation_state_container_frame_admin_sign_in: (
                         customtkinter.CTkFrame
@@ -1075,7 +1085,7 @@ your administrator account.""",
                         ),
                         command=lambda: (
                             (
-                                send_mail_and_validate_otp(_email),
+                                send_mail_and_validate_otp(username, _email),
                                 if_emailotp_confirmation_state_container_frame_admin_sign_in.place_forget(),
                             )
                             if utils.connection.is_connected()
@@ -1224,7 +1234,7 @@ your administrator account.""",
                         return
 
                     else:
-                        _recovery_confirmation_state_emailotp(email_address)
+                        _recovery_confirmation_state_emailotp(username, email_address)
                         if_emailotp_container_frame_admin_sign_in.place_forget()
 
                 container_frame__username_admin_reset_password: (
@@ -1566,7 +1576,7 @@ to continue secure recovery verification.""",
                         return
 
                     else:
-                        _password_reset()
+                        _password_reset(username)
                         if_backupcode_container_frame_admin_sign_in.place_forget()
                         if_backupcode_container_frame_admin_sign_in.destroy()
 
