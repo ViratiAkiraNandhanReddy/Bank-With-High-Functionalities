@@ -469,6 +469,47 @@ the password reset process is completed.""",
                             )
                         )
 
+                        if is_password_changed:
+
+                            title_recovery_completed.configure(
+                                image=customtkinter.CTkImage(
+                                    light_image=assets.icons.material.check_circle,
+                                    dark_image=assets.icons.material.check_circle,
+                                    size=(64, 64),
+                                ),
+                                text="Password Reset Successful",
+                            )
+
+                            desc_recovery_completed.configure(
+                                text="""Your password has been successfully updated
+and your account is now secured with the 
+new password. 
+                                                              
+You can continue to the sign-in page and 
+access your account using your
+new credentials."""
+                            )
+
+                        else:
+
+                            title_recovery_completed.configure(
+                                image=customtkinter.CTkImage(
+                                    light_image=assets.icons.material.error,
+                                    dark_image=assets.icons.material.error,
+                                    size=(64, 64),
+                                ),
+                                text="Password Reset Failed",
+                            )
+                            desc_recovery_completed.configure(
+                                text="""We were unable to update your password at
+this time. No changes have been made to 
+your account. Please try again later.
+                                                              
+If the issue persists, please contact 
+support for further assistance in 
+resolving the problem."""
+                            )
+
                         frame__recovery_completed_frame.place(x=3, y=3)
                         frame__password_reset_frame.place_forget()
                         frame__password_reset_frame.destroy()
@@ -655,6 +696,31 @@ the password reset process is completed.""",
                 continue_to_frame__recovery_completed_frame.place(x=252, y=352)
 
                 ### --- ---  frame__recovery_completed_frame  --- --- ###
+
+                title_recovery_completed: customtkinter.CTkLabel = (
+                    customtkinter.CTkLabel(
+                        frame__recovery_completed_frame,
+                        text="",
+                        font=("Segoe UI", 16, "bold"),
+                        text_color="#FFFFFF",
+                        compound="top",
+                        height=0,  # 85
+                        width=260,
+                    )
+                )
+                title_recovery_completed.place(x=20, y=50)
+
+                desc_recovery_completed: customtkinter.CTkLabel = (
+                    customtkinter.CTkLabel(
+                        frame__recovery_completed_frame,
+                        text="",
+                        font=("Roboto", 11),
+                        text_color="#FFFFFF",
+                        height=165,
+                        width=260,
+                    )
+                )
+                desc_recovery_completed.place(x=20, y=186)
 
                 continue_to_sign_in_frame: customtkinter.CTkButton = (
                     customtkinter.CTkButton(
