@@ -26,6 +26,10 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "campaign.png"
         )
 
+        check_circle: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "check_circle.png"
+        )
+
         chevron_backward: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "chevron_backward.png"
         )
@@ -40,6 +44,10 @@ class icons:
 
         developer_mode_tv: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "developer_mode_tv.png"
+        )
+
+        error: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "error.png"
         )
 
         exit_to_app: Image.Image = Image.open(
