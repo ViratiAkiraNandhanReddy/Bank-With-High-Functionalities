@@ -341,6 +341,130 @@ the password reset process is completed.""",
 
                 ### --- ---  frame__password_reset_frame  --- --- ###
 
+                def validate_new_passwords() -> None:
+
+                    new_password: str = __new_password.get().strip()
+                    confirm_password: str = __confirm_password.get().strip()
+
+                    __new_password.bind(
+                        "<KeyPress>",
+                        lambda event: container_frame__new_password.configure(
+                            border_color="#FFFFFF"
+                        )
+                        or container_frame__new_password_label.configure(
+                            text_color="#FFFFFF"
+                        )
+                        or container_frame__new_password_label.configure(
+                            text="new password",
+                            width=71,  # 65
+                        )
+                        or __new_password.unbind("<KeyPress>"),
+                    )
+                    __confirm_password.bind(
+                        "<KeyPress>",
+                        lambda event: container_frame__confirm_password.configure(
+                            border_color="#FFFFFF"
+                        )
+                        or container_frame__confirm_password_label.configure(
+                            text_color="#FFFFFF"
+                        )
+                        or container_frame__confirm_password_label.configure(
+                            text="confirm password",
+                            width=86,  # 80
+                        )
+                        or __confirm_password.unbind("<KeyPress>"),
+                    )
+
+                    if (not new_password) and (
+                        confirm_password
+                    ):  # new_password: false -- confirm_password: true
+
+                        container_frame__new_password.configure(border_color="#FF0000")
+                        container_frame__new_password_label.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__new_password_label.configure(
+                            text="invalid new password", width=101  # 95
+                        )
+
+                        return
+
+                    elif new_password and (
+                        not confirm_password
+                    ):  # new_password: true -- confirm_password: false
+
+                        container_frame__confirm_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__confirm_password_label.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__confirm_password_label.configure(
+                            text="invalid confirm password", width=116  # 110
+                        )
+
+                        return
+
+                    elif (not new_password) and (
+                        not confirm_password
+                    ):  # new_password: false -- confirm_password: false
+
+                        container_frame__new_password.configure(border_color="#FF0000")
+                        container_frame__confirm_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__new_password_label.configure(
+                            text="invalid new password", width=101
+                        )
+
+                        container_frame__new_password_label.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__confirm_password_label.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__confirm_password_label.configure(
+                            text="invalid confirm password", width=116
+                        )
+
+                        return
+
+                    elif (
+                        len(new_password) < 8
+                    ):  # new_password: true -- confirm_password: true [less than 8 characters]
+
+                        container_frame__new_password.configure(border_color="#FF0000")
+                        container_frame__new_password_label.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__new_password_label.configure(
+                            text="password must be at least 8 characters long",
+                            width=197,
+                        )
+
+                        return
+
+                    elif (
+                        new_password != confirm_password
+                    ):  # new_password: true -- confirm_password: true [mismatched]
+
+                        container_frame__confirm_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__confirm_password_label.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__confirm_password_label.configure(
+                            text="confirm password must match the new password",
+                            width=226,
+                        )
+
+                        return
+
+                    else:
+
+                        pass
+
                 customtkinter.CTkLabel(
                     frame__password_reset_frame,
                     text="Administrator Password Reset",
@@ -464,7 +588,6 @@ the password reset process is completed.""",
                     border_width=0,
                     fg_color="transparent",
                     font=("Roboto", 16),
-                    show="•",
                 )
                 __confirm_password.place(x=28, rely=0.5, anchor="w")
 
@@ -504,6 +627,24 @@ the password reset process is completed.""",
                     ),
                 )
                 btn_exit_to_sign_in.place(x=20, y=352)
+
+                continue_to_frame__recovery_completed_frame: customtkinter.CTkButton = (
+                    customtkinter.CTkButton(
+                        frame__password_reset_frame,
+                        text="",
+                        width=0,  # 28
+                        height=0,  # 28
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=assets.icons.material.arrow_forward,
+                            dark_image=assets.icons.material.arrow_forward,
+                            size=(20, 20),
+                        ),
+                        command=validate_new_passwords,
+                    )
+                )
+                continue_to_frame__recovery_completed_frame.place(x=252, y=352)
 
                 ### --- ---  frame__recovery_completed_frame  --- --- ###
 
