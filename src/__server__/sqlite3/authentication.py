@@ -1,6 +1,8 @@
-from ..__base__ import UserAuthenticationBase, AdminAuthenticationBase
 from ... import _uuids
+from ._connection import connection
+from ..__base__ import UserAuthenticationBase, AdminAuthenticationBase
 
+cursor = connection.cursor()
 
 class UserAuthentication(UserAuthenticationBase):
 
