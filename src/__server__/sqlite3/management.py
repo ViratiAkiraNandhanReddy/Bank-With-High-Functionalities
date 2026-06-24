@@ -39,7 +39,17 @@ class UserManagement(UserManagementBase):
         return cursor.rowcount > 0
 
     @classmethod
-    def delete(cls, username_or_uuid: str, password: str) -> bool: ...
+    def delete(cls, username_or_uuid: str, password: str) -> bool:
+
+        cursor.execute(
+            """
+                DELETE FROM users WHERE username = ?
+                """,
+            (username_or_uuid,),
+        )
+        connection.commit()
+
+        return cursor.rowcount > 0
 
 
 class AdminManagement(AdminManagementBase):
