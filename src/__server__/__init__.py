@@ -2,6 +2,7 @@ import os
 import json
 import uuid
 import logging
+from .sqlite3 import SERVER as SQLite3Server
 
 DIR_PATH: str = str(os.environ.get("LOCALAPPDATA")) + r"\Bank-With-High-Functionalities"
 
@@ -10,9 +11,12 @@ MYSQL__DB_PASSWORD: str | None = os.getenv("MYSQL__DB_PASSWORD")
 
 class _uuids:
 
-    UUID_NAMESPACE_BWHF = uuid.UUID(
-        "71da99dc-ce4e-575e-a319-3083e9265046"
-    )  # pre-generated using uuid.uuid5(uuid.NAMESPACE_URL, "https://viratiakiranandhanreddy.github.io/Bank-With-High-Functionalities/")
+    UUID_NAMESPACE_BWHF = uuid.UUID("71da99dc-ce4e-575e-a319-3083e9265046")
+    # pre-generated using:
+    # uuid.uuid5(
+    #     uuid.NAMESPACE_URL,
+    #     "https://viratiakiranandhanreddy.github.io/Bank-With-High-Functionalities/",
+    # )
 
     @classmethod
     def generate_uuid5(cls, name: str) -> str:
@@ -45,6 +49,6 @@ match CONFIGURATION_JSON.get("DATABASE TYPE"):
     case "MySQL":
         from .MySQL import SERVER
     case "SQLite3":
-        from .SQLite3 import SERVER
+        SERVER = SQLite3Server
 
 __all__ = ["SERVER", "_uuids"]
