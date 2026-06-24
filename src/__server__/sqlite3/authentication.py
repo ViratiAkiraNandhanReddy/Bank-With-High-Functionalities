@@ -50,7 +50,16 @@ class UserAuthentication(UserAuthenticationBase):
         return cursor.fetchone()[0] == backup_code
 
     @classmethod
-    def email_address(cls, username_or_uuid: str, email_address: str) -> bool: ...
+    def email_address(cls, username_or_uuid: str, email_address: str) -> bool:
+
+        cursor.execute(
+            """
+            SELECT email FROM users WHERE username = ?
+            """,
+            (username_or_uuid,),
+        )
+
+        return cursor.fetchone()[0] == email_address
 
 
 class AdminAuthentication(AdminAuthenticationBase):
@@ -83,4 +92,13 @@ class AdminAuthentication(AdminAuthenticationBase):
         return cursor.fetchone()[0] == backup_code
 
     @classmethod
-    def email_address(cls, username: str, email_address: str) -> bool: ...
+    def email_address(cls, username: str, email_address: str) -> bool:
+
+        cursor.execute(
+            """
+            SELECT email FROM ADMINS WHERE username = ?
+            """,
+            (username,),
+        )
+
+        return cursor.fetchone()[0] == email_address
