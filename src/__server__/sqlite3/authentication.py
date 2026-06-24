@@ -38,7 +38,16 @@ class UserAuthentication(UserAuthenticationBase):
         )
 
     @classmethod
-    def backup_code(cls, username_or_uuid: str, backup_code: str) -> bool: ...
+    def backup_code(cls, username_or_uuid: str, backup_code: str) -> bool:
+
+        cursor.execute(
+            """
+                SELECT backup_code FROM users WHERE username = ?
+                """,
+            (username_or_uuid,),
+        )
+
+        return cursor.fetchone()[0] == backup_code
 
     @classmethod
     def email_address(cls, username_or_uuid: str, email_address: str) -> bool: ...
@@ -62,7 +71,16 @@ class AdminAuthentication(AdminAuthenticationBase):
         )
 
     @classmethod
-    def backup_code(cls, username: str, backup_code: str) -> bool: ...
+    def backup_code(cls, username: str, backup_code: str) -> bool:
+
+        cursor.execute(
+            """
+                SELECT backup_code FROM ADMINS WHERE username = ?
+                """,
+            (username,),
+        )
+
+        return cursor.fetchone()[0] == backup_code
 
     @classmethod
     def email_address(cls, username: str, email_address: str) -> bool: ...
