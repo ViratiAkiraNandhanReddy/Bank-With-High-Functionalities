@@ -25,7 +25,18 @@ class UserManagement(UserManagementBase):
         return cursor.rowcount > 0
 
     @classmethod
-    def change_username(cls, old_username_or_uuid: str, new_username: str) -> bool: ...
+    def change_username(cls, old_username_or_uuid: str, new_username: str) -> bool:
+
+        cursor.execute(
+            """
+                UPDATE users SET username = ? WHERE username = ?
+                """,
+            (new_username, old_username_or_uuid),
+        )
+
+        connection.commit()
+
+        return cursor.rowcount > 0
 
     @classmethod
     def delete(cls, username_or_uuid: str, password: str) -> bool: ...
