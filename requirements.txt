@@ -1,7 +1,7 @@
 hPyT==1.4.0
 pillow==12.1.1
 pywinstyles==1.8
-python-dotenv==1.2.1
+python-dotenv==1.2.2
 customtkinter==5.2.2
 CaesarCipher.extended
 mysql-connector-python
