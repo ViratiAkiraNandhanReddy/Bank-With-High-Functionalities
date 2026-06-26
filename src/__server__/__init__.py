@@ -2,7 +2,7 @@ import os
 import json
 import uuid
 import logging
-from .sqlite3 import SERVER as SQLite3Server
+from ._sqlite3 import SERVER as SQLite3Server
 
 DIR_PATH: str = str(os.environ.get("LOCALAPPDATA")) + r"\Bank-With-High-Functionalities"
 
