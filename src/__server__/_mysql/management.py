@@ -10,7 +10,7 @@ class UserManagement(UserManagementBase):
 
     @classmethod
     def change_password(cls, username_or_uuid: str, new_password: str) -> bool: ...
-    
+
     @classmethod
     def change_username(cls, old_username_or_uuid: str, new_username: str) -> bool: ...
 
