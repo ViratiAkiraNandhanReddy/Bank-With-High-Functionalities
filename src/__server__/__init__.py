@@ -1,11 +1,8 @@
 import json
 import uuid
 import logging
-from os import getenv
 from ..utils import root
 from ._sqlite3 import SERVER as SQLite3Server
-
-MYSQL__DB_PASSWORD: str | None = getenv("MYSQL__DB_PASSWORD")
 
 
 class _uuids:
