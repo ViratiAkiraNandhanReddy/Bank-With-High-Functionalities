@@ -1,12 +1,8 @@
-import os
 import json
 import uuid
 import logging
+from ..utils import root
 from ._sqlite3 import SERVER as SQLite3Server
-
-DIR_PATH: str = str(os.environ.get("LOCALAPPDATA")) + r"\Bank-With-High-Functionalities"
-
-MYSQL__DB_PASSWORD: str | None = os.getenv("MYSQL__DB_PASSWORD")
 
 
 class _uuids:
@@ -33,7 +29,7 @@ class _uuids:
 
 try:
 
-    with open(rf"{DIR_PATH}\database\config.json") as config:
+    with open(root / "database" / "config.json") as config:
         CONFIGURATION_JSON: dict = json.load(config)
 
 except FileNotFoundError, json.JSONDecodeError:
