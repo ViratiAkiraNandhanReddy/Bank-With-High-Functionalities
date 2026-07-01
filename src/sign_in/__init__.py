@@ -710,7 +710,7 @@ class sign_in_interface:
 
                 try:
 
-                    if SERVER.traversal().is_user_exists(username):
+                    if SERVER.lookup.user.exists(username):
 
                         self.window.withdraw()
                         dashboard_window = dashboard_interface.dashboard(
@@ -773,12 +773,8 @@ class sign_in_interface:
                 return
 
             elif (username and password) and (
-                (not SERVER.traversal().is_user_exists(username))
-                or (
-                    not SERVER.authentication().authenticate_password(
-                        username, password
-                    )
-                )
+                (not SERVER.lookup.user.exists(username))
+                or (not SERVER.authentication.user.password(username, password))
             ):  # username: true (not exists) -- password: true --[or]-- username: true (exists) -- password: true (wrong)
 
                 self.container_frame__username_sign_in.configure(border_color="#FF0000")
@@ -1046,7 +1042,7 @@ class sign_in_interface:
 
                     try:
 
-                        is_password_changed = SERVER.accountactions().change_password(
+                        is_password_changed = SERVER.management.user.change_password(
                             username_at_reset_password, new_password
                         )
 
@@ -1177,7 +1173,7 @@ class sign_in_interface:
 
             elif (
                 username_at_reset_password
-                and not SERVER.traversal().is_user_exists(username_at_reset_password)
+                and not SERVER.lookup.user.exists(username_at_reset_password)
             ) and user_security_code_at_reset_password:  # username: true (not exists) -- password: true
                 Username_Exists_Error = customtkinter.CTkLabel(
                     self.frame__reset_password,
@@ -1212,7 +1208,7 @@ class sign_in_interface:
                 auth__password_error.after(2000, auth__password_error.destroy)
 
             elif username_at_reset_password and (
-                not SERVER.authentication().authenticate_backup_code(
+                not SERVER.authentication.user.backup_code(
                     username_at_reset_password, user_security_code_at_reset_password
                 )
             ):  # username: true -- code: true (wrong)
