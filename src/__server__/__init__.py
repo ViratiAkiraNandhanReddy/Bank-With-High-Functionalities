@@ -2,6 +2,7 @@ import json
 import uuid
 import logging
 from ..utils import root
+from ._json import SERVER as JSONServer
 from ._mysql import SERVER as MySQLServer
 from ._sqlite3 import SERVER as SQLite3Server
 
@@ -42,7 +43,7 @@ except FileNotFoundError, json.JSONDecodeError:
 match CONFIGURATION_JSON.get("DATABASE TYPE"):
 
     case "JSON":
-        from .JSON import SERVER
+        SERVER = JSONServer
     case "MySQL":
         SERVER = MySQLServer
     case "SQLite3":
