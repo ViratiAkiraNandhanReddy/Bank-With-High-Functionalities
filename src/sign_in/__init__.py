@@ -775,7 +775,7 @@ class sign_in_interface:
             elif (username and password) and (
                 (not SERVER.lookup.user.exists(username))
                 or (
-                    not SERVER.authentication().authenticate_password(
+                    not SERVER.authentication.user.password(
                         username, password
                     )
                 )
@@ -1212,7 +1212,7 @@ class sign_in_interface:
                 auth__password_error.after(2000, auth__password_error.destroy)
 
             elif username_at_reset_password and (
-                not SERVER.authentication().authenticate_backup_code(
+                not SERVER.authentication.user.backup_code(
                     username_at_reset_password, user_security_code_at_reset_password
                 )
             ):  # username: true -- code: true (wrong)
