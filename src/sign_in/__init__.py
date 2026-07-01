@@ -774,11 +774,7 @@ class sign_in_interface:
 
             elif (username and password) and (
                 (not SERVER.lookup.user.exists(username))
-                or (
-                    not SERVER.authentication.user.password(
-                        username, password
-                    )
-                )
+                or (not SERVER.authentication.user.password(username, password))
             ):  # username: true (not exists) -- password: true --[or]-- username: true (exists) -- password: true (wrong)
 
                 self.container_frame__username_sign_in.configure(border_color="#FF0000")
@@ -1046,7 +1042,7 @@ class sign_in_interface:
 
                     try:
 
-                        is_password_changed = SERVER.accountactions().change_password(
+                        is_password_changed = SERVER.management.user.change_password(
                             username_at_reset_password, new_password
                         )
 
