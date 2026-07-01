@@ -1269,7 +1269,7 @@ your administrator account.""",
                     elif (username and email_address) and (
                         (not SERVER.lookup.admin.exists(username))
                         or (
-                            not SERVER.authentication().authenticate_admin_email_address(
+                            not SERVER.authentication.admin.email_address(
                                 username, email_address
                             )
                         )
@@ -1611,7 +1611,7 @@ to continue secure recovery verification.""",
                     elif (username and backup_code) and (
                         (not SERVER.lookup.admin.exists(username))
                         or (
-                            not SERVER.authentication().authenticate_admin_backup_code(
+                            not SERVER.authentication.admin.backup_code(
                                 username, backup_code
                             )
                         )
@@ -2032,7 +2032,7 @@ backup recovery code linked to your account.""",
             elif (admin_username and admin_password) and (
                 (not SERVER.lookup.admin.exists(admin_username))
                 or (
-                    not SERVER.authentication().authenticate_admin(
+                    not SERVER.authentication.admin.password(
                         admin_username, admin_password
                     )
                 )
