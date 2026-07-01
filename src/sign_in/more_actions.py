@@ -463,10 +463,8 @@ the password reset process is completed.""",
 
                     else:
 
-                        is_password_changed = (
-                            SERVER.accountactions().change_admin_password(
-                                username, new_password
-                            )
+                        is_password_changed = SERVER.management.admin.change_password(
+                            username, new_password
                         )
 
                         if is_password_changed:
