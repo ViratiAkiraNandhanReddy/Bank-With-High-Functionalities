@@ -8,8 +8,8 @@ import customtkinter
 from .assets import *
 from .__mail__ import *
 from dotenv import load_dotenv
+from .__server__ import SERVER
 from typing import Any, Callable
-from .__server__ import SERVER, _uuids
 from hPyT import title_bar, get_accent_color
 from pywinstyles import apply_style, set_opacity
 

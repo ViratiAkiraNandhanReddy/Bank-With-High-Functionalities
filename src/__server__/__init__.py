@@ -1,9 +1,6 @@
 import json
 import logging
 from ..utils import root
-from ._json import SERVER as JSONServer
-from ._mysql import SERVER as MySQLServer
-from ._sqlite3 import SERVER as SQLite3Server
 
 try:
 
@@ -19,10 +16,21 @@ except FileNotFoundError, json.JSONDecodeError:
 match CONFIGURATION_JSON.get("DATABASE TYPE"):
 
     case "JSON":
+
+        from ._json import SERVER as JSONServer
+
         SERVER = JSONServer
+
     case "MySQL":
+
+        from ._mysql import SERVER as MySQLServer
+
         SERVER = MySQLServer
+
     case "SQLite3":
+
+        from ._sqlite3 import SERVER as SQLite3Server
+
         SERVER = SQLite3Server
 
 __all__ = ["SERVER"]
