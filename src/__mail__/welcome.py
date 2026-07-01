@@ -1,11 +1,11 @@
-from . import *
+from ._imports import *
 
 
 class welcome:
 
     def __init__(self, receiver_mail_address: str, fullname: str) -> None:
 
-        with open(rf"{DIR_PATH}\src\__mail__\templates\welcome.html") as file:
+        with open(root / "src" / "__mail__" / "templates" / "welcome.html") as file:
 
             self.email_html = file.read().replace("[TESTER]", fullname)
 

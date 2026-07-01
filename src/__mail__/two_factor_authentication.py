@@ -1,5 +1,4 @@
-from . import *
-import datetime
+from ._imports import *
 
 
 class two_factor_authentication:
@@ -9,7 +8,7 @@ class two_factor_authentication:
         self.otp: str = otp_code()
 
         with open(
-            rf"{DIR_PATH}\src\__mail__\templates\two_factor_authentication.html"
+            root / "src" / "__mail__" / "templates" / "two_factor_authentication.html"
         ) as file:
 
             self.email_html = (
