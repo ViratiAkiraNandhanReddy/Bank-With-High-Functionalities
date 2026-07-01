@@ -206,6 +206,23 @@ class SERVER:
 
             return self.cursor.rowcount > 0
 
+        def change_admin_password(self, username: str, new_password: str) -> bool:
+
+            password: str = Encryption(
+                new_password, shift=53, alterNumbers=True
+            ).encrypt()
+
+            self.cursor.execute(
+                """
+                UPDATE admins SET password = ? WHERE username = ?
+                """,
+                (password, username),
+            )
+
+            connection.commit()
+
+            return self.cursor.rowcount > 0
+
         def change_username(self, old_username: str, new_username: str) -> bool:
 
             self.cursor.execute(

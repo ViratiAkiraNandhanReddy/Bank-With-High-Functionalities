@@ -22,6 +22,10 @@ class more_actions_interface:
             self.hide_overlay_callback: Callable = _callback
             self._btn: customtkinter.CTkButton = _btn
 
+            self.temp_ctk_frame_instance: (
+                customtkinter.CTkFrame
+            )  # for caching current frame instance to be used in nested functions
+
             self.internal_frame_00_more_actions: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
                     self.parent_frame,
@@ -230,9 +234,515 @@ class more_actions_interface:
 
             _is_internet_connection_available: bool = utils.connection.is_connected()
 
-            def _password_reset() -> None:
+            def _password_reset(username: str) -> None:
 
-                pass
+                frame__recovery_verified_frame: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        self.internal_frame_00_more_actions,
+                        width=300,
+                        height=400,
+                        fg_color="transparent",
+                    )
+                )
+                frame__password_reset_frame: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        self.internal_frame_00_more_actions,
+                        width=300,
+                        height=400,
+                        fg_color="transparent",
+                    )
+                )
+                frame__recovery_completed_frame: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        self.internal_frame_00_more_actions,
+                        width=300,
+                        height=400,
+                        fg_color="transparent",
+                    )
+                )
+
+                frame__recovery_verified_frame.place(x=3, y=3)
+
+                ### --- ---  frame__recovery_verified_frame  --- --- ###
+
+                customtkinter.CTkLabel(
+                    frame__recovery_verified_frame,
+                    text="Administrator Identity Verified",
+                    font=("Segoe UI", 16, "bold"),
+                    text_color="#FFFFFF",
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.verified_user,
+                        dark_image=assets.icons.material.verified_user,
+                        size=(42, 42),
+                    ),
+                    compound="top",
+                    height=0,  # 63
+                    width=260,  # 235
+                ).place(x=20, y=53)
+
+                customtkinter.CTkLabel(
+                    frame__recovery_verified_frame,
+                    text="""Your administrator identity has been 
+successfully verified using the selected
+recovery method.
+
+You may now proceed to create a new 
+administrator password.
+
+This recovery session remains active until 
+the password reset process is completed.""",
+                    font=("Roboto", 11),
+                    text_color="#FFFFFF",
+                    height=0,  # 117
+                    width=260,  # 214
+                ).place(x=20, y=175)
+
+                btn_exit_to_sign_in: customtkinter.CTkButton = customtkinter.CTkButton(
+                    frame__recovery_verified_frame,
+                    text="",
+                    width=0,
+                    height=0,
+                    fg_color="transparent",
+                    hover=False,
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.first_page,
+                        dark_image=assets.icons.material.first_page,
+                        size=(20, 20),
+                    ),
+                    command=lambda: (
+                        self.if_00_container_frame_admin_sign_in.place(x=3, y=3),
+                        frame__recovery_verified_frame.place_forget(),
+                        frame__recovery_verified_frame.destroy(),
+                    ),
+                )
+                btn_exit_to_sign_in.place(x=20, y=352)
+
+                continue_to_frame__password_reset_frame: customtkinter.CTkButton = (
+                    customtkinter.CTkButton(
+                        frame__recovery_verified_frame,
+                        text="",
+                        width=0,  # 28
+                        height=0,  # 28
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=assets.icons.material.arrow_forward,
+                            dark_image=assets.icons.material.arrow_forward,
+                            size=(20, 20),
+                        ),
+                        command=lambda: (
+                            frame__password_reset_frame.place(x=3, y=3),
+                            frame__recovery_verified_frame.place_forget(),
+                            frame__recovery_verified_frame.destroy(),
+                        ),
+                    )
+                )
+                continue_to_frame__password_reset_frame.place(x=252, y=352)
+
+                ### --- ---  frame__password_reset_frame  --- --- ###
+
+                def validate_new_passwords_and_reset() -> None:
+
+                    new_password: str = __new_password.get().strip()
+                    confirm_password: str = __confirm_password.get().strip()
+
+                    __new_password.bind(
+                        "<KeyPress>",
+                        lambda event: container_frame__new_password.configure(
+                            border_color="#FFFFFF"
+                        )
+                        or container_frame__new_password_label.configure(
+                            text_color="#FFFFFF"
+                        )
+                        or container_frame__new_password_label.configure(
+                            text="new password",
+                            width=71,  # 65
+                        )
+                        or __new_password.unbind("<KeyPress>"),
+                    )
+                    __confirm_password.bind(
+                        "<KeyPress>",
+                        lambda event: container_frame__confirm_password.configure(
+                            border_color="#FFFFFF"
+                        )
+                        or container_frame__confirm_password_label.configure(
+                            text_color="#FFFFFF"
+                        )
+                        or container_frame__confirm_password_label.configure(
+                            text="confirm password",
+                            width=86,  # 80
+                        )
+                        or __confirm_password.unbind("<KeyPress>"),
+                    )
+
+                    if (not new_password) and (
+                        confirm_password
+                    ):  # new_password: false -- confirm_password: true
+
+                        container_frame__new_password.configure(border_color="#FF0000")
+                        container_frame__new_password_label.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__new_password_label.configure(
+                            text="invalid new password", width=101  # 95
+                        )
+
+                        return
+
+                    elif new_password and (
+                        not confirm_password
+                    ):  # new_password: true -- confirm_password: false
+
+                        container_frame__confirm_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__confirm_password_label.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__confirm_password_label.configure(
+                            text="invalid confirm password", width=116  # 110
+                        )
+
+                        return
+
+                    elif (not new_password) and (
+                        not confirm_password
+                    ):  # new_password: false -- confirm_password: false
+
+                        container_frame__new_password.configure(border_color="#FF0000")
+                        container_frame__confirm_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__new_password_label.configure(
+                            text="invalid new password", width=101
+                        )
+
+                        container_frame__new_password_label.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__confirm_password_label.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__confirm_password_label.configure(
+                            text="invalid confirm password", width=116
+                        )
+
+                        return
+
+                    elif (
+                        len(new_password) < 8
+                    ):  # new_password: true -- confirm_password: true [less than 8 characters]
+
+                        container_frame__new_password.configure(border_color="#FF0000")
+                        container_frame__new_password_label.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__new_password_label.configure(
+                            text="password must be at least 8 characters long",
+                            width=197,
+                        )
+
+                        return
+
+                    elif (
+                        new_password != confirm_password
+                    ):  # new_password: true -- confirm_password: true [mismatched]
+
+                        container_frame__confirm_password.configure(
+                            border_color="#FF0000"
+                        )
+                        container_frame__confirm_password_label.configure(
+                            text_color="#FF0000"
+                        )
+                        container_frame__confirm_password_label.configure(
+                            text="confirm password must match the new password",
+                            width=226,
+                        )
+
+                        return
+
+                    else:
+
+                        is_password_changed = (
+                            SERVER.accountactions().change_admin_password(
+                                username, new_password
+                            )
+                        )
+
+                        if is_password_changed:
+
+                            title_recovery_completed.configure(
+                                image=customtkinter.CTkImage(
+                                    light_image=assets.icons.material.check_circle,
+                                    dark_image=assets.icons.material.check_circle,
+                                    size=(64, 64),
+                                ),
+                                text="Password Reset Successful",
+                            )
+
+                            desc_recovery_completed.configure(
+                                text="""Your password has been successfully updated
+and your account is now secured with the 
+new password. 
+                                                              
+You can continue to the sign-in page and 
+access your account using your
+new credentials."""
+                            )
+
+                        else:
+
+                            title_recovery_completed.configure(
+                                image=customtkinter.CTkImage(
+                                    light_image=assets.icons.material.error,
+                                    dark_image=assets.icons.material.error,
+                                    size=(64, 64),
+                                ),
+                                text="Password Reset Failed",
+                            )
+                            desc_recovery_completed.configure(
+                                text="""We were unable to update your password at
+this time. No changes have been made to 
+your account. Please try again later.
+                                                              
+If the issue persists, please contact 
+support for further assistance in 
+resolving the problem."""
+                            )
+
+                        frame__recovery_completed_frame.place(x=3, y=3)
+                        frame__password_reset_frame.place_forget()
+                        frame__password_reset_frame.destroy()
+
+                customtkinter.CTkLabel(
+                    frame__password_reset_frame,
+                    text="Administrator Password Reset",
+                    font=("Segoe UI", 16, "bold"),
+                    text_color="#FFFFFF",
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.lock_person,
+                        dark_image=assets.icons.material.lock_person,
+                        size=(42, 42),
+                    ),
+                    compound="top",
+                    height=0,
+                    width=260,
+                ).place(x=20, y=68)
+
+                container_frame__new_password: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        frame__password_reset_frame,
+                        width=260,
+                        height=40,
+                        fg_color="transparent",
+                        border_width=1,
+                        border_color="#FFFFFF",
+                        corner_radius=6,
+                    )
+                )
+
+                container_frame__new_password_label: customtkinter.CTkLabel = (
+                    customtkinter.CTkLabel(
+                        frame__password_reset_frame,
+                        text="new password",
+                        font=("Roboto", 10),
+                        height=12,
+                        width=71,  # 65
+                        text_color="#FFFFFF",
+                    )
+                )
+
+                customtkinter.CTkLabel(
+                    container_frame__new_password,
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.password,
+                        dark_image=assets.icons.material.password,
+                        size=(20, 20),
+                    ),
+                    text="",
+                ).place(x=8, rely=0.5, anchor="w")
+
+                container_frame__new_password.place(x=20, y=200)
+
+                __new_password: customtkinter.CTkEntry = customtkinter.CTkEntry(
+                    container_frame__new_password,
+                    placeholder_text="new password",
+                    width=260 - 40,
+                    height=40 - 8,
+                    corner_radius=0,
+                    border_width=0,
+                    fg_color="transparent",
+                    font=("Roboto", 16),
+                )
+                __new_password.place(x=28, rely=0.5, anchor="w")
+
+                __new_password.bind(
+                    "<FocusIn>",
+                    lambda event: (
+                        container_frame__new_password_label.place(x=40, y=193)
+                        if not __new_password.get()
+                        else None
+                    ),
+                )
+                __new_password.bind(
+                    "<FocusOut>",
+                    lambda event: (
+                        container_frame__new_password_label.place_forget()
+                        if not __new_password.get()
+                        else None
+                    ),
+                )
+
+                container_frame__confirm_password: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        frame__password_reset_frame,
+                        width=260,
+                        height=40,
+                        fg_color="transparent",
+                        border_width=1,
+                        border_color="#FFFFFF",
+                        corner_radius=6,
+                    )
+                )
+
+                container_frame__confirm_password_label: customtkinter.CTkLabel = (
+                    customtkinter.CTkLabel(
+                        frame__password_reset_frame,
+                        text="confirm password",
+                        font=("Roboto", 10),
+                        height=12,
+                        width=86,  # 80
+                        text_color="#FFFFFF",
+                    )
+                )
+
+                customtkinter.CTkLabel(
+                    container_frame__confirm_password,
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.password,
+                        dark_image=assets.icons.material.password,
+                        size=(20, 20),
+                    ),
+                    text="",
+                ).place(x=8, rely=0.5, anchor="w")
+
+                container_frame__confirm_password.place(x=20, y=260)
+
+                __confirm_password: customtkinter.CTkEntry = customtkinter.CTkEntry(
+                    container_frame__confirm_password,
+                    placeholder_text="confirm password",
+                    width=260 - 40,
+                    height=40 - 8,
+                    corner_radius=0,
+                    border_width=0,
+                    fg_color="transparent",
+                    font=("Roboto", 16),
+                )
+                __confirm_password.place(x=28, rely=0.5, anchor="w")
+
+                __confirm_password.bind(
+                    "<FocusIn>",
+                    lambda event: (
+                        container_frame__confirm_password_label.place(x=40, y=253)
+                        if not __confirm_password.get()
+                        else None
+                    ),
+                )
+                __confirm_password.bind(
+                    "<FocusOut>",
+                    lambda event: (
+                        container_frame__confirm_password_label.place_forget()
+                        if not __confirm_password.get()
+                        else None
+                    ),
+                )
+
+                btn_exit_to_sign_in: customtkinter.CTkButton = customtkinter.CTkButton(
+                    frame__password_reset_frame,
+                    text="",
+                    width=0,
+                    height=0,
+                    fg_color="transparent",
+                    hover=False,
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.first_page,
+                        dark_image=assets.icons.material.first_page,
+                        size=(20, 20),
+                    ),
+                    command=lambda: (
+                        self.if_00_container_frame_admin_sign_in.place(x=3, y=3),
+                        frame__password_reset_frame.place_forget(),
+                        frame__password_reset_frame.destroy(),
+                    ),
+                )
+                btn_exit_to_sign_in.place(x=20, y=352)
+
+                continue_to_frame__recovery_completed_frame: customtkinter.CTkButton = (
+                    customtkinter.CTkButton(
+                        frame__password_reset_frame,
+                        text="",
+                        width=0,  # 28
+                        height=0,  # 28
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=assets.icons.material.arrow_forward,
+                            dark_image=assets.icons.material.arrow_forward,
+                            size=(20, 20),
+                        ),
+                        command=validate_new_passwords_and_reset,
+                    )
+                )
+                continue_to_frame__recovery_completed_frame.place(x=252, y=352)
+
+                ### --- ---  frame__recovery_completed_frame  --- --- ###
+
+                title_recovery_completed: customtkinter.CTkLabel = (
+                    customtkinter.CTkLabel(
+                        frame__recovery_completed_frame,
+                        text="",
+                        font=("Segoe UI", 16, "bold"),
+                        text_color="#FFFFFF",
+                        compound="top",
+                        height=0,  # 85
+                        width=260,
+                    )
+                )
+                title_recovery_completed.place(x=20, y=50)
+
+                desc_recovery_completed: customtkinter.CTkLabel = (
+                    customtkinter.CTkLabel(
+                        frame__recovery_completed_frame,
+                        text="",
+                        font=("Roboto", 11),
+                        text_color="#FFFFFF",
+                        height=165,
+                        width=260,
+                    )
+                )
+                desc_recovery_completed.place(x=20, y=186)
+
+                continue_to_sign_in_frame: customtkinter.CTkButton = (
+                    customtkinter.CTkButton(
+                        frame__recovery_completed_frame,
+                        text="",
+                        width=0,  # 28
+                        height=0,  # 28
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=assets.icons.material.arrow_forward,
+                            dark_image=assets.icons.material.arrow_forward,
+                            size=(20, 20),
+                        ),
+                        command=lambda: (
+                            self.if_00_container_frame_admin_sign_in.place(x=3, y=3),
+                            frame__recovery_completed_frame.place_forget(),
+                            frame__recovery_completed_frame.destroy(),
+                        ),
+                    )
+                )
+                continue_to_sign_in_frame.place(x=252, y=352)
 
             def opted_email_verification_via_otp() -> None:
 
@@ -274,7 +784,226 @@ secure OTP verification.""",
                     width=260,
                 ).place(x=20, y=169)
 
-                def _recovery_confirmation_state_emailotp(_email: str) -> None:
+                def send_mail_and_validate_otp(username, _email: str) -> None:
+
+                    def _timer(
+                        widget: customtkinter.CTkButton,
+                        remaining_seconds: int,
+                        _text: str = "Resend OTP",
+                    ) -> None:
+
+                        widget.configure(text=f"00:{remaining_seconds:02d}")
+
+                        if remaining_seconds > 0:
+                            widget.after(
+                                1000, _timer, widget, remaining_seconds - 1, _text
+                            )
+                        else:
+                            widget.configure(text=_text, state="normal")
+
+                    if_send_mail_and_validate_otp_container_frame_admin_sign_in: (
+                        customtkinter.CTkFrame
+                    ) = customtkinter.CTkFrame(
+                        self.internal_frame_00_more_actions,
+                        width=300,
+                        height=400,
+                        fg_color="transparent",
+                    )
+                    if_send_mail_and_validate_otp_container_frame_admin_sign_in.place(
+                        x=3, y=3
+                    )
+
+                    ctk_report_var = customtkinter.CTkLabel(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        text="",
+                        font=("Roboto", 11),
+                        text_color="#FFFFFF",
+                        height=0,
+                        width=260,
+                    )  # x=20, y=336
+
+                    email_object = forgot_password(
+                        receiver_mail_address=_email,
+                        ctk_report=(
+                            ctk_report_var,
+                            20,
+                            336,
+                            "OTP sent successfully.",
+                            "Failed to send OTP.",
+                        ),
+                        receiver_type="Administrator",
+                    )
+
+                    mail_thread = lambda: threading.Thread(
+                        target=email_object.send_mail, daemon=True
+                    ).start()
+                    mail_thread()
+
+                    def resend_otp() -> None:
+                        btn__resend_otp.configure(state="disabled")
+                        _timer(btn__resend_otp, 30)
+
+                        email_object.stop_timer(_otp_countdown)
+
+                        email_object.start_timer(
+                            timer_widget=_otp_countdown,
+                            report_widget=(ctk_report_var, 20, 336),
+                            resend_callback=mail_thread,
+                        )
+
+                        mail_thread()
+
+                    btn__resend_otp = customtkinter.CTkButton(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        text="Resend OTP",
+                        height=0,  # 15
+                        width=54,  # 54
+                        hover=False,
+                        font=("Roboto", 9),
+                        fg_color="transparent",
+                        text_color="#218CFF",
+                        border_spacing=0,
+                        state="disabled",
+                        text_color_disabled="#FFFFFF",
+                        command=resend_otp,
+                    )
+                    btn__resend_otp.place(x=123, y=304)
+                    _timer(btn__resend_otp, 30)
+
+                    customtkinter.CTkLabel(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        text="Email OTP Verification",
+                        font=("Segoe UI", 16, "bold"),
+                        text_color="#FFFFFF",
+                        image=customtkinter.CTkImage(
+                            light_image=assets.icons.material.mark_email_unread,
+                            dark_image=assets.icons.material.mark_email_unread,
+                            size=(42, 42),
+                        ),
+                        compound="top",
+                        height=0,
+                        width=260,
+                    ).place(x=20, y=53)
+
+                    customtkinter.CTkLabel(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        text="""A one-time password (OTP) has been sent
+to your registered recovery email address.
+
+Enter the verification code below to
+continue account recovery.""",
+                        font=("Roboto", 11),
+                        text_color="#FFFFFF",
+                        height=0,  # 65
+                        width=260,
+                    ).place(x=20, y=169)
+
+                    def validate_otp(*args) -> None:
+
+                        otp_validated = False
+
+                        curr_otp.set(curr_otp.get().upper()[:10])
+
+                        if len(curr_otp.get()) == 10:
+
+                            otp_validated = email_object.validate_code(curr_otp.get())
+
+                        if not otp_validated and len(curr_otp.get()) == 10:
+
+                            ctk_report_var.configure(
+                                text="Invalid OTP. Please try again."
+                            )
+                            ctk_report_var.place(x=20, y=336)
+                            ctk_report_var.after(3000, ctk_report_var.place_forget)
+
+                        if otp_validated and len(curr_otp.get()) == 10:
+
+                            email_object.stop_timer(_otp_countdown)
+
+                            ctk_report_var.configure(
+                                text="Verification successful. Redirecting..."
+                            )
+                            ctk_report_var.place(x=20, y=336)
+                            ctk_report_var.after(2000, ctk_report_var.place_forget)
+
+                            if_send_mail_and_validate_otp_container_frame_admin_sign_in.after(
+                                2000,
+                                lambda: (
+                                    _password_reset(username),
+                                    if_send_mail_and_validate_otp_container_frame_admin_sign_in.place_forget(),
+                                    if_send_mail_and_validate_otp_container_frame_admin_sign_in.destroy(),
+                                ),
+                            )
+
+                    curr_otp: customtkinter.StringVar = customtkinter.StringVar()
+                    curr_otp.trace_add("write", validate_otp)
+
+                    __otp_code = customtkinter.CTkEntry(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        placeholder_text="XXXXXXXXXX",
+                        width=140,
+                        height=30,
+                        font=("Consolas", 16),
+                        fg_color="transparent",
+                        border_width=1,
+                        border_color="#FFFFFF",
+                        corner_radius=6,
+                        justify="center",
+                    )
+                    __otp_code.place(x=80, y=264)
+
+                    _otp_countdown: customtkinter.CTkLabel = customtkinter.CTkLabel(
+                        if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                        text="",
+                        font=("Roboto", 10),
+                        height=12,
+                        width=32,  # 26
+                        text_color="#FFFFFF",
+                    )
+                    _otp_countdown.place(x=134, y=257)
+
+                    email_object.start_timer(
+                        timer_widget=_otp_countdown,
+                        report_widget=(ctk_report_var, 20, 336),
+                        resend_callback=mail_thread,
+                    )
+
+                    __otp_code.bind(
+                        "<FocusIn>",
+                        lambda event: __otp_code.configure(textvariable=curr_otp),
+                    )
+
+                    __otp_code.bind(
+                        "<FocusOut>",
+                        lambda event: __otp_code.configure(textvariable=None)
+                        or __otp_code.unbind("<FocusIn>"),
+                    )
+
+                    btn__send_mail_and_validate: customtkinter.CTkButton = (
+                        customtkinter.CTkButton(
+                            if_send_mail_and_validate_otp_container_frame_admin_sign_in,
+                            text="",
+                            width=0,  # 28
+                            height=0,  # 28
+                            fg_color="transparent",
+                            hover=False,
+                            image=customtkinter.CTkImage(
+                                light_image=assets.icons.material.arrow_back,
+                                dark_image=assets.icons.material.arrow_back,
+                                size=(20, 20),
+                            ),
+                            command=lambda: (
+                                email_object.stop_timer(_otp_countdown),
+                                self.temp_ctk_frame_instance.place(x=3, y=3),
+                                if_send_mail_and_validate_otp_container_frame_admin_sign_in.destroy(),
+                            ),
+                        )
+                    )
+                    btn__send_mail_and_validate.place(x=20, y=352)
+
+                def _recovery_confirmation_state_emailotp(
+                    username: str, _email: str
+                ) -> None:
 
                     if_emailotp_confirmation_state_container_frame_admin_sign_in: (
                         customtkinter.CTkFrame
@@ -286,6 +1015,10 @@ secure OTP verification.""",
                     )
                     if_emailotp_confirmation_state_container_frame_admin_sign_in.place(
                         x=3, y=3
+                    )
+
+                    self.temp_ctk_frame_instance = (
+                        if_emailotp_confirmation_state_container_frame_admin_sign_in
                     )
 
                     customtkinter.CTkLabel(
@@ -398,7 +1131,6 @@ your administrator account.""",
                         command=lambda: (
                             if_emailotp_container_frame_admin_sign_in.place(x=3, y=3),
                             if_emailotp_confirmation_state_container_frame_admin_sign_in.place_forget(),
-                            if_emailotp_confirmation_state_container_frame_admin_sign_in.destroy(),
                         ),
                     )
                     btn__back_if_emailotp_confirmation_state.place(x=20, y=352)
@@ -416,6 +1148,28 @@ your administrator account.""",
                             light_image=assets.icons.material.arrow_forward,
                             dark_image=assets.icons.material.arrow_forward,
                             size=(20, 20),
+                        ),
+                        command=lambda: (
+                            (
+                                send_mail_and_validate_otp(username, _email),
+                                if_emailotp_confirmation_state_container_frame_admin_sign_in.place_forget(),
+                            )
+                            if utils.connection.is_connected()
+                            else (
+                                no_internet_connection_warning := customtkinter.CTkLabel(
+                                    if_emailotp_confirmation_state_container_frame_admin_sign_in,
+                                    text="No internet connection.\nPlease connect to the internet and try again.",
+                                    text_color="#FFFFFF",
+                                    font=("Segoe UI", 8),
+                                    width=0,  # 160
+                                    height=28,
+                                ),
+                                no_internet_connection_warning.place(x=70, y=352),
+                                no_internet_connection_warning.after(
+                                    3000,
+                                    no_internet_connection_warning.place_forget,
+                                ),
+                            )
                         ),
                     )
                     btn__forward_if_emailotp_confirmation_state.place(x=252, y=352)
@@ -546,7 +1300,7 @@ your administrator account.""",
                         return
 
                     else:
-                        _recovery_confirmation_state_emailotp(email_address)
+                        _recovery_confirmation_state_emailotp(username, email_address)
                         if_emailotp_container_frame_admin_sign_in.place_forget()
 
                 container_frame__username_admin_reset_password: (
@@ -888,7 +1642,7 @@ to continue secure recovery verification.""",
                         return
 
                     else:
-                        _password_reset()
+                        _password_reset(username)
                         if_backupcode_container_frame_admin_sign_in.place_forget()
                         if_backupcode_container_frame_admin_sign_in.destroy()
 

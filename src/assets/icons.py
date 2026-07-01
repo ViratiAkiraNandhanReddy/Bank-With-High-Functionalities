@@ -26,6 +26,10 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "campaign.png"
         )
 
+        check_circle: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "check_circle.png"
+        )
+
         chevron_backward: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "chevron_backward.png"
         )
@@ -42,8 +46,16 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "developer_mode_tv.png"
         )
 
+        error: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "error.png"
+        )
+
         exit_to_app: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "exit_to_app.png"
+        )
+
+        first_page: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "first_page.png"
         )
 
         groups: Image.Image = Image.open(
@@ -64,6 +76,10 @@ class icons:
 
         manage_accounts: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "manage_accounts.png"
+        )
+
+        mark_email_unread: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "mark_email_unread.png"
         )
 
         more_horiz: Image.Image = Image.open(
@@ -94,8 +110,16 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "shield_lock.png"
         )
 
+        verified_user: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "verified_user.png"
+        )
+
         wifi_off: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "wifi_off.png"
+        )
+
+        wifi: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "wifi.png"
         )
 
     class platform:

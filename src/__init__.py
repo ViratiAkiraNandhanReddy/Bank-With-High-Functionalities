@@ -2,13 +2,14 @@ import os
 import json
 import ctypes
 import logging
+import threading
 from . import utils
 import customtkinter
 from .assets import *
-from . import __mail__
+from .__mail__ import *
 from dotenv import load_dotenv
+from .__server__ import SERVER
 from typing import Any, Callable
-from .__server__ import SERVER, _uuids
 from hPyT import title_bar, get_accent_color
 from pywinstyles import apply_style, set_opacity
 
