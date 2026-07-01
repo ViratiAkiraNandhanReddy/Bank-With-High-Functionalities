@@ -710,7 +710,7 @@ class sign_in_interface:
 
                 try:
 
-                    if SERVER.traversal().is_user_exists(username):
+                    if SERVER.lookup.user.exists(username):
 
                         self.window.withdraw()
                         dashboard_window = dashboard_interface.dashboard(
@@ -773,7 +773,7 @@ class sign_in_interface:
                 return
 
             elif (username and password) and (
-                (not SERVER.traversal().is_user_exists(username))
+                (not SERVER.lookup.user.exists(username))
                 or (
                     not SERVER.authentication().authenticate_password(
                         username, password
@@ -1177,7 +1177,7 @@ class sign_in_interface:
 
             elif (
                 username_at_reset_password
-                and not SERVER.traversal().is_user_exists(username_at_reset_password)
+                and not SERVER.lookup.user.exists(username_at_reset_password)
             ) and user_security_code_at_reset_password:  # username: true (not exists) -- password: true
                 Username_Exists_Error = customtkinter.CTkLabel(
                     self.frame__reset_password,
