@@ -1,4 +1,4 @@
-from ... import _uuids
+from .._uuids import _uuids
 from ..__base__ import UserLookupBase, AdminLookupBase
 
 

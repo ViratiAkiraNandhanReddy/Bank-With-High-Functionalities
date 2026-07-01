@@ -1,4 +1,4 @@
-from ... import _uuids
+from .._uuids import _uuids
 from ._connection import connection
 from CaesarCipher import Encryption
 from ..__base__ import UserManagementBase, AdminManagementBase
