@@ -463,10 +463,8 @@ the password reset process is completed.""",
 
                     else:
 
-                        is_password_changed = (
-                            SERVER.accountactions().change_admin_password(
-                                username, new_password
-                            )
+                        is_password_changed = SERVER.management.admin.change_password(
+                            username, new_password
                         )
 
                         if is_password_changed:
@@ -1267,9 +1265,9 @@ your administrator account.""",
                         return
 
                     elif (username and email_address) and (
-                        (not SERVER.traversal().is_admin_exists(username))
+                        (not SERVER.lookup.admin.exists(username))
                         or (
-                            not SERVER.authentication().authenticate_admin_email_address(
+                            not SERVER.authentication.admin.email_address(
                                 username, email_address
                             )
                         )
@@ -1609,9 +1607,9 @@ to continue secure recovery verification.""",
                         return
 
                     elif (username and backup_code) and (
-                        (not SERVER.traversal().is_admin_exists(username))
+                        (not SERVER.lookup.admin.exists(username))
                         or (
-                            not SERVER.authentication().authenticate_admin_backup_code(
+                            not SERVER.authentication.admin.backup_code(
                                 username, backup_code
                             )
                         )
@@ -2030,9 +2028,9 @@ backup recovery code linked to your account.""",
                 return
 
             elif (admin_username and admin_password) and (
-                (not SERVER.traversal().is_admin_exists(admin_username))
+                (not SERVER.lookup.admin.exists(admin_username))
                 or (
-                    not SERVER.authentication().authenticate_admin(
+                    not SERVER.authentication.admin.password(
                         admin_username, admin_password
                     )
                 )
