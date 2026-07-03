@@ -8,17 +8,22 @@ class dashboard_interface:
 
     class dashboard:
 
-        def __init__(self, username: str, parent: customtkinter.CTk) -> None:
-            self.username = username
+        def __init__(
+            self,
+            parent_window: customtkinter.CTk,
+            _btn: customtkinter.CTkButton,
+            username: str,
+        ) -> None:
 
-            self.window__dashboard = customtkinter.CTkToplevel(parent)
+            self.frame__dashboard: customtkinter.CTkFrame = customtkinter.CTkFrame(
+                parent_window, width=1100, height=650, corner_radius=0, fg_color="black"
+            )
 
-    class transactions:
-
-        def __init__(self) -> None:
-            pass
-
-    class settings:
-
-        def __init__(self) -> None:
-            pass
+            self.show_frame: Callable = lambda: (
+                self.frame__dashboard.place(x=0, y=0),
+                _btn.place_forget(),
+            )
+            self.hide_frame: Callable = lambda: (
+                self.frame__dashboard.place_forget(),
+                _btn.place(x=1080, y=0),
+            )
