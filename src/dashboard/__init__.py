@@ -27,13 +27,3 @@ class dashboard_interface:
                 self.frame__dashboard.place_forget(),
                 _btn.place(x=1080, y=0),
             )
-
-    class transactions:
-
-        def __init__(self) -> None:
-            pass
-
-    class settings:
-
-        def __init__(self) -> None:
-            pass
