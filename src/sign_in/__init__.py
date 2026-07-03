@@ -706,23 +706,6 @@ class sign_in_interface:
                 or self.__password.unbind("<KeyPress>"),
             )
 
-            def redirect_to_dashboard():  # Redirects To The Dashboard
-
-                try:
-
-                    if SERVER.lookup.user.exists(username):
-
-                        self.window.withdraw()
-                        dashboard_window = dashboard_interface.dashboard(
-                            username, self.window
-                        )
-                        self.window.wait_window(dashboard_window.window__dashboard)
-                        self.window.deiconify()
-
-                except:
-
-                    ...
-
             if (not username) and password:  # username: false -- password: true
 
                 self.container_frame__username_sign_in.configure(border_color="#FF0000")
@@ -797,7 +780,17 @@ class sign_in_interface:
                 return
 
             else:
-                raise NotImplementedError
+
+                self.overlay_frame__user_dashboard = dashboard_interface.dashboard(
+                    self.window, self.more_button, username
+                )
+                self.overlay_frame__user_dashboard.show_frame()
+
+                self.__username.delete(0, "end")
+                self.__password.delete(0, "end")
+
+                self.container_frame__username_label_sign_in.place_forget()
+                self.container_frame__password_label_sign_in.place_forget()
 
         def more_action__overlay_frame(self) -> None:
 
