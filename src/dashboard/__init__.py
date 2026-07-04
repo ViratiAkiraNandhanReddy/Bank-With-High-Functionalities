@@ -1,5 +1,5 @@
 from .. import *
-from .tiles import actions
+from .tiles import actions, messages
 
 
 class dashboard_interface:
@@ -60,4 +60,6 @@ class dashboard_interface:
             )
             self.frame__status_utilities.place(x=820, y=10)
 
-            self.actions = actions(self.frame__dashboard)
+            self.actions = actions(self.frame__dashboard, username)
+            
+            self.messages = messages(self.frame__dashboard, username)
