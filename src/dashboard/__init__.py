@@ -44,3 +44,17 @@ class dashboard_interface:
                 border_spacing=0,
                 command=self.hide_frame,
             ).place(x=1060, y=10)
+
+            self.frame__status_greeting: customtkinter.CTkFrame = (
+                customtkinter.CTkFrame(
+                    self.frame__dashboard, width=800, height=30, fg_color="#0a0a0a"
+                )
+            )
+            self.frame__status_greeting.place(x=10, y=10)
+
+            self.frame__status_utilities: customtkinter.CTkFrame = (
+                customtkinter.CTkFrame(
+                    self.frame__dashboard, width=230, height=30, fg_color="#0a0a0a"
+                )
+            )
+            self.frame__status_utilities.place(x=820, y=10)
