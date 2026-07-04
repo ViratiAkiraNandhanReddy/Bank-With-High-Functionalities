@@ -27,3 +27,20 @@ class dashboard_interface:
                 self.frame__dashboard.place_forget(),
                 _btn.place(x=1080, y=0),
             )
+
+            customtkinter.CTkButton(
+                self.frame__dashboard,
+                text="",
+                image=customtkinter.CTkImage(
+                    light_image=assets.icons.material.exit_to_app,
+                    dark_image=assets.icons.material.exit_to_app,
+                    size=(25, 25),
+                ),
+                width=0,
+                height=0,
+                corner_radius=0,
+                hover=False,
+                fg_color="black",
+                border_spacing=0,
+                command=self.hide_frame,
+            ).place(x=1060, y=10)
