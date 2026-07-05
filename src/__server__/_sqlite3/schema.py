@@ -35,7 +35,8 @@ class UserSchema(UserSchemaBase):
             PASSWORD TEXT NOT NULL,
             EMAIL TEXT,
             BACKUP_CODE TEXT NOT NULL,
-            CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
+            CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            BALANCE REAL DEFAULT 0.0)
             """)
 
         connection.commit()

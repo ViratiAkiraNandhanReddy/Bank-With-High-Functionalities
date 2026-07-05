@@ -30,6 +30,29 @@ class UserLookup(UserLookupBase):
 
         return cursor.fetchone() is not None
 
+    @classmethod
+    def balance(cls, username_or_uuid) -> float:
+
+        if _uuids.validate_uuid5(username_or_uuid):
+
+            cursor.execute(
+                """
+                SELECT balance FROM USERS WHERE UUID = ?
+                """,
+                (username_or_uuid,),
+            )
+
+            return cursor.fetchone()[0]
+
+        cursor.execute(
+            """
+            SELECT balance FROM USERS WHERE USERNAME = ?
+            """,
+            (username_or_uuid,),
+        )
+
+        return cursor.fetchone()[0]
+
 
 class AdminLookup(AdminLookupBase):
 
