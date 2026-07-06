@@ -11,7 +11,7 @@ class UserAuthentication(UserAuthenticationBase):
     @classmethod
     def password(cls, username_or_uuid: str, password: str) -> bool:
 
-        if _uuids.validate_uuid5(username_or_uuid):
+        if _uuids.validate(username_or_uuid):
 
             cursor.execute(
                 """
