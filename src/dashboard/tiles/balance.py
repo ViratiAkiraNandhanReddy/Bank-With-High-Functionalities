@@ -10,9 +10,11 @@ class balance:
         )
         self.frame__balance.place(x=10, y=50)
 
+        self.username = username
+
         self.label__balance: customtkinter.CTkLabel = customtkinter.CTkLabel(
             self.frame__balance,
-            text=f"$ {SERVER.lookup.user.balance(username):,.2f}",
+            text=f"$ {SERVER.lookup.user.balance(self.username):,.2f}",
             width=480,
             height=50,
             text_color="#FFFFFF",
@@ -20,6 +22,8 @@ class balance:
         )
         self.label__balance.place(x=10, y=0)
 
-        self.refresh = lambda: self.label__balance.configure(
-            text=f"$ {SERVER.lookup.user.balance(username):,.2f}"
+    def refresh(self) -> None:
+
+        self.label__balance.configure(
+            text=f"$ {SERVER.lookup.user.balance(self.username):,.2f}"
         )
