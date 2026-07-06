@@ -9,6 +9,12 @@ class UserLookupBase(ABC):
 
         pass
 
+    @classmethod
+    @abstractmethod
+    def balance(cls, username_or_uuid: str) -> float:
+
+        pass
+
 
 class AdminLookupBase(ABC):
 
