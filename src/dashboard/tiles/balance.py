@@ -6,16 +6,21 @@ class balance:
     def __init__(self, parent_frame: customtkinter.CTkFrame, username: str) -> None:
 
         self.frame__balance: customtkinter.CTkFrame = customtkinter.CTkFrame(
-            parent_frame, width=500, height=50, fg_color="#0a0a0a"
+            parent_frame, width=440, height=50, fg_color="#0a0a0a"
         )
         self.frame__balance.place(x=10, y=50)
+
+        self.frame__balance_trend: customtkinter.CTkFrame = customtkinter.CTkFrame(
+            parent_frame, width=50, height=50, fg_color="#0a0a0a"
+        )
+        self.frame__balance_trend.place(x=460, y=50)
 
         self.username = username
 
         self.label__balance: customtkinter.CTkLabel = customtkinter.CTkLabel(
             self.frame__balance,
             text=f"$ {SERVER.lookup.user.balance(self.username):,.2f}",
-            width=480,
+            width=420,
             height=50,
             text_color="#FFFFFF",
             font=("Roboto", 18),
