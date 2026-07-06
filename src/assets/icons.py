@@ -110,6 +110,14 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "shield_lock.png"
         )
 
+        trending_down: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "trending_down.png"
+        )
+
+        trending_up: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "trending_up.png"
+        )
+
         verified_user: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "verified_user.png"
         )
