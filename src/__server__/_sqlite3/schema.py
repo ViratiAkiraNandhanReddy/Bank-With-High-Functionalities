@@ -29,14 +29,22 @@ class UserSchema(UserSchemaBase):
     def create(cls) -> bool:
 
         cursor.execute("""
+
             CREATE TABLE IF NOT EXISTS USERS (
-            USERNAME VARCHAR(100) NOT NULL PRIMARY KEY,
-            UUID CHAR(36) NOT NULL,
-            PASSWORD TEXT NOT NULL,
-            EMAIL TEXT,
-            BACKUP_CODE TEXT NOT NULL,
-            CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            BALANCE REAL DEFAULT 0.0)
+
+                UUID CHAR(36) PRIMARY KEY,
+                USERNAME VARCHAR(100) NOT NULL UNIQUE,
+
+                PASSWORD TEXT NOT NULL,
+                EMAIL TEXT UNIQUE,
+                BACKUP_CODE CHAR(36) NOT NULL,
+
+                BALANCE REAL NOT NULL DEFAULT 0.0,
+
+                CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+            );
+ 
             """)
 
         connection.commit()
@@ -50,13 +58,21 @@ class TransactionSchema(TransactionSchemaBase):
     def create(cls) -> bool:
 
         cursor.execute("""
+
             CREATE TABLE IF NOT EXISTS TRANSACTIONS (
-            TRANSACTION_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-            USERNAME VARCHAR(100) NOT NULL,
-            AMOUNT REAL NOT NULL,
-            TRANSACTION_TYPE VARCHAR(50) NOT NULL,
-            TIMESTAMP TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (USERNAME) REFERENCES USERS(USERNAME))
+
+                TRANSACTION_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                USER_UUID CHAR(36) NOT NULL,
+
+                AMOUNT REAL NOT NULL,
+                TRANSACTION_TYPE TEXT NOT NULL,
+
+                TIMESTAMP TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+                FOREIGN KEY (USER_UUID) REFERENCES USERS(UUID) ON DELETE CASCADE
+
+            );
+
             """)
 
         connection.commit()
