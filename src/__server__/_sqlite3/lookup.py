@@ -10,7 +10,7 @@ class UserLookup(UserLookupBase):
     @classmethod
     def exists(cls, username_or_uuid: str) -> bool:
 
-        if _uuids.validate_uuid5(username_or_uuid):
+        if _uuids.validate(username_or_uuid):
 
             cursor.execute(
                 """
@@ -33,7 +33,7 @@ class UserLookup(UserLookupBase):
     @classmethod
     def balance(cls, username_or_uuid) -> float:
 
-        if _uuids.validate_uuid5(username_or_uuid):
+        if _uuids.validate(username_or_uuid):
 
             cursor.execute(
                 """
