@@ -15,6 +15,12 @@ class UserLookupBase(ABC):
 
         pass
 
+    @classmethod
+    @abstractmethod
+    def resolve_uuid(cls, username: str) -> str | None:
+
+        pass
+
 
 class AdminLookupBase(ABC):
 

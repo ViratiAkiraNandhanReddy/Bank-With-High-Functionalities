@@ -55,6 +55,22 @@ class UserLookup(UserLookupBase):
         row = cursor.fetchone()
         return row[0] if row is not None else 0.0
 
+    @classmethod
+    def resolve_uuid(cls, username: str) -> str | None:
+
+        if _uuids.validate(username):
+
+            return username
+
+        cursor.execute(
+            """
+            SELECT UUID FROM USERS WHERE USERNAME = ?
+            """,
+            (username,),
+        )
+
+        row = cursor.fetchone()
+        return row[0] if row is not None else None
 
 class AdminLookup(AdminLookupBase):
 
