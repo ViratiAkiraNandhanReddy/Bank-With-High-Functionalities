@@ -21,6 +21,12 @@ class UserLookupBase(ABC):
 
         pass
 
+    @classmethod
+    @abstractmethod
+    def last_transaction(cls, username_or_uuid: str) -> tuple | None:
+
+        pass
+
 
 class AdminLookupBase(ABC):
 
