@@ -1,1 +1,1 @@
-<img src="https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/blob/main/assets/README/root-banner.png" width="100%">
+<img src="https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/blob/main/assets/README/root-banner.jpg" width="100%">
