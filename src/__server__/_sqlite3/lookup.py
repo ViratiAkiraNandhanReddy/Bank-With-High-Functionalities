@@ -10,7 +10,7 @@ class UserLookup(UserLookupBase):
     @classmethod
     def exists(cls, username_or_uuid: str) -> bool:
 
-        if _uuids.validate_uuid5(username_or_uuid):
+        if _uuids.validate(username_or_uuid):
 
             cursor.execute(
                 """
@@ -29,6 +29,78 @@ class UserLookup(UserLookupBase):
         )
 
         return cursor.fetchone() is not None
+
+    @classmethod
+    def balance(cls, username_or_uuid) -> float:
+
+        if _uuids.validate(username_or_uuid):
+
+            cursor.execute(
+                """
+                SELECT balance FROM USERS WHERE UUID = ?
+                """,
+                (username_or_uuid,),
+            )
+
+            row = cursor.fetchone()
+            return row[0] if row is not None else 0.0
+
+        cursor.execute(
+            """
+            SELECT balance FROM USERS WHERE USERNAME = ?
+            """,
+            (username_or_uuid,),
+        )
+
+        row = cursor.fetchone()
+        return row[0] if row is not None else 0.0
+
+    @classmethod
+    def resolve_uuid(cls, username: str) -> str | None:
+
+        if _uuids.validate(username):
+
+            return username
+
+        cursor.execute(
+            """
+            SELECT UUID FROM USERS WHERE USERNAME = ?
+            """,
+            (username,),
+        )
+
+        row = cursor.fetchone()
+        return row[0] if row is not None else None
+
+    @classmethod
+    def last_transaction(cls, username_or_uuid: str) -> tuple | None:
+        """(TRANSACTION_TYPE, AMOUNT, TIMESTAMP)"""
+
+        user_uuid = (
+            username_or_uuid
+            if _uuids.validate(username_or_uuid)
+            else cls.resolve_uuid(username_or_uuid)
+        )
+
+        if not user_uuid:
+
+            return None
+
+        cursor.execute(
+            """
+            SELECT
+                TRANSACTION_TYPE,
+                AMOUNT,
+                TIMESTAMP
+            FROM TRANSACTIONS
+            WHERE USER_UUID = ?
+            ORDER BY TIMESTAMP DESC
+            LIMIT 1;
+            """,
+            (user_uuid,),
+        )
+
+        return cursor.fetchone()
 
 
 class AdminLookup(AdminLookupBase):

@@ -9,6 +9,24 @@ class UserLookupBase(ABC):
 
         pass
 
+    @classmethod
+    @abstractmethod
+    def balance(cls, username_or_uuid: str) -> float:
+
+        pass
+
+    @classmethod
+    @abstractmethod
+    def resolve_uuid(cls, username: str) -> str | None:
+
+        pass
+
+    @classmethod
+    @abstractmethod
+    def last_transaction(cls, username_or_uuid: str) -> tuple | None:
+
+        pass
+
 
 class AdminLookupBase(ABC):
 
