@@ -64,6 +64,7 @@ class TransactionSchema(TransactionSchemaBase):
                 TRANSACTION_ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 USER_UUID CHAR(36) NOT NULL,
 
+                COUNTERPARTY_USERNAME VARCHAR(100) NOT NULL,
                 AMOUNT REAL NOT NULL,
                 TRANSACTION_TYPE TEXT NOT NULL,
 

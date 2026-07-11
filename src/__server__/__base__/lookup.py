@@ -24,8 +24,8 @@ class UserLookupBase(ABC):
     @classmethod
     @abstractmethod
     def transactions(
-        cls, username_or_uuid: str, limit: int
-    ) -> list[tuple[str, float, str]]:
+        cls, username_or_uuid: str, limit: int = 5
+    ) -> list[tuple[str, str, float, str]]:
 
         pass
 
