@@ -47,34 +47,26 @@ class balance:
 
     def set_balance_trend_icon(self) -> None:
 
-        last_transaction = SERVER.lookup.user.last_transaction(self.username)
+        transactions = SERVER.lookup.user.transactions(self.username, limit=1)
 
-        if last_transaction is None:
+        last_transaction = transactions[0] if transactions else None
 
-            self.balance_trend_icon.configure(
-                image=customtkinter.CTkImage(
-                    light_image=assets.icons.material.remove,
-                    dark_image=assets.icons.material.remove,
-                    size=(30, 30),
-                )
-            )
+        if not last_transaction:
+
+            icon = assets.icons.material.remove
 
         elif last_transaction[0] in ("deposit", "transfer_in"):
 
-            self.balance_trend_icon.configure(
-                image=customtkinter.CTkImage(
-                    light_image=assets.icons.material.trending_up,
-                    dark_image=assets.icons.material.trending_up,
-                    size=(30, 30),
-                )
-            )
+            icon = assets.icons.material.trending_up
 
         else:
 
-            self.balance_trend_icon.configure(
-                image=customtkinter.CTkImage(
-                    light_image=assets.icons.material.trending_down,
-                    dark_image=assets.icons.material.trending_down,
-                    size=(30, 30),
-                )
+            icon = assets.icons.material.trending_down
+
+        self.balance_trend_icon.configure(
+            image=customtkinter.CTkImage(
+                light_image=icon,
+                dark_image=icon,
+                size=(30, 30),
             )
+        )

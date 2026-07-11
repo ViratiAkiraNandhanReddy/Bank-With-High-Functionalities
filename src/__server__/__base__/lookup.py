@@ -23,7 +23,9 @@ class UserLookupBase(ABC):
 
     @classmethod
     @abstractmethod
-    def last_transaction(cls, username_or_uuid: str) -> tuple | None:
+    def transactions(
+        cls, username_or_uuid: str, limit: int
+    ) -> list[tuple[str, float, str]]:
 
         pass
 

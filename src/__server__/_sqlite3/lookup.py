@@ -73,7 +73,9 @@ class UserLookup(UserLookupBase):
         return row[0] if row is not None else None
 
     @classmethod
-    def last_transaction(cls, username_or_uuid: str) -> tuple | None:
+    def transactions(
+        cls, username_or_uuid: str, limit: int = 5
+    ) -> list[tuple[str, float, str]]:
         """(TRANSACTION_TYPE, AMOUNT, TIMESTAMP)"""
 
         user_uuid = (
@@ -84,7 +86,7 @@ class UserLookup(UserLookupBase):
 
         if not user_uuid:
 
-            return None
+            return []
 
         cursor.execute(
             """
@@ -95,12 +97,12 @@ class UserLookup(UserLookupBase):
             FROM TRANSACTIONS
             WHERE USER_UUID = ?
             ORDER BY TIMESTAMP DESC
-            LIMIT 1;
+            LIMIT ?;
             """,
-            (user_uuid,),
+            (user_uuid, limit),
         )
 
-        return cursor.fetchone()
+        return cursor.fetchall()
 
 
 class AdminLookup(AdminLookupBase):
