@@ -55,7 +55,7 @@ class balance:
 
             icon = assets.icons.material.remove
 
-        elif last_transaction[0] in ("deposit", "transfer_in"):
+        elif last_transaction[1] in ("deposit", "transfer_in"):
 
             icon = assets.icons.material.trending_up
 

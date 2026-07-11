@@ -76,7 +76,7 @@ class UserLookup(UserLookupBase):
     def transactions(
         cls, username_or_uuid: str, limit: int = 5
     ) -> list[tuple[str, str, float, str]]:
-        """(TRANSACTION_TYPE, AMOUNT, TIMESTAMP)"""
+        """[(COUNTERPARTY_USERNAME, TRANSACTION_TYPE, AMOUNT, TIMESTAMP)]"""
 
         user_uuid = (
             username_or_uuid
