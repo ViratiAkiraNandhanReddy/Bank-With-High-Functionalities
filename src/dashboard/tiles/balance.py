@@ -47,9 +47,11 @@ class balance:
 
     def set_balance_trend_icon(self) -> None:
 
-        last_transaction = SERVER.lookup.user.last_transaction(self.username)
+        last_transaction: tuple = SERVER.lookup.user.transactions(
+            self.username, limit=1
+        )[0]
 
-        if last_transaction is None:
+        if not last_transaction:
 
             self.balance_trend_icon.configure(
                 image=customtkinter.CTkImage(
