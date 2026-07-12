@@ -31,26 +31,36 @@ class transactions:
 
                     icon = assets.icons.material.add_circle
                     text = " Deposit"
+                    sign = "+"
+                    color = "#22C55E"
 
                 case "withdraw":
 
                     icon = assets.icons.material.do_not_disturb_on
                     text = " Withdraw"
+                    sign = "-"
+                    color = "#EF4444"
 
                 case "transfer_in":
 
                     icon = assets.icons.material.arrow_circle_down
                     text = " Received"
+                    sign = "+"
+                    color = "#22C55E"
 
                 case "transfer_out":
 
                     icon = assets.icons.material.arrow_circle_up
                     text = " Sent"
+                    sign = "-"
+                    color = "#EF4444"
 
                 case _:
 
                     icon = assets.icons.material.error
                     text = " Unknown"
+                    sign = "~"
+                    color = "#FFFFFF"
 
             customtkinter.CTkLabel(
                 card,
@@ -62,4 +72,15 @@ class transactions:
                     light_image=icon, dark_image=icon, size=(20, 20)
                 ),
                 compound="left",
+                text_color="#FFFFFF",
             ).place(x=5, y=5)
+
+            customtkinter.CTkLabel(
+                card,
+                text=f"{sign}${_transaction[2]:,.2f}",
+                width=110,
+                height=20,
+                font=("Roboto", 12, "bold"),
+                text_color=color,
+                anchor="e",
+            ).place(x=85, y=5)
