@@ -106,3 +106,13 @@ class transactions:
                 font=("Consolas", 11),
                 text_color="#A3A3A3",
             ).place(x=0, y=57)
+
+    def refresh(self) -> None:
+
+        widget: customtkinter.CTkFrame
+
+        for widget in self.frame__transactions.winfo_children():
+
+            widget.destroy()
+
+        self.load_transactions_cards()
