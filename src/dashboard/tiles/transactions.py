@@ -98,3 +98,11 @@ class transactions:
                 text_color="#D4D4D4",
             ).place(x=0, y=31)
 
+            customtkinter.CTkLabel(
+                card,
+                text=f"{_transaction[3]}",  # YYYY-MM-DD HH:MM:SS
+                width=200,
+                height=20,
+                font=("Consolas", 11),
+                text_color="#A3A3A3",
+            ).place(x=0, y=57)
