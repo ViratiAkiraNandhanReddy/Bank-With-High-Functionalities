@@ -84,3 +84,17 @@ class transactions:
                 text_color=color,
                 anchor="e",
             ).place(x=85, y=5)
+
+            customtkinter.CTkLabel(
+                card,
+                text=(
+                    _transaction[0]
+                    if len(_transaction[0]) < 29
+                    else _transaction[0][:26] + "..."
+                ),
+                width=200,
+                height=20,
+                font=("Consolas", 11),
+                text_color="#D4D4D4",
+            ).place(x=0, y=31)
+
