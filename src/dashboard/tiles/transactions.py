@@ -24,3 +24,42 @@ class transactions:
                 self.frame__transactions, width=200, height=82, fg_color="#111111"
             )
             card.place(x=5, y=(5 + n * (82 + 5)))
+
+            match _transaction[1]:
+
+                case "deposit":
+
+                    icon = assets.icons.material.add_circle
+                    text = " Deposit"
+
+                case "withdraw":
+
+                    icon = assets.icons.material.do_not_disturb_on
+                    text = " Withdraw"
+
+                case "transfer_in":
+
+                    icon = assets.icons.material.arrow_circle_down
+                    text = " Received"
+
+                case "transfer_out":
+
+                    icon = assets.icons.material.arrow_circle_up
+                    text = " Sent"
+
+                case _:
+
+                    icon = assets.icons.material.error
+                    text = " Unknown"
+
+            customtkinter.CTkLabel(
+                card,
+                text=text,
+                width=0,
+                height=0,
+                font=("Roboto", 12, "bold"),
+                image=customtkinter.CTkImage(
+                    light_image=icon, dark_image=icon, size=(20, 20)
+                ),
+                compound="left",
+            ).place(x=5, y=5)
