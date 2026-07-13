@@ -10,8 +10,20 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "account_circle.png"
         )
 
+        add_circle: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "add_circle.png"
+        )
+
         arrow_back: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "arrow_back.png"
+        )
+
+        arrow_circle_down = Image.open(
+            root / "assets" / "icons" / "material-icons" / "arrow_circle_down.png"
+        )
+
+        arrow_circle_up = Image.open(
+            root / "assets" / "icons" / "material-icons" / "arrow_circle_up.png"
         )
 
         arrow_forward: Image.Image = Image.open(
@@ -44,6 +56,10 @@ class icons:
 
         developer_mode_tv: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "developer_mode_tv.png"
+        )
+
+        do_not_disturb_on = Image.open(
+            root / "assets" / "icons" / "material-icons" / "do_not_disturb_on.png"
         )
 
         error: Image.Image = Image.open(
