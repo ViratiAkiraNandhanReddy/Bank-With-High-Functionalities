@@ -29,6 +29,12 @@ class UserLookupBase(ABC):
 
         pass
 
+    @classmethod
+    @abstractmethod
+    def full_name(cls, username_or_uuid: str) -> str:
+
+        pass
+
 
 class AdminLookupBase(ABC):
 
