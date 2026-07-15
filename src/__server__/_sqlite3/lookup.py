@@ -105,6 +105,30 @@ class UserLookup(UserLookupBase):
 
         return cursor.fetchall()
 
+    @classmethod
+    def full_name(cls, username_or_uuid: str) -> str:
+        
+        if _uuids.validate(username_or_uuid):
+
+            cursor.execute(
+                """
+                SELECT FULL_NAME FROM USERS WHERE UUID = ?
+                """,
+                (username_or_uuid,),
+            )
+
+            row = cursor.fetchone()
+            return row[0] if row is not None else "User"
+
+        cursor.execute(
+            """
+            SELECT FULL_NAME FROM USERS WHERE USERNAME = ?
+            """,
+            (username_or_uuid,),
+        )
+
+        row = cursor.fetchone()
+        return row[0] if row is not None else "User"
 
 class AdminLookup(AdminLookupBase):
 
