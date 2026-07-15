@@ -53,6 +53,25 @@ class dashboard_interface:
             )
             self.frame__status_greeting.place(x=10, y=10)
 
+            self.full_name = SERVER.lookup.user.full_name(username)
+
+            customtkinter.CTkLabel(
+                self.frame__status_greeting,
+                text=(
+                    utils.greetings.current()
+                    + ", "
+                    + (
+                        self.full_name
+                        if len(self.full_name) < 96
+                        else self.full_name[:93] + "..."
+                    )
+                ),
+                font=("Roboto", 14),
+                height=30,
+                width=780,
+                anchor="w",
+            ).place(x=10, y=0)
+
             self.frame__status_utilities: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
                     self.frame__dashboard, width=230, height=30, fg_color="#0a0a0a"
