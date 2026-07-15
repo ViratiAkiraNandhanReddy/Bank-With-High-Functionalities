@@ -107,7 +107,7 @@ class UserLookup(UserLookupBase):
 
     @classmethod
     def full_name(cls, username_or_uuid: str) -> str:
-        
+
         if _uuids.validate(username_or_uuid):
 
             cursor.execute(
@@ -129,6 +129,7 @@ class UserLookup(UserLookupBase):
 
         row = cursor.fetchone()
         return row[0] if row is not None else "User"
+
 
 class AdminLookup(AdminLookupBase):
 
