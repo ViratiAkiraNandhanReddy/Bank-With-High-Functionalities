@@ -1,3 +1,4 @@
+from datetime import datetime
 from .. import customtkinter, assets, utils, Callable, SERVER
 from .tiles import actions, messages, account_info, security
 
@@ -76,6 +77,14 @@ class dashboard_interface:
                 self.frame__dashboard, width=120, height=30, fg_color="#0a0a0a"
             )
             self.frame__status_date.place(x=690, y=10)
+
+            customtkinter.CTkLabel(
+                self.frame__status_date,
+                text=datetime.now().strftime("%d %b %Y"),
+                font=("Consolas", 14, "bold"),
+                height=30,
+                width=110,
+            ).place(x=5, y=0)
 
             self.frame__status_utilities: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
