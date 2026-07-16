@@ -1,4 +1,4 @@
-from .. import *
+from .. import customtkinter, assets, utils, Callable, SERVER
 from .tiles import actions, messages, account_info, security
 
 
@@ -48,7 +48,7 @@ class dashboard_interface:
 
             self.frame__status_greeting: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
-                    self.frame__dashboard, width=800, height=30, fg_color="#0a0a0a"
+                    self.frame__dashboard, width=670, height=30, fg_color="#0a0a0a"
                 )
             )
             self.frame__status_greeting.place(x=10, y=10)
@@ -68,9 +68,14 @@ class dashboard_interface:
                 ),
                 font=("Roboto", 14),
                 height=30,
-                width=780,
+                width=650,
                 anchor="w",
             ).place(x=10, y=0)
+
+            self.frame__status_date: customtkinter.CTkFrame = customtkinter.CTkFrame(
+                self.frame__dashboard, width=120, height=30, fg_color="#0a0a0a"
+            )
+            self.frame__status_date.place(x=690, y=10)
 
             self.frame__status_utilities: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
