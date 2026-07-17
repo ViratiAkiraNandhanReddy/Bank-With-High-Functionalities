@@ -1,4 +1,5 @@
 from .._uuids import _uuids
+from datetime import datetime
 from ._connection import connection
 from ..__base__ import UserLookupBase, AdminLookupBase
 
@@ -129,6 +130,31 @@ class UserLookup(UserLookupBase):
 
         row = cursor.fetchone()
         return row[0] if row is not None else "User"
+
+    @classmethod
+    def last_login(cls, username_or_uuid: str) -> datetime | None:
+
+        if _uuids.validate(username_or_uuid):
+
+            cursor.execute(
+                """
+                SELECT LAST_LOGIN FROM USERS WHERE UUID = ?
+                """,
+                (username_or_uuid,),
+            )
+
+            row = cursor.fetchone()
+            return datetime.fromisoformat(row[0]) if row is not None else None
+
+        cursor.execute(
+            """
+            SELECT LAST_LOGIN FROM USERS WHERE USERNAME = ?
+            """,
+            (username_or_uuid,),
+        )
+
+        row = cursor.fetchone()
+        return datetime.fromisoformat(row[0]) if row is not None else None
 
 
 class AdminLookup(AdminLookupBase):
