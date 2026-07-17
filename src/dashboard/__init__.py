@@ -30,6 +30,14 @@ class dashboard_interface:
                 _btn.place(x=1080, y=0),
             )
 
+            self.last_login: datetime | None = SERVER.lookup.user.last_login(username)
+
+            if self.last_login:
+
+                self.last_login = self.last_login.astimezone()
+
+            SERVER.authentication.user.update_last_login(username)
+
             customtkinter.CTkButton(
                 self.frame__dashboard,
                 text="",
@@ -49,7 +57,7 @@ class dashboard_interface:
 
             self.frame__status_greeting: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
-                    self.frame__dashboard, width=670, height=30, fg_color="#0a0a0a"
+                    self.frame__dashboard, width=414, height=30, fg_color="#0a0a0a"
                 )
             )
             self.frame__status_greeting.place(x=10, y=10)
@@ -63,20 +71,42 @@ class dashboard_interface:
                     + ", "
                     + (
                         self.full_name
-                        if len(self.full_name) < 96
-                        else self.full_name[:93] + "..."
+                        if len(self.full_name) < 33
+                        else self.full_name[:30] + "..."
                     )
                 ),
-                font=("Roboto", 14),
+                font=("Consolas", 14, "bold"),
                 height=30,
-                width=650,
+                width=394,
                 anchor="w",
             ).place(x=10, y=0)
+
+            self.frame__status_last_login: customtkinter.CTkFrame = (
+                customtkinter.CTkFrame(
+                    self.frame__dashboard, width=296, height=30, fg_color="#0a0a0a"
+                )
+            )
+            self.frame__status_last_login.place(x=434, y=10)
+
+            customtkinter.CTkLabel(
+                self.frame__status_last_login,
+                text=(
+                    "Last login: "
+                    + (
+                        self.last_login.strftime("%d %b %Y, %I:%M %p")
+                        if self.last_login is not None
+                        else "Never"
+                    )
+                ),
+                font=("Consolas", 14, "bold"),
+                height=30,
+                width=286,
+            ).place(x=5, y=0)
 
             self.frame__status_date: customtkinter.CTkFrame = customtkinter.CTkFrame(
                 self.frame__dashboard, width=120, height=30, fg_color="#0a0a0a"
             )
-            self.frame__status_date.place(x=690, y=10)
+            self.frame__status_date.place(x=740, y=10)
 
             customtkinter.CTkLabel(
                 self.frame__status_date,
@@ -88,10 +118,10 @@ class dashboard_interface:
 
             self.frame__status_utilities: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
-                    self.frame__dashboard, width=230, height=30, fg_color="#0a0a0a"
+                    self.frame__dashboard, width=180, height=30, fg_color="#0a0a0a"
                 )
             )
-            self.frame__status_utilities.place(x=820, y=10)
+            self.frame__status_utilities.place(x=870, y=10)
 
             self.actions = actions(self.frame__dashboard, username)
 

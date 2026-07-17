@@ -1,5 +1,6 @@
 from .._uuids import _uuids
 from ._connection import connection
+from datetime import datetime, timezone
 from ..__base__ import UserLookupBase, AdminLookupBase
 
 cursor = connection.cursor()
@@ -129,6 +130,39 @@ class UserLookup(UserLookupBase):
 
         row = cursor.fetchone()
         return row[0] if row is not None else "User"
+
+    @classmethod
+    def last_login(cls, username_or_uuid: str) -> datetime | None:
+
+        if _uuids.validate(username_or_uuid):
+
+            cursor.execute(
+                """
+                SELECT LAST_LOGIN FROM USERS WHERE UUID = ?
+                """,
+                (username_or_uuid,),
+            )
+
+            row = cursor.fetchone()
+            return (
+                datetime.fromisoformat(row[0]).replace(tzinfo=timezone.utc)
+                if row is not None and row[0] is not None
+                else None
+            )
+
+        cursor.execute(
+            """
+            SELECT LAST_LOGIN FROM USERS WHERE USERNAME = ?
+            """,
+            (username_or_uuid,),
+        )
+
+        row = cursor.fetchone()
+        return (
+            datetime.fromisoformat(row[0]).replace(tzinfo=timezone.utc)
+            if row is not None and row[0] is not None
+            else None
+        )
 
 
 class AdminLookup(AdminLookupBase):

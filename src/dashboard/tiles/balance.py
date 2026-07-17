@@ -33,7 +33,7 @@ class balance:
             width=420,
             height=50,
             text_color="#FFFFFF",
-            font=("Roboto", 18),
+            font=("Consolas", 18),
         )
         self.label__balance.place(x=10, y=0)
 
