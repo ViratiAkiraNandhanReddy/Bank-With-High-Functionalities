@@ -1,6 +1,6 @@
 from .._uuids import _uuids
-from datetime import datetime
 from ._connection import connection
+from datetime import datetime, timezone
 from ..__base__ import UserLookupBase, AdminLookupBase
 
 cursor = connection.cursor()
@@ -144,7 +144,11 @@ class UserLookup(UserLookupBase):
             )
 
             row = cursor.fetchone()
-            return datetime.fromisoformat(row[0]) if row is not None else None
+            return (
+                datetime.fromisoformat(row[0]).replace(tzinfo=timezone.utc)
+                if row is not None and row[0] is not None
+                else None
+            )
 
         cursor.execute(
             """
@@ -154,7 +158,11 @@ class UserLookup(UserLookupBase):
         )
 
         row = cursor.fetchone()
-        return datetime.fromisoformat(row[0]) if row is not None else None
+        return (
+            datetime.fromisoformat(row[0]).replace(tzinfo=timezone.utc)
+            if row is not None and row[0] is not None
+            else None
+        )
 
 
 class AdminLookup(AdminLookupBase):
