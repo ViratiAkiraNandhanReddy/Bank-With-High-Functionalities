@@ -3,5 +3,5 @@ pillow==12.3.0
 pywinstyles==1.8
 python-dotenv==1.2.2
 customtkinter==6.0.0
-CaesarCipher.extended
+caesarcipher-extended
 mysql-connector-python

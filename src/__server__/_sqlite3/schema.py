@@ -38,7 +38,9 @@ class UserSchema(UserSchemaBase):
                 PASSWORD TEXT NOT NULL,
                 EMAIL TEXT UNIQUE,
                 BACKUP_CODE CHAR(36) NOT NULL,
+                LAST_LOGIN TIMESTAMP,
 
+                FULL_NAME VARCHAR(100) NOT NULL,
                 BALANCE REAL NOT NULL DEFAULT 0.0,
 
                 CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -64,6 +66,7 @@ class TransactionSchema(TransactionSchemaBase):
                 TRANSACTION_ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 USER_UUID CHAR(36) NOT NULL,
 
+                COUNTERPARTY_USERNAME VARCHAR(100) NOT NULL,
                 AMOUNT REAL NOT NULL,
                 TRANSACTION_TYPE TEXT NOT NULL,
 

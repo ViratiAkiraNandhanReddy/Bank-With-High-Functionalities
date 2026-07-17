@@ -61,6 +61,20 @@ class UserAuthentication(UserAuthenticationBase):
 
         return cursor.fetchone()[0] == email_address
 
+    @classmethod
+    def update_last_login(cls, username_or_uuid: str) -> None:
+
+        cursor.execute(
+            """
+            UPDATE users
+            SET last_login = CURRENT_TIMESTAMP
+            WHERE username = ? OR uuid = ?
+            """,
+            (username_or_uuid, username_or_uuid),
+        )
+
+        connection.commit()
+
 
 class AdminAuthentication(AdminAuthenticationBase):
 

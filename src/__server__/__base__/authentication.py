@@ -21,6 +21,12 @@ class UserAuthenticationBase(ABC):
 
         pass
 
+    @classmethod
+    @abstractmethod
+    def update_last_login(cls, username_or_uuid: str) -> None:
+
+        pass
+
 
 class AdminAuthenticationBase(ABC):
 

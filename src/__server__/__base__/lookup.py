@@ -1,3 +1,4 @@
+from datetime import datetime
 from abc import ABC, abstractmethod
 
 
@@ -23,7 +24,21 @@ class UserLookupBase(ABC):
 
     @classmethod
     @abstractmethod
-    def last_transaction(cls, username_or_uuid: str) -> tuple | None:
+    def transactions(
+        cls, username_or_uuid: str, limit: int = 5
+    ) -> list[tuple[str, str, float, str]]:
+
+        pass
+
+    @classmethod
+    @abstractmethod
+    def full_name(cls, username_or_uuid: str) -> str:
+
+        pass
+
+    @classmethod
+    @abstractmethod
+    def last_login(cls, username_or_uuid: str) -> datetime | None:
 
         pass
 

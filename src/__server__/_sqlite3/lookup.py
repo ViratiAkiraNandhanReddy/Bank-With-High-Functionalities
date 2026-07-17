@@ -1,5 +1,6 @@
 from .._uuids import _uuids
 from ._connection import connection
+from datetime import datetime, timezone
 from ..__base__ import UserLookupBase, AdminLookupBase
 
 cursor = connection.cursor()
@@ -73,8 +74,10 @@ class UserLookup(UserLookupBase):
         return row[0] if row is not None else None
 
     @classmethod
-    def last_transaction(cls, username_or_uuid: str) -> tuple | None:
-        """(TRANSACTION_TYPE, AMOUNT, TIMESTAMP)"""
+    def transactions(
+        cls, username_or_uuid: str, limit: int = 5
+    ) -> list[tuple[str, str, float, str]]:
+        """[(COUNTERPARTY_USERNAME, TRANSACTION_TYPE, AMOUNT, TIMESTAMP)]"""
 
         user_uuid = (
             username_or_uuid
@@ -84,23 +87,82 @@ class UserLookup(UserLookupBase):
 
         if not user_uuid:
 
-            return None
+            return []
 
         cursor.execute(
             """
             SELECT
+                COUNTERPARTY_USERNAME,
                 TRANSACTION_TYPE,
                 AMOUNT,
                 TIMESTAMP
             FROM TRANSACTIONS
             WHERE USER_UUID = ?
             ORDER BY TIMESTAMP DESC
-            LIMIT 1;
+            LIMIT ?;
             """,
-            (user_uuid,),
+            (user_uuid, limit),
         )
 
-        return cursor.fetchone()
+        return cursor.fetchall()
+
+    @classmethod
+    def full_name(cls, username_or_uuid: str) -> str:
+
+        if _uuids.validate(username_or_uuid):
+
+            cursor.execute(
+                """
+                SELECT FULL_NAME FROM USERS WHERE UUID = ?
+                """,
+                (username_or_uuid,),
+            )
+
+            row = cursor.fetchone()
+            return row[0] if row is not None else "User"
+
+        cursor.execute(
+            """
+            SELECT FULL_NAME FROM USERS WHERE USERNAME = ?
+            """,
+            (username_or_uuid,),
+        )
+
+        row = cursor.fetchone()
+        return row[0] if row is not None else "User"
+
+    @classmethod
+    def last_login(cls, username_or_uuid: str) -> datetime | None:
+
+        if _uuids.validate(username_or_uuid):
+
+            cursor.execute(
+                """
+                SELECT LAST_LOGIN FROM USERS WHERE UUID = ?
+                """,
+                (username_or_uuid,),
+            )
+
+            row = cursor.fetchone()
+            return (
+                datetime.fromisoformat(row[0]).replace(tzinfo=timezone.utc)
+                if row is not None and row[0] is not None
+                else None
+            )
+
+        cursor.execute(
+            """
+            SELECT LAST_LOGIN FROM USERS WHERE USERNAME = ?
+            """,
+            (username_or_uuid,),
+        )
+
+        row = cursor.fetchone()
+        return (
+            datetime.fromisoformat(row[0]).replace(tzinfo=timezone.utc)
+            if row is not None and row[0] is not None
+            else None
+        )
 
 
 class AdminLookup(AdminLookupBase):
