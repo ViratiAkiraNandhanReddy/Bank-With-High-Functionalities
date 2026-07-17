@@ -30,6 +30,14 @@ class dashboard_interface:
                 _btn.place(x=1080, y=0),
             )
 
+            self.last_login: datetime | None = SERVER.lookup.user.last_login(username)
+
+            if self.last_login:
+
+                self.last_login = self.last_login.astimezone()
+
+            SERVER.authentication.user.update_last_login(username)
+
             customtkinter.CTkButton(
                 self.frame__dashboard,
                 text="",
