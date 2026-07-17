@@ -71,8 +71,8 @@ class dashboard_interface:
                     + ", "
                     + (
                         self.full_name
-                        if len(self.full_name) < 96
-                        else self.full_name[:93] + "..."
+                        if len(self.full_name) < 33
+                        else self.full_name[:30] + "..."
                     )
                 ),
                 font=("Consolas", 14, "bold"),
