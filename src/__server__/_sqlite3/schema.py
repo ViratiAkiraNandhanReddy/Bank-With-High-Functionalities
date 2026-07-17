@@ -38,6 +38,7 @@ class UserSchema(UserSchemaBase):
                 PASSWORD TEXT NOT NULL,
                 EMAIL TEXT UNIQUE,
                 BACKUP_CODE CHAR(36) NOT NULL,
+                LAST_LOGIN TIMESTAMP,
 
                 FULL_NAME VARCHAR(100) NOT NULL,
                 BALANCE REAL NOT NULL DEFAULT 0.0,

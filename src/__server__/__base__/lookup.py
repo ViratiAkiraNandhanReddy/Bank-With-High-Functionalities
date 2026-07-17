@@ -1,3 +1,4 @@
+from datetime import datetime
 from abc import ABC, abstractmethod
 
 
@@ -32,6 +33,12 @@ class UserLookupBase(ABC):
     @classmethod
     @abstractmethod
     def full_name(cls, username_or_uuid: str) -> str:
+
+        pass
+
+    @classmethod
+    @abstractmethod
+    def last_login(cls, username_or_uuid: str) -> datetime | None:
 
         pass
 
