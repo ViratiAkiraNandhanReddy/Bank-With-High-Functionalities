@@ -88,6 +88,21 @@ class dashboard_interface:
             )
             self.frame__status_last_login.place(x=434, y=10)
 
+            customtkinter.CTkLabel(
+                self.frame__status_last_login,
+                text=(
+                    "Last login: "
+                    + (
+                        self.last_login.strftime("%d %b %Y, %I:%M %p")
+                        if self.last_login is not None
+                        else "Never"
+                    )
+                ),
+                font=("Consolas", 14, "bold"),
+                height=30,
+                width=286,
+            ).place(x=5, y=0)
+
             self.frame__status_date: customtkinter.CTkFrame = customtkinter.CTkFrame(
                 self.frame__dashboard, width=120, height=30, fg_color="#0a0a0a"
             )
