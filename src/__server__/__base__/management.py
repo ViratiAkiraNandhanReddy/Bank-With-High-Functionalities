@@ -17,7 +17,7 @@ class UserManagementBase(ABC):
 
     @classmethod
     @abstractmethod
-    def delete(cls, username_or_uuid: str, password: str) -> bool:
+    def delete(cls, username_or_uuid: str) -> bool:
 
         pass
 
