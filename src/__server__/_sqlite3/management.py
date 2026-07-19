@@ -1,4 +1,3 @@
-from .._uuids import _uuids
 from ._connection import connection
 from CaesarCipher import Encryption
 from ..__base__ import UserManagementBase, AdminManagementBase
@@ -15,9 +14,11 @@ class UserManagement(UserManagementBase):
 
         cursor.execute(
             """
-                UPDATE users SET password = ? WHERE username = ?
-                """,
-            (password, username_or_uuid),
+            UPDATE USERS
+            SET PASSWORD = ?
+            WHERE USERNAME = ? OR UUID = ?
+            """,
+            (password, username_or_uuid, username_or_uuid),
         )
 
         connection.commit()
@@ -29,9 +30,11 @@ class UserManagement(UserManagementBase):
 
         cursor.execute(
             """
-                UPDATE users SET username = ? WHERE username = ?
-                """,
-            (new_username, old_username_or_uuid),
+            UPDATE USERS
+            SET USERNAME = ?
+            WHERE USERNAME = ? OR UUID = ?
+            """,
+            (new_username, old_username_or_uuid, old_username_or_uuid),
         )
 
         connection.commit()
@@ -39,13 +42,14 @@ class UserManagement(UserManagementBase):
         return cursor.rowcount > 0
 
     @classmethod
-    def delete(cls, username_or_uuid: str, password: str) -> bool:
+    def delete(cls, username_or_uuid: str) -> bool:
 
         cursor.execute(
             """
-                DELETE FROM users WHERE username = ?
-                """,
-            (username_or_uuid,),
+            DELETE FROM USERS
+            WHERE USERNAME = ? OR UUID = ?
+            """,
+            (username_or_uuid, username_or_uuid),
         )
         connection.commit()
 
@@ -61,8 +65,10 @@ class AdminManagement(AdminManagementBase):
 
         cursor.execute(
             """
-                UPDATE admins SET password = ? WHERE username = ?
-                """,
+            UPDATE ADMINS
+            SET PASSWORD = ?
+            WHERE USERNAME = ?
+            """,
             (password, username),
         )
 
