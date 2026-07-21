@@ -1,3 +1,4 @@
+from .deposit import deposit
 from ..balance import balance
 from .... import customtkinter
 from ..favorites import favorites
@@ -21,3 +22,5 @@ class actions:
             parent_frame, width=350, height=390, fg_color="#0a0a0a"
         )
         self.frame__action_view.place(x=740, y=250)
+
+        self.deposit = deposit(self.frame__action_view, self.balance, self.transactions)
