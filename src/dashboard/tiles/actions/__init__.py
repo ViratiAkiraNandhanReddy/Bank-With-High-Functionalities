@@ -1,7 +1,7 @@
-from .balance import balance
-from ... import customtkinter
-from .favorites import favorites
-from .transactions import transactions
+from ..balance import balance
+from .... import customtkinter
+from ..favorites import favorites
+from ..transactions import transactions
 
 
 class actions:
