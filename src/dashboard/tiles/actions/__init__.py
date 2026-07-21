@@ -1,5 +1,6 @@
 from .deposit import deposit
 from ..balance import balance
+from .withdraw import withdraw
 from .... import customtkinter
 from ..favorites import favorites
 from ..transactions import transactions
@@ -23,4 +24,10 @@ class actions:
         )
         self.frame__action_view.place(x=740, y=250)
 
-        self.deposit = deposit(self.frame__action_view, self.balance, self.transactions)
+        self.deposit: deposit = deposit(
+            self.frame__action_view, self.balance, self.transactions
+        )
+
+        self.withdraw: withdraw = withdraw(
+            self.frame__action_view, self.balance, self.transactions
+        )
