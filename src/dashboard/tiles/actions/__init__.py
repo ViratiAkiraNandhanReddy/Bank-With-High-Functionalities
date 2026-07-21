@@ -1,6 +1,7 @@
 from .deposit import deposit
 from ..balance import balance
 from .withdraw import withdraw
+from .transfer import transfer
 from .... import customtkinter
 from ..favorites import favorites
 from ..transactions import transactions
@@ -29,5 +30,9 @@ class actions:
         )
 
         self.withdraw: withdraw = withdraw(
+            self.frame__action_view, self.balance, self.transactions
+        )
+
+        self.transfer: transfer = transfer(
             self.frame__action_view, self.balance, self.transactions
         )
