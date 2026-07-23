@@ -1,9 +1,9 @@
-from ..balance import balance
-from ..transactions import transactions
+from .._balance import balance
+from .._transactions import transactions
 from .... import customtkinter, assets, Callable, SERVER
 
 
-class withdraw:
+class deposit:
 
     def __init__(
         self,
@@ -12,7 +12,7 @@ class withdraw:
         transactions_instance: transactions,
     ) -> None:
 
-        self.frame__withdraw: customtkinter.CTkFrame = customtkinter.CTkFrame(
+        self.frame__deposit: customtkinter.CTkFrame = customtkinter.CTkFrame(
             parent_frame,
             width=350,
             height=390,
@@ -25,6 +25,6 @@ class withdraw:
             ),  # type: ignore[arg-type]
         )
 
-        self.show_frame: Callable = lambda: self.frame__withdraw.place(x=0, y=0)
+        self.show_frame: Callable = lambda: self.frame__deposit.place(x=0, y=0)
 
-        self.hide_frame: Callable = lambda: self.frame__withdraw.place_forget()
+        self.hide_frame: Callable = lambda: self.frame__deposit.place_forget()
