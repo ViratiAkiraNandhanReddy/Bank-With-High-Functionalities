@@ -20,9 +20,7 @@ class actions:
         )
         self.frame__actions.place(x=740, y=200)
 
-        self.deposit: deposit = deposit(
-            parent_frame, self.balance, self.transactions
-        )
+        self.deposit: deposit = deposit(parent_frame, self.balance, self.transactions)
 
         self.withdraw: withdraw = withdraw(
             parent_frame, self.balance, self.transactions
@@ -31,6 +29,8 @@ class actions:
         self.transfer: transfer = transfer(
             parent_frame, self.balance, self.transactions
         )
+
+        self.previous_action_view: deposit | withdraw | transfer
 
         self.action_selector_variable = customtkinter.StringVar(value="Deposit")
 
@@ -47,5 +47,36 @@ class actions:
             unselected_hover_color="#1D1D1D",
             selected_color="#1D1D1D",
             selected_hover_color="#1D1D1D",
+            command=self.place_actions_views,
         )
         self.action_selector.place(x=5, y=5)
+
+        self.place_actions_views("Deposit")
+
+    def place_actions_views(self, action_view_to_place: str) -> None:
+
+        if hasattr(self, "previous_action_view"):
+
+            self.previous_action_view.hide_frame()
+
+        match action_view_to_place:
+
+            case "Deposit":
+
+                current_action_view = self.deposit
+
+            case "Withdraw":
+
+                current_action_view = self.withdraw
+
+            case "Transfer":
+
+                current_action_view = self.transfer
+
+            case _:
+
+                current_action_view = self.deposit
+
+        current_action_view.show_frame()
+
+        self.previous_action_view = current_action_view
