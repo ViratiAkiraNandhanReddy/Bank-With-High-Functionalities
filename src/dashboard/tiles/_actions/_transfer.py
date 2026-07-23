@@ -17,14 +17,8 @@ class transfer:
             width=350,
             height=390,
             fg_color="#0a0a0a",
-            background_corner_colors=(
-                "#000000",
-                "#000000",
-                "#000000",
-                "#000000",
-            ),  # type: ignore[arg-type]
         )
 
-        self.show_frame: Callable = lambda: self.frame__transfer.place(x=0, y=0)
+        self.show_frame: Callable = lambda: self.frame__transfer.place(x=740, y=250)
 
         self.hide_frame: Callable = lambda: self.frame__transfer.place_forget()

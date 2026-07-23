@@ -20,21 +20,16 @@ class actions:
         )
         self.frame__actions.place(x=740, y=200)
 
-        self.frame__action_view: customtkinter.CTkFrame = customtkinter.CTkFrame(
-            parent_frame, width=350, height=390, fg_color="#0a0a0a"
-        )
-        self.frame__action_view.place(x=740, y=250)
-
         self.deposit: deposit = deposit(
-            self.frame__action_view, self.balance, self.transactions
+            parent_frame, self.balance, self.transactions
         )
 
         self.withdraw: withdraw = withdraw(
-            self.frame__action_view, self.balance, self.transactions
+            parent_frame, self.balance, self.transactions
         )
 
         self.transfer: transfer = transfer(
-            self.frame__action_view, self.balance, self.transactions
+            parent_frame, self.balance, self.transactions
         )
 
         self.action_selector_variable = customtkinter.StringVar(value="Deposit")
