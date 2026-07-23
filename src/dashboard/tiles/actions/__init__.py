@@ -36,3 +36,21 @@ class actions:
         self.transfer: transfer = transfer(
             self.frame__action_view, self.balance, self.transactions
         )
+
+        self.action_selector_variable = customtkinter.StringVar(value="Deposit")
+
+        self.action_selector = customtkinter.CTkSegmentedButton(
+            self.frame__actions,
+            height=30,
+            width=340,
+            fg_color="#0a0a0a",
+            text_color="#FFFFFF",
+            values=["Deposit", "Withdraw", "Transfer"],
+            variable=self.action_selector_variable,
+            dynamic_resizing=False,
+            unselected_color="#131313",
+            unselected_hover_color="#1D1D1D",
+            selected_color="#1D1D1D",
+            selected_hover_color="#1D1D1D",
+        )
+        self.action_selector.place(x=5, y=5)
