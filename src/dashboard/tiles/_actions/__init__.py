@@ -30,7 +30,7 @@ class actions:
             parent_frame, self.balance, self.transactions
         )
 
-        self.previous_action_view: deposit | withdraw | transfer
+        self.previous_action_view: deposit | withdraw | transfer | None = None
 
         self.action_selector_variable = customtkinter.StringVar(value="Deposit")
 
@@ -55,27 +55,20 @@ class actions:
 
     def place_actions_views(self, action_view_to_place: str) -> None:
 
-        if hasattr(self, "previous_action_view"):
+        if self.previous_action_view is not None:
 
             self.previous_action_view.hide_frame()
 
-        match action_view_to_place:
+        self.action_views = {
+            "Deposit": self.deposit,
+            "Withdraw": self.withdraw,
+            "Transfer": self.transfer,
+        }
 
-            case "Deposit":
-
-                current_action_view = self.deposit
-
-            case "Withdraw":
-
-                current_action_view = self.withdraw
-
-            case "Transfer":
-
-                current_action_view = self.transfer
-
-            case _:
-
-                current_action_view = self.deposit
+        current_action_view: deposit | withdraw | transfer = self.action_views.get(
+            action_view_to_place,
+            self.deposit,
+        )
 
         current_action_view.show_frame()
 
