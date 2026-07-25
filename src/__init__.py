@@ -31,18 +31,16 @@ CONSTANTS: dict[str, dict[str, Any]] = {
     },
 }
 
-DIR_PATH: str = str(os.environ.get("LOCALAPPDATA")) + r"\Bank-With-High-Functionalities"
-
 try:
 
-    with open(rf"{DIR_PATH}\database\config.json", "r") as config:
+    with open(utils.root / "database" / "config.json", "r") as config:
         CONFIGURATION_JSON: dict[str, Any] = json.load(config)
 
 except FileNotFoundError, json.JSONDecodeError:
 
     CONFIGURATION_JSON = {}
 
-load_dotenv(rf"{DIR_PATH}\.env")
+load_dotenv(utils.root / ".env")
 
 
 class borderless_window_utils:
