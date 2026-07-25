@@ -27,6 +27,24 @@ class favorites:
             )
             card.place(x=7, y=(7 + n * (64 + 7)))
 
+            customtkinter.CTkLabel(
+                card,
+                text=(recipient if len(recipient) < 25 else recipient[:21] + "..."),
+                width=231,
+                height=26,
+                font=("Consolas", 16, "bold"),
+                text_color="#D4D4D4",
+            ).place(x=0, y=6)
+
+            customtkinter.CTkLabel(
+                card,
+                text=f"{count} transfers",
+                width=231,
+                height=26,
+                font=("Consolas", 12),
+                text_color="#FFFFFF",
+            ).place(x=0, y=32)
+
     def refresh(self) -> None:
 
         widget: customtkinter.CTkFrame
