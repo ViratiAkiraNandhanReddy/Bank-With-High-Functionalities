@@ -17,13 +17,6 @@ CONSTANTS: dict[str, dict[str, Any]] = {
     "website": {
         "home": "https://viratiakiranandhanreddy.github.io/Bank-With-High-Functionalities/",
     },
-    "socials": {
-        "github": "https://github.com/ViratiAkiraNandhanReddy",
-        "instagram": "https://www.instagram.com/viratiakiranandhanreddy",
-        "twitter": "https://twitter.com/akiranandhan_",
-        "linkedin": "https://www.linkedin.com/in/viratiakiranandhanreddy",
-        "youtube": "https://www.youtube.com/@ViratiAkiraNandhanReddy",
-    },
     "github": {
         "repository": "https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities",
         "issues": "https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/issues",
