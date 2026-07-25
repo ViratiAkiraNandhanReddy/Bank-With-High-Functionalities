@@ -128,6 +128,32 @@ class UserLookup(UserLookupBase):
             else None
         )
 
+    @classmethod
+    def frequent_transfer_recipients(
+        cls, username_or_uuid: str
+    ) -> list[tuple[str, int]]:
+
+        cursor.execute(
+            """
+            SELECT
+                COUNTERPARTY_USERNAME,
+                COUNT(*) AS TRANSFER_COUNT
+            FROM TRANSACTIONS
+            WHERE USER_UUID = (
+                SELECT UUID
+                FROM USERS
+                WHERE USERNAME = ? OR UUID = ?
+            )
+            AND TRANSACTION_TYPE = 'transfer_out'
+            GROUP BY COUNTERPARTY_USERNAME
+            ORDER BY TRANSFER_COUNT DESC
+            LIMIT 3
+            """,
+            (username_or_uuid, username_or_uuid),
+        )
+
+        return cursor.fetchall()
+
 
 class AdminLookup(AdminLookupBase):
 
