@@ -26,3 +26,13 @@ class favorites:
                 self.frame__favorites, width=231, height=64, fg_color="#111111"
             )
             card.place(x=7, y=(7 + n * (64 + 7)))
+
+    def refresh(self) -> None:
+
+        widget: customtkinter.CTkFrame
+
+        for widget in self.frame__favorites.winfo_children():
+
+            widget.destroy()
+
+        self.load_favorites_cards()
