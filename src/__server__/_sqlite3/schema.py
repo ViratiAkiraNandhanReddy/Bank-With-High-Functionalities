@@ -9,18 +9,31 @@ class AdminSchema(AdminSchemaBase):
     @classmethod
     def create(cls) -> bool:
 
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS ADMINS (
-            USERNAME VARCHAR(100) NOT NULL PRIMARY KEY,
-            PASSWORD TEXT NOT NULL,
-            EMAIL TEXT,
-            BACKUP_CODE TEXT NOT NULL,
-            CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
-            """)
+        try:
 
-        connection.commit()
+            cursor.execute("""
 
-        return cursor.rowcount > 0
+                CREATE TABLE IF NOT EXISTS ADMINS (
+
+                    USERNAME VARCHAR(100) NOT NULL PRIMARY KEY,
+
+                    PASSWORD TEXT NOT NULL,
+                    EMAIL TEXT UNIQUE,
+                    BACKUP_CODE CHAR(36) NOT NULL,
+
+                    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+                );
+
+                """)
+
+            connection.commit()
+
+            return True
+
+        except Exception:
+
+            return False
 
 
 class UserSchema(UserSchemaBase):
@@ -28,30 +41,36 @@ class UserSchema(UserSchemaBase):
     @classmethod
     def create(cls) -> bool:
 
-        cursor.execute("""
+        try:
 
-            CREATE TABLE IF NOT EXISTS USERS (
+            cursor.execute("""
 
-                UUID CHAR(36) PRIMARY KEY,
-                USERNAME VARCHAR(100) NOT NULL UNIQUE,
+                CREATE TABLE IF NOT EXISTS USERS (
 
-                PASSWORD TEXT NOT NULL,
-                EMAIL TEXT UNIQUE,
-                BACKUP_CODE CHAR(36) NOT NULL,
-                LAST_LOGIN TIMESTAMP,
+                    UUID CHAR(36) PRIMARY KEY,
+                    USERNAME VARCHAR(100) NOT NULL UNIQUE,
 
-                FULL_NAME VARCHAR(100) NOT NULL,
-                BALANCE REAL NOT NULL DEFAULT 0.0,
+                    PASSWORD TEXT NOT NULL,
+                    EMAIL TEXT UNIQUE,
+                    BACKUP_CODE CHAR(36) NOT NULL,
+                    LAST_LOGIN TIMESTAMP,
 
-                CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    FULL_NAME VARCHAR(100) NOT NULL,
+                    BALANCE REAL NOT NULL DEFAULT 0.0,
 
-            );
- 
-            """)
+                    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
-        connection.commit()
+                );
 
-        return cursor.rowcount > 0
+                """)
+
+            connection.commit()  # DDL statements do not affect rowcount
+
+            return True
+
+        except Exception:
+
+            return False
 
 
 class TransactionSchema(TransactionSchemaBase):
@@ -59,25 +78,31 @@ class TransactionSchema(TransactionSchemaBase):
     @classmethod
     def create(cls) -> bool:
 
-        cursor.execute("""
+        try:
 
-            CREATE TABLE IF NOT EXISTS TRANSACTIONS (
+            cursor.execute("""
 
-                TRANSACTION_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                USER_UUID CHAR(36) NOT NULL,
+                CREATE TABLE IF NOT EXISTS TRANSACTIONS (
 
-                COUNTERPARTY_USERNAME VARCHAR(100) NOT NULL,
-                AMOUNT REAL NOT NULL,
-                TRANSACTION_TYPE TEXT NOT NULL,
+                    TRANSACTION_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    USER_UUID CHAR(36) NOT NULL,
 
-                TIMESTAMP TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    COUNTERPARTY_USERNAME VARCHAR(100) NOT NULL,
+                    AMOUNT REAL NOT NULL,
+                    TRANSACTION_TYPE VARCHAR(20) NOT NULL,
 
-                FOREIGN KEY (USER_UUID) REFERENCES USERS(UUID) ON DELETE CASCADE
+                    TIMESTAMP TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-            );
+                    FOREIGN KEY (USER_UUID) REFERENCES USERS(UUID) ON DELETE CASCADE
 
-            """)
+                );
 
-        connection.commit()
+                """)
 
-        return cursor.rowcount > 0
+            connection.commit()  # DDL statements do not affect rowcount
+
+            return True
+
+        except Exception:
+
+            return False

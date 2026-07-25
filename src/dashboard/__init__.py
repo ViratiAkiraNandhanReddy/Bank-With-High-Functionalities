@@ -1,6 +1,6 @@
+from .tiles import *
 from datetime import datetime
 from .. import customtkinter, assets, utils, Callable, SERVER
-from .tiles import actions, messages, account_info, security
 
 
 class dashboard_interface:

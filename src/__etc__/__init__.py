@@ -1,2 +1,2 @@
 from .. import *
-from .activation import activation
+from ._activation import activation

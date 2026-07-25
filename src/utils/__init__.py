@@ -1,4 +1,3 @@
-from os import environ
 from pathlib import Path
 
 from .theme import colors
@@ -7,7 +6,7 @@ from .privacy import masking
 from .network import connection
 from .greetings import greetings
 
-root: Path = Path(environ.get("LOCALAPPDATA", "")) / "Bank-With-High-Functionalities"
+root: Path = Path(__file__).resolve().parent.parent.parent
 
 __all__ = [
     "root",

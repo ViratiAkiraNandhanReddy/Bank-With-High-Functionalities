@@ -11,22 +11,14 @@ class UserLookup(UserLookupBase):
     @classmethod
     def exists(cls, username_or_uuid: str) -> bool:
 
-        if _uuids.validate(username_or_uuid):
-
-            cursor.execute(
-                """
-                SELECT 1 FROM USERS WHERE UUID = ?
-                """,
-                (username_or_uuid,),
-            )
-
-            return cursor.fetchone() is not None
-
         cursor.execute(
             """
-            SELECT 1 FROM USERS WHERE USERNAME = ?
+            SELECT
+                1
+            FROM USERS
+            WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid,),
+            (username_or_uuid, username_or_uuid),
         )
 
         return cursor.fetchone() is not None
@@ -34,23 +26,14 @@ class UserLookup(UserLookupBase):
     @classmethod
     def balance(cls, username_or_uuid) -> float:
 
-        if _uuids.validate(username_or_uuid):
-
-            cursor.execute(
-                """
-                SELECT balance FROM USERS WHERE UUID = ?
-                """,
-                (username_or_uuid,),
-            )
-
-            row = cursor.fetchone()
-            return row[0] if row is not None else 0.0
-
         cursor.execute(
             """
-            SELECT balance FROM USERS WHERE USERNAME = ?
+            SELECT
+                BALANCE
+            FROM USERS
+            WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid,),
+            (username_or_uuid, username_or_uuid),
         )
 
         row = cursor.fetchone()
@@ -65,7 +48,10 @@ class UserLookup(UserLookupBase):
 
         cursor.execute(
             """
-            SELECT UUID FROM USERS WHERE USERNAME = ?
+            SELECT
+                UUID
+            FROM USERS
+            WHERE USERNAME = ?
             """,
             (username,),
         )
@@ -109,23 +95,14 @@ class UserLookup(UserLookupBase):
     @classmethod
     def full_name(cls, username_or_uuid: str) -> str:
 
-        if _uuids.validate(username_or_uuid):
-
-            cursor.execute(
-                """
-                SELECT FULL_NAME FROM USERS WHERE UUID = ?
-                """,
-                (username_or_uuid,),
-            )
-
-            row = cursor.fetchone()
-            return row[0] if row is not None else "User"
-
         cursor.execute(
             """
-            SELECT FULL_NAME FROM USERS WHERE USERNAME = ?
+            SELECT
+                FULL_NAME
+            FROM USERS
+            WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid,),
+            (username_or_uuid, username_or_uuid),
         )
 
         row = cursor.fetchone()
@@ -134,27 +111,14 @@ class UserLookup(UserLookupBase):
     @classmethod
     def last_login(cls, username_or_uuid: str) -> datetime | None:
 
-        if _uuids.validate(username_or_uuid):
-
-            cursor.execute(
-                """
-                SELECT LAST_LOGIN FROM USERS WHERE UUID = ?
-                """,
-                (username_or_uuid,),
-            )
-
-            row = cursor.fetchone()
-            return (
-                datetime.fromisoformat(row[0]).replace(tzinfo=timezone.utc)
-                if row is not None and row[0] is not None
-                else None
-            )
-
         cursor.execute(
             """
-            SELECT LAST_LOGIN FROM USERS WHERE USERNAME = ?
+            SELECT
+                LAST_LOGIN
+            FROM USERS
+            WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid,),
+            (username_or_uuid, username_or_uuid),
         )
 
         row = cursor.fetchone()
@@ -164,6 +128,32 @@ class UserLookup(UserLookupBase):
             else None
         )
 
+    @classmethod
+    def frequent_transfer_recipients(
+        cls, username_or_uuid: str
+    ) -> list[tuple[str, int]]:
+
+        cursor.execute(
+            """
+            SELECT
+                COUNTERPARTY_USERNAME,
+                COUNT(*) AS TRANSFER_COUNT
+            FROM TRANSACTIONS
+            WHERE USER_UUID = (
+                SELECT UUID
+                FROM USERS
+                WHERE USERNAME = ? OR UUID = ?
+            )
+            AND TRANSACTION_TYPE = 'transfer_out'
+            GROUP BY COUNTERPARTY_USERNAME
+            ORDER BY TRANSFER_COUNT DESC
+            LIMIT 3
+            """,
+            (username_or_uuid, username_or_uuid),
+        )
+
+        return cursor.fetchall()
+
 
 class AdminLookup(AdminLookupBase):
 
@@ -172,8 +162,11 @@ class AdminLookup(AdminLookupBase):
 
         cursor.execute(
             """
-                SELECT 1 FROM ADMINS WHERE USERNAME = ?
-                """,
+            SELECT
+                1
+            FROM ADMINS
+            WHERE USERNAME = ?
+            """,
             (username,),
         )
 

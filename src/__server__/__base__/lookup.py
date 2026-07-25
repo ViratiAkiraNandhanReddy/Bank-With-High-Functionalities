@@ -42,6 +42,14 @@ class UserLookupBase(ABC):
 
         pass
 
+    @classmethod
+    @abstractmethod
+    def frequent_transfer_recipients(
+        cls, username_or_uuid: str
+    ) -> list[tuple[str, int]]:
+
+        pass
+
 
 class AdminLookupBase(ABC):
 

@@ -1,4 +1,3 @@
-from .._uuids import _uuids
 from ._connection import connection
 from CaesarCipher import Encryption
 from ..__base__ import UserAuthenticationBase, AdminAuthenticationBase
@@ -11,25 +10,14 @@ class UserAuthentication(UserAuthenticationBase):
     @classmethod
     def password(cls, username_or_uuid: str, password: str) -> bool:
 
-        if _uuids.validate(username_or_uuid):
-
-            cursor.execute(
-                """
-                SELECT password FROM users WHERE uuid = ?
-                """,
-                (username_or_uuid,),
-            )
-
-            return (
-                cursor.fetchone()[0]
-                == Encryption(password, shift=8, alterNumbers=True).encrypt()
-            )
-
         cursor.execute(
             """
-            SELECT password FROM users WHERE username = ?
+            SELECT 
+                PASSWORD
+            FROM USERS
+            WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid,),
+            (username_or_uuid, username_or_uuid),
         )
 
         return (
@@ -42,9 +30,12 @@ class UserAuthentication(UserAuthenticationBase):
 
         cursor.execute(
             """
-                SELECT backup_code FROM users WHERE username = ?
-                """,
-            (username_or_uuid,),
+            SELECT
+                BACKUP_CODE
+            FROM USERS
+            WHERE USERNAME = ? OR UUID = ?
+            """,
+            (username_or_uuid, username_or_uuid),
         )
 
         return cursor.fetchone()[0] == backup_code
@@ -54,9 +45,12 @@ class UserAuthentication(UserAuthenticationBase):
 
         cursor.execute(
             """
-            SELECT email FROM users WHERE username = ?
+            SELECT
+                EMAIL
+            FROM USERS
+            WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid,),
+            (username_or_uuid, username_or_uuid),
         )
 
         return cursor.fetchone()[0] == email_address
@@ -66,9 +60,9 @@ class UserAuthentication(UserAuthenticationBase):
 
         cursor.execute(
             """
-            UPDATE users
-            SET last_login = CURRENT_TIMESTAMP
-            WHERE username = ? OR uuid = ?
+            UPDATE USERS
+            SET LAST_LOGIN = CURRENT_TIMESTAMP
+            WHERE USERNAME = ? OR UUID = ?
             """,
             (username_or_uuid, username_or_uuid),
         )
@@ -83,7 +77,10 @@ class AdminAuthentication(AdminAuthenticationBase):
 
         cursor.execute(
             """
-            SELECT password FROM ADMINS WHERE username = ?
+            SELECT
+                PASSWORD
+            FROM ADMINS
+            WHERE USERNAME = ?
             """,
             (username,),
         )
@@ -98,8 +95,11 @@ class AdminAuthentication(AdminAuthenticationBase):
 
         cursor.execute(
             """
-                SELECT backup_code FROM ADMINS WHERE username = ?
-                """,
+            SELECT
+                BACKUP_CODE
+            FROM ADMINS
+            WHERE USERNAME = ?
+            """,
             (username,),
         )
 
@@ -110,7 +110,10 @@ class AdminAuthentication(AdminAuthenticationBase):
 
         cursor.execute(
             """
-            SELECT email FROM ADMINS WHERE username = ?
+            SELECT
+                EMAIL
+            FROM ADMINS
+            WHERE USERNAME = ?
             """,
             (username,),
         )
