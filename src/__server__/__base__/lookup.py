@@ -65,4 +65,5 @@ class ApplicationLookupBase(ABC):
     @classmethod
     @abstractmethod
     def current_notice(cls) -> str:
+
         pass

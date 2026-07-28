@@ -1,7 +1,7 @@
 from .._uuids import _uuids
 from ._connection import connection
 from datetime import datetime, timezone
-from ..__base__ import UserLookupBase, AdminLookupBase
+from ..__base__ import UserLookupBase, AdminLookupBase, ApplicationLookupBase
 
 cursor = connection.cursor()
 
@@ -171,3 +171,20 @@ class AdminLookup(AdminLookupBase):
         )
 
         return cursor.fetchone() is not None
+
+
+class ApplicationLookup(ApplicationLookupBase):
+
+    @classmethod
+    def current_notice(cls) -> str:
+
+        cursor.execute(
+            """
+            SELECT
+                CONTENT
+            FROM NOTICES
+            WHERE NOTICE_ID = 1
+            """,
+        )
+
+        return cursor.fetchone()[0]
