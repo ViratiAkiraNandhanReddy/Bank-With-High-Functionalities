@@ -1,6 +1,10 @@
 from ._connection import connection
 from CaesarCipher import Encryption
-from ..__base__ import UserManagementBase, AdminManagementBase
+from ..__base__ import (
+    UserManagementBase,
+    AdminManagementBase,
+    ApplicationManagementBase,
+)
 
 cursor = connection.cursor()
 
@@ -70,6 +74,25 @@ class AdminManagement(AdminManagementBase):
             WHERE USERNAME = ?
             """,
             (password, username),
+        )
+
+        connection.commit()
+
+        return cursor.rowcount > 0
+
+
+class ApplicationManagement(ApplicationManagementBase):
+
+    @classmethod
+    def update_notice(cls, notice: str) -> bool:
+
+        cursor.execute(
+            """
+            UPDATE APPLICATION
+            SET NOTICE = ?
+            WHERE ID = 1
+            """,
+            (notice,),
         )
 
         connection.commit()
