@@ -29,3 +29,11 @@ class AdminManagementBase(ABC):
     def change_password(cls, username: str, new_password: str) -> bool:
 
         pass
+
+
+class ApplicationManagementBase(ABC):
+
+    @classmethod
+    @abstractmethod
+    def update_notice(cls, notice: str) -> bool:
+        pass

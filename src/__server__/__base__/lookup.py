@@ -58,3 +58,11 @@ class AdminLookupBase(ABC):
     def exists(cls, username: str) -> bool:
 
         pass
+
+
+class ApplicationLookupBase(ABC):
+
+    @classmethod
+    @abstractmethod
+    def current_notice(cls) -> str:
+        pass
