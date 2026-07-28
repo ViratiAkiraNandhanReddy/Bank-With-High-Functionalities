@@ -88,9 +88,9 @@ class ApplicationManagement(ApplicationManagementBase):
 
         cursor.execute(
             """
-            UPDATE APPLICATION
-            SET NOTICE = ?
-            WHERE ID = 1
+            UPDATE NOTICES
+            SET CONTENT = ?
+            WHERE NOTICE_ID = 1
             """,
             (notice,),
         )
