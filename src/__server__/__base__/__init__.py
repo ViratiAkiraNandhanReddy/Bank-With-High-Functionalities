@@ -1,6 +1,10 @@
-from .lookup import UserLookupBase, AdminLookupBase
-from .management import UserManagementBase, AdminManagementBase
+from .lookup import UserLookupBase, AdminLookupBase, ApplicationLookupBase
 from .authentication import UserAuthenticationBase, AdminAuthenticationBase
+from .management import (
+    UserManagementBase,
+    AdminManagementBase,
+    ApplicationManagementBase,
+)
 from .schema import (
     UserSchemaBase,
     AdminSchemaBase,
@@ -16,7 +20,9 @@ __all__ = [
     "NoticeSchemaBase",
     "UserManagementBase",
     "AdminManagementBase",
+    "ApplicationLookupBase",
     "TransactionSchemaBase",
     "UserAuthenticationBase",
     "AdminAuthenticationBase",
+    "ApplicationManagementBase",
 ]
