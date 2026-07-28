@@ -1,5 +1,10 @@
 from ._connection import connection
-from ..__base__ import UserSchemaBase, AdminSchemaBase, TransactionSchemaBase
+from ..__base__ import (
+    UserSchemaBase,
+    AdminSchemaBase,
+    TransactionSchemaBase,
+    NoticeSchemaBase,
+)
 
 cursor = connection.cursor()
 
@@ -94,6 +99,35 @@ class TransactionSchema(TransactionSchemaBase):
                     TIMESTAMP TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
                     FOREIGN KEY (USER_UUID) REFERENCES USERS(UUID) ON DELETE CASCADE
+
+                );
+
+                """)
+
+            connection.commit()  # DDL statements do not affect rowcount
+
+            return True
+
+        except Exception:
+
+            return False
+
+
+class NoticeSchema(NoticeSchemaBase):
+
+    @classmethod
+    def create(cls) -> bool:
+
+        try:
+
+            cursor.execute("""
+
+                CREATE TABLE IF NOT EXISTS NOTICES (
+
+                    NOTICE_ID INTEGER PRIMARY KEY CHECK (NOTICE_ID = 1),
+                    CONTENT TEXT NOT NULL,
+
+                    UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
                 );
 
