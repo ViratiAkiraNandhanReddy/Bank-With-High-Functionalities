@@ -104,13 +104,15 @@ class ApplicationManagement(ApplicationManagementBase):
     @classmethod
     def remove_notice(cls) -> bool:
 
-        cursor.execute("""
+        cursor.execute(
+            """
             UPDATE NOTICES
             SET
                 CONTENT = 'no new notices',
                 UPDATED_AT = CURRENT_TIMESTAMP
             WHERE NOTICE_ID = 1
-            """)
+            """,
+        )
 
         connection.commit()
 

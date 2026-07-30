@@ -135,6 +135,19 @@ class NoticeSchema(NoticeSchemaBase):
 
             connection.commit()  # DDL statements do not affect rowcount
 
+            cursor.execute("""
+
+                INSERT OR IGNORE INTO NOTICES (
+                    NOTICE_ID,
+                    CONTENT
+                )
+                VALUES (
+                    1,
+                    'No new notices.'
+                );
+                
+                """)
+
             return True
 
         except Exception:
