@@ -26,3 +26,12 @@ class UserSchemaBase(ABC):
     def create(cls) -> bool:
 
         pass
+
+
+class AnnouncementSchemaBase(ABC):
+
+    @classmethod
+    @abstractmethod
+    def create(cls) -> bool:
+
+        pass

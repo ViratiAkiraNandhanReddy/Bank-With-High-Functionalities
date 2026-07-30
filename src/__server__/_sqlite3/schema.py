@@ -1,5 +1,10 @@
 from ._connection import connection
-from ..__base__ import UserSchemaBase, AdminSchemaBase, TransactionSchemaBase
+from ..__base__ import (
+    UserSchemaBase,
+    AdminSchemaBase,
+    TransactionSchemaBase,
+    AnnouncementSchemaBase,
+)
 
 cursor = connection.cursor()
 
@@ -100,6 +105,48 @@ class TransactionSchema(TransactionSchemaBase):
                 """)
 
             connection.commit()  # DDL statements do not affect rowcount
+
+            return True
+
+        except Exception:
+
+            return False
+
+
+class AnnouncementSchema(AnnouncementSchemaBase):
+
+    @classmethod
+    def create(cls) -> bool:
+
+        try:
+
+            cursor.execute("""
+
+                CREATE TABLE IF NOT EXISTS ANNOUNCEMENT (
+
+                    ANNOUNCEMENT_ID INTEGER PRIMARY KEY CHECK (ANNOUNCEMENT_ID = 1),
+                    CONTENT TEXT NOT NULL,
+
+                    UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+                );
+
+                """)
+
+            connection.commit()  # DDL statements do not affect rowcount
+
+            cursor.execute("""
+
+                INSERT OR IGNORE INTO ANNOUNCEMENT (
+                    ANNOUNCEMENT_ID,
+                    CONTENT
+                )
+                VALUES (
+                    1,
+                    'No new announcements.'
+                );
+                
+                """)
 
             return True
 
