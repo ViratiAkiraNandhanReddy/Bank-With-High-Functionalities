@@ -143,7 +143,7 @@ class AnnouncementSchema(AnnouncementSchemaBase):
                 )
                 VALUES (
                     1,
-                    'no new announcement'
+                    'No new announcements.'
                 );
                 
                 """)

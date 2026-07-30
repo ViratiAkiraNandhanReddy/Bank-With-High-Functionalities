@@ -84,7 +84,7 @@ class AdminManagement(AdminManagementBase):
 class ApplicationManagement(ApplicationManagementBase):
 
     @classmethod
-    def update_announcement(cls, announcement: str) -> bool:
+    def update_announcement(cls, announcement: str = "No new announcements.") -> bool:
 
         cursor.execute(
             """
@@ -95,23 +95,6 @@ class ApplicationManagement(ApplicationManagementBase):
             WHERE ANNOUNCEMENT_ID = 1
             """,
             (announcement,),
-        )
-
-        connection.commit()
-
-        return cursor.rowcount > 0
-
-    @classmethod
-    def remove_announcement(cls) -> bool:
-
-        cursor.execute(
-            """
-            UPDATE ANNOUNCEMENT
-            SET
-                CONTENT = 'no new announcement',
-                UPDATED_AT = CURRENT_TIMESTAMP
-            WHERE ANNOUNCEMENT_ID = 1
-            """,
         )
 
         connection.commit()

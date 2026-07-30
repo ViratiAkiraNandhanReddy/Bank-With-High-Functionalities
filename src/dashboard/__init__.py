@@ -125,7 +125,7 @@ class dashboard_interface:
 
             self.actions = actions(self.frame__dashboard, username)
 
-            self.notice = notice(self.frame__dashboard, username)
+            self.announcement = announcement(self.frame__dashboard)
 
             self.security = security(self.frame__dashboard, username)
 

@@ -3,7 +3,7 @@ from ... import customtkinter, SERVER
 
 class announcement:
 
-    def __init__(self, parent_frame: customtkinter.CTkFrame, username: str) -> None:
+    def __init__(self, parent_frame: customtkinter.CTkFrame) -> None:
 
         self.frame__announcement: customtkinter.CTkFrame = customtkinter.CTkFrame(
             parent_frame, width=570, height=140, fg_color="#0a0a0a"
@@ -14,7 +14,7 @@ class announcement:
             SERVER.lookup.application.current_announcement()
         )
 
-        if self.announcement_content == "no new announcement":
+        if self.announcement_content == "No new announcements.":
 
             justify: str = "center"
             anchor: str = "center"

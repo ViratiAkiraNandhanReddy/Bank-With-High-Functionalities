@@ -35,12 +35,6 @@ class ApplicationManagementBase(ABC):
 
     @classmethod
     @abstractmethod
-    def update_announcement(cls, announcement: str) -> bool:
-
-        pass
-
-    @classmethod
-    @abstractmethod
-    def remove_announcement(cls) -> bool:
+    def update_announcement(cls, announcement: str = "No new announcements.") -> bool:
 
         pass
