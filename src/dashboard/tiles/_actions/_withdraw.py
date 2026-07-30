@@ -8,9 +8,14 @@ class withdraw:
     def __init__(
         self,
         parent_frame: customtkinter.CTkFrame,
+        username: str,
         balance_instance: balance,
         transactions_instance: transactions,
     ) -> None:
+
+        self.balance_instance = balance_instance
+        self.transactions_instance = transactions_instance
+        self.username = username
 
         self.frame__withdraw: customtkinter.CTkFrame = customtkinter.CTkFrame(
             parent_frame,

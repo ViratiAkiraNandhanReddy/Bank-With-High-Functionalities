@@ -20,14 +20,16 @@ class actions:
         )
         self.frame__actions.place(x=740, y=200)
 
-        self.deposit: deposit = deposit(parent_frame, self.balance, self.transactions)
+        self.deposit: deposit = deposit(
+            parent_frame, username, self.balance, self.transactions
+        )
 
         self.withdraw: withdraw = withdraw(
-            parent_frame, self.balance, self.transactions
+            parent_frame, username, self.balance, self.transactions
         )
 
         self.transfer: transfer = transfer(
-            parent_frame, self.balance, self.transactions
+            parent_frame, username, self.balance, self.transactions
         )
 
         self.previous_action_view: deposit | withdraw | transfer | None = None
