@@ -89,7 +89,9 @@ class ApplicationManagement(ApplicationManagementBase):
         cursor.execute(
             """
             UPDATE NOTICES
-            SET CONTENT = ?
+            SET
+                CONTENT = ?,
+                UPDATED_AT = CURRENT_TIMESTAMP
             WHERE NOTICE_ID = 1
             """,
             (notice,),
