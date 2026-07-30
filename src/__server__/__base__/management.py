@@ -5,7 +5,7 @@ class UserManagementBase(ABC):
 
     @classmethod
     @abstractmethod
-    def deposit(cls, username_or_uuid: str, password: str, amount: float) -> bool:
+    def deposit(cls, username_or_uuid: str, amount: float) -> bool:
 
         pass
 
