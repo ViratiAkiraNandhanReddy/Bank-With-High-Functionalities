@@ -84,17 +84,17 @@ class AdminManagement(AdminManagementBase):
 class ApplicationManagement(ApplicationManagementBase):
 
     @classmethod
-    def update_notice(cls, notice: str) -> bool:
+    def update_announcement(cls, announcement: str) -> bool:
 
         cursor.execute(
             """
-            UPDATE NOTICES
+            UPDATE ANNOUNCEMENT
             SET
                 CONTENT = ?,
                 UPDATED_AT = CURRENT_TIMESTAMP
-            WHERE NOTICE_ID = 1
+            WHERE ANNOUNCEMENT_ID = 1
             """,
-            (notice,),
+            (announcement,),
         )
 
         connection.commit()
@@ -102,15 +102,15 @@ class ApplicationManagement(ApplicationManagementBase):
         return cursor.rowcount > 0
 
     @classmethod
-    def remove_notice(cls) -> bool:
+    def remove_announcement(cls) -> bool:
 
         cursor.execute(
             """
-            UPDATE NOTICES
+            UPDATE ANNOUNCEMENT
             SET
-                CONTENT = 'no new notices',
+                CONTENT = 'no new announcement',
                 UPDATED_AT = CURRENT_TIMESTAMP
-            WHERE NOTICE_ID = 1
+            WHERE ANNOUNCEMENT_ID = 1
             """,
         )
 
