@@ -9,7 +9,7 @@ from .schema import (
     UserSchemaBase,
     AdminSchemaBase,
     TransactionSchemaBase,
-    NoticeSchemaBase,
+    AnnouncementSchemaBase,
 )
 
 __all__ = [
@@ -17,12 +17,12 @@ __all__ = [
     "UserLookupBase",
     "AdminLookupBase",
     "AdminSchemaBase",
-    "NoticeSchemaBase",
     "UserManagementBase",
     "AdminManagementBase",
     "ApplicationLookupBase",
     "TransactionSchemaBase",
     "UserAuthenticationBase",
+    "AnnouncementSchemaBase",
     "AdminAuthenticationBase",
     "ApplicationManagementBase",
 ]

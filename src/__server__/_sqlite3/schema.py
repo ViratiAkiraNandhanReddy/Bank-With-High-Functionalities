@@ -3,7 +3,7 @@ from ..__base__ import (
     UserSchemaBase,
     AdminSchemaBase,
     TransactionSchemaBase,
-    NoticeSchemaBase,
+    AnnouncementSchemaBase,
 )
 
 cursor = connection.cursor()
@@ -113,7 +113,7 @@ class TransactionSchema(TransactionSchemaBase):
             return False
 
 
-class NoticeSchema(NoticeSchemaBase):
+class AnnouncementSchema(AnnouncementSchemaBase):
 
     @classmethod
     def create(cls) -> bool:
@@ -122,9 +122,9 @@ class NoticeSchema(NoticeSchemaBase):
 
             cursor.execute("""
 
-                CREATE TABLE IF NOT EXISTS NOTICES (
+                CREATE TABLE IF NOT EXISTS ANNOUNCEMENT (
 
-                    NOTICE_ID INTEGER PRIMARY KEY CHECK (NOTICE_ID = 1),
+                    ANNOUNCEMENT_ID INTEGER PRIMARY KEY CHECK (ANNOUNCEMENT_ID = 1),
                     CONTENT TEXT NOT NULL,
 
                     UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -137,13 +137,13 @@ class NoticeSchema(NoticeSchemaBase):
 
             cursor.execute("""
 
-                INSERT OR IGNORE INTO NOTICES (
-                    NOTICE_ID,
+                INSERT OR IGNORE INTO ANNOUNCEMENT (
+                    ANNOUNCEMENT_ID,
                     CONTENT
                 )
                 VALUES (
                     1,
-                    'No new notices.'
+                    'no new announcement'
                 );
                 
                 """)

@@ -28,7 +28,7 @@ class UserSchemaBase(ABC):
         pass
 
 
-class NoticeSchemaBase(ABC):
+class AnnouncementSchemaBase(ABC):
 
     @classmethod
     @abstractmethod

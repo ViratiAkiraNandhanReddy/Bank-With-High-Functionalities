@@ -10,7 +10,9 @@ class announcement:
         )
         self.frame__announcement.place(x=520, y=50)
 
-        self.announcement_content: str = SERVER.lookup.application.current_announcement()
+        self.announcement_content: str = (
+            SERVER.lookup.application.current_announcement()
+        )
 
         if self.announcement_content == "no new announcement":
 
