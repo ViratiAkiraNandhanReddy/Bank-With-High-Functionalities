@@ -32,4 +32,4 @@ class notice:
             anchor=anchor,
             font=("Consolas", 13),
         )
-        self.label__notice.place(x=10, y=10)
+        self.label__notice.place(x=10, y=7)

@@ -100,3 +100,18 @@ class ApplicationManagement(ApplicationManagementBase):
         connection.commit()
 
         return cursor.rowcount > 0
+
+    @classmethod
+    def remove_notice(cls) -> bool:
+
+        cursor.execute("""
+            UPDATE NOTICES
+            SET
+                CONTENT = 'no new notices',
+                UPDATED_AT = CURRENT_TIMESTAMP
+            WHERE NOTICE_ID = 1
+            """)
+
+        connection.commit()
+
+        return cursor.rowcount > 0

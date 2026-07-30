@@ -38,3 +38,9 @@ class ApplicationManagementBase(ABC):
     def update_notice(cls, notice: str) -> bool:
 
         pass
+
+    @classmethod
+    @abstractmethod
+    def remove_notice(cls) -> bool:
+
+        pass
