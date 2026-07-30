@@ -176,14 +176,14 @@ class AdminLookup(AdminLookupBase):
 class ApplicationLookup(ApplicationLookupBase):
 
     @classmethod
-    def current_notice(cls) -> str:
+    def current_announcement(cls) -> str:
 
         cursor.execute(
             """
             SELECT
                 CONTENT
-            FROM NOTICES
-            WHERE NOTICE_ID = 1
+            FROM ANNOUNCEMENT
+            WHERE ANNOUNCEMENT_ID = 1
             """,
         )
 
