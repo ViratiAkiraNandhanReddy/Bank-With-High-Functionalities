@@ -44,6 +44,7 @@ class actions:
             text_color="#FFFFFF",
             values=["Deposit", "Withdraw", "Transfer"],
             variable=self.action_selector_variable,
+            font=("Consolas", 13, "bold"),
             dynamic_resizing=False,
             unselected_color="#131313",
             unselected_hover_color="#1D1D1D",
