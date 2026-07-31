@@ -1,3 +1,4 @@
+from .lookup import UserLookup
 from ._connection import connection
 from CaesarCipher import Encryption
 from ..__base__ import (
@@ -10,6 +11,37 @@ cursor = connection.cursor()
 
 
 class UserManagement(UserManagementBase):
+
+    @classmethod
+    def deposit(cls, username_or_uuid: str, amount: float) -> bool:
+
+        user_uuid = UserLookup.resolve_uuid(username_or_uuid)
+
+        cursor.execute(
+            """
+            UPDATE USERS
+            SET BALANCE = BALANCE + ?
+            WHERE UUID = ?
+            """,
+            (amount, user_uuid),
+        )
+
+        cursor.execute(
+            """
+            INSERT INTO TRANSACTIONS (
+                USER_UUID,
+                COUNTERPARTY_USERNAME,
+                AMOUNT,
+                TRANSACTION_TYPE
+            )
+            VALUES (?, ?, ?, ?)
+            """,
+            (user_uuid, username_or_uuid, amount, "deposit"),
+        )
+
+        connection.commit()
+
+        return cursor.rowcount > 0
 
     @classmethod
     def change_password(cls, username_or_uuid: str, new_password: str) -> bool:
