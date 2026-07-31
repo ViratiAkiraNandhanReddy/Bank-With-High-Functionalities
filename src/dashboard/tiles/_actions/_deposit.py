@@ -173,6 +173,20 @@ class deposit:
             ),
         )
 
+        self.message_label = customtkinter.CTkLabel(
+            self.frame__deposit,
+            text="",
+            width=280,
+            height=65,
+            wraplength=270,
+            font=("Consolas", 12),
+            text_color="#22C55E",
+        )
+        self.message_label.place(x=35, y=250)
+
+        self.__amount.bind("<Return>", lambda _event: self.handle_deposit())
+        self.__password.bind("<Return>", lambda _event: self.handle_deposit())
+
         deposit_btn: customtkinter.CTkButton = customtkinter.CTkButton(
             self.frame__deposit,
             text="Deposit",
@@ -185,5 +199,42 @@ class deposit:
             font=("Consolas", 16, "bold"),
             hover_color="#16A34A",
             corner_radius=6,
+            command=self.handle_deposit,
         )
         deposit_btn.place(x=35, y=315)
+
+    def handle_deposit(self) -> None:
+
+        amount_string: str = self.__amount.get().strip()
+        user_password: str = self.__password.get().strip()
+
+        self.__amount.bind(
+            "<KeyPress>",
+            lambda event: self.container_frame__amount_deposit.configure(
+                border_color="#FFFFFF"
+            )
+            or self.container_frame__amount_label_deposit.configure(
+                text_color="#FFFFFF"
+            )
+            or self.container_frame__amount_label_deposit.configure(
+                text="amount",
+                width=34,  # 28
+            )
+            or self.message_label.configure(text="", text_color="#22C55E")
+            or self.__amount.unbind("<KeyPress>"),
+        )
+        self.__password.bind(
+            "<KeyPress>",
+            lambda event: self.container_frame__password_deposit.configure(
+                border_color="#FFFFFF"
+            )
+            or self.container_frame__password_label_deposit.configure(
+                text_color="#FFFFFF"
+            )
+            or self.container_frame__password_label_deposit.configure(
+                text="password",
+                width=44,  # 38
+            )
+            or self.message_label.configure(text="", text_color="#22C55E")
+            or self.__password.unbind("<KeyPress>"),
+        )
