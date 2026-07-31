@@ -172,3 +172,18 @@ class deposit:
                 else None
             ),
         )
+
+        deposit_btn: customtkinter.CTkButton = customtkinter.CTkButton(
+            self.frame__deposit,
+            text="Deposit",
+            width=280,
+            height=40,
+            border_width=0,
+            text_color="#000000",
+            bg_color="transparent",
+            fg_color="#22C55E",
+            font=("Consolas", 16, "bold"),
+            hover_color="#16A34A",
+            corner_radius=6,
+        )
+        deposit_btn.place(x=35, y=315)
