@@ -308,3 +308,43 @@ class deposit:
             )
 
             return
+
+        if not SERVER.authentication.user.password(self.username, user_password):
+
+            self.container_frame__password_deposit.configure(border_color="#FF0000")
+            self.container_frame__password_label_deposit.configure(text_color="#FF0000")
+            self.container_frame__password_label_deposit.configure(
+                text="invalid password", width=83
+            )
+
+            self.message_label.configure(
+                text="Incorrect password", text_color="#FF0000"
+            )
+
+            return
+
+        server_response: bool = SERVER.management.user.deposit(
+            self.username, amount_float
+        )
+
+        if server_response:
+
+            self.__amount.delete(0, "end")
+            self.__password.delete(0, "end")
+            self.balance_instance.refresh()
+            self.transactions_instance.refresh()
+
+            self.message_label.configure(text="Deposit successful!")
+            self.message_label.after(
+                3000, lambda: self.message_label.configure(text="")
+            )
+
+        else:
+
+            self.message_label.configure(
+                text="Deposit failed. Please try again.",
+                text_color="#FF0000",
+            )
+            self.message_label.after(
+                3000, lambda: self.message_label.configure(text="")
+            )
