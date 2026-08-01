@@ -342,3 +342,29 @@ class withdraw:
             )
 
             return
+
+        server_response: bool = SERVER.management.user.withdraw(
+            self.username, amount_float
+        )
+
+        if server_response:
+
+            self.__amount.delete(0, "end")
+            self.__password.delete(0, "end")
+            self.balance_instance.refresh()
+            self.transactions_instance.refresh()
+
+            self.message_label.configure(text="Withdraw successful!")
+            self.message_label.after(
+                3000, lambda: self.message_label.configure(text="")
+            )
+
+        else:
+
+            self.message_label.configure(
+                text="Withdraw failed. Please try again.",
+                text_color="#FF0000",
+            )
+            self.message_label.after(
+                3000, lambda: self.message_label.configure(text="")
+            )
