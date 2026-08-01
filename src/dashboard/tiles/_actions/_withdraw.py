@@ -184,6 +184,25 @@ class withdraw:
         )
         self.message_label.place(x=35, y=250)
 
+        self.__amount.bind("<Return>", lambda _event: self.handle_withdraw())
+        self.__password.bind("<Return>", lambda _event: self.handle_withdraw())
+
+        withdraw_btn: customtkinter.CTkButton = customtkinter.CTkButton(
+            self.frame__withdraw,
+            text="Withdraw",
+            width=280,
+            height=40,
+            border_width=0,
+            text_color="#FFFFFF",
+            bg_color="transparent",
+            fg_color="#EF4444",
+            font=("Consolas", 16, "bold"),
+            hover_color="#DC2626",
+            corner_radius=6,
+            command=self.handle_withdraw,
+        )
+        withdraw_btn.place(x=35, y=315)
+
     def handle_withdraw(self) -> None:
 
         amount_string: str = self.__amount.get().strip()
