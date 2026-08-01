@@ -71,8 +71,8 @@ class deposit:
         customtkinter.CTkLabel(
             self.container_frame__amount_deposit,
             image=customtkinter.CTkImage(
-                light_image=assets.icons.material.account_circle,
-                dark_image=assets.icons.material.account_circle,
+                light_image=assets.icons.material.paid,
+                dark_image=assets.icons.material.paid,
                 size=(20, 20),
             ),
             text="",
