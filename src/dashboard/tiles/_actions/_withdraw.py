@@ -238,3 +238,35 @@ class withdraw:
             or self.message_label.configure(text="", text_color="#22C55E")
             or self.__password.unbind("<KeyPress>"),
         )
+
+        if (not amount_string) and (
+            not user_password
+        ):  # amount_string: false -- user_password: false
+
+            self.container_frame__amount_withdraw.configure(border_color="#FF0000")
+            self.container_frame__password_withdraw.configure(border_color="#FF0000")
+            self.container_frame__amount_label_withdraw.configure(
+                text="invalid amount", width=73
+            )
+
+            self.container_frame__amount_label_withdraw.configure(text_color="#FF0000")
+            self.container_frame__password_label_withdraw.configure(
+                text_color="#FF0000"
+            )
+            self.container_frame__password_label_withdraw.configure(
+                text="invalid password", width=83
+            )
+
+            return
+
+        if not user_password:
+
+            self.container_frame__password_withdraw.configure(border_color="#FF0000")
+            self.container_frame__password_label_withdraw.configure(
+                text_color="#FF0000"
+            )
+            self.container_frame__password_label_withdraw.configure(
+                text="invalid password", width=83
+            )
+
+            return
