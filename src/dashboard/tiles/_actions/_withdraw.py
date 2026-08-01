@@ -313,12 +313,26 @@ class withdraw:
 
             return
 
+        if not SERVER.authentication.user.password(self.username, user_password):
+
+            self.container_frame__password_withdraw.configure(border_color="#FF0000")
+            self.container_frame__password_label_withdraw.configure(
+                text_color="#FF0000"
+            )
+            self.container_frame__password_label_withdraw.configure(
+                text="invalid password", width=83
+            )
+
+            self.message_label.configure(
+                text="Incorrect password", text_color="#FF0000"
+            )
+
+            return
+
         if SERVER.lookup.user.balance(self.username) < amount_float:
 
             self.container_frame__amount_withdraw.configure(border_color="#FF0000")
-            self.container_frame__amount_label_withdraw.configure(
-                text_color="#FF0000"
-            )
+            self.container_frame__amount_label_withdraw.configure(text_color="#FF0000")
             self.container_frame__amount_label_withdraw.configure(
                 text="invalid amount", width=73
             )
