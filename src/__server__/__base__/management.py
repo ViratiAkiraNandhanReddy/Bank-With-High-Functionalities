@@ -11,6 +11,12 @@ class UserManagementBase(ABC):
 
     @classmethod
     @abstractmethod
+    def withdraw(cls, username_or_uuid: str, amount: float) -> bool:
+
+        pass
+
+    @classmethod
+    @abstractmethod
     def change_password(cls, username_or_uuid: str, new_password: str) -> bool:
 
         pass
