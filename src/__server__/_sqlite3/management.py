@@ -44,6 +44,37 @@ class UserManagement(UserManagementBase):
         return cursor.rowcount > 0
 
     @classmethod
+    def withdraw(cls, username_or_uuid: str, amount: float) -> bool:
+
+        user_uuid = UserLookup.resolve_uuid(username_or_uuid)
+
+        cursor.execute(
+            """
+            UPDATE USERS
+            SET BALANCE = BALANCE - ?
+            WHERE UUID = ?
+            """,
+            (amount, user_uuid),
+        )
+
+        cursor.execute(
+            """
+            INSERT INTO TRANSACTIONS (
+                USER_UUID,
+                COUNTERPARTY_USERNAME,
+                AMOUNT,
+                TRANSACTION_TYPE
+            )
+            VALUES (?, ?, ?, ?)
+            """,
+            (user_uuid, username_or_uuid, amount, "withdraw"),
+        )
+
+        connection.commit()
+
+        return cursor.rowcount > 0
+
+    @classmethod
     def change_password(cls, username_or_uuid: str, new_password: str) -> bool:
 
         password: str = Encryption(new_password, shift=8, alterNumbers=True).encrypt()
