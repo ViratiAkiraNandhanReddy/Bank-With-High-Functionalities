@@ -270,3 +270,61 @@ class withdraw:
             )
 
             return
+
+        try:
+
+            amount_float: float = round(float(amount_string), 2)
+
+        except ValueError:
+
+            self.container_frame__amount_withdraw.configure(border_color="#FF0000")
+            self.container_frame__amount_label_withdraw.configure(text_color="#FF0000")
+            self.container_frame__amount_label_withdraw.configure(
+                text="invalid amount", width=73
+            )
+
+            return
+
+        if amount_float <= 0:
+
+            self.container_frame__amount_withdraw.configure(border_color="#FF0000")
+            self.container_frame__amount_label_withdraw.configure(text_color="#FF0000")
+            self.container_frame__amount_label_withdraw.configure(
+                text="invalid amount", width=73
+            )
+
+            self.message_label.configure(
+                text="Amount must be greater than $0", text_color="#FF0000"
+            )
+
+            return
+
+        if amount_float > 99999.99:
+
+            self.container_frame__amount_withdraw.configure(border_color="#FF0000")
+            self.container_frame__amount_label_withdraw.configure(text_color="#FF0000")
+            self.container_frame__amount_label_withdraw.configure(
+                text="invalid amount", width=73
+            )
+
+            self.message_label.configure(
+                text="Maximum Withdraw: $99,999.99", text_color="#FF0000"
+            )
+
+            return
+
+        if SERVER.lookup.user.balance(self.username) < amount_float:
+
+            self.container_frame__amount_withdraw.configure(border_color="#FF0000")
+            self.container_frame__amount_label_withdraw.configure(
+                text_color="#FF0000"
+            )
+            self.container_frame__amount_label_withdraw.configure(
+                text="invalid amount", width=73
+            )
+
+            self.message_label.configure(
+                text="Insufficient available balance.", text_color="#FF0000"
+            )
+
+            return
