@@ -108,3 +108,67 @@ class withdraw:
                 else None
             ),
         )
+
+        self.container_frame__password_withdraw: customtkinter.CTkFrame = (
+            customtkinter.CTkFrame(
+                self.frame__withdraw,
+                width=280,
+                height=40,
+                fg_color="transparent",
+                border_width=1,
+                border_color="#FFFFFF",
+                corner_radius=6,
+            )
+        )
+
+        self.container_frame__password_label_withdraw: customtkinter.CTkLabel = (
+            customtkinter.CTkLabel(
+                self.frame__withdraw,
+                text="password",
+                font=("Consolas", 10),
+                height=12,
+                width=44,  # 38
+                text_color="#FFFFFF",
+            )
+        )
+
+        customtkinter.CTkLabel(
+            self.container_frame__password_withdraw,
+            image=customtkinter.CTkImage(
+                light_image=assets.icons.material.password,
+                dark_image=assets.icons.material.password,
+                size=(20, 20),
+            ),
+            text="",
+        ).place(x=8, rely=0.5, anchor="w")
+
+        self.container_frame__password_withdraw.place(x=35, y=210)
+
+        self.__password: customtkinter.CTkEntry = customtkinter.CTkEntry(
+            self.container_frame__password_withdraw,
+            placeholder_text="password",
+            width=280 - 40,
+            height=40 - 8,
+            corner_radius=0,
+            border_width=0,
+            fg_color="transparent",
+            font=("Consolas", 16),
+        )
+        self.__password.place(x=28, rely=0.5, anchor="w")
+
+        self.__password.bind(
+            "<FocusIn>",
+            lambda event: (
+                self.container_frame__password_label_withdraw.place(x=55, y=204)
+                if not self.__password.get()
+                else None
+            ),
+        )
+        self.__password.bind(
+            "<FocusOut>",
+            lambda event: (
+                self.container_frame__password_label_withdraw.place_forget()
+                if not self.__password.get()
+                else None
+            ),
+        )
