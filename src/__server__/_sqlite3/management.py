@@ -1,11 +1,78 @@
+from .lookup import UserLookup
 from ._connection import connection
 from CaesarCipher import Encryption
-from ..__base__ import UserManagementBase, AdminManagementBase
+from ..__base__ import (
+    UserManagementBase,
+    AdminManagementBase,
+    ApplicationManagementBase,
+)
 
 cursor = connection.cursor()
 
 
 class UserManagement(UserManagementBase):
+
+    @classmethod
+    def deposit(cls, username_or_uuid: str, amount: float) -> bool:
+
+        user_uuid = UserLookup.resolve_uuid(username_or_uuid)
+
+        cursor.execute(
+            """
+            UPDATE USERS
+            SET BALANCE = BALANCE + ?
+            WHERE UUID = ?
+            """,
+            (amount, user_uuid),
+        )
+
+        cursor.execute(
+            """
+            INSERT INTO TRANSACTIONS (
+                USER_UUID,
+                COUNTERPARTY_USERNAME,
+                AMOUNT,
+                TRANSACTION_TYPE
+            )
+            VALUES (?, ?, ?, ?)
+            """,
+            (user_uuid, username_or_uuid, amount, "deposit"),
+        )
+
+        connection.commit()
+
+        return cursor.rowcount > 0
+
+    @classmethod
+    def withdraw(cls, username_or_uuid: str, amount: float) -> bool:
+
+        user_uuid = UserLookup.resolve_uuid(username_or_uuid)
+
+        cursor.execute(
+            """
+            UPDATE USERS
+            SET BALANCE = BALANCE - ?
+            WHERE UUID = ?
+            """,
+            (amount, user_uuid),
+        )
+
+        cursor.execute(
+            """
+            INSERT INTO TRANSACTIONS (
+                USER_UUID,
+                COUNTERPARTY_USERNAME,
+                AMOUNT,
+                TRANSACTION_TYPE
+            )
+            VALUES (?, ?, ?, ?)
+            """,
+            (user_uuid, username_or_uuid, amount, "withdraw"),
+        )
+
+        connection.commit()
+
+        return cursor.rowcount > 0
 
     @classmethod
     def change_password(cls, username_or_uuid: str, new_password: str) -> bool:
@@ -70,6 +137,27 @@ class AdminManagement(AdminManagementBase):
             WHERE USERNAME = ?
             """,
             (password, username),
+        )
+
+        connection.commit()
+
+        return cursor.rowcount > 0
+
+
+class ApplicationManagement(ApplicationManagementBase):
+
+    @classmethod
+    def update_announcement(cls, announcement: str = "No new announcements.") -> bool:
+
+        cursor.execute(
+            """
+            UPDATE ANNOUNCEMENT
+            SET
+                CONTENT = ?,
+                UPDATED_AT = CURRENT_TIMESTAMP
+            WHERE ANNOUNCEMENT_ID = 1
+            """,
+            (announcement,),
         )
 
         connection.commit()

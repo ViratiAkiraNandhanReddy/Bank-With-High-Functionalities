@@ -1,4 +1,5 @@
-from ... import customtkinter, SERVER, assets
+from datetime import datetime, timezone
+from ... import customtkinter, SERVER
 
 
 class transactions:
@@ -29,36 +30,31 @@ class transactions:
 
                 case "deposit":
 
-                    icon = assets.icons.material.add_circle
-                    text = " Deposit"
+                    text = "Deposit"
                     sign = "+"
                     color = "#22C55E"
 
                 case "withdraw":
 
-                    icon = assets.icons.material.do_not_disturb_on
-                    text = " Withdraw"
+                    text = "Withdraw"
                     sign = "-"
                     color = "#EF4444"
 
                 case "transfer_in":
 
-                    icon = assets.icons.material.arrow_circle_down
-                    text = " Received"
+                    text = "Received"
                     sign = "+"
                     color = "#22C55E"
 
                 case "transfer_out":
 
-                    icon = assets.icons.material.arrow_circle_up
-                    text = " Sent"
+                    text = "Sent"
                     sign = "-"
                     color = "#EF4444"
 
                 case _:
 
-                    icon = assets.icons.material.error
-                    text = " Unknown"
+                    text = "Unknown"
                     sign = "~"
                     color = "#FFFFFF"
 
@@ -66,21 +62,17 @@ class transactions:
                 card,
                 text=text,
                 width=0,
-                height=0,
-                font=("Roboto", 12, "bold"),
-                image=customtkinter.CTkImage(
-                    light_image=icon, dark_image=icon, size=(20, 20)
-                ),
-                compound="left",
+                height=20,
+                font=("Consolas", 12, "bold"),
                 text_color="#FFFFFF",
-            ).place(x=5, y=5)
+            ).place(x=10, y=5)
 
             customtkinter.CTkLabel(
                 card,
                 text=f"{sign}${_transaction[2]:,.2f}",
-                width=110,
+                width=105,
                 height=20,
-                font=("Roboto", 12, "bold"),
+                font=("Consolas", 12, "bold"),
                 text_color=color,
                 anchor="e",
             ).place(x=85, y=5)
@@ -100,7 +92,12 @@ class transactions:
 
             customtkinter.CTkLabel(
                 card,
-                text=f"{_transaction[3]}",  # YYYY-MM-DD HH:MM:SS
+                text=(
+                    datetime.fromisoformat(_transaction[3])
+                    .replace(tzinfo=timezone.utc)
+                    .astimezone()
+                    .strftime("%Y-%m-%d %I:%M:%S %p (%z)")
+                ),  # %Y-%m-%d %I:%M:%S %p (%z)
                 width=200,
                 height=20,
                 font=("Consolas", 11),

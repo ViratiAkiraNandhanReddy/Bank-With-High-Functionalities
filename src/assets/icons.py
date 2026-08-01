@@ -106,6 +106,10 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "overview.png"
         )
 
+        paid: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "paid.png"
+        )
+
         password: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "password.png"
         )

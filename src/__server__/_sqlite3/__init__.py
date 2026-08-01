@@ -1,6 +1,6 @@
-from .lookup import UserLookup, AdminLookup
-from .management import UserManagement, AdminManagement
-from .schema import UserSchema, AdminSchema, TransactionSchema
+from .lookup import UserLookup, AdminLookup, ApplicationLookup
+from .management import UserManagement, AdminManagement, ApplicationManagement
+from .schema import UserSchema, AdminSchema, TransactionSchema, AnnouncementSchema
 from .authentication import UserAuthentication, AdminAuthentication
 
 
@@ -9,12 +9,14 @@ class Schema:
     user: type[UserSchema] = UserSchema
     admin: type[AdminSchema] = AdminSchema
     transaction: type[TransactionSchema] = TransactionSchema
+    announcement: type[AnnouncementSchema] = AnnouncementSchema
 
 
 class Lookup:
 
     user: type[UserLookup] = UserLookup
     admin: type[AdminLookup] = AdminLookup
+    application: type[ApplicationLookup] = ApplicationLookup
 
 
 class Authentication:
@@ -27,6 +29,7 @@ class Management:
 
     user: type[UserManagement] = UserManagement
     admin: type[AdminManagement] = AdminManagement
+    application: type[ApplicationManagement] = ApplicationManagement
 
 
 class SERVER:
