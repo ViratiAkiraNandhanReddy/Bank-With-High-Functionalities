@@ -1,4 +1,5 @@
 from .._balance import balance
+from .._favorites import favorites
 from .._transactions import transactions
 from .... import customtkinter, assets, Callable, SERVER
 
@@ -11,11 +12,13 @@ class transfer:
         username: str,
         balance_instance: balance,
         transactions_instance: transactions,
+        favorites_instance: favorites,
     ) -> None:
 
-        self.balance_instance = balance_instance
-        self.transactions_instance = transactions_instance
         self.username = username
+        self.balance_instance = balance_instance
+        self.favorites_instance = favorites_instance
+        self.transactions_instance = transactions_instance
 
         self.frame__transfer: customtkinter.CTkFrame = customtkinter.CTkFrame(
             parent_frame,
@@ -491,6 +494,7 @@ class transfer:
             self.__amount.delete(0, "end")
             self.__password.delete(0, "end")
             self.balance_instance.refresh()
+            self.favorites_instance.refresh()
             self.transactions_instance.refresh()
 
             self.message_label.configure(text="Transfer successful!")
