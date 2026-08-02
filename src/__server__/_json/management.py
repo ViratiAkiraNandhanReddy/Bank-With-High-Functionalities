@@ -12,6 +12,11 @@ class UserManagement(UserManagementBase):
     def withdraw(cls, username_or_uuid: str, amount: float) -> bool: ...
 
     @classmethod
+    def transfer(
+        cls, username_or_uuid: str, recipient_username: str, amount: float
+    ) -> bool: ...
+
+    @classmethod
     def change_password(cls, username_or_uuid: str, new_password: str) -> bool: ...
 
     @classmethod
