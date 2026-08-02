@@ -58,3 +58,67 @@ class transfer:
         ).place(
             x=112, y=44
         )  # x = 112 ; y = 44.5
+
+        self.container_frame__username_transfer: customtkinter.CTkFrame = (
+            customtkinter.CTkFrame(
+                self.if_00_transfer,
+                width=280,
+                height=40,
+                fg_color="transparent",
+                border_width=1,
+                border_color="#FFFFFF",
+                corner_radius=6,
+            )
+        )
+
+        self.container_frame__username_label_transfer: customtkinter.CTkLabel = (
+            customtkinter.CTkLabel(
+                self.if_00_transfer,
+                text="username",
+                font=("Consolas", 10),
+                height=12,
+                width=44,  # 38
+                text_color="#FFFFFF",
+            )
+        )
+
+        customtkinter.CTkLabel(
+            self.container_frame__username_transfer,
+            image=customtkinter.CTkImage(
+                light_image=assets.icons.material.account_circle,
+                dark_image=assets.icons.material.account_circle,
+                size=(20, 20),
+            ),
+            text="",
+        ).place(x=8, rely=0.5, anchor="w")
+
+        self.container_frame__username_transfer.place(x=35, y=150)
+
+        self.__username: customtkinter.CTkEntry = customtkinter.CTkEntry(
+            self.container_frame__username_transfer,
+            placeholder_text="username",
+            width=280 - 40,
+            height=40 - 8,
+            corner_radius=0,
+            border_width=0,
+            fg_color="transparent",
+            font=("Consolas", 16),
+        )
+        self.__username.place(x=28, rely=0.5, anchor="w")
+
+        self.__username.bind(
+            "<FocusIn>",
+            lambda event: (
+                self.container_frame__username_label_transfer.place(x=55, y=144)
+                if not self.__username.get()
+                else None
+            ),
+        )
+        self.__username.bind(
+            "<FocusOut>",
+            lambda event: (
+                self.container_frame__username_label_transfer.place_forget()
+                if not self.__username.get()
+                else None
+            ),
+        )
