@@ -452,9 +452,65 @@ class transfer:
 
             return
 
+        if not SERVER.authentication.user.password(self.username, user_password):
+
+            self.container_frame__password_transfer.configure(border_color="#FF0000")
+            self.container_frame__password_label_transfer.configure(
+                text_color="#FF0000"
+            )
+            self.container_frame__password_label_transfer.configure(
+                text="invalid password", width=83
+            )
+
+            self.message_label.configure(
+                text="Incorrect password", text_color="#FF0000"
+            )
+
+            return
+
+        if SERVER.lookup.user.balance(self.username) < amount_float:
+
+            self.container_frame__amount_transfer.configure(border_color="#FF0000")
+            self.container_frame__amount_label_transfer.configure(text_color="#FF0000")
+            self.container_frame__amount_label_transfer.configure(
+                text="invalid amount", width=73
+            )
+
+            self.message_label.configure(
+                text="Insufficient available balance.", text_color="#FF0000"
+            )
+
+            return
+
+        server_response: bool = SERVER.management.user.transfer(
+            self.username, self.recipient_username, amount_float
+        )
+
+        if server_response:
+
+            self.__amount.delete(0, "end")
+            self.__password.delete(0, "end")
+            self.balance_instance.refresh()
+            self.transactions_instance.refresh()
+
+            self.message_label.configure(text="Transfer successful!")
+            self.message_label.after(
+                3000, lambda: self.message_label.configure(text="")
+            )
+
+        else:
+
+            self.message_label.configure(
+                text="Transfer failed. Please try again.",
+                text_color="#FF0000",
+            )
+            self.message_label.after(
+                3000, lambda: self.message_label.configure(text="")
+            )
+
     def _validate_username(self) -> None:
 
-        pass
+        self.recipient_username = self.__username.get().strip()
 
     def redirect_to_if_01_transfer(self) -> None:
 
