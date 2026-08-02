@@ -154,6 +154,27 @@ class transfer:
 
         self.validate_username_btn.place(x=302, y=342)
 
+        self.continue_to_if_01_transfer: customtkinter.CTkButton = (
+            customtkinter.CTkButton(
+                self.if_00_transfer,
+                text="",
+                width=0,  # 28
+                height=0,  # 28
+                fg_color="transparent",
+                hover=False,
+                image=customtkinter.CTkImage(
+                    light_image=assets.icons.material.arrow_forward,
+                    dark_image=assets.icons.material.arrow_forward,
+                    size=(20, 20),
+                ),
+                command=self.redirect_to_if_01_transfer,
+            )
+        )
+
     def _validate_username(self) -> None:
+
+        pass
+
+    def redirect_to_if_01_transfer(self) -> None:
 
         pass
