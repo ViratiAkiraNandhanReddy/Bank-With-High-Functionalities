@@ -378,6 +378,38 @@ class transfer:
             or self.__password.unbind("<KeyPress>"),
         )
 
+        if (not amount_string) and (
+            not user_password
+        ):  # amount_string: false -- user_password: false
+
+            self.container_frame__amount_transfer.configure(border_color="#FF0000")
+            self.container_frame__password_transfer.configure(border_color="#FF0000")
+            self.container_frame__amount_label_transfer.configure(
+                text="invalid amount", width=73
+            )
+
+            self.container_frame__amount_label_transfer.configure(text_color="#FF0000")
+            self.container_frame__password_label_transfer.configure(
+                text_color="#FF0000"
+            )
+            self.container_frame__password_label_transfer.configure(
+                text="invalid password", width=83
+            )
+
+            return
+
+        if not user_password:
+
+            self.container_frame__password_transfer.configure(border_color="#FF0000")
+            self.container_frame__password_label_transfer.configure(
+                text_color="#FF0000"
+            )
+            self.container_frame__password_label_transfer.configure(
+                text="invalid password", width=83
+            )
+
+            return
+
     def _validate_username(self) -> None:
 
         pass
