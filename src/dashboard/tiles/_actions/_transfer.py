@@ -410,6 +410,48 @@ class transfer:
 
             return
 
+        try:
+
+            amount_float: float = round(float(amount_string), 2)
+
+        except ValueError:
+
+            self.container_frame__amount_transfer.configure(border_color="#FF0000")
+            self.container_frame__amount_label_transfer.configure(text_color="#FF0000")
+            self.container_frame__amount_label_transfer.configure(
+                text="invalid amount", width=73
+            )
+
+            return
+
+        if amount_float <= 0:
+
+            self.container_frame__amount_transfer.configure(border_color="#FF0000")
+            self.container_frame__amount_label_transfer.configure(text_color="#FF0000")
+            self.container_frame__amount_label_transfer.configure(
+                text="invalid amount", width=73
+            )
+
+            self.message_label.configure(
+                text="Amount must be greater than $0", text_color="#FF0000"
+            )
+
+            return
+
+        if amount_float > 99999.99:
+
+            self.container_frame__amount_transfer.configure(border_color="#FF0000")
+            self.container_frame__amount_label_transfer.configure(text_color="#FF0000")
+            self.container_frame__amount_label_transfer.configure(
+                text="invalid amount", width=73
+            )
+
+            self.message_label.configure(
+                text="Maximum Transfer: $99,999.99", text_color="#FF0000"
+            )
+
+            return
+
     def _validate_username(self) -> None:
 
         pass
