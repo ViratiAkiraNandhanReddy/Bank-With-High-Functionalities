@@ -323,6 +323,25 @@ class transfer:
         )
         self.message_label.place(x=35, y=250)
 
+        self.__amount.bind("<Return>", lambda _event: self.handle_transfer())
+        self.__password.bind("<Return>", lambda _event: self.handle_transfer())
+
+        transfer_btn: customtkinter.CTkButton = customtkinter.CTkButton(
+            self.if_01_transfer,
+            text="Transfer",
+            width=280,
+            height=40,
+            border_width=0,
+            text_color="#FFFFFF",
+            bg_color="transparent",
+            fg_color="#3B82F6",
+            font=("Consolas", 16, "bold"),
+            hover_color="#2563EB",
+            corner_radius=6,
+            command=self.handle_transfer,
+        )
+        transfer_btn.place(x=35, y=315)
+
     def handle_transfer(self) -> None:
 
         amount_string: str = self.__amount.get().strip()
