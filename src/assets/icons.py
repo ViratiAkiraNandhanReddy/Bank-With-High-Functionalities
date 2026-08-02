@@ -114,6 +114,10 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "password.png"
         )
 
+        person_search: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "person_search.png"
+        )
+
         remove: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "remove.png"
         )

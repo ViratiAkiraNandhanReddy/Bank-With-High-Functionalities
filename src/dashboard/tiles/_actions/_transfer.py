@@ -145,8 +145,8 @@ class transfer:
             fg_color="transparent",
             hover=False,
             image=customtkinter.CTkImage(
-                light_image=assets.icons.material.arrow_forward,
-                dark_image=assets.icons.material.arrow_forward,
+                light_image=assets.icons.material.person_search,
+                dark_image=assets.icons.material.person_search,
                 size=(20, 20),
             ),
             command=self._validate_username,
