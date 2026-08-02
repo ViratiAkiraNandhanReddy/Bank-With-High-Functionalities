@@ -122,3 +122,38 @@ class transfer:
                 else None
             ),
         )
+
+        self.container_frame__username_info_transfer: customtkinter.CTkFrame = (
+            customtkinter.CTkFrame(
+                self.if_00_transfer,
+                width=280,
+                height=104,
+                fg_color="transparent",
+                border_width=1,
+                border_color="#FFFFFF",
+                corner_radius=6,
+            )
+        )
+
+        self.container_frame__username_info_transfer.place(x=35, y=210)
+
+        self.validate_username_btn: customtkinter.CTkButton = customtkinter.CTkButton(
+            self.if_00_transfer,
+            text="",
+            width=0,  # 28
+            height=0,  # 28
+            fg_color="transparent",
+            hover=False,
+            image=customtkinter.CTkImage(
+                light_image=assets.icons.material.arrow_forward,
+                dark_image=assets.icons.material.arrow_forward,
+                size=(20, 20),
+            ),
+            command=self._validate_username,
+        )
+
+        self.validate_username_btn.place(x=302, y=342)
+
+    def _validate_username(self) -> None:
+
+        pass
