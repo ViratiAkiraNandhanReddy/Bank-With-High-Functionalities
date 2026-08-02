@@ -312,6 +312,53 @@ class transfer:
             ),
         )
 
+        self.message_label = customtkinter.CTkLabel(
+            self.if_01_transfer,
+            text="",
+            width=280,
+            height=65,
+            wraplength=270,
+            font=("Consolas", 12),
+            text_color="#22C55E",
+        )
+        self.message_label.place(x=35, y=250)
+
+    def handle_transfer(self) -> None:
+
+        amount_string: str = self.__amount.get().strip()
+        user_password: str = self.__password.get().strip()
+
+        self.__amount.bind(
+            "<KeyPress>",
+            lambda event: self.container_frame__amount_transfer.configure(
+                border_color="#FFFFFF"
+            )
+            or self.container_frame__amount_label_transfer.configure(
+                text_color="#FFFFFF"
+            )
+            or self.container_frame__amount_label_transfer.configure(
+                text="amount",
+                width=34,  # 28
+            )
+            or self.message_label.configure(text="", text_color="#22C55E")
+            or self.__amount.unbind("<KeyPress>"),
+        )
+        self.__password.bind(
+            "<KeyPress>",
+            lambda event: self.container_frame__password_transfer.configure(
+                border_color="#FFFFFF"
+            )
+            or self.container_frame__password_label_transfer.configure(
+                text_color="#FFFFFF"
+            )
+            or self.container_frame__password_label_transfer.configure(
+                text="password",
+                width=44,  # 38
+            )
+            or self.message_label.configure(text="", text_color="#22C55E")
+            or self.__password.unbind("<KeyPress>"),
+        )
+
     def _validate_username(self) -> None:
 
         pass
