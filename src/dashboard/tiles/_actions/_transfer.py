@@ -192,6 +192,28 @@ class transfer:
             ),  # type: ignore[arg-type]
         )
 
+        customtkinter.CTkLabel(
+            self.if_01_transfer,
+            text="Transfer To",
+            font=("Consolas", 16, "bold"),
+            text_color="#FFFFFF",
+            height=0,  # 19
+            width=0,  # 99
+        ).place(
+            x=125, y=24
+        )  # x = 125.5 ; y = 24.5
+
+        self.recipient_username_h1: customtkinter.CTkLabel = customtkinter.CTkLabel(
+            self.if_01_transfer,
+            text="",
+            font=("Consolas", 18, "bold"),
+            text_color="#FFFFFF",
+            height=25,  # 22
+            width=280,  # 280
+        )
+
+        self.recipient_username_h1.place(x=35, y=84)  # x = 35 ; y = 84
+
         self.container_frame__amount_transfer: customtkinter.CTkFrame = (
             customtkinter.CTkFrame(
                 self.if_01_transfer,
@@ -555,5 +577,13 @@ class transfer:
             or self.__amount.unbind("<KeyPress>"),
         )
 
+        self.recipient_username_h1.configure(
+            text="@"
+            + (
+                self.recipient_username
+                if len(self.recipient_username) <= 23
+                else self.recipient_username[:20] + "..."
+            )
+        )
         self.validate_username_btn.place_forget()
         self.continue_to_if_01_transfer.place(x=302, y=342)
