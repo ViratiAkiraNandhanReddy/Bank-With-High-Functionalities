@@ -140,6 +140,8 @@ class transfer:
 
         self.container_frame__username_info_transfer.place(x=35, y=210)
 
+        self.__username.bind("<Return>", lambda _event: self._validate_username())
+
         self.validate_username_btn: customtkinter.CTkButton = customtkinter.CTkButton(
             self.if_00_transfer,
             text="",
@@ -170,7 +172,10 @@ class transfer:
                     dark_image=assets.icons.material.arrow_forward,
                     size=(20, 20),
                 ),
-                command=self.redirect_to_if_01_transfer,
+                command=lambda: (
+                    self.if_01_transfer.place(x=0, y=0),
+                    self.if_00_transfer.place_forget(),
+                ),
             )
         )
 
@@ -328,6 +333,25 @@ class transfer:
 
         self.__amount.bind("<Return>", lambda _event: self.handle_transfer())
         self.__password.bind("<Return>", lambda _event: self.handle_transfer())
+
+        self.back_to_if_00_transfer: customtkinter.CTkButton = customtkinter.CTkButton(
+            self.if_01_transfer,
+            text="",
+            width=0,  # 28
+            height=0,  # 28
+            fg_color="transparent",
+            hover=False,
+            image=customtkinter.CTkImage(
+                light_image=assets.icons.material.arrow_back,
+                dark_image=assets.icons.material.arrow_back,
+                size=(20, 20),
+            ),
+            command=lambda: (
+                self.if_00_transfer.place(x=0, y=0),
+                self.if_01_transfer.place_forget(),
+            ),
+        )
+        self.back_to_if_00_transfer.place(x=20, y=20)
 
         transfer_btn: customtkinter.CTkButton = customtkinter.CTkButton(
             self.if_01_transfer,
@@ -516,6 +540,20 @@ class transfer:
 
         self.recipient_username = self.__username.get().strip()
 
-    def redirect_to_if_01_transfer(self) -> None:
+        self.__username.bind(
+            "<KeyPress>",
+            lambda event: self.container_frame__username_transfer.configure(
+                border_color="#FFFFFF"
+            )
+            or self.container_frame__amount_label_transfer.configure(
+                text_color="#FFFFFF",
+                width=34,  # 28
+                text="amount",
+            )
+            or self.validate_username_btn.place(x=302, y=342)
+            or self.continue_to_if_01_transfer.place_forget()
+            or self.__amount.unbind("<KeyPress>"),
+        )
 
-        pass
+        self.validate_username_btn.place_forget()
+        self.continue_to_if_01_transfer.place(x=302, y=342)
