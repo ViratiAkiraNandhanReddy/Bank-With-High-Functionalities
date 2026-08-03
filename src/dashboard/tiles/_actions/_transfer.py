@@ -140,6 +140,20 @@ class transfer:
 
         self.container_frame__username_info_transfer.place(x=35, y=210)
 
+        self.default_label_username_info: customtkinter.CTkLabel = (
+            customtkinter.CTkLabel(
+                self.container_frame__username_info_transfer,
+                text="Enter a recipient username to continue.",
+                width=270,
+                height=94,
+                wraplength=200,
+                font=("Consolas", 13),
+                text_color="#FFFFFF",
+            )
+        )
+
+        self.default_label_username_info.place(x=5, y=5)
+
         self.__username.bind("<Return>", lambda _event: self._validate_username())
 
         self.validate_username_btn: customtkinter.CTkButton = customtkinter.CTkButton(
@@ -596,6 +610,9 @@ class transfer:
                 text_color="#FF0000",
                 width=83,
             )
+            self.default_label_username_info.configure(
+                text="No account found with this username."
+            )
 
             return
 
@@ -606,6 +623,9 @@ class transfer:
                 text="invalid username",
                 text_color="#FF0000",
                 width=83,
+            )
+            self.default_label_username_info.configure(
+                text="You cannot transfer funds to your own account."
             )
 
             return
