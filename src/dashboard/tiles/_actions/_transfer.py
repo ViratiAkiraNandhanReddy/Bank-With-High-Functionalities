@@ -553,13 +553,22 @@ class transfer:
 
             self.__amount.delete(0, "end")
             self.__password.delete(0, "end")
+            self.__username.delete(0, "end")
             self.balance_instance.refresh()
             self.favorites_instance.refresh()
             self.transactions_instance.refresh()
+            self.default_label_username_info.configure(
+                text="Enter a recipient username to continue."
+            )
 
             self.message_label.configure(text="Transfer successful!")
             self.message_label.after(
-                3000, lambda: self.message_label.configure(text="")
+                3000,
+                lambda: (
+                    self.message_label.configure(text=""),
+                    self.if_00_transfer.place(x=0, y=0),
+                    self.if_01_transfer.place_forget(),
+                ),
             )
 
         else:
@@ -578,17 +587,22 @@ class transfer:
 
         self.__username.bind(
             "<KeyPress>",
-            lambda event: self.container_frame__username_transfer.configure(
-                border_color="#FFFFFF"
-            )
-            or self.container_frame__username_label_transfer.configure(
-                text_color="#FFFFFF",
-                width=34,  # 28
-                text="amount",
-            )
-            or self.validate_username_btn.place(x=302, y=342)
-            or self.continue_to_if_01_transfer.place_forget()
-            or self.__amount.unbind("<KeyPress>"),
+            lambda event: (
+                self.container_frame__username_transfer.configure(
+                    border_color="#FFFFFF"
+                ),
+                self.container_frame__username_label_transfer.configure(
+                    text_color="#FFFFFF",
+                    width=34,  # 28
+                    text="amount",
+                ),
+                self.default_label_username_info.configure(
+                    text="Enter a recipient username to continue."
+                ),
+                self.validate_username_btn.place(x=302, y=342),
+                self.continue_to_if_01_transfer.place_forget(),
+                self.__amount.unbind("<KeyPress>"),
+            ),
         )
 
         if not self.recipient_username:
@@ -629,6 +643,20 @@ class transfer:
             )
 
             return
+
+        recipient_full_name: str = SERVER.lookup.user.full_name(self.recipient_username)
+
+        self.default_label_username_info.configure(
+            text="Recipient verified."
+            + "\n\n"
+            + (
+                recipient_full_name
+                if len(recipient_full_name) <= 27
+                else recipient_full_name[:24] + "..."
+            )
+            + "\n\n"
+            + "Ready to continue."
+        )
 
         self.recipient_username_h1.configure(
             text="@"
