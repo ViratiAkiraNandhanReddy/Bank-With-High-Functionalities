@@ -67,3 +67,12 @@ class ApplicationLookupBase(ABC):
     def current_announcement(cls) -> str:
 
         pass
+
+
+class SecurityEventLookupBase(ABC):
+
+    @classmethod
+    @abstractmethod
+    def recent(cls, username_or_uuid: str, limit: int = 5) -> list[tuple[str, str]]:
+
+        pass

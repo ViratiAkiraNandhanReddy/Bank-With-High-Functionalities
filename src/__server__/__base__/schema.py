@@ -35,3 +35,12 @@ class AnnouncementSchemaBase(ABC):
     def create(cls) -> bool:
 
         pass
+
+
+class SecurityEventSchemaBase(ABC):
+
+    @classmethod
+    @abstractmethod
+    def create(cls) -> bool:
+
+        pass

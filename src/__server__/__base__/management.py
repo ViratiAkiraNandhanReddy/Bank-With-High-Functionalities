@@ -58,3 +58,12 @@ class ApplicationManagementBase(ABC):
     def update_announcement(cls, announcement: str = "No new announcements.") -> bool:
 
         pass
+
+
+class SecurityEventManagementBase(ABC):
+
+    @classmethod
+    @abstractmethod
+    def record(cls, username_or_uuid: str, event_type: str) -> bool:
+
+        pass
