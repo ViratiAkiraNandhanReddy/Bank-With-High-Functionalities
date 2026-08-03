@@ -567,7 +567,7 @@ class transfer:
             lambda event: self.container_frame__username_transfer.configure(
                 border_color="#FFFFFF"
             )
-            or self.container_frame__amount_label_transfer.configure(
+            or self.container_frame__username_label_transfer.configure(
                 text_color="#FFFFFF",
                 width=34,  # 28
                 text="amount",
@@ -576,6 +576,39 @@ class transfer:
             or self.continue_to_if_01_transfer.place_forget()
             or self.__amount.unbind("<KeyPress>"),
         )
+
+        if not self.recipient_username:
+
+            self.container_frame__username_transfer.configure(border_color="#FF0000")
+            self.container_frame__username_label_transfer.configure(
+                text="invalid username",
+                text_color="#FF0000",
+                width=83,
+            )
+
+            return
+
+        if not SERVER.lookup.user.exists(self.recipient_username):
+
+            self.container_frame__username_transfer.configure(border_color="#FF0000")
+            self.container_frame__username_label_transfer.configure(
+                text="invalid username",
+                text_color="#FF0000",
+                width=83,
+            )
+
+            return
+
+        if self.recipient_username == self.username:
+
+            self.container_frame__username_transfer.configure(border_color="#FF0000")
+            self.container_frame__username_label_transfer.configure(
+                text="invalid username",
+                text_color="#FF0000",
+                width=83,
+            )
+
+            return
 
         self.recipient_username_h1.configure(
             text="@"
