@@ -75,6 +75,71 @@ class UserManagement(UserManagementBase):
         return cursor.rowcount > 0
 
     @classmethod
+    def transfer(
+        cls, username_or_uuid: str, recipient_username: str, amount: float
+    ) -> bool:
+
+        try:
+
+            user_uuid = UserLookup.resolve_uuid(username_or_uuid)
+
+            recipient_uuid = UserLookup.resolve_uuid(recipient_username)
+
+            cursor.execute(
+                """
+                UPDATE USERS
+                SET BALANCE = BALANCE - ?
+                WHERE UUID = ?
+                """,
+                (amount, user_uuid),
+            )
+
+            cursor.execute(
+                """
+                UPDATE USERS
+                SET BALANCE = BALANCE + ?
+                WHERE UUID = ?
+                """,
+                (amount, recipient_uuid),
+            )
+
+            cursor.execute(
+                """
+                INSERT INTO TRANSACTIONS (
+                    USER_UUID,
+                    COUNTERPARTY_USERNAME,
+                    AMOUNT,
+                    TRANSACTION_TYPE
+                )
+                VALUES (?, ?, ?, ?)
+                """,
+                (user_uuid, recipient_username, amount, "transfer_out"),
+            )
+
+            cursor.execute(
+                """
+                INSERT INTO TRANSACTIONS (
+                    USER_UUID,
+                    COUNTERPARTY_USERNAME,
+                    AMOUNT,
+                    TRANSACTION_TYPE
+                )
+                VALUES (?, ?, ?, ?)
+                """,
+                (recipient_uuid, username_or_uuid, amount, "transfer_in"),
+            )
+
+            connection.commit()
+
+            return True
+
+        except Exception:
+
+            connection.rollback()
+
+            return False
+
+    @classmethod
     def change_password(cls, username_or_uuid: str, new_password: str) -> bool:
 
         password: str = Encryption(new_password, shift=8, alterNumbers=True).encrypt()

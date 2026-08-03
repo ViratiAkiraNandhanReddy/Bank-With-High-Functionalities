@@ -29,7 +29,7 @@ class actions:
         )
 
         self.transfer: transfer = transfer(
-            parent_frame, username, self.balance, self.transactions
+            parent_frame, username, self.balance, self.transactions, self.favorites
         )
 
         self.previous_action_view: deposit | withdraw | transfer | None = None
