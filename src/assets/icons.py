@@ -142,6 +142,10 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "shield_lock.png"
         )
 
+        support_agent: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "support_agent.png"
+        )
+
         trending_down: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "trending_down.png"
         )
