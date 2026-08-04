@@ -53,7 +53,7 @@ class dashboard_interface:
                 fg_color="black",
                 border_spacing=0,
                 command=lambda: (
-                    self.hide_frame,
+                    self.hide_frame(),
                     SERVER.management.security_event.record(username, "logout"),
                 ),
             ).place(x=1060, y=10)
