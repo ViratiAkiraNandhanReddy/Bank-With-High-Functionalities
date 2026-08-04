@@ -28,7 +28,10 @@ class UserManagement(UserManagementBase):
             SET BALANCE = BALANCE + ?
             WHERE UUID = ?
             """,
-            (amount, user_uuid),
+            (
+                amount,
+                user_uuid,
+            ),
         )
 
         cursor.execute(
@@ -41,7 +44,12 @@ class UserManagement(UserManagementBase):
             )
             VALUES (?, ?, ?, ?)
             """,
-            (user_uuid, username_or_uuid, amount, "deposit"),
+            (
+                user_uuid,
+                username_or_uuid,
+                amount,
+                "deposit",
+            ),
         )
 
         connection.commit()
@@ -63,7 +71,10 @@ class UserManagement(UserManagementBase):
             SET BALANCE = BALANCE - ?
             WHERE UUID = ?
             """,
-            (amount, user_uuid),
+            (
+                amount,
+                user_uuid,
+            ),
         )
 
         cursor.execute(
@@ -76,7 +87,12 @@ class UserManagement(UserManagementBase):
             )
             VALUES (?, ?, ?, ?)
             """,
-            (user_uuid, username_or_uuid, amount, "withdraw"),
+            (
+                user_uuid,
+                username_or_uuid,
+                amount,
+                "withdraw",
+            ),
         )
 
         connection.commit()
@@ -103,7 +119,10 @@ class UserManagement(UserManagementBase):
                 SET BALANCE = BALANCE - ?
                 WHERE UUID = ?
                 """,
-                (amount, user_uuid),
+                (
+                    amount,
+                    user_uuid,
+                ),
             )
 
             cursor.execute(
@@ -112,7 +131,10 @@ class UserManagement(UserManagementBase):
                 SET BALANCE = BALANCE + ?
                 WHERE UUID = ?
                 """,
-                (amount, recipient_uuid),
+                (
+                    amount,
+                    recipient_uuid,
+                ),
             )
 
             cursor.execute(
@@ -125,7 +147,12 @@ class UserManagement(UserManagementBase):
                 )
                 VALUES (?, ?, ?, ?)
                 """,
-                (user_uuid, recipient_username, amount, "transfer_out"),
+                (
+                    user_uuid,
+                    recipient_username,
+                    amount,
+                    "transfer_out",
+                ),
             )
 
             cursor.execute(
@@ -138,7 +165,12 @@ class UserManagement(UserManagementBase):
                 )
                 VALUES (?, ?, ?, ?)
                 """,
-                (recipient_uuid, username_or_uuid, amount, "transfer_in"),
+                (
+                    recipient_uuid,
+                    username_or_uuid,
+                    amount,
+                    "transfer_in",
+                ),
             )
 
             connection.commit()
@@ -158,7 +190,11 @@ class UserManagement(UserManagementBase):
         new_password: str,
     ) -> bool:
 
-        password: str = Encryption(new_password, shift=8, alterNumbers=True).encrypt()
+        password: str = Encryption(
+            new_password,
+            shift=8,
+            alterNumbers=True,
+        ).encrypt()
 
         cursor.execute(
             """
@@ -166,7 +202,11 @@ class UserManagement(UserManagementBase):
             SET PASSWORD = ?
             WHERE USERNAME = ? OR UUID = ?
             """,
-            (password, username_or_uuid, username_or_uuid),
+            (
+                password,
+                username_or_uuid,
+                username_or_uuid,
+            ),
         )
 
         connection.commit()
@@ -186,7 +226,11 @@ class UserManagement(UserManagementBase):
             SET USERNAME = ?
             WHERE USERNAME = ? OR UUID = ?
             """,
-            (new_username, old_username_or_uuid, old_username_or_uuid),
+            (
+                new_username,
+                old_username_or_uuid,
+                old_username_or_uuid,
+            ),
         )
 
         connection.commit()
@@ -204,7 +248,10 @@ class UserManagement(UserManagementBase):
             DELETE FROM USERS
             WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid, username_or_uuid),
+            (
+                username_or_uuid,
+                username_or_uuid,
+            ),
         )
         connection.commit()
 
@@ -220,7 +267,11 @@ class AdminManagement(AdminManagementBase):
         new_password: str,
     ) -> bool:
 
-        password: str = Encryption(new_password, shift=53, alterNumbers=True).encrypt()
+        password: str = Encryption(
+            new_password,
+            shift=53,
+            alterNumbers=True,
+        ).encrypt()
 
         cursor.execute(
             """
@@ -228,7 +279,10 @@ class AdminManagement(AdminManagementBase):
             SET PASSWORD = ?
             WHERE USERNAME = ?
             """,
-            (password, username),
+            (
+                password,
+                username,
+            ),
         )
 
         connection.commit()

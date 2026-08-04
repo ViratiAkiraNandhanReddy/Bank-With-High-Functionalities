@@ -26,7 +26,10 @@ class UserLookup(UserLookupBase):
             FROM USERS
             WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid, username_or_uuid),
+            (
+                username_or_uuid,
+                username_or_uuid,
+            ),
         )
 
         return cursor.fetchone() is not None
@@ -44,7 +47,10 @@ class UserLookup(UserLookupBase):
             FROM USERS
             WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid, username_or_uuid),
+            (
+                username_or_uuid,
+                username_or_uuid,
+            ),
         )
 
         row = cursor.fetchone()
@@ -103,7 +109,10 @@ class UserLookup(UserLookupBase):
             ORDER BY TIMESTAMP DESC
             LIMIT ?;
             """,
-            (user_uuid, limit),
+            (
+                user_uuid,
+                limit,
+            ),
         )
 
         return cursor.fetchall()
@@ -121,7 +130,10 @@ class UserLookup(UserLookupBase):
             FROM USERS
             WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid, username_or_uuid),
+            (
+                username_or_uuid,
+                username_or_uuid,
+            ),
         )
 
         row = cursor.fetchone()
@@ -140,7 +152,10 @@ class UserLookup(UserLookupBase):
             FROM USERS
             WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid, username_or_uuid),
+            (
+                username_or_uuid,
+                username_or_uuid,
+            ),
         )
 
         row = cursor.fetchone()
@@ -172,7 +187,10 @@ class UserLookup(UserLookupBase):
             ORDER BY TRANSFER_COUNT DESC
             LIMIT 3
             """,
-            (username_or_uuid, username_or_uuid),
+            (
+                username_or_uuid,
+                username_or_uuid,
+            ),
         )
 
         return cursor.fetchall()

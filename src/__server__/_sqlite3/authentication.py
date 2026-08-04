@@ -8,7 +8,11 @@ cursor = connection.cursor()
 class UserAuthentication(UserAuthenticationBase):
 
     @classmethod
-    def password(cls, username_or_uuid: str, password: str) -> bool:
+    def password(
+        cls,
+        username_or_uuid: str,
+        password: str,
+    ) -> bool:
 
         cursor.execute(
             """
@@ -17,16 +21,27 @@ class UserAuthentication(UserAuthenticationBase):
             FROM USERS
             WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid, username_or_uuid),
+            (
+                username_or_uuid,
+                username_or_uuid,
+            ),
         )
 
         return (
             cursor.fetchone()[0]
-            == Encryption(password, shift=8, alterNumbers=True).encrypt()
+            == Encryption(
+                password,
+                shift=8,
+                alterNumbers=True,
+            ).encrypt()
         )
 
     @classmethod
-    def backup_code(cls, username_or_uuid: str, backup_code: str) -> bool:
+    def backup_code(
+        cls,
+        username_or_uuid: str,
+        backup_code: str,
+    ) -> bool:
 
         cursor.execute(
             """
@@ -35,13 +50,20 @@ class UserAuthentication(UserAuthenticationBase):
             FROM USERS
             WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid, username_or_uuid),
+            (
+                username_or_uuid,
+                username_or_uuid,
+            ),
         )
 
         return cursor.fetchone()[0] == backup_code
 
     @classmethod
-    def email_address(cls, username_or_uuid: str, email_address: str) -> bool:
+    def email_address(
+        cls,
+        username_or_uuid: str,
+        email_address: str,
+    ) -> bool:
 
         cursor.execute(
             """
@@ -50,13 +72,19 @@ class UserAuthentication(UserAuthenticationBase):
             FROM USERS
             WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid, username_or_uuid),
+            (
+                username_or_uuid,
+                username_or_uuid,
+            ),
         )
 
         return cursor.fetchone()[0] == email_address
 
     @classmethod
-    def update_last_login(cls, username_or_uuid: str) -> None:
+    def update_last_login(
+        cls,
+        username_or_uuid: str,
+    ) -> None:
 
         cursor.execute(
             """
@@ -64,7 +92,10 @@ class UserAuthentication(UserAuthenticationBase):
             SET LAST_LOGIN = CURRENT_TIMESTAMP
             WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid, username_or_uuid),
+            (
+                username_or_uuid,
+                username_or_uuid,
+            ),
         )
 
         connection.commit()
@@ -73,7 +104,11 @@ class UserAuthentication(UserAuthenticationBase):
 class AdminAuthentication(AdminAuthenticationBase):
 
     @classmethod
-    def password(cls, username: str, password: str) -> bool:
+    def password(
+        cls,
+        username: str,
+        password: str,
+    ) -> bool:
 
         cursor.execute(
             """
@@ -87,11 +122,19 @@ class AdminAuthentication(AdminAuthenticationBase):
 
         return (
             cursor.fetchone()[0]
-            == Encryption(password, shift=53, alterNumbers=True).encrypt()
+            == Encryption(
+                password,
+                shift=53,
+                alterNumbers=True,
+            ).encrypt()
         )
 
     @classmethod
-    def backup_code(cls, username: str, backup_code: str) -> bool:
+    def backup_code(
+        cls,
+        username: str,
+        backup_code: str,
+    ) -> bool:
 
         cursor.execute(
             """
@@ -106,7 +149,11 @@ class AdminAuthentication(AdminAuthenticationBase):
         return cursor.fetchone()[0] == backup_code
 
     @classmethod
-    def email_address(cls, username: str, email_address: str) -> bool:
+    def email_address(
+        cls,
+        username: str,
+        email_address: str,
+    ) -> bool:
 
         cursor.execute(
             """
