@@ -98,6 +98,10 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "manage_accounts.png"
         )
 
+        manage_history: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "manage_history.png"
+        )
+
         mark_email_unread: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "mark_email_unread.png"
         )
