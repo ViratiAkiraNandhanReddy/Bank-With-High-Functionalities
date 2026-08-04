@@ -721,7 +721,7 @@ class sign_in_interface:
 
                 return
 
-            elif (not password) and username:  # username: true -- password: false
+            if (not password) and username:  # username: true -- password: false
 
                 self.container_frame__password_sign_in.configure(border_color="#FF0000")
 
@@ -734,9 +734,7 @@ class sign_in_interface:
 
                 return
 
-            elif (not username) and (
-                not password
-            ):  # username: false -- password: false
+            if (not username) and (not password):  # username: false -- password: false
 
                 self.container_frame__username_sign_in.configure(border_color="#FF0000")
                 self.container_frame__password_sign_in.configure(border_color="#FF0000")
@@ -757,9 +755,10 @@ class sign_in_interface:
 
                 return
 
-            elif (username and password) and (
-                (not SERVER.lookup.user.exists(username))
-                or (not SERVER.authentication.user.password(username, password))
+            user_exists = SERVER.lookup.user.exists(username)
+
+            if (not user_exists) or (
+                not SERVER.authentication.user.password(username, password)
             ):  # username: true (not exists) -- password: true --[or]-- username: true (exists) -- password: true (wrong)
 
                 self.container_frame__username_sign_in.configure(border_color="#FF0000")
@@ -779,20 +778,24 @@ class sign_in_interface:
                     text="invalid username/uuid or password", width=160
                 )
 
+                if user_exists:
+
+                    SERVER.management.security_event.record(username, "failed_login")
+
                 return
 
-            else:
+            SERVER.management.security_event.record(username, "login")
 
-                self.overlay_frame__user_dashboard = dashboard_interface.dashboard(
-                    self.window, self.more_button, username
-                )
-                self.overlay_frame__user_dashboard.show_frame()
+            self.overlay_frame__user_dashboard = dashboard_interface.dashboard(
+                self.window, self.more_button, username
+            )
+            self.overlay_frame__user_dashboard.show_frame()
 
-                self.__username.delete(0, "end")
-                self.__password.delete(0, "end")
+            self.__username.delete(0, "end")
+            self.__password.delete(0, "end")
 
-                self.container_frame__username_label_sign_in.place_forget()
-                self.container_frame__password_label_sign_in.place_forget()
+            self.container_frame__username_label_sign_in.place_forget()
+            self.container_frame__password_label_sign_in.place_forget()
 
         def more_action__overlay_frame(self) -> None:
 

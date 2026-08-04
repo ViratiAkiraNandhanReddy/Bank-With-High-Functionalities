@@ -52,7 +52,10 @@ class dashboard_interface:
                 hover=False,
                 fg_color="black",
                 border_spacing=0,
-                command=self.hide_frame,
+                command=lambda: (
+                    self.hide_frame,
+                    SERVER.management.security_event.record(username, "logout"),
+                ),
             ).place(x=1060, y=10)
 
             self.frame__status_greeting: customtkinter.CTkFrame = (
