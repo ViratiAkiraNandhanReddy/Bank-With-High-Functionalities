@@ -6,46 +6,64 @@ class UserLookupBase(ABC):
 
     @classmethod
     @abstractmethod
-    def exists(cls, username_or_uuid: str) -> bool:
+    def exists(
+        cls,
+        username_or_uuid: str,
+    ) -> bool:
 
         pass
 
     @classmethod
     @abstractmethod
-    def balance(cls, username_or_uuid: str) -> float:
+    def balance(
+        cls,
+        username_or_uuid: str,
+    ) -> float:
 
         pass
 
     @classmethod
     @abstractmethod
-    def resolve_uuid(cls, username: str) -> str | None:
+    def resolve_uuid(
+        cls,
+        username: str,
+    ) -> str | None:
 
         pass
 
     @classmethod
     @abstractmethod
     def transactions(
-        cls, username_or_uuid: str, limit: int = 5
+        cls,
+        username_or_uuid: str,
+        limit: int = 5,
     ) -> list[tuple[str, str, float, str]]:
 
         pass
 
     @classmethod
     @abstractmethod
-    def full_name(cls, username_or_uuid: str) -> str:
+    def full_name(
+        cls,
+        username_or_uuid: str,
+    ) -> str:
 
         pass
 
     @classmethod
     @abstractmethod
-    def last_login(cls, username_or_uuid: str) -> datetime | None:
+    def last_login(
+        cls,
+        username_or_uuid: str,
+    ) -> datetime | None:
 
         pass
 
     @classmethod
     @abstractmethod
     def frequent_transfer_recipients(
-        cls, username_or_uuid: str
+        cls,
+        username_or_uuid: str,
     ) -> list[tuple[str, int]]:
 
         pass
@@ -55,7 +73,10 @@ class AdminLookupBase(ABC):
 
     @classmethod
     @abstractmethod
-    def exists(cls, username: str) -> bool:
+    def exists(
+        cls,
+        username: str,
+    ) -> bool:
 
         pass
 
@@ -64,7 +85,9 @@ class ApplicationLookupBase(ABC):
 
     @classmethod
     @abstractmethod
-    def current_announcement(cls) -> str:
+    def current_announcement(
+        cls,
+    ) -> str:
 
         pass
 
@@ -73,6 +96,10 @@ class SecurityEventLookupBase(ABC):
 
     @classmethod
     @abstractmethod
-    def recent(cls, username_or_uuid: str, limit: int = 5) -> list[tuple[str, str]]:
+    def recent(
+        cls,
+        username_or_uuid: str,
+        limit: int = 5,
+    ) -> list[tuple[str, str]]:
 
         pass
