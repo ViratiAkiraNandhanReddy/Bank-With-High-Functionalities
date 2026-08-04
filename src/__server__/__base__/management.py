@@ -5,39 +5,61 @@ class UserManagementBase(ABC):
 
     @classmethod
     @abstractmethod
-    def deposit(cls, username_or_uuid: str, amount: float) -> bool:
-
-        pass
-
-    @classmethod
-    @abstractmethod
-    def withdraw(cls, username_or_uuid: str, amount: float) -> bool:
-
-        pass
-
-    @classmethod
-    @abstractmethod
-    def transfer(
-        cls, username_or_uuid: str, recipient_username: str, amount: float
+    def deposit(
+        cls,
+        username_or_uuid: str,
+        amount: float,
     ) -> bool:
 
         pass
 
     @classmethod
     @abstractmethod
-    def change_password(cls, username_or_uuid: str, new_password: str) -> bool:
+    def withdraw(
+        cls,
+        username_or_uuid: str,
+        amount: float,
+    ) -> bool:
 
         pass
 
     @classmethod
     @abstractmethod
-    def change_username(cls, old_username_or_uuid: str, new_username: str) -> bool:
+    def transfer(
+        cls,
+        username_or_uuid: str,
+        recipient_username: str,
+        amount: float,
+    ) -> bool:
 
         pass
 
     @classmethod
     @abstractmethod
-    def delete(cls, username_or_uuid: str) -> bool:
+    def change_password(
+        cls,
+        username_or_uuid: str,
+        new_password: str,
+    ) -> bool:
+
+        pass
+
+    @classmethod
+    @abstractmethod
+    def change_username(
+        cls,
+        old_username_or_uuid: str,
+        new_username: str,
+    ) -> bool:
+
+        pass
+
+    @classmethod
+    @abstractmethod
+    def delete(
+        cls,
+        username_or_uuid: str,
+    ) -> bool:
 
         pass
 
@@ -46,7 +68,11 @@ class AdminManagementBase(ABC):
 
     @classmethod
     @abstractmethod
-    def change_password(cls, username: str, new_password: str) -> bool:
+    def change_password(
+        cls,
+        username: str,
+        new_password: str,
+    ) -> bool:
 
         pass
 
@@ -55,6 +81,22 @@ class ApplicationManagementBase(ABC):
 
     @classmethod
     @abstractmethod
-    def update_announcement(cls, announcement: str = "No new announcements.") -> bool:
+    def update_announcement(
+        cls,
+        announcement: str = "No new announcements.",
+    ) -> bool:
+
+        pass
+
+
+class SecurityEventManagementBase(ABC):
+
+    @classmethod
+    @abstractmethod
+    def record(
+        cls,
+        username_or_uuid: str,
+        event_type: str,
+    ) -> bool:
 
         pass

@@ -1,7 +1,12 @@
 from .._uuids import _uuids
 from ._connection import connection
 from datetime import datetime, timezone
-from ..__base__ import UserLookupBase, AdminLookupBase, ApplicationLookupBase
+from ..__base__ import (
+    UserLookupBase,
+    AdminLookupBase,
+    ApplicationLookupBase,
+    SecurityEventLookupBase,
+)
 
 cursor = connection.cursor()
 
@@ -9,7 +14,10 @@ cursor = connection.cursor()
 class UserLookup(UserLookupBase):
 
     @classmethod
-    def exists(cls, username_or_uuid: str) -> bool:
+    def exists(
+        cls,
+        username_or_uuid: str,
+    ) -> bool:
 
         cursor.execute(
             """
@@ -18,13 +26,19 @@ class UserLookup(UserLookupBase):
             FROM USERS
             WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid, username_or_uuid),
+            (
+                username_or_uuid,
+                username_or_uuid,
+            ),
         )
 
         return cursor.fetchone() is not None
 
     @classmethod
-    def balance(cls, username_or_uuid) -> float:
+    def balance(
+        cls,
+        username_or_uuid,
+    ) -> float:
 
         cursor.execute(
             """
@@ -33,14 +47,20 @@ class UserLookup(UserLookupBase):
             FROM USERS
             WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid, username_or_uuid),
+            (
+                username_or_uuid,
+                username_or_uuid,
+            ),
         )
 
         row = cursor.fetchone()
         return row[0] if row is not None else 0.0
 
     @classmethod
-    def resolve_uuid(cls, username: str) -> str | None:
+    def resolve_uuid(
+        cls,
+        username: str,
+    ) -> str | None:
 
         if _uuids.validate(username):
 
@@ -61,7 +81,9 @@ class UserLookup(UserLookupBase):
 
     @classmethod
     def transactions(
-        cls, username_or_uuid: str, limit: int = 5
+        cls,
+        username_or_uuid: str,
+        limit: int = 5,
     ) -> list[tuple[str, str, float, str]]:
         """[(COUNTERPARTY_USERNAME, TRANSACTION_TYPE, AMOUNT, TIMESTAMP)]"""
 
@@ -87,13 +109,19 @@ class UserLookup(UserLookupBase):
             ORDER BY TIMESTAMP DESC
             LIMIT ?;
             """,
-            (user_uuid, limit),
+            (
+                user_uuid,
+                limit,
+            ),
         )
 
         return cursor.fetchall()
 
     @classmethod
-    def full_name(cls, username_or_uuid: str) -> str:
+    def full_name(
+        cls,
+        username_or_uuid: str,
+    ) -> str:
 
         cursor.execute(
             """
@@ -102,14 +130,20 @@ class UserLookup(UserLookupBase):
             FROM USERS
             WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid, username_or_uuid),
+            (
+                username_or_uuid,
+                username_or_uuid,
+            ),
         )
 
         row = cursor.fetchone()
         return row[0] if row is not None else "User"
 
     @classmethod
-    def last_login(cls, username_or_uuid: str) -> datetime | None:
+    def last_login(
+        cls,
+        username_or_uuid: str,
+    ) -> datetime | None:
 
         cursor.execute(
             """
@@ -118,7 +152,10 @@ class UserLookup(UserLookupBase):
             FROM USERS
             WHERE USERNAME = ? OR UUID = ?
             """,
-            (username_or_uuid, username_or_uuid),
+            (
+                username_or_uuid,
+                username_or_uuid,
+            ),
         )
 
         row = cursor.fetchone()
@@ -130,7 +167,8 @@ class UserLookup(UserLookupBase):
 
     @classmethod
     def frequent_transfer_recipients(
-        cls, username_or_uuid: str
+        cls,
+        username_or_uuid: str,
     ) -> list[tuple[str, int]]:
 
         cursor.execute(
@@ -149,7 +187,10 @@ class UserLookup(UserLookupBase):
             ORDER BY TRANSFER_COUNT DESC
             LIMIT 3
             """,
-            (username_or_uuid, username_or_uuid),
+            (
+                username_or_uuid,
+                username_or_uuid,
+            ),
         )
 
         return cursor.fetchall()
@@ -158,7 +199,10 @@ class UserLookup(UserLookupBase):
 class AdminLookup(AdminLookupBase):
 
     @classmethod
-    def exists(cls, username: str) -> bool:
+    def exists(
+        cls,
+        username: str,
+    ) -> bool:
 
         cursor.execute(
             """
@@ -176,7 +220,9 @@ class AdminLookup(AdminLookupBase):
 class ApplicationLookup(ApplicationLookupBase):
 
     @classmethod
-    def current_announcement(cls) -> str:
+    def current_announcement(
+        cls,
+    ) -> str:
 
         cursor.execute(
             """
@@ -188,3 +234,33 @@ class ApplicationLookup(ApplicationLookupBase):
         )
 
         return cursor.fetchone()[0]
+
+
+class SecurityEventLookup(SecurityEventLookupBase):
+
+    @classmethod
+    def recent(
+        cls,
+        username_or_uuid: str,
+        limit: int = 5,
+    ) -> list[tuple[str, str]]:
+
+        user_uuid = UserLookup.resolve_uuid(username_or_uuid)
+
+        cursor.execute(
+            """
+            SELECT
+                EVENT_TYPE,
+                CREATED_AT
+            FROM SECURITY_EVENTS
+            WHERE USER_UUID = ?
+            ORDER BY CREATED_AT DESC
+            LIMIT ?
+            """,
+            (
+                user_uuid,
+                limit,
+            ),
+        )
+
+        return cursor.fetchall()
