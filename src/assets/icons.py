@@ -126,6 +126,10 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "person_search.png"
         )
 
+        receipt_long: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "receipt_long.png"
+        )
+
         remove: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "remove.png"
         )
