@@ -44,7 +44,7 @@ class dashboard_interface:
                 image=customtkinter.CTkImage(
                     light_image=assets.icons.material.exit_to_app,
                     dark_image=assets.icons.material.exit_to_app,
-                    size=(25, 25),
+                    size=(24, 24),
                 ),
                 width=0,
                 height=0,
@@ -57,6 +57,25 @@ class dashboard_interface:
                     SERVER.management.security_event.record(username, "logout"),
                 ),
             ).place(x=1060, y=10)
+
+            self.actions = actions(
+                self.frame__dashboard,
+                username,
+            )
+
+            self.announcement = announcement(
+                self.frame__dashboard,
+            )
+
+            self.security = security(
+                self.frame__dashboard,
+                username,
+            )
+
+            self.account_info = account_info(
+                self.frame__dashboard,
+                username,
+            )
 
             self.frame__status_greeting: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
@@ -126,10 +145,22 @@ class dashboard_interface:
             )
             self.frame__status_utilities.place(x=870, y=10)
 
-            self.actions = actions(self.frame__dashboard, username)
+            self.transactions_overlay = transactions_overlay(
+                self.frame__dashboard,
+                username,
+            )
 
-            self.announcement = announcement(self.frame__dashboard)
+            self.security_overlay = security_overlay(
+                self.frame__dashboard,
+                username,
+            )
 
-            self.security = security(self.frame__dashboard, username)
+            self.support_overlay = support_overlay(
+                self.frame__dashboard,
+                username,
+            )
 
-            self.account_info = account_info(self.frame__dashboard, username)
+            self.settings_overlay = settings_overlay(
+                self.frame__dashboard,
+                username,
+            )
