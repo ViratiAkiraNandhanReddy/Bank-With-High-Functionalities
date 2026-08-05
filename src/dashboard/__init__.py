@@ -1,4 +1,5 @@
 from .tiles import *
+from .overlays import *
 from datetime import datetime
 from .. import customtkinter, assets, utils, Callable, SERVER
 
@@ -79,7 +80,7 @@ class dashboard_interface:
 
             self.frame__status_greeting: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
-                    self.frame__dashboard, width=414, height=30, fg_color="#0a0a0a"
+                    self.frame__dashboard, width=460, height=30, fg_color="#0a0a0a"
                 )
             )
             self.frame__status_greeting.place(x=10, y=10)
@@ -93,13 +94,13 @@ class dashboard_interface:
                     + ", "
                     + (
                         self.full_name
-                        if len(self.full_name) < 33
-                        else self.full_name[:30] + "..."
+                        if len(self.full_name) <= 41
+                        else self.full_name[:38] + "..."
                     )
                 ),
                 font=("Consolas", 14, "bold"),
                 height=30,
-                width=394,
+                width=440,
                 anchor="w",
             ).place(x=10, y=0)
 
@@ -108,7 +109,7 @@ class dashboard_interface:
                     self.frame__dashboard, width=296, height=30, fg_color="#0a0a0a"
                 )
             )
-            self.frame__status_last_login.place(x=434, y=10)
+            self.frame__status_last_login.place(x=480, y=10)
 
             customtkinter.CTkLabel(
                 self.frame__status_last_login,
@@ -128,7 +129,7 @@ class dashboard_interface:
             self.frame__status_date: customtkinter.CTkFrame = customtkinter.CTkFrame(
                 self.frame__dashboard, width=120, height=30, fg_color="#0a0a0a"
             )
-            self.frame__status_date.place(x=740, y=10)
+            self.frame__status_date.place(x=786, y=10)
 
             customtkinter.CTkLabel(
                 self.frame__status_date,
@@ -140,10 +141,10 @@ class dashboard_interface:
 
             self.frame__status_utilities: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
-                    self.frame__dashboard, width=180, height=30, fg_color="#0a0a0a"
+                    self.frame__dashboard, width=134, height=30, fg_color="#0a0a0a"
                 )
             )
-            self.frame__status_utilities.place(x=870, y=10)
+            self.frame__status_utilities.place(x=916, y=10)
 
             self.transactions_overlay = transactions_overlay(
                 self.frame__dashboard,
