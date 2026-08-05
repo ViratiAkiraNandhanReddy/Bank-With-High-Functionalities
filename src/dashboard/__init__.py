@@ -78,6 +78,14 @@ class dashboard_interface:
                 username,
             )
 
+            self.current_frame: tuple[
+                transactions_overlay
+                | security_overlay
+                | support_overlay
+                | settings_overlay,
+                customtkinter.CTkButton,
+            ]
+
             self.frame__status_greeting: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
                     self.frame__dashboard, width=460, height=30, fg_color="#0a0a0a"
@@ -165,3 +173,25 @@ class dashboard_interface:
                 self.frame__dashboard,
                 username,
             )
+
+        def place_overlays(
+            self,
+            _button: customtkinter.CTkButton,
+            view_object: (
+                transactions_overlay
+                | security_overlay
+                | support_overlay
+                | settings_overlay
+                | None
+            ),
+        ) -> None:
+
+            if hasattr(self, "current_frame"):
+
+                self.current_frame[0].hide_frame()
+                self.current_frame[1].configure(fg_color="#0a0a0a", state="normal")
+
+            _button.configure(fg_color="#000000", state="disabled")
+            view_object.show_frame()
+
+            self.current_frame = (view_object, _button)
