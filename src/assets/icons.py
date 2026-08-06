@@ -82,6 +82,10 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "history_toggle_off.png"
         )
 
+        home: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "home.png"
+        )
+
         lock_person: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "lock_person.png"
         )
@@ -92,6 +96,10 @@ class icons:
 
         manage_accounts: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "manage_accounts.png"
+        )
+
+        manage_history: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "manage_history.png"
         )
 
         mark_email_unread: Image.Image = Image.open(
@@ -118,6 +126,10 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "person_search.png"
         )
 
+        receipt_long: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "receipt_long.png"
+        )
+
         remove: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "remove.png"
         )
@@ -132,6 +144,10 @@ class icons:
 
         shield_lock: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "shield_lock.png"
+        )
+
+        support_agent: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "support_agent.png"
         )
 
         trending_down: Image.Image = Image.open(

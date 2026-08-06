@@ -1,7 +1,7 @@
 from ... import customtkinter, Callable
 
 
-class settings:
+class settings_overlay:
 
     def __init__(self, parent_frame: customtkinter.CTkFrame, username: str) -> None:
 
