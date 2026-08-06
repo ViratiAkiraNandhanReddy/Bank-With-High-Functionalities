@@ -192,6 +192,45 @@ class dashboard_interface:
             )
             self.button_home.place(x=4, y=4)
 
+            self.button_transactions = customtkinter.CTkButton(
+                self.frame__status_utilities,
+                text="",
+                image=customtkinter.CTkImage(
+                    light_image=assets.icons.material.receipt_long,
+                    dark_image=assets.icons.material.receipt_long,
+                    size=(16, 16),
+                ),
+                width=0,  # 22
+                height=0,  # 22
+                corner_radius=0,
+                hover_color="#000000",
+                fg_color="#0a0a0a",
+                border_spacing=0,
+                command=lambda: self.place_overlays(
+                    self.button_transactions, self.transactions_overlay
+                ),
+            )
+            self.button_transactions.place(x=30, y=4)
+
+            self.button_security = customtkinter.CTkButton(
+                self.frame__status_utilities,
+                text="",
+                image=customtkinter.CTkImage(
+                    light_image=assets.icons.material.manage_history,
+                    dark_image=assets.icons.material.manage_history,
+                    size=(16, 16),
+                ),
+                width=0,  # 22
+                height=0,  # 22
+                corner_radius=0,
+                hover_color="#000000",
+                fg_color="#0a0a0a",
+                border_spacing=0,
+                command=lambda: self.place_overlays(
+                    self.button_security, self.security_overlay
+                ),
+            )
+            self.button_security.place(x=56, y=4)
         def place_overlays(
             self,
             _button: customtkinter.CTkButton,
