@@ -174,6 +174,24 @@ class dashboard_interface:
                 username,
             )
 
+            self.button_home = customtkinter.CTkButton(
+                self.frame__status_utilities,
+                text="",
+                image=customtkinter.CTkImage(
+                    light_image=assets.icons.material.home,
+                    dark_image=assets.icons.material.home,
+                    size=(16, 16),
+                ),
+                width=0,  # 22
+                height=0,  # 22
+                corner_radius=0,
+                hover_color="#000000",
+                fg_color="#0a0a0a",
+                border_spacing=0,
+                command=lambda: self.place_overlays(self.button_home, None),
+            )
+            self.button_home.place(x=4, y=4)
+
         def place_overlays(
             self,
             _button: customtkinter.CTkButton,
@@ -185,6 +203,15 @@ class dashboard_interface:
                 | None
             ),
         ) -> None:
+
+            if not view_object:
+
+                if hasattr(self, "current_frame"):
+
+                    self.current_frame[0].hide_frame()
+                    self.current_frame[1].configure(fg_color="#0a0a0a", state="normal")
+
+                return
 
             if hasattr(self, "current_frame"):
 
