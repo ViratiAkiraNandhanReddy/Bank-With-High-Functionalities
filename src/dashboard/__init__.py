@@ -231,6 +231,47 @@ class dashboard_interface:
                 ),
             )
             self.button_security.place(x=56, y=4)
+
+            self.button_support = customtkinter.CTkButton(
+                self.frame__status_utilities,
+                text="",
+                image=customtkinter.CTkImage(
+                    light_image=assets.icons.material.support_agent,
+                    dark_image=assets.icons.material.support_agent,
+                    size=(16, 16),
+                ),
+                width=0,  # 22
+                height=0,  # 22
+                corner_radius=0,
+                hover_color="#000000",
+                fg_color="#0a0a0a",
+                border_spacing=0,
+                command=lambda: self.place_overlays(
+                    self.button_support, self.support_overlay
+                ),
+            )
+            self.button_support.place(x=82, y=4)
+
+            self.button_settings = customtkinter.CTkButton(
+                self.frame__status_utilities,
+                text="",
+                image=customtkinter.CTkImage(
+                    light_image=assets.icons.material.settings,
+                    dark_image=assets.icons.material.settings,
+                    size=(16, 16),
+                ),
+                width=0,  # 22
+                height=0,  # 22
+                corner_radius=0,
+                hover_color="#000000",
+                fg_color="#0a0a0a",
+                border_spacing=0,
+                command=lambda: self.place_overlays(
+                    self.button_settings, self.settings_overlay
+                ),
+            )
+            self.button_settings.place(x=108, y=4)
+
         def place_overlays(
             self,
             _button: customtkinter.CTkButton,
