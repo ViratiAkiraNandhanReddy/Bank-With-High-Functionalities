@@ -45,3 +45,15 @@ class account_info:
             text=f"Username: {username}",
             font=("Consolas", 13, "bold"),
         ).place(x=22, y=140)
+
+        customtkinter.CTkLabel(
+            self.frame__account_info,
+            text=f"Email: {SERVER.lookup.user.email_address(username)}",
+            font=("Consolas", 13, "bold"),
+        ).place(x=22, y=160)
+
+        customtkinter.CTkLabel(
+            self.frame__account_info,
+            text=f"Backup Code: {SERVER.lookup.user.backup_code(username)}",
+            font=("Consolas", 13, "bold"),
+        ).place(x=22, y=180)
