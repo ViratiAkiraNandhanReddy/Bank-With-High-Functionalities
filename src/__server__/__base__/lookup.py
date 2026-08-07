@@ -68,6 +68,15 @@ class UserLookupBase(ABC):
 
         pass
 
+    @classmethod
+    @abstractmethod
+    def created_at(
+        cls,
+        username_or_uuid: str,
+    ) -> str:
+
+        pass
+
 
 class AdminLookupBase(ABC):
 

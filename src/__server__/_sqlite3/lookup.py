@@ -195,6 +195,35 @@ class UserLookup(UserLookupBase):
 
         return cursor.fetchall()
 
+    @classmethod
+    def created_at(
+        cls,
+        username_or_uuid: str,
+    ) -> str:
+
+        user_uuid = cls.resolve_uuid(username_or_uuid)
+
+        if not user_uuid:
+
+            return "0000-00-00 00:00:00 AM (+0000)"
+
+        cursor.execute(
+            """
+            SELECT
+                CREATED_AT
+            FROM USERS
+            WHERE UUID = ?
+            """,
+            (user_uuid,),
+        )
+
+        return (
+            datetime.fromisoformat(cursor.fetchone()[0])
+            .replace(tzinfo=timezone.utc)
+            .astimezone()
+            .strftime("%Y-%m-%d %I:%M:%S %p (%z)")
+        )
+
 
 class AdminLookup(AdminLookupBase):
 
