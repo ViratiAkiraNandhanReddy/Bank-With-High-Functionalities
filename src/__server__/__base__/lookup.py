@@ -86,6 +86,15 @@ class UserLookupBase(ABC):
 
         pass
 
+    @classmethod
+    @abstractmethod
+    def email_address(
+        cls,
+        username_or_uuid: str,
+    ) -> str:
+
+        pass
+
 
 class AdminLookupBase(ABC):
 

@@ -248,6 +248,30 @@ class UserLookup(UserLookupBase):
 
         return cursor.fetchone()[0]
 
+    @classmethod
+    def email_address(
+        cls,
+        username_or_uuid: str,
+    ) -> str:
+
+        user_uuid = cls.resolve_uuid(username_or_uuid)
+
+        if not user_uuid:
+
+            return "email@example.com"
+
+        cursor.execute(
+            """
+        SELECT
+            EMAIL
+        FROM USERS
+        WHERE UUID = ?
+        """,
+            (user_uuid,),
+        )
+
+        return cursor.fetchone()[0]
+
 
 class AdminLookup(AdminLookupBase):
 
