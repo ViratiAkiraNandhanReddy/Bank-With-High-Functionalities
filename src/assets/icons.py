@@ -86,6 +86,10 @@ class icons:
             root / "assets" / "icons" / "material-icons" / "home.png"
         )
 
+        id_card: Image.Image = Image.open(
+            root / "assets" / "icons" / "material-icons" / "id_card.png"
+        )
+
         lock_person: Image.Image = Image.open(
             root / "assets" / "icons" / "material-icons" / "lock_person.png"
         )
