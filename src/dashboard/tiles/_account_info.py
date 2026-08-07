@@ -33,3 +33,15 @@ class account_info:
             text=f"Created At: {SERVER.lookup.user.created_at(username)}",
             font=("Consolas", 15, "bold"),
         ).place(x=122, y=55)
+
+        customtkinter.CTkLabel(
+            self.frame__account_info,
+            text=f"Full Name: {SERVER.lookup.user.full_name(username)}",
+            font=("Consolas", 13, "bold"),
+        ).place(x=22, y=120)
+
+        customtkinter.CTkLabel(
+            self.frame__account_info,
+            text=f"Username: {username}",
+            font=("Consolas", 13, "bold"),
+        ).place(x=22, y=140)
