@@ -77,6 +77,15 @@ class UserLookupBase(ABC):
 
         pass
 
+    @classmethod
+    @abstractmethod
+    def backup_code(
+        cls,
+        username_or_uuid: str,
+    ) -> str:
+
+        pass
+
 
 class AdminLookupBase(ABC):
 

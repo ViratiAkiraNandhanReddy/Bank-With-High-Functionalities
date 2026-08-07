@@ -224,6 +224,30 @@ class UserLookup(UserLookupBase):
             .strftime("%Y-%m-%d %I:%M:%S %p (%z)")
         )
 
+    @classmethod
+    def backup_code(
+        cls,
+        username_or_uuid: str,
+    ) -> str:
+
+        user_uuid = cls.resolve_uuid(username_or_uuid)
+
+        if not user_uuid:
+
+            return "00000000-0000-0000-0000-000000000000"
+
+        cursor.execute(
+            """
+        SELECT
+            BACKUP_CODE
+        FROM USERS
+        WHERE UUID = ?
+        """,
+            (user_uuid,),
+        )
+
+        return cursor.fetchone()[0]
+
 
 class AdminLookup(AdminLookupBase):
 
