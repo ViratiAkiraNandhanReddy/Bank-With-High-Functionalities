@@ -68,6 +68,33 @@ class UserLookupBase(ABC):
 
         pass
 
+    @classmethod
+    @abstractmethod
+    def created_at(
+        cls,
+        username_or_uuid: str,
+    ) -> str:
+
+        pass
+
+    @classmethod
+    @abstractmethod
+    def backup_code(
+        cls,
+        username_or_uuid: str,
+    ) -> str:
+
+        pass
+
+    @classmethod
+    @abstractmethod
+    def email_address(
+        cls,
+        username_or_uuid: str,
+    ) -> str:
+
+        pass
+
 
 class AdminLookupBase(ABC):
 

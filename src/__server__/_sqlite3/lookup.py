@@ -195,6 +195,83 @@ class UserLookup(UserLookupBase):
 
         return cursor.fetchall()
 
+    @classmethod
+    def created_at(
+        cls,
+        username_or_uuid: str,
+    ) -> str:
+
+        user_uuid = cls.resolve_uuid(username_or_uuid)
+
+        if not user_uuid:
+
+            return "0000-00-00 00:00:00 AM (+0000)"
+
+        cursor.execute(
+            """
+            SELECT
+                CREATED_AT
+            FROM USERS
+            WHERE UUID = ?
+            """,
+            (user_uuid,),
+        )
+
+        return (
+            datetime.fromisoformat(cursor.fetchone()[0])
+            .replace(tzinfo=timezone.utc)
+            .astimezone()
+            .strftime("%Y-%m-%d %I:%M:%S %p (%z)")
+        )
+
+    @classmethod
+    def backup_code(
+        cls,
+        username_or_uuid: str,
+    ) -> str:
+
+        user_uuid = cls.resolve_uuid(username_or_uuid)
+
+        if not user_uuid:
+
+            return "00000000-0000-0000-0000-000000000000"
+
+        cursor.execute(
+            """
+        SELECT
+            BACKUP_CODE
+        FROM USERS
+        WHERE UUID = ?
+        """,
+            (user_uuid,),
+        )
+
+        return cursor.fetchone()[0]
+
+    @classmethod
+    def email_address(
+        cls,
+        username_or_uuid: str,
+    ) -> str:
+
+        user_uuid = cls.resolve_uuid(username_or_uuid)
+
+        if not user_uuid:
+
+            return "email@example.com"
+
+        cursor.execute(
+            """
+        SELECT
+            EMAIL
+        FROM USERS
+        WHERE UUID = ?
+        """,
+            (user_uuid,),
+        )
+
+        return cursor.fetchone()[0]
+
 
 class AdminLookup(AdminLookupBase):
 
