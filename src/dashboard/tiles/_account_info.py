@@ -38,22 +38,36 @@ class account_info:
             self.frame__account_info,
             text=f"Full Name: {SERVER.lookup.user.full_name(username)}",
             font=("Consolas", 13, "bold"),
-        ).place(x=22, y=120)
+            height=0,  # 15
+        ).place(x=22, y=126)
 
         customtkinter.CTkLabel(
             self.frame__account_info,
             text=f"Username: {username}",
             font=("Consolas", 13, "bold"),
-        ).place(x=22, y=140)
+            height=0,  # 15
+        ).place(x=22, y=156)
 
         customtkinter.CTkLabel(
             self.frame__account_info,
             text=f"Email: {SERVER.lookup.user.email_address(username)}",
             font=("Consolas", 13, "bold"),
-        ).place(x=22, y=160)
+            height=0,  # 15
+        ).place(x=22, y=186)
 
         customtkinter.CTkLabel(
             self.frame__account_info,
             text=f"Backup Code: {SERVER.lookup.user.backup_code(username)}",
             font=("Consolas", 13, "bold"),
-        ).place(x=22, y=180)
+            height=0,  # 15
+        ).place(x=22, y=216)
+
+        customtkinter.CTkLabel(
+            self.frame__account_info,
+            text="Keep your backup code private. It can be used to recover access to"
+            + "\n"
+            + "your account if you lose access to your primary sign-in method.",
+            font=("Consolas", 11),
+            height=0,  # 26
+            width=456,
+        ).place(x=22, y=252)
