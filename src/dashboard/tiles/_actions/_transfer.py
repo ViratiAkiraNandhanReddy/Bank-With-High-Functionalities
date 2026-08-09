@@ -554,9 +554,14 @@ class transfer:
             self.__amount.delete(0, "end")
             self.__password.delete(0, "end")
             self.__username.delete(0, "end")
+
             self.balance_instance.refresh()
             self.favorites_instance.refresh()
             self.transactions_instance.refresh()
+
+            self.recipient_username = ""
+            self.validate_username_btn.place(x=302, y=342)
+            self.continue_to_if_01_transfer.place_forget()
             self.default_label_username_info.configure(
                 text="Enter a recipient username to continue."
             )
