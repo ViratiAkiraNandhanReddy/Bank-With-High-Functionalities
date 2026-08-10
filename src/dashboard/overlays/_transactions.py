@@ -5,8 +5,12 @@ class transactions_overlay:
 
     def __init__(self, parent_frame: customtkinter.CTkFrame, username: str) -> None:
 
-        self.frame__transactions: customtkinter.CTkFrame = customtkinter.CTkFrame(
-            parent_frame, width=1080, height=590, fg_color="#0a0a0a"
+        self.username = username
+
+        self.frame__transactions: customtkinter.CTkScrollableFrame = (
+            customtkinter.CTkScrollableFrame(
+                parent_frame, width=1058, height=578, fg_color="#0a0a0a"
+            )
         )
 
         self.show_frame: Callable = lambda: (
