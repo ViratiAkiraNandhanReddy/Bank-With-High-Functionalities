@@ -10,7 +10,10 @@ class transactions_overlay:
 
         self.frame__transactions: customtkinter.CTkScrollableFrame = (
             customtkinter.CTkScrollableFrame(
-                parent_frame, width=1058, height=578, fg_color="#0a0a0a"
+                parent_frame,
+                width=1058,
+                height=578,
+                fg_color="#0a0a0a",
             )
         )
 
@@ -20,18 +23,35 @@ class transactions_overlay:
         )
         self.hide_frame: Callable = lambda: self.frame__transactions.place_forget()
 
-        self.load_transactions_cards()
-
     def load_transactions_cards(self) -> None:
 
         total_transactions = SERVER.lookup.user.transactions(self.username, -1)
 
+        columns = 5
+
+        for column in range(columns):
+
+            self.frame__transactions.grid_columnconfigure(
+                column,
+                weight=1,
+            )
+
         for n, _transaction in enumerate(total_transactions):
 
             card = customtkinter.CTkFrame(
-                self.frame__transactions, width=200, height=82, fg_color="#111111"
+                self.frame__transactions, width=202, height=82, fg_color="#111111"
             )
-            card.place(x=5, y=(5 + n * (82 + 5)))
+
+            column = n % columns
+            row = n // columns
+
+            card.grid(
+                row=row,
+                column=column,
+                padx=5,
+                pady=5,
+                sticky="nsew",
+            )
 
             match _transaction[1]:
 
@@ -105,7 +125,7 @@ class transactions_overlay:
                     .astimezone()
                     .strftime("%Y-%m-%d %I:%M:%S %p (%z)")
                 ),  # %Y-%m-%d %I:%M:%S %p (%z)
-                width=200,
+                width=202,
                 height=20,
                 font=("Consolas", 11),
                 text_color="#A3A3A3",
@@ -113,4 +133,8 @@ class transactions_overlay:
 
     def refresh(self) -> None:
 
-        pass
+        for widget in self.frame__transactions.winfo_children():
+
+            widget.destroy()
+
+        self.load_transactions_cards()
