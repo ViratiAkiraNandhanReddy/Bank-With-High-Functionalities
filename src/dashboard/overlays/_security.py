@@ -1,5 +1,5 @@
-from ... import customtkinter, SERVER
 from datetime import datetime, timezone
+from ... import customtkinter, Callable, SERVER
 
 EVENT_LABELS: dict[str, tuple[str, str]] = {
     "login": (
@@ -17,36 +17,63 @@ EVENT_LABELS: dict[str, tuple[str, str]] = {
 }
 
 
-class security:
+class security_overlay:
 
     def __init__(self, parent_frame: customtkinter.CTkFrame, username: str) -> None:
 
-        self.username: str = username
+        self.username = username
 
-        self.frame__security: customtkinter.CTkFrame = customtkinter.CTkFrame(
-            parent_frame, width=245, height=220, fg_color="#0a0a0a"
+        self.frame__security: customtkinter.CTkScrollableFrame = (
+            customtkinter.CTkScrollableFrame(
+                parent_frame,
+                width=1058,
+                height=578,
+                fg_color="#0a0a0a",
+            )
         )
-        self.frame__security.place(x=265, y=420)
 
-        self.load_security_cards()
+        self.show_frame: Callable = lambda: (
+            self.refresh(),
+            self.frame__security.place(x=10, y=50),
+        )
+        self.hide_frame: Callable = lambda: self.frame__security.place_forget()
 
     def load_security_cards(self) -> None:
 
-        recent_security_events: list[tuple[str, str]] = (
-            SERVER.lookup.security_event.recent(self.username)
+        total_security_events: list[tuple[str, str]] = (
+            SERVER.lookup.security_event.recent(self.username, -1)
         )
 
-        for n, (event_type, timestamp) in enumerate(recent_security_events):
+        columns = 4
+
+        for column in range(columns):
+
+            self.frame__security.grid_columnconfigure(
+                column,
+                weight=1,
+            )
+
+        for n, (event_type, timestamp) in enumerate(total_security_events):
 
             get_event_labels = EVENT_LABELS.get(event_type, ("Unknown", "[INFO]"))
 
             card = customtkinter.CTkFrame(
                 self.frame__security,
-                width=235,
+                width=252,
                 height=38,
                 fg_color="#111111",
             )
-            card.place(x=5, y=(5 + n * (38 + 5)))
+
+            column = n % columns
+            row = n // columns
+
+            card.grid(
+                row=row,
+                column=column,
+                padx=5,
+                pady=5,
+                sticky="nsew",
+            )
 
             customtkinter.CTkLabel(
                 card,
@@ -61,7 +88,7 @@ class security:
             customtkinter.CTkLabel(
                 card,
                 text=get_event_labels[1],
-                width=70,
+                width=89,
                 height=24,
                 font=("Consolas", 12, "bold"),
                 text_color="#D4D4D4",
@@ -76,15 +103,13 @@ class security:
                     .astimezone()
                     .strftime("%Y-%m-%d %I:%M:%S %p (%z)")
                 ),  # %Y-%m-%d %I:%M:%S %p (%z)
-                width=227,
+                width=244,
                 height=0,  # 12
                 font=("Consolas", 10),
                 text_color="#A3A3A3",
             ).place(x=4, y=24)
 
     def refresh(self) -> None:
-
-        widget: customtkinter.CTkFrame
 
         for widget in self.frame__security.winfo_children():
 

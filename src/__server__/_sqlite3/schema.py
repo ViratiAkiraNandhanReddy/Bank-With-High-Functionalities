@@ -4,6 +4,7 @@ from ..__base__ import (
     AdminSchemaBase,
     TransactionSchemaBase,
     AnnouncementSchemaBase,
+    SecurityEventSchemaBase,
 )
 
 cursor = connection.cursor()
@@ -147,6 +148,37 @@ class AnnouncementSchema(AnnouncementSchemaBase):
                 );
                 
                 """)
+
+            return True
+
+        except Exception:
+
+            return False
+
+
+class SecurityEventSchema(SecurityEventSchemaBase):
+
+    @classmethod
+    def create(cls) -> bool:
+
+        try:
+
+            cursor.execute("""
+
+                CREATE TABLE IF NOT EXISTS SECURITY_EVENTS (
+
+                    EVENT_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    USER_UUID CHAR(36) NOT NULL,
+                    EVENT_TYPE TEXT NOT NULL,
+                    CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+                    FOREIGN KEY (USER_UUID) REFERENCES USERS(UUID) ON DELETE CASCADE
+
+                );
+
+                """)
+
+            connection.commit()  # DDL statements do not affect rowcount
 
             return True
 
