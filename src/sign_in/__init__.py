@@ -898,22 +898,6 @@ class sign_in_interface:
 
             self.is_more_action_overlaid = True
 
-        def forgot_security_code(self):  # Handles The Forgot Security Code Action
-
-            for widget in [
-                self.__heading_reset_password,
-                self.__greet_reset_password,
-                self.__subheading_reset_password,
-                self.__user_icon_label_reset_password,
-                self.__username_at_reset_password,
-                self.__security_icon_label_reset_password,
-                self.__forgot_security_code_button_reset_password,
-                self.__security_code_at_reset_password,
-                self.__request_reset_password,
-            ]:
-
-                widget.place_forget()
-
         def request_for_password_reset(
             self,
         ):  # Handles The Request To Reset The Password
