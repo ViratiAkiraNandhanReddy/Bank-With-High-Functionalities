@@ -909,45 +909,6 @@ class sign_in_interface:
 
             def security_code_accepted():  # If The Security Code is Accepted Then Change The Password
 
-                for widget in [
-                    self.__greet_reset_password,
-                    self.__cancel_reset_password,
-                    self.__request_reset_password,
-                    self.__heading_reset_password,
-                    self.__subheading_reset_password,
-                    self.__username_at_reset_password,
-                    self.__user_icon_label_reset_password,
-                    self.__security_code_at_reset_password,
-                    self.__security_icon_label_reset_password,
-                    self.__forgot_security_code_button_reset_password,
-                ]:
-
-                    widget.place_forget()
-
-                self.__username_at_reset_password.delete(0, "end")
-                self.__security_code_at_reset_password.delete(0, "end")
-
-                def hide_contents_change_password():  # Hides The Contents Of The Change Password Screen
-
-                    for widget in [
-                        greet_change_password,
-                        heading_change_password,
-                        subeading_change_password,
-                        cancel_reset_change_password,
-                        new_password_reset_change_password,
-                        new_password_label_change_password,
-                        confirm_password_reset_change_password,
-                        change_password_button_change_password,
-                        confirm_password_label_change_password,
-                    ]:
-
-                        widget.place_forget()
-
-                    self.__username_at_reset_password.delete(0, "end")
-                    self.__security_code_at_reset_password.delete(0, "end")
-
-                    self.hide_reset_password_frame__show_sign_in_frame()
-
                 def change_password():
 
                     new_password = new_password_reset_change_password.get()
