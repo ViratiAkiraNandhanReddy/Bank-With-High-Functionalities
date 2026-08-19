@@ -336,10 +336,9 @@ class sign_in_interface:
             # --- Reset Password Screen Configuration --- #
 
             self.frame__reset_password = customtkinter.CTkFrame(
-                self.window, corner_radius=0
+                self.window, corner_radius=0, width=900, height=610
             )
 
-            self.frame__reset_password.configure(width=900, height=610)
             self.frame__reset_password.place(x=self.x_axis_ltr, y=20)
 
             self.internal_frame_00__reset_password = customtkinter.CTkFrame(
@@ -365,100 +364,6 @@ class sign_in_interface:
             self.__reset_password_banner.place(x=0, y=0)
 
             set_opacity(self.__reset_password_banner.winfo_id(), 1)
-
-            self.__heading_reset_password = customtkinter.CTkLabel(
-                self.frame__reset_password,
-                text="Forgot Password",
-                font=("Freestyle Script", 42, "bold"),
-                width=5,
-            )
-
-            self.__greet_reset_password = customtkinter.CTkLabel(
-                self.frame__reset_password,
-                text="Get Your Account Back!",
-                font=("Roboto", 20, "bold"),
-                text_color="#57D956",
-            )
-
-            self.__subheading_reset_password = customtkinter.CTkLabel(
-                self.frame__reset_password,
-                text="Enter Required Credentials",
-                font=("Roboto", 12),
-                height=0,
-            )
-
-            # --- Username Entry At Reset Password Screen --- #
-
-            self.__user_icon_label_reset_password = customtkinter.CTkLabel(
-                self.frame__reset_password,
-                text="Username",
-                font=("Roboto", 24, "bold"),
-                image=customtkinter.CTkImage(
-                    light_image=assets.icons.material.account_circle,
-                    dark_image=assets.icons.material.account_circle,
-                    size=(40, 40),
-                ),
-                compound="top",
-            )
-
-            self.__username_at_reset_password = customtkinter.CTkEntry(
-                self.frame__reset_password,
-                placeholder_text="Example: Virati Akira Nandhan Reddy",
-                height=40,
-                width=340,
-                corner_radius=5,
-                font=("Roboto", 16),
-            )
-
-            # --- Security Code Entry At Reset Password Screen --- #
-
-            self.__security_icon_label_reset_password = customtkinter.CTkLabel(
-                self.frame__reset_password,
-                text="Security Code",
-                font=("Roboto", 24, "bold"),
-                image=customtkinter.CTkImage(
-                    light_image=assets.icons.material.security,
-                    dark_image=assets.icons.material.security,
-                    size=(40, 40),
-                ),
-                compound="top",
-                height=0,
-            )
-
-            self.__forgot_security_code_button_reset_password = customtkinter.CTkButton(
-                self.frame__reset_password,
-                text="Forgot Security Code",
-                height=0,
-                width=0,
-                fg_color="transparent",
-                hover=False,
-                font=("Roboto", 10),
-                text_color="#218CFF",
-                command=self.forgot_security_code,
-            )
-
-            self.__security_code_at_reset_password = customtkinter.CTkEntry(
-                self.frame__reset_password,
-                placeholder_text="Example: Viratiaki@Akki",
-                height=40,
-                width=340,
-                corner_radius=5,
-                font=("Roboto", 16),
-            )
-
-            # --- Request And Cancel Buttons At Reset Password Screen --- #
-
-            self.__request_reset_password = customtkinter.CTkButton(
-                self.frame__reset_password,
-                text="Request",
-                width=120,
-                border_width=1,
-                text_color="#3264FF",
-                fg_color="transparent",
-                font=("Roboto", 16, "bold"),
-                hover_color="Light Blue",
-                command=self.request_for_password_reset,
-            )
 
             self.__cancel_reset_password = customtkinter.CTkButton(
                 self.frame__reset_password,
