@@ -365,18 +365,14 @@ class sign_in_interface:
 
             set_opacity(self.__reset_password_banner.winfo_id(), 1)
 
-            self.__cancel_reset_password = customtkinter.CTkButton(
+            self.internal_frame_01__reset_password = customtkinter.CTkFrame(
                 self.frame__reset_password,
-                text="",
-                fg_color="transparent",
-                height=15,
-                border_width=0,
-                hover_color="#A1FB8E",
-                width=45,
-                command=self.hide_reset_password_frame__show_sign_in_frame,
+                width=450,
+                height=610,
+                fg_color="#000000",
+                corner_radius=0,
             )
-
-            self.__cancel_reset_password.place(x=2, y=538)
+            self.internal_frame_01__reset_password.place(x=0, y=0)
 
             self.window.after(
                 1500,
@@ -679,6 +675,14 @@ class sign_in_interface:
 
                 raise NotImplementedError
 
-    def forgot_user_password(self) -> None:
+        def forgot_user_password(self) -> None:
 
-        pass
+            _is_internet_connection_available: bool = utils.connection.is_connected()
+
+            def opted_email_verification_via_otp() -> None:
+
+                pass
+
+            def opted_backup_code_verification() -> None:
+
+                pass
