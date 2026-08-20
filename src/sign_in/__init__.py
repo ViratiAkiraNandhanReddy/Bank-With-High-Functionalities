@@ -376,6 +376,8 @@ class sign_in_interface:
                 command=self.hide_reset_password_frame__show_sign_in_frame,
             )
 
+            self.__cancel_reset_password.place(x=2, y=538)
+
             self.window.after(
                 1500,
                 lambda: [
@@ -460,7 +462,13 @@ class sign_in_interface:
             None
         ):  # Hides The Reset Password Screen Then Shows The Sign In Screen in The Window
 
-            self.hide_contents_reset_password()
+            self.window.after(
+                900,
+                lambda: [
+                    self.internal_frame_00__sign_in.place(x=0, y=0),
+                    self.internal_frame_01__sign_in.place(x=450, y=0),
+                ],
+            )
             self.hide_reset_password_ltr()
             self.show_sign_in_rtl()
 
@@ -470,65 +478,8 @@ class sign_in_interface:
             None
         ):  # Hides The Sign In Screen Then Shows The Reset Password Screen in The Window
 
-            self.hide_contents_sign_in()
             self.hide_sign_in_rtl()
             self.show_reset_password_ltr()
-
-        def hide_contents_sign_in(
-            self,
-        ) -> None:  # Hides The Contents Of The Sign In Screen
-
-            for widget in []:
-
-                widget.place_forget()
-
-            else:
-
-                self.window.after(900, self.show_contents_reset_password)
-
-        def show_contents_reset_password(
-            self,
-        ) -> None:  # Shows The Contents Of The Reset Password Screen
-
-            self.__heading_reset_password.place(x=105, y=2)
-            self.__greet_reset_password.place(x=30, y=65)
-            self.__subheading_reset_password.place(x=33, y=90)
-            self.__user_icon_label_reset_password.place(x=140, y=140)
-            self.__username_at_reset_password.place(x=30, y=204)
-            self.__security_icon_label_reset_password.place(x=120, y=250)
-            self.__forgot_security_code_button_reset_password.place(x=270, y=359)
-            self.__security_code_at_reset_password.place(x=30, y=324)
-            self.__request_reset_password.place(x=142, y=400)
-            self.__cancel_reset_password.place(x=2, y=538)
-
-        def hide_contents_reset_password(
-            self,
-        ) -> None:  # Hides The Contents Of The Reset Password Screen
-
-            for widget in [
-                self.__greet_reset_password,
-                self.__cancel_reset_password,
-                self.__heading_reset_password,
-                self.__request_reset_password,
-                self.__subheading_reset_password,
-                self.__username_at_reset_password,
-                self.__user_icon_label_reset_password,
-                self.__security_code_at_reset_password,
-                self.__security_icon_label_reset_password,
-                self.__forgot_security_code_button_reset_password,
-            ]:
-
-                widget.place_forget()
-
-            else:
-
-                self.window.after(
-                    900,
-                    lambda: [
-                        self.internal_frame_00__sign_in.place(x=0, y=0),
-                        self.internal_frame_01__sign_in.place(x=450, y=0),
-                    ],
-                )
 
         def redirect_to_signup(self) -> None:  # Redirects To The Signup Module
 
@@ -537,7 +488,6 @@ class sign_in_interface:
                 overlay_frame__signup = sign_up_interface.sign_up(
                     self.window
                 )  # Opening The Signup Window
-                self.hide_contents_sign_in()
                 self.hide_sign_in_rtl()
 
                 def cancel_signup_action():
