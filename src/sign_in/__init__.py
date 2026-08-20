@@ -686,3 +686,28 @@ class sign_in_interface:
             def opted_backup_code_verification() -> None:
 
                 pass
+
+            self.if_00_container_frame__reset_password: customtkinter.CTkFrame = (
+                customtkinter.CTkFrame(
+                    self.internal_frame_01__reset_password,
+                    width=450,
+                    height=610,
+                    fg_color="transparent",
+                )
+            )
+            self.if_00_container_frame__reset_password.place(x=3, y=3)
+
+            self.btn__back_to_sign_in: customtkinter.CTkButton = customtkinter.CTkButton(
+                self.if_00_container_frame__reset_password,
+                text="",
+                width=0,  # 28
+                height=0,  # 28
+                fg_color="transparent",
+                hover=False,
+                image=customtkinter.CTkImage(
+                    light_image=assets.icons.material.arrow_back,
+                    dark_image=assets.icons.material.arrow_back,
+                    size=(20, 20),
+                ),
+            )
+            self.btn__back_to_sign_in.place(x=20, y=352)
