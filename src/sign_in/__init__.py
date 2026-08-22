@@ -697,6 +697,94 @@ class sign_in_interface:
             )
             self.if_00_container_frame__reset_password.place(x=3, y=3)
 
+            customtkinter.CTkLabel(
+                self.if_00_container_frame__reset_password,
+                text="Choose a Verification Method",
+                font=("Segoe UI", 16, "bold"),
+                text_color="#FFFFFF",
+                image=customtkinter.CTkImage(
+                    light_image=assets.icons.material.lock_person,
+                    dark_image=assets.icons.material.lock_person,
+                    size=(42, 42),
+                ),
+                compound="top",
+                height=0,
+                width=0,
+            ).place(x=36, y=68)
+            
+            self.btn__email_verification_via_otp: customtkinter.CTkButton = (
+                customtkinter.CTkButton(
+                    self.if_00_container_frame__reset_password,
+                    text="""Verify your user account ownership using the
+        one-time password sent to your email address.""",
+                    width=260,
+                    height=60,
+                    border_width=0,
+                    text_color="#FFFFFF",
+                    bg_color="transparent",
+                    fg_color="#1B1B1B",
+                    font=("Roboto", 9),
+                    hover_color="#252525",
+                    corner_radius=6,
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.chevron_forward,
+                        dark_image=assets.icons.material.chevron_forward,
+                        size=(30, 30),
+                    ),
+                    compound="right",
+                    command=opted_email_verification_via_otp,
+                )
+            )
+            self.btn__email_verification_via_otp.place(x=20, y=200)
+            
+            if not _is_internet_connection_available:
+            
+                self.btn__email_verification_via_otp.configure(
+                    state="disabled",
+                    fg_color="#3a3a3a",
+                    text_color_disabled="#a0a0a0",
+                )
+            
+                customtkinter.CTkLabel(
+                    self.btn__email_verification_via_otp,
+                    text="  No internet connection available",
+                    font=("Segoe UI", 9),
+                    text_color="#a0a0a0",
+                    width=0,
+                    height=0,
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.wifi_off,
+                        dark_image=assets.icons.material.wifi_off,
+                        size=(12, 12),
+                    ),
+                    compound="left",
+                ).place(x=58, y=46)
+            
+            self.btn__backup_code_verification: customtkinter.CTkButton = (
+                customtkinter.CTkButton(
+                    self.if_00_container_frame__reset_password,
+                    text="""Verify your user account ownership using the
+            backup recovery code linked to your account.""",
+                    width=260,
+                    height=60,
+                    border_width=0,
+                    text_color="#FFFFFF",
+                    bg_color="transparent",
+                    fg_color="#1B1B1B",
+                    font=("Roboto", 9),
+                    hover_color="#252525",
+                    corner_radius=6,
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.chevron_forward,
+                        dark_image=assets.icons.material.chevron_forward,
+                        size=(30, 30),
+                    ),
+                    compound="right",
+                    command=opted_backup_code_verification,
+                )
+            )
+            self.btn__backup_code_verification.place(x=20, y=272)
+
             self.btn__back_to_sign_in: customtkinter.CTkButton = customtkinter.CTkButton(
                 self.if_00_container_frame__reset_password,
                 text="",
