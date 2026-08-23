@@ -369,7 +369,6 @@ class sign_in_interface:
                 self.frame__reset_password,
                 width=450,
                 height=610,
-                fg_color="#000000",
                 corner_radius=0,
             )
             self.internal_frame_01__reset_password.place(x=0, y=0)
@@ -474,6 +473,7 @@ class sign_in_interface:
             None
         ):  # Hides The Sign In Screen Then Shows The Reset Password Screen in The Window
 
+            self.forgot_user_password()
             self.hide_sign_in_rtl()
             self.show_reset_password_ltr()
 
@@ -711,7 +711,7 @@ class sign_in_interface:
                 height=0,
                 width=0,
             ).place(x=36, y=68)
-            
+
             self.btn__email_verification_via_otp: customtkinter.CTkButton = (
                 customtkinter.CTkButton(
                     self.if_00_container_frame__reset_password,
@@ -736,15 +736,15 @@ class sign_in_interface:
                 )
             )
             self.btn__email_verification_via_otp.place(x=20, y=200)
-            
+
             if not _is_internet_connection_available:
-            
+
                 self.btn__email_verification_via_otp.configure(
                     state="disabled",
                     fg_color="#3a3a3a",
                     text_color_disabled="#a0a0a0",
                 )
-            
+
                 customtkinter.CTkLabel(
                     self.btn__email_verification_via_otp,
                     text="  No internet connection available",
@@ -759,7 +759,7 @@ class sign_in_interface:
                     ),
                     compound="left",
                 ).place(x=58, y=46)
-            
+
             self.btn__backup_code_verification: customtkinter.CTkButton = (
                 customtkinter.CTkButton(
                     self.if_00_container_frame__reset_password,
@@ -785,17 +785,19 @@ class sign_in_interface:
             )
             self.btn__backup_code_verification.place(x=20, y=272)
 
-            self.btn__back_to_sign_in: customtkinter.CTkButton = customtkinter.CTkButton(
-                self.if_00_container_frame__reset_password,
-                text="",
-                width=0,  # 28
-                height=0,  # 28
-                fg_color="transparent",
-                hover=False,
-                image=customtkinter.CTkImage(
-                    light_image=assets.icons.material.arrow_back,
-                    dark_image=assets.icons.material.arrow_back,
-                    size=(20, 20),
-                ),
+            self.btn__back_to_sign_in: customtkinter.CTkButton = (
+                customtkinter.CTkButton(
+                    self.if_00_container_frame__reset_password,
+                    text="",
+                    width=0,  # 28
+                    height=0,  # 28
+                    fg_color="transparent",
+                    hover=False,
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.arrow_back,
+                        dark_image=assets.icons.material.arrow_back,
+                        size=(20, 20),
+                    ),
+                )
             )
             self.btn__back_to_sign_in.place(x=20, y=352)
