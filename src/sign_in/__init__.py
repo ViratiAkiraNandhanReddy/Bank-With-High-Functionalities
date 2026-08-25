@@ -92,9 +92,8 @@ class sign_in_interface:
             # --- Sign In Screen Configuration --- #
 
             self.frame__sign_in: customtkinter.CTkFrame = customtkinter.CTkFrame(
-                self.window, corner_radius=0
+                self.window, corner_radius=0, width=900, height=610
             )
-            self.frame__sign_in.configure(width=900, height=610)
             self.frame__sign_in.place(x=self.x_axis_rtl, y=20)
 
             self.internal_frame_00__sign_in: customtkinter.CTkFrame = (
@@ -517,7 +516,6 @@ class sign_in_interface:
             except:
 
                 raise NotImplementedError
-                self.window.deiconify()  # Re-Opening The Sign In Window If Any Error Occurs
 
         def validate_and_redirect_to_dashboard(
             self,
@@ -532,9 +530,7 @@ class sign_in_interface:
                     border_color="#FFFFFF"
                 )
                 or self.container_frame__username_label_sign_in.configure(
-                    text_color="#FFFFFF"
-                )
-                or self.container_frame__username_label_sign_in.configure(
+                    text_color="#FFFFFF",
                     text="username or uuid",
                     width=83,  # 77
                 )
@@ -547,9 +543,7 @@ class sign_in_interface:
                     border_color="#FFFFFF"
                 )
                 or self.container_frame__password_label_sign_in.configure(
-                    text_color="#FFFFFF"
-                )
-                or self.container_frame__password_label_sign_in.configure(
+                    text_color="#FFFFFF",
                     text="password",
                     width=50,  # 44
                 )
@@ -561,10 +555,9 @@ class sign_in_interface:
                 self.container_frame__username_sign_in.configure(border_color="#FF0000")
 
                 self.container_frame__username_label_sign_in.configure(
-                    text="invalid username or uuid", width=112
-                )
-                self.container_frame__username_label_sign_in.configure(
-                    text_color="#FF0000"
+                    text="invalid username or uuid",
+                    width=112,
+                    text_color="#FF0000",
                 )
 
                 return
@@ -574,10 +567,9 @@ class sign_in_interface:
                 self.container_frame__password_sign_in.configure(border_color="#FF0000")
 
                 self.container_frame__password_label_sign_in.configure(
-                    text="invalid password", width=81
-                )
-                self.container_frame__password_label_sign_in.configure(
-                    text_color="#FF0000"
+                    text="invalid password",
+                    width=81,
+                    text_color="#FF0000",
                 )
 
                 return
@@ -588,17 +580,15 @@ class sign_in_interface:
                 self.container_frame__password_sign_in.configure(border_color="#FF0000")
 
                 self.container_frame__username_label_sign_in.configure(
-                    text="invalid username or uuid", width=112
-                )
-                self.container_frame__username_label_sign_in.configure(
-                    text_color="#FF0000"
+                    text="invalid username or uuid",
+                    width=112,
+                    text_color="#FF0000",
                 )
 
                 self.container_frame__password_label_sign_in.configure(
-                    text="invalid password", width=81
-                )
-                self.container_frame__password_label_sign_in.configure(
-                    text_color="#FF0000"
+                    text="invalid password",
+                    width=81,
+                    text_color="#FF0000",
                 )
 
                 return
@@ -613,17 +603,14 @@ class sign_in_interface:
                 self.container_frame__password_sign_in.configure(border_color="#FF0000")
 
                 self.container_frame__username_label_sign_in.configure(
-                    text_color="#FF0000"
+                    text="invalid username/uuid or password",
+                    width=160,
+                    text_color="#FF0000",
                 )
                 self.container_frame__password_label_sign_in.configure(
-                    text_color="#FF0000"
-                )
-
-                self.container_frame__username_label_sign_in.configure(
-                    text="invalid username/uuid or password", width=160
-                )
-                self.container_frame__password_label_sign_in.configure(
-                    text="invalid username/uuid or password", width=160
+                    text="invalid username/uuid or password",
+                    width=160,
+                    text_color="#FF0000",
                 )
 
                 if user_exists:
@@ -695,35 +682,37 @@ class sign_in_interface:
                     fg_color="transparent",
                 )
             )
-            self.if_00_container_frame__reset_password.place(x=3, y=3)
+            self.if_00_container_frame__reset_password.place(x=0, y=0)
 
-            customtkinter.CTkLabel(
+            _ = customtkinter.CTkLabel(
                 self.if_00_container_frame__reset_password,
                 text="Choose a Verification Method",
-                font=("Segoe UI", 16, "bold"),
+                font=("Segoe UI", 22, "bold"),
                 text_color="#FFFFFF",
                 image=customtkinter.CTkImage(
                     light_image=assets.icons.material.lock_person,
                     dark_image=assets.icons.material.lock_person,
-                    size=(42, 42),
+                    size=(64, 64),
                 ),
                 compound="top",
-                height=0,
-                width=0,
-            ).place(x=36, y=68)
+                height=0,  # 104
+                width=0,  # 307
+            )
+            _.place(x=71, y=88)  # x = 71.5, y = 88
+            _.after(1000, lambda: print(_.winfo_width(), _.winfo_height()))
 
             self.btn__email_verification_via_otp: customtkinter.CTkButton = (
                 customtkinter.CTkButton(
                     self.if_00_container_frame__reset_password,
                     text="""Verify your user account ownership using the
-        one-time password sent to your email address.""",
-                    width=260,
-                    height=60,
+  one-time password sent to your email address.""",
+                    width=410,
+                    height=100,
                     border_width=0,
                     text_color="#FFFFFF",
                     bg_color="transparent",
                     fg_color="#1B1B1B",
-                    font=("Roboto", 9),
+                    font=("Roboto", 14),
                     hover_color="#252525",
                     corner_radius=6,
                     image=customtkinter.CTkImage(
@@ -735,7 +724,7 @@ class sign_in_interface:
                     command=opted_email_verification_via_otp,
                 )
             )
-            self.btn__email_verification_via_otp.place(x=20, y=200)
+            self.btn__email_verification_via_otp.place(x=20, y=280)
 
             if not _is_internet_connection_available:
 
@@ -764,14 +753,14 @@ class sign_in_interface:
                 customtkinter.CTkButton(
                     self.if_00_container_frame__reset_password,
                     text="""Verify your user account ownership using the
-            backup recovery code linked to your account.""",
-                    width=260,
-                    height=60,
+backup recovery code linked to your account.""",
+                    width=410,
+                    height=100,
                     border_width=0,
                     text_color="#FFFFFF",
                     bg_color="transparent",
                     fg_color="#1B1B1B",
-                    font=("Roboto", 9),
+                    font=("Roboto", 14),
                     hover_color="#252525",
                     corner_radius=6,
                     image=customtkinter.CTkImage(
@@ -783,7 +772,7 @@ class sign_in_interface:
                     command=opted_backup_code_verification,
                 )
             )
-            self.btn__backup_code_verification.place(x=20, y=272)
+            self.btn__backup_code_verification.place(x=20, y=392)
 
             self.btn__back_to_sign_in: customtkinter.CTkButton = (
                 customtkinter.CTkButton(
@@ -798,6 +787,7 @@ class sign_in_interface:
                         dark_image=assets.icons.material.arrow_back,
                         size=(20, 20),
                     ),
+                    command=self.hide_reset_password_frame__show_sign_in_frame,
                 )
             )
-            self.btn__back_to_sign_in.place(x=20, y=352)
+            self.btn__back_to_sign_in.place(x=20, y=562)
