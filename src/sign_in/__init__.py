@@ -92,7 +92,11 @@ class sign_in_interface:
             # --- Sign In Screen Configuration --- #
 
             self.frame__sign_in: customtkinter.CTkFrame = customtkinter.CTkFrame(
-                self.window, corner_radius=0, width=900, height=610
+                self.window,
+                corner_radius=0,
+                width=900,
+                height=610,
+                fg_color="#0a0a0a",
             )
             self.frame__sign_in.place(x=self.x_axis_rtl, y=20)
 
@@ -129,7 +133,7 @@ class sign_in_interface:
                     self.frame__sign_in,
                     width=450,
                     height=610,
-                    fg_color="transparent",
+                    fg_color="#0a0a0a",
                     corner_radius=0,
                 )
             )
@@ -369,6 +373,7 @@ class sign_in_interface:
                 width=450,
                 height=610,
                 corner_radius=0,
+                fg_color="#0a0a0a",
             )
             self.internal_frame_01__reset_password.place(x=0, y=0)
 
@@ -683,7 +688,7 @@ class sign_in_interface:
                         self.internal_frame_01__reset_password,
                         width=450,
                         height=610,
-                        fg_color="transparent",
+                        fg_color="#0a0a0a",
                     )
                 )
                 if_emailotp_container_frame__reset_password.place(x=0, y=0)
@@ -701,11 +706,13 @@ class sign_in_interface:
                     compound="top",
                     height=0,  # 94
                     width=0,  # 271
-                ).place(x=89, y=112)  # x = 89.5, y = 112.5
+                ).place(
+                    x=89, y=112
+                )  # x = 89.5, y = 112.5
 
                 customtkinter.CTkLabel(
                     if_emailotp_container_frame__reset_password,
-                    text="""Use the registered recovery email associated with your\nuser account to continue secure OTP verification.""",
+                    text="Use the registered recovery email associated with your\nuser account to continue secure OTP verification.",
                     font=("Roboto", 14),
                     text_color="#FFFFFF",
                     height=0,  # 34
@@ -735,7 +742,7 @@ class sign_in_interface:
                         self.internal_frame_00__reset_password,
                         width=300,
                         height=400,
-                        fg_color="transparent",
+                        fg_color="#0a0a0a",
                     )
                     if_send_mail_and_validate_otp_container_frame__reset_password.place(
                         x=3, y=3
@@ -936,10 +943,10 @@ class sign_in_interface:
                     if_emailotp_confirmation_state_container_frame__reset_password: (
                         customtkinter.CTkFrame
                     ) = customtkinter.CTkFrame(
-                        self.internal_frame_00__reset_password,
+                        self.internal_frame_01__reset_password,
                         width=450,
                         height=610,
-                        fg_color="transparent",
+                        fg_color="#0a0a0a",
                     )
                     if_emailotp_confirmation_state_container_frame__reset_password.place(
                         x=0, y=0
@@ -1416,7 +1423,7 @@ class sign_in_interface:
                     self.internal_frame_01__reset_password,
                     width=450,
                     height=610,
-                    fg_color="transparent",
+                    fg_color="#0a0a0a",
                 )
                 if_backupcode_container_frame__reset_password.place(x=0, y=0)
 
@@ -1754,7 +1761,7 @@ class sign_in_interface:
                     self.internal_frame_01__reset_password,
                     width=450,
                     height=610,
-                    fg_color="transparent",
+                    fg_color="#0a0a0a",
                 )
             )
             self.if_00_container_frame__reset_password.place(x=0, y=0)
