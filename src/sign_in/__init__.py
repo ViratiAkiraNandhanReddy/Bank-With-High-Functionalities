@@ -970,7 +970,7 @@ class sign_in_interface:
                         height=0,  # 63
                         width=0,  # 223
                     ).place(x=38, y=53)
-                    
+
                     customtkinter.CTkLabel(
                         if_emailotp_confirmation_state_container_frame__reset_password,
                         text="A verification OTP will be sent to the registered recovery\nemail associated with your user account.",
@@ -1765,19 +1765,19 @@ class sign_in_interface:
             customtkinter.CTkLabel(
                 self.if_00_container_frame__reset_password,
                 text="Choose a Verification Method",
-                font=("Segoe UI", 22, "bold"),
+                font=("Segoe UI", 18, "bold"),
                 text_color="#FFFFFF",
                 image=customtkinter.CTkImage(
                     light_image=assets.icons.material.lock_person,
                     dark_image=assets.icons.material.lock_person,
-                    size=(64, 64),
+                    size=(48, 48),
                 ),
                 compound="top",
-                height=0,  # 94
-                width=0,  # 307
+                height=0,  # 73
+                width=450,  # 253
             ).place(
-                x=71, y=93
-            )  # x = 71.5, y = 93
+                x=0, y=93
+            )  # x = 0, y = 98.5
 
             self.btn__email_verification_via_otp: customtkinter.CTkButton = (
                 customtkinter.CTkButton(
@@ -1789,7 +1789,7 @@ class sign_in_interface:
                     text_color="#FFFFFF",
                     bg_color="transparent",
                     fg_color="#1B1B1B",
-                    font=("Roboto", 14),
+                    font=("Segoe UI", 12),
                     hover_color="#252525",
                     corner_radius=6,
                     image=customtkinter.CTkImage(
@@ -1801,7 +1801,7 @@ class sign_in_interface:
                     command=opted_email_verification_via_otp,
                 )
             )
-            self.btn__email_verification_via_otp.place(x=50, y=280)
+            self.btn__email_verification_via_otp.place(x=50, y=270)
 
             if not _is_internet_connection_available:
 
@@ -1836,7 +1836,7 @@ class sign_in_interface:
                     text_color="#FFFFFF",
                     bg_color="transparent",
                     fg_color="#1B1B1B",
-                    font=("Roboto", 14),
+                    font=("Segoe UI", 12),
                     hover_color="#252525",
                     corner_radius=6,
                     image=customtkinter.CTkImage(
@@ -1848,7 +1848,7 @@ class sign_in_interface:
                     command=opted_backup_code_verification,
                 )
             )
-            self.btn__backup_code_verification.place(x=50, y=392)
+            self.btn__backup_code_verification.place(x=50, y=382)
 
             self.btn__back_to_sign_in: customtkinter.CTkButton = (
                 customtkinter.CTkButton(
@@ -1866,4 +1866,4 @@ class sign_in_interface:
                     command=self.hide_reset_password_frame__show_sign_in_frame,
                 )
             )
-            self.btn__back_to_sign_in.place(x=20, y=562)
+            self.btn__back_to_sign_in.place(x=50, y=532)
