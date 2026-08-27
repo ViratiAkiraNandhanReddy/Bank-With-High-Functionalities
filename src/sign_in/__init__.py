@@ -959,36 +959,32 @@ class sign_in_interface:
                     customtkinter.CTkLabel(
                         if_emailotp_confirmation_state_container_frame__reset_password,
                         text="Recovery Email Confirmation",
-                        font=("Segoe UI", 16, "bold"),
+                        font=("Segoe UI", 22, "bold"),
                         text_color="#FFFFFF",
                         image=customtkinter.CTkImage(
                             light_image=assets.icons.material.mail,
                             dark_image=assets.icons.material.mail,
-                            size=(42, 42),
+                            size=(64, 64),
                         ),
                         compound="top",
                         height=0,  # 63
                         width=0,  # 223
                     ).place(x=38, y=53)
-
-                    _ = customtkinter.CTkLabel(
+                    
+                    customtkinter.CTkLabel(
                         if_emailotp_confirmation_state_container_frame__reset_password,
-                        text="""A verification OTP will be sent to the
-                registered recovery email associated with
-                your user account.""",
+                        text="A verification OTP will be sent to the registered recovery\nemail associated with your user account.",
                         font=("Roboto", 14),
                         text_color="#FFFFFF",
-                        height=0,  # 39
-                        width=260,
-                    )
-                    _.place(x=20, y=169)
-                    _.after(1000, lambda: print(_.winfo_width(), _.winfo_height()))
+                        height=0,  # 34
+                        width=410,
+                    ).place(x=20, y=379)
 
                     entry__container_masked_email_address_emailotp_confirmation_state: (
                         customtkinter.CTkEntry
                     ) = customtkinter.CTkEntry(
                         if_emailotp_confirmation_state_container_frame__reset_password,
-                        width=260,
+                        width=410,
                         height=40,
                         font=("Consolas", 16),
                         fg_color="transparent",
@@ -998,7 +994,7 @@ class sign_in_interface:
                         justify="center",
                     )
                     entry__container_masked_email_address_emailotp_confirmation_state.place(
-                        x=20, y=260
+                        x=20, y=470
                     )
 
                     entry__container_masked_email_address_emailotp_confirmation_state.insert(
@@ -1010,7 +1006,7 @@ class sign_in_interface:
                     )
 
                     if (
-                        len(_email) > 27
+                        len(_email) > 53
                     ):  # if email length exceeds entry width, show scroll buttons
 
                         moveleft_btn = customtkinter.CTkButton(
@@ -1030,7 +1026,7 @@ class sign_in_interface:
                                 -5, "units"
                             ),
                         )
-                        moveleft_btn.place(x=120, y=300)
+                        moveleft_btn.place(x=20, y=510)
 
                         moveright_btn = customtkinter.CTkButton(
                             if_emailotp_confirmation_state_container_frame__reset_password,
@@ -1049,7 +1045,7 @@ class sign_in_interface:
                                 5, "units"
                             ),
                         )
-                        moveright_btn.place(x=160, y=300)
+                        moveright_btn.place(x=412, y=510)
 
                     btn__back_if_emailotp_confirmation_state: (
                         customtkinter.CTkButton
@@ -1070,7 +1066,7 @@ class sign_in_interface:
                             if_emailotp_confirmation_state_container_frame__reset_password.place_forget(),
                         ),
                     )
-                    btn__back_if_emailotp_confirmation_state.place(x=20, y=352)
+                    btn__back_if_emailotp_confirmation_state.place(x=20, y=562)
 
                     btn__forward_if_emailotp_confirmation_state: (
                         customtkinter.CTkButton
@@ -1091,7 +1087,7 @@ class sign_in_interface:
                                 send_mail_and_validate_otp(username, _email),
                                 if_emailotp_confirmation_state_container_frame__reset_password.place_forget(),
                             )
-                            if utils.connection.is_connected()
+                            if not utils.connection.is_connected()
                             else (
                                 no_internet_connection_warning := customtkinter.CTkLabel(
                                     if_emailotp_confirmation_state_container_frame__reset_password,
@@ -1101,7 +1097,7 @@ class sign_in_interface:
                                     width=0,  # 160
                                     height=28,
                                 ),
-                                no_internet_connection_warning.place(x=70, y=352),
+                                no_internet_connection_warning.place(x=145, y=562),
                                 no_internet_connection_warning.after(
                                     3000,
                                     no_internet_connection_warning.place_forget,
@@ -1109,7 +1105,7 @@ class sign_in_interface:
                             )
                         ),
                     )
-                    btn__forward_if_emailotp_confirmation_state.place(x=252, y=352)
+                    btn__forward_if_emailotp_confirmation_state.place(x=402, y=562)
 
                 def validate_email_address() -> None:
 
@@ -1243,7 +1239,7 @@ class sign_in_interface:
                 container_frame__username__reset_password: customtkinter.CTkFrame = (
                     customtkinter.CTkFrame(
                         if_emailotp_container_frame__reset_password,
-                        width=410,
+                        width=350,
                         height=40,
                         fg_color="transparent",
                         border_width=1,
@@ -1273,12 +1269,12 @@ class sign_in_interface:
                     text="",
                 ).place(x=8, rely=0.5, anchor="w")
 
-                container_frame__username__reset_password.place(x=20, y=382)
+                container_frame__username__reset_password.place(x=50, y=382)
 
                 __username: customtkinter.CTkEntry = customtkinter.CTkEntry(
                     container_frame__username__reset_password,
                     placeholder_text="username",
-                    width=410 - 40,
+                    width=350 - 40,
                     height=40 - 8,
                     corner_radius=0,
                     border_width=0,
@@ -1291,7 +1287,7 @@ class sign_in_interface:
                     "<FocusIn>",
                     lambda event: (
                         container_frame__username_label__reset_password.place(
-                            x=40, y=375
+                            x=70, y=375
                         )
                         if not __username.get()
                         else None
@@ -1310,7 +1306,7 @@ class sign_in_interface:
                     customtkinter.CTkFrame
                 ) = customtkinter.CTkFrame(
                     if_emailotp_container_frame__reset_password,
-                    width=410,
+                    width=350,
                     height=40,
                     fg_color="transparent",
                     border_width=1,
@@ -1339,12 +1335,12 @@ class sign_in_interface:
                     text="",
                 ).place(x=8, rely=0.5, anchor="w")
 
-                container_frame__email_address__reset_password.place(x=20, y=442)
+                container_frame__email_address__reset_password.place(x=50, y=442)
 
                 __email_address: customtkinter.CTkEntry = customtkinter.CTkEntry(
                     container_frame__email_address__reset_password,
                     placeholder_text="email address",
-                    width=410 - 40,
+                    width=350 - 40,
                     height=40 - 8,
                     corner_radius=0,
                     border_width=0,
@@ -1358,7 +1354,7 @@ class sign_in_interface:
                     "<FocusIn>",
                     lambda event: (
                         container_frame__email_address_label__reset_password.place(
-                            x=40, y=435
+                            x=70, y=435
                         )
                         if not __email_address.get()
                         else None
@@ -1586,7 +1582,7 @@ class sign_in_interface:
                 container_frame__username__reset_password: customtkinter.CTkFrame = (
                     customtkinter.CTkFrame(
                         if_backupcode_container_frame__reset_password,
-                        width=410,
+                        width=350,
                         height=40,
                         fg_color="transparent",
                         border_width=1,
@@ -1616,12 +1612,12 @@ class sign_in_interface:
                     text="",
                 ).place(x=8, rely=0.5, anchor="w")
 
-                container_frame__username__reset_password.place(x=20, y=232)
+                container_frame__username__reset_password.place(x=50, y=232)
 
                 __username: customtkinter.CTkEntry = customtkinter.CTkEntry(
                     container_frame__username__reset_password,
                     placeholder_text="username",
-                    width=410 - 40,
+                    width=350 - 40,
                     height=40 - 8,
                     corner_radius=0,
                     border_width=0,
@@ -1634,7 +1630,7 @@ class sign_in_interface:
                     "<FocusIn>",
                     lambda event: (
                         container_frame__username_label__reset_password.place(
-                            x=40, y=225
+                            x=70, y=225
                         )
                         if not __username.get()
                         else None
@@ -1652,7 +1648,7 @@ class sign_in_interface:
                 container_frame__backup_code__reset_password: customtkinter.CTkFrame = (
                     customtkinter.CTkFrame(
                         if_backupcode_container_frame__reset_password,
-                        width=410,
+                        width=350,
                         height=40,
                         fg_color="transparent",
                         border_width=1,
@@ -1682,12 +1678,12 @@ class sign_in_interface:
                     text="",
                 ).place(x=8, rely=0.5, anchor="w")
 
-                container_frame__backup_code__reset_password.place(x=20, y=292)
+                container_frame__backup_code__reset_password.place(x=50, y=292)
 
                 __backup_code: customtkinter.CTkEntry = customtkinter.CTkEntry(
                     container_frame__backup_code__reset_password,
                     placeholder_text="backup code",
-                    width=410 - 40,
+                    width=350 - 40,
                     height=40 - 8,
                     corner_radius=0,
                     border_width=0,
@@ -1701,7 +1697,7 @@ class sign_in_interface:
                     "<FocusIn>",
                     lambda event: (
                         container_frame__backup_code_label__reset_backup_code.place(
-                            x=40, y=285
+                            x=70, y=285
                         )
                         if not __backup_code.get()
                         else None
@@ -1787,7 +1783,7 @@ class sign_in_interface:
                 customtkinter.CTkButton(
                     self.if_00_container_frame__reset_password,
                     text="Verify user account ownership using the\none-time password sent to your email address.",
-                    width=410,
+                    width=350,
                     height=100,
                     border_width=0,
                     text_color="#FFFFFF",
@@ -1805,7 +1801,7 @@ class sign_in_interface:
                     command=opted_email_verification_via_otp,
                 )
             )
-            self.btn__email_verification_via_otp.place(x=20, y=280)
+            self.btn__email_verification_via_otp.place(x=50, y=280)
 
             if not _is_internet_connection_available:
 
@@ -1834,7 +1830,7 @@ class sign_in_interface:
                 customtkinter.CTkButton(
                     self.if_00_container_frame__reset_password,
                     text="Verify user account ownership using the\n backup recovery code linked to your account. ",
-                    width=410,
+                    width=350,
                     height=100,
                     border_width=0,
                     text_color="#FFFFFF",
@@ -1852,7 +1848,7 @@ class sign_in_interface:
                     command=opted_backup_code_verification,
                 )
             )
-            self.btn__backup_code_verification.place(x=20, y=392)
+            self.btn__backup_code_verification.place(x=50, y=392)
 
             self.btn__back_to_sign_in: customtkinter.CTkButton = (
                 customtkinter.CTkButton(
