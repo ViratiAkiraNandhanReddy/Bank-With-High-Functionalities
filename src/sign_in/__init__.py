@@ -696,28 +696,28 @@ class sign_in_interface:
                 customtkinter.CTkLabel(
                     if_emailotp_container_frame__reset_password,
                     text="Verify Account Ownership",
-                    font=("Segoe UI", 22, "bold"),
+                    font=("Segoe UI", 18, "bold"),
                     text_color="#FFFFFF",
                     image=customtkinter.CTkImage(
                         light_image=assets.icons.material.shield_lock,
                         dark_image=assets.icons.material.shield_lock,
-                        size=(64, 64),
+                        size=(48, 48),
                     ),
                     compound="top",
-                    height=0,  # 94
-                    width=0,  # 271
+                    height=0,  # 73
+                    width=450,
                 ).place(
-                    x=89, y=112
-                )  # x = 89.5, y = 112.5
+                    x=0, y=121
+                )  # x = 0, y = 121
 
                 customtkinter.CTkLabel(
                     if_emailotp_container_frame__reset_password,
                     text="Use the registered recovery email associated with your\nuser account to continue secure OTP verification.",
-                    font=("Roboto", 14),
+                    font=("Segoe UI", 14),
                     text_color="#FFFFFF",
-                    height=0,  # 34
-                    width=410,
-                ).place(x=20, y=319)
+                    height=40,  # 34
+                    width=350,  # 350
+                ).place(x=50, y=315)
 
                 def send_mail_and_validate_otp(username, _email: str) -> None:
 
@@ -1389,7 +1389,7 @@ class sign_in_interface:
                         ),
                     )
                 )
-                btn__back_if_emailotp.place(x=20, y=562)
+                btn__back_if_emailotp.place(x=50, y=532)
 
                 btn__forward_if_emailotp: customtkinter.CTkButton = (
                     customtkinter.CTkButton(
@@ -1407,7 +1407,7 @@ class sign_in_interface:
                         command=validate_email_address,
                     )
                 )
-                btn__forward_if_emailotp.place(x=402, y=562)
+                btn__forward_if_emailotp.place(x=372, y=532)
 
             def opted_backup_code_verification() -> None:
 
