@@ -754,15 +754,15 @@ class sign_in_interface:
                         font=("Roboto", 11),
                         text_color="#FFFFFF",
                         height=0,
-                        width=260,
-                    )  # x=20, y=336
+                        width=410,
+                    )  # x=20, y=499
 
                     email_object = forgot_password(
                         receiver_mail_address=_email,
                         ctk_report=(
                             ctk_report_var,
                             20,
-                            336,
+                            499,
                             "OTP sent successfully.",
                             "Failed to send OTP.",
                         ),
@@ -782,7 +782,7 @@ class sign_in_interface:
 
                         email_object.start_timer(
                             timer_widget=_otp_countdown,
-                            report_widget=(ctk_report_var, 20, 336),
+                            report_widget=(ctk_report_var, 20, 499),
                             resend_callback=mail_thread,
                         )
 
@@ -802,13 +802,13 @@ class sign_in_interface:
                         text_color_disabled="#FFFFFF",
                         command=resend_otp,
                     )
-                    btn__resend_otp.place(x=123, y=304)
+                    btn__resend_otp.place(x=198, y=467)
                     _timer(btn__resend_otp, 30)
 
                     customtkinter.CTkLabel(
                         if_send_mail_and_validate_otp_container_frame__reset_password,
                         text="Email OTP Verification",
-                        font=("Segoe UI", 16, "bold"),
+                        font=("Segoe UI", 18, "bold"),
                         text_color="#FFFFFF",
                         image=customtkinter.CTkImage(
                             light_image=assets.icons.material.mark_email_unread,
@@ -816,22 +816,22 @@ class sign_in_interface:
                             size=(42, 42),
                         ),
                         compound="top",
-                        height=0,
-                        width=260,
-                    ).place(x=20, y=53)
+                        height=0,  # 73
+                        width=450,
+                    ).place(x=0, y=113)
 
                     customtkinter.CTkLabel(
                         if_send_mail_and_validate_otp_container_frame__reset_password,
                         text="""A one-time password (OTP) has been sent
-                to your registered recovery email address.
+to your registered recovery email address.
                 
-                Enter the verification code below to
-                continue account recovery.""",
-                        font=("Roboto", 11),
+Enter the verification code below to
+continue account recovery.""",
+                        font=("Segoe UI", 14),
                         text_color="#FFFFFF",
                         height=0,  # 65
-                        width=260,
-                    ).place(x=20, y=169)
+                        width=350,
+                    ).place(x=50, y=300)
 
                     def validate_otp(*args) -> None:
 
@@ -848,7 +848,7 @@ class sign_in_interface:
                             ctk_report_var.configure(
                                 text="Invalid OTP. Please try again."
                             )
-                            ctk_report_var.place(x=20, y=336)
+                            ctk_report_var.place(x=20, y=499)
                             ctk_report_var.after(3000, ctk_report_var.place_forget)
 
                         if otp_validated and len(curr_otp.get()) == 10:
@@ -858,7 +858,7 @@ class sign_in_interface:
                             ctk_report_var.configure(
                                 text="Verification successful. Redirecting..."
                             )
-                            ctk_report_var.place(x=20, y=336)
+                            ctk_report_var.place(x=20, y=499)
                             ctk_report_var.after(2000, ctk_report_var.place_forget)
 
                             if_send_mail_and_validate_otp_container_frame__reset_password.after(
@@ -885,7 +885,7 @@ class sign_in_interface:
                         corner_radius=6,
                         justify="center",
                     )
-                    __otp_code.place(x=80, y=264)
+                    __otp_code.place(x=155, y=427)
 
                     _otp_countdown: customtkinter.CTkLabel = customtkinter.CTkLabel(
                         if_send_mail_and_validate_otp_container_frame__reset_password,
@@ -895,11 +895,11 @@ class sign_in_interface:
                         width=32,  # 26
                         text_color="#FFFFFF",
                     )
-                    _otp_countdown.place(x=134, y=257)
+                    _otp_countdown.place(x=209, y=420)
 
                     email_object.start_timer(
                         timer_widget=_otp_countdown,
-                        report_widget=(ctk_report_var, 20, 336),
+                        report_widget=(ctk_report_var, 20, 499),
                         resend_callback=mail_thread,
                     )
 
