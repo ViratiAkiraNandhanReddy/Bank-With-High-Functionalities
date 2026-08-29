@@ -1426,28 +1426,28 @@ continue account recovery.""",
                 customtkinter.CTkLabel(
                     if_backupcode_container_frame__reset_password,
                     text="Verify Account Ownership",
-                    font=("Segoe UI", 22, "bold"),
+                    font=("Segoe UI", 18, "bold"),
                     text_color="#FFFFFF",
                     image=customtkinter.CTkImage(
                         light_image=assets.icons.material.shield_lock,
                         dark_image=assets.icons.material.shield_lock,
-                        size=(64, 64),
+                        size=(48, 48),
                     ),
                     compound="top",
-                    height=0,
-                    width=0,
-                ).place(x=50, y=53)
+                    height=0,  # 73
+                    width=450,
+                ).place(x=0, y=113)
 
                 customtkinter.CTkLabel(
                     if_backupcode_container_frame__reset_password,
-                    text="""Use the permanent backup recovery code
-                associated with your user account
-                to continue secure recovery verification.""",
-                    font=("Roboto", 11),
+                    text="""Use the permanent backup recovery code associated
+with your user account to continue secure
+recovery verification.""",
+                    font=("Segoe UI", 14),
                     text_color="#FFFFFF",
-                    height=0,  # 39
-                    width=410,
-                ).place(x=20, y=219)
+                    height=0,
+                    width=350,
+                ).place(x=50, y=300)
 
                 def validate_backup_code() -> None:
 
@@ -1460,11 +1460,9 @@ continue account recovery.""",
                             border_color="#FFFFFF"
                         )
                         or container_frame__username_label__reset_password.configure(
-                            text_color="#FFFFFF"
-                        )
-                        or container_frame__username_label__reset_password.configure(
                             text="username",
                             width=50,  # 44
+                            text_color="#FFFFFF",
                         )
                         or self.__username.unbind("<KeyPress>"),
                     )
@@ -1474,11 +1472,9 @@ continue account recovery.""",
                             border_color="#FFFFFF"
                         )
                         or container_frame__backup_code_label__reset_backup_code.configure(
-                            text_color="#FFFFFF"
-                        )
-                        or container_frame__backup_code_label__reset_backup_code.configure(
                             text="backup code",
                             width=63,  # 57
+                            text_color="#FFFFFF",
                         )
                         or __backup_code.unbind("<KeyPress>"),
                     )
@@ -1491,10 +1487,9 @@ continue account recovery.""",
                             border_color="#FF0000"
                         )
                         container_frame__username_label__reset_password.configure(
-                            text_color="#FF0000"
-                        )
-                        container_frame__username_label__reset_password.configure(
-                            text="invalid username", width=81
+                            text="invalid username",
+                            width=81,
+                            text_color="#FF0000",
                         )
 
                         return
@@ -1507,10 +1502,9 @@ continue account recovery.""",
                             border_color="#FF0000"
                         )
                         container_frame__backup_code_label__reset_backup_code.configure(
-                            text_color="#FF0000"
-                        )
-                        container_frame__backup_code_label__reset_backup_code.configure(
-                            text="invalid backup code", width=93
+                            text="invalid backup code",
+                            width=93,
+                            text_color="#FF0000",
                         )
 
                         return
@@ -1526,17 +1520,14 @@ continue account recovery.""",
                             border_color="#FF0000"
                         )
                         container_frame__username_label__reset_password.configure(
-                            text="invalid username", width=81
-                        )
-
-                        container_frame__username_label__reset_password.configure(
-                            text_color="#FF0000"
+                            text="invalid username",
+                            width=81,
+                            text_color="#FF0000",
                         )
                         container_frame__backup_code_label__reset_backup_code.configure(
-                            text_color="#FF0000"
-                        )
-                        container_frame__backup_code_label__reset_backup_code.configure(
-                            text="invalid backup code", width=93
+                            text="invalid backup code",
+                            width=93,
+                            text_color="#FF0000",
                         )
 
                         return
@@ -1556,20 +1547,18 @@ continue account recovery.""",
                             border_color="#FF0000"
                         )
                         container_frame__username_label__reset_password.configure(
-                            text_color="#FF0000"
-                        )
-                        container_frame__username_label__reset_password.configure(
-                            text="invalid username or backup code", width=150
+                            text="invalid username or backup code",
+                            width=150,
+                            text_color="#FF0000",
                         )
 
                         container_frame__backup_code__reset_password.configure(
                             border_color="#FF0000"
                         )
                         container_frame__backup_code_label__reset_backup_code.configure(
-                            text_color="#FF0000"
-                        )
-                        container_frame__backup_code_label__reset_backup_code.configure(
-                            text="invalid username or backup code", width=150
+                            text="invalid username or backup code",
+                            width=150,
+                            text_color="#FF0000",
                         )
 
                         return
@@ -1612,7 +1601,7 @@ continue account recovery.""",
                     text="",
                 ).place(x=8, rely=0.5, anchor="w")
 
-                container_frame__username__reset_password.place(x=50, y=232)
+                container_frame__username__reset_password.place(x=50, y=382)
 
                 __username: customtkinter.CTkEntry = customtkinter.CTkEntry(
                     container_frame__username__reset_password,
@@ -1630,7 +1619,7 @@ continue account recovery.""",
                     "<FocusIn>",
                     lambda event: (
                         container_frame__username_label__reset_password.place(
-                            x=70, y=225
+                            x=70, y=375
                         )
                         if not __username.get()
                         else None
@@ -1678,7 +1667,7 @@ continue account recovery.""",
                     text="",
                 ).place(x=8, rely=0.5, anchor="w")
 
-                container_frame__backup_code__reset_password.place(x=50, y=292)
+                container_frame__backup_code__reset_password.place(x=50, y=442)
 
                 __backup_code: customtkinter.CTkEntry = customtkinter.CTkEntry(
                     container_frame__backup_code__reset_password,
@@ -1697,7 +1686,7 @@ continue account recovery.""",
                     "<FocusIn>",
                     lambda event: (
                         container_frame__backup_code_label__reset_backup_code.place(
-                            x=70, y=285
+                            x=70, y=435
                         )
                         if not __backup_code.get()
                         else None
@@ -1732,7 +1721,7 @@ continue account recovery.""",
                         ),
                     )
                 )
-                btn__back_if_backupcode.place(x=20, y=562)
+                btn__back_if_backupcode.place(x=50, y=532)
 
                 btn__forward_if_backupcode: customtkinter.CTkButton = (
                     customtkinter.CTkButton(
@@ -1750,7 +1739,7 @@ continue account recovery.""",
                         command=validate_backup_code,
                     )
                 )
-                btn__forward_if_backupcode.place(x=402, y=562)
+                btn__forward_if_backupcode.place(x=372, y=532)
 
             self.if_00_container_frame__reset_password: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
