@@ -739,13 +739,13 @@ class sign_in_interface:
                     if_send_mail_and_validate_otp_container_frame__reset_password: (
                         customtkinter.CTkFrame
                     ) = customtkinter.CTkFrame(
-                        self.internal_frame_00__reset_password,
-                        width=300,
-                        height=400,
+                        self.internal_frame_01__reset_password,
+                        width=450,
+                        height=610,
                         fg_color="#0a0a0a",
                     )
                     if_send_mail_and_validate_otp_container_frame__reset_password.place(
-                        x=3, y=3
+                        x=0, y=0
                     )
 
                     ctk_report_var = customtkinter.CTkLabel(
@@ -929,12 +929,12 @@ class sign_in_interface:
                             ),
                             command=lambda: (
                                 email_object.stop_timer(_otp_countdown),
-                                self.temp_ctk_frame_instance.place(x=3, y=3),
+                                self.temp_ctk_frame_instance.place(x=0, y=0),
                                 if_send_mail_and_validate_otp_container_frame__reset_password.destroy(),
                             ),
                         )
                     )
-                    btn__send_mail_and_validate.place(x=20, y=352)
+                    btn__send_mail_and_validate.place(x=50, y=532)
 
                 def _recovery_confirmation_state_emailotp(
                     username: str, _email: str
@@ -959,32 +959,32 @@ class sign_in_interface:
                     customtkinter.CTkLabel(
                         if_emailotp_confirmation_state_container_frame__reset_password,
                         text="Recovery Email Confirmation",
-                        font=("Segoe UI", 22, "bold"),
+                        font=("Segoe UI", 18, "bold"),
                         text_color="#FFFFFF",
                         image=customtkinter.CTkImage(
                             light_image=assets.icons.material.mail,
                             dark_image=assets.icons.material.mail,
-                            size=(64, 64),
+                            size=(48, 48),
                         ),
                         compound="top",
-                        height=0,  # 63
-                        width=0,  # 223
-                    ).place(x=38, y=53)
+                        height=0,  # 73
+                        width=450,
+                    ).place(x=0, y=151)
 
                     customtkinter.CTkLabel(
                         if_emailotp_confirmation_state_container_frame__reset_password,
-                        text="A verification OTP will be sent to the registered recovery\nemail associated with your user account.",
-                        font=("Roboto", 14),
+                        text="A verification OTP will be sent to the registered\nrecovery email associated with your user account.",
+                        font=("Segoe UI", 14),
                         text_color="#FFFFFF",
-                        height=0,  # 34
-                        width=410,
-                    ).place(x=20, y=379)
+                        height=40,  # 34
+                        width=350,
+                    ).place(x=50, y=375)
 
                     entry__container_masked_email_address_emailotp_confirmation_state: (
                         customtkinter.CTkEntry
                     ) = customtkinter.CTkEntry(
                         if_emailotp_confirmation_state_container_frame__reset_password,
-                        width=410,
+                        width=350,
                         height=40,
                         font=("Consolas", 16),
                         fg_color="transparent",
@@ -994,7 +994,7 @@ class sign_in_interface:
                         justify="center",
                     )
                     entry__container_masked_email_address_emailotp_confirmation_state.place(
-                        x=20, y=470
+                        x=50, y=442
                     )
 
                     entry__container_masked_email_address_emailotp_confirmation_state.insert(
@@ -1006,14 +1006,14 @@ class sign_in_interface:
                     )
 
                     if (
-                        len(_email) > 53
+                        len(_email) > 40
                     ):  # if email length exceeds entry width, show scroll buttons
 
                         moveleft_btn = customtkinter.CTkButton(
                             if_emailotp_confirmation_state_container_frame__reset_password,
                             text="",
-                            height=0,
-                            width=0,
+                            height=0,  # 20
+                            width=0,  # 20
                             border_spacing=0,
                             fg_color="transparent",
                             hover=False,
@@ -1026,13 +1026,13 @@ class sign_in_interface:
                                 -5, "units"
                             ),
                         )
-                        moveleft_btn.place(x=20, y=510)
+                        moveleft_btn.place(x=50, y=490)
 
                         moveright_btn = customtkinter.CTkButton(
                             if_emailotp_confirmation_state_container_frame__reset_password,
                             text="",
-                            height=0,
-                            width=0,
+                            height=0,  # 20
+                            width=0,  # 20
                             border_spacing=0,
                             fg_color="transparent",
                             hover=False,
@@ -1045,7 +1045,7 @@ class sign_in_interface:
                                 5, "units"
                             ),
                         )
-                        moveright_btn.place(x=412, y=510)
+                        moveright_btn.place(x=380, y=490)
 
                     btn__back_if_emailotp_confirmation_state: (
                         customtkinter.CTkButton
@@ -1066,7 +1066,7 @@ class sign_in_interface:
                             if_emailotp_confirmation_state_container_frame__reset_password.place_forget(),
                         ),
                     )
-                    btn__back_if_emailotp_confirmation_state.place(x=20, y=562)
+                    btn__back_if_emailotp_confirmation_state.place(x=50, y=532)
 
                     btn__forward_if_emailotp_confirmation_state: (
                         customtkinter.CTkButton
@@ -1087,7 +1087,7 @@ class sign_in_interface:
                                 send_mail_and_validate_otp(username, _email),
                                 if_emailotp_confirmation_state_container_frame__reset_password.place_forget(),
                             )
-                            if not utils.connection.is_connected()
+                            if utils.connection.is_connected()
                             else (
                                 no_internet_connection_warning := customtkinter.CTkLabel(
                                     if_emailotp_confirmation_state_container_frame__reset_password,
@@ -1097,7 +1097,7 @@ class sign_in_interface:
                                     width=0,  # 160
                                     height=28,
                                 ),
-                                no_internet_connection_warning.place(x=145, y=562),
+                                no_internet_connection_warning.place(x=145, y=532),
                                 no_internet_connection_warning.after(
                                     3000,
                                     no_internet_connection_warning.place_forget,
@@ -1105,7 +1105,7 @@ class sign_in_interface:
                             )
                         ),
                     )
-                    btn__forward_if_emailotp_confirmation_state.place(x=402, y=562)
+                    btn__forward_if_emailotp_confirmation_state.place(x=372, y=532)
 
                 def validate_email_address() -> None:
 
