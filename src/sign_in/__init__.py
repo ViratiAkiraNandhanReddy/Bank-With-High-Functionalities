@@ -677,8 +677,109 @@ class sign_in_interface:
 
             def _password_reset(username: str) -> None:
 
-                pass
-
+                frame__recovery_verified_frame: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        self.internal_frame_01__reset_password,
+                        width=450,
+                        height=610,
+                        fg_color="transparent",
+                    )
+                )
+                frame__password_reset_frame: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        self.internal_frame_01__reset_password,
+                        width=450,
+                        height=610,
+                        fg_color="transparent",
+                    )
+                )
+                frame__recovery_completed_frame: customtkinter.CTkFrame = (
+                    customtkinter.CTkFrame(
+                        self.internal_frame_01__reset_password,
+                        width=450,
+                        height=610,
+                        fg_color="transparent",
+                    )
+                )
+                
+                frame__recovery_verified_frame.place(x=0, y=0)
+                
+                ### --- ---  frame__recovery_verified_frame  --- --- ###
+                
+                customtkinter.CTkLabel(
+                    frame__recovery_verified_frame,
+                    text="User Identity Verified",
+                    font=("Segoe UI", 18, "bold"),
+                    text_color="#FFFFFF",
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.verified_user,
+                        dark_image=assets.icons.material.verified_user,
+                        size=(48, 48),
+                    ),
+                    compound="top",
+                    height=0,  # 73
+                    width=450,
+                ).place(x=0, y=119)
+                
+                customtkinter.CTkLabel(
+                    frame__recovery_verified_frame,
+                    text="""Your user identity has been successfully
+verified using the selected recovery
+method.
+                
+You may now proceed to create a new 
+administrator password.
+                
+This recovery session remains active until 
+the password reset process is completed.""",
+                    font=("Segoe UI", 14),
+                    text_color="#FFFFFF",
+                    height=0,  # 171
+                    width=350,
+                ).place(x=50, y=311)
+                
+                btn_exit_to_root_frame: customtkinter.CTkButton = customtkinter.CTkButton(
+                    frame__recovery_verified_frame,
+                    text="",
+                    width=0,
+                    height=0,
+                    fg_color="transparent",
+                    hover=False,
+                    image=customtkinter.CTkImage(
+                        light_image=assets.icons.material.first_page,
+                        dark_image=assets.icons.material.first_page,
+                        size=(20, 20),
+                    ),
+                    command=lambda: (
+                        self.if_00_container_frame__reset_password.place(x=0, y=0),
+                        frame__recovery_verified_frame.place_forget(),
+                        frame__recovery_verified_frame.destroy(),
+                    ),
+                )
+                btn_exit_to_root_frame.place(x=50, y=532)
+                
+                continue_to_frame__password_reset_frame: customtkinter.CTkButton = (
+                    customtkinter.CTkButton(
+                        frame__recovery_verified_frame,
+                        text="",
+                        width=0,  # 28
+                        height=0,  # 28
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=assets.icons.material.arrow_forward,
+                            dark_image=assets.icons.material.arrow_forward,
+                            size=(20, 20),
+                        ),
+                        command=lambda: (
+                            frame__password_reset_frame.place(x=0, y=0),
+                            frame__recovery_verified_frame.place_forget(),
+                            frame__recovery_verified_frame.destroy(),
+                        ),
+                    )
+                )
+                continue_to_frame__password_reset_frame.place(x=372, y=532)
+                
             def opted_email_verification_via_otp() -> None:
 
                 self.if_00_container_frame__reset_password.place_forget()
