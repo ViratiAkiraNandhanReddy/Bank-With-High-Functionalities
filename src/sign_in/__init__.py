@@ -701,11 +701,11 @@ class sign_in_interface:
                         fg_color="transparent",
                     )
                 )
-                
+
                 frame__recovery_verified_frame.place(x=0, y=0)
-                
+
                 ### --- ---  frame__recovery_verified_frame  --- --- ###
-                
+
                 customtkinter.CTkLabel(
                     frame__recovery_verified_frame,
                     text="User Identity Verified",
@@ -720,7 +720,7 @@ class sign_in_interface:
                     height=0,  # 73
                     width=450,
                 ).place(x=0, y=119)
-                
+
                 customtkinter.CTkLabel(
                     frame__recovery_verified_frame,
                     text="""Your user identity has been successfully
@@ -737,27 +737,29 @@ the password reset process is completed.""",
                     height=0,  # 171
                     width=350,
                 ).place(x=50, y=311)
-                
-                btn_exit_to_root_frame: customtkinter.CTkButton = customtkinter.CTkButton(
-                    frame__recovery_verified_frame,
-                    text="",
-                    width=0,
-                    height=0,
-                    fg_color="transparent",
-                    hover=False,
-                    image=customtkinter.CTkImage(
-                        light_image=assets.icons.material.first_page,
-                        dark_image=assets.icons.material.first_page,
-                        size=(20, 20),
-                    ),
-                    command=lambda: (
-                        self.if_00_container_frame__reset_password.place(x=0, y=0),
-                        frame__recovery_verified_frame.place_forget(),
-                        frame__recovery_verified_frame.destroy(),
-                    ),
+
+                btn_exit_to_root_frame: customtkinter.CTkButton = (
+                    customtkinter.CTkButton(
+                        frame__recovery_verified_frame,
+                        text="",
+                        width=0,
+                        height=0,
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=assets.icons.material.first_page,
+                            dark_image=assets.icons.material.first_page,
+                            size=(20, 20),
+                        ),
+                        command=lambda: (
+                            self.if_00_container_frame__reset_password.place(x=0, y=0),
+                            frame__recovery_verified_frame.place_forget(),
+                            frame__recovery_verified_frame.destroy(),
+                        ),
+                    )
                 )
                 btn_exit_to_root_frame.place(x=50, y=532)
-                
+
                 continue_to_frame__password_reset_frame: customtkinter.CTkButton = (
                     customtkinter.CTkButton(
                         frame__recovery_verified_frame,
@@ -779,14 +781,14 @@ the password reset process is completed.""",
                     )
                 )
                 continue_to_frame__password_reset_frame.place(x=372, y=532)
-                
+
                 ### --- ---  frame__password_reset_frame  --- --- ###
-                
+
                 def validate_new_passwords_and_reset() -> None:
-                
+
                     new_password: str = __new_password.get().strip()
                     confirm_password: str = __confirm_password.get().strip()
-                
+
                     __new_password.bind(
                         "<KeyPress>",
                         lambda event: container_frame__new_password.configure(
@@ -811,65 +813,73 @@ the password reset process is completed.""",
                         )
                         or __confirm_password.unbind("<KeyPress>"),
                     )
-                
+
                     if (not new_password) and (
                         confirm_password
                     ):  # new_password: false -- confirm_password: true
-                
+
                         container_frame__new_password.configure(border_color="#FF0000")
                         container_frame__new_password_label.configure(
-                            text="invalid new password", text_color="#FF0000", width=101,  # 95
+                            text="invalid new password",
+                            text_color="#FF0000",
+                            width=101,  # 95
                         )
-                
+
                         return
-                
+
                     elif new_password and (
                         not confirm_password
                     ):  # new_password: true -- confirm_password: false
-                
+
                         container_frame__confirm_password.configure(
                             border_color="#FF0000"
                         )
                         container_frame__confirm_password_label.configure(
-                            text="invalid confirm password", text_color="#FF0000", width=116,  # 110
+                            text="invalid confirm password",
+                            text_color="#FF0000",
+                            width=116,  # 110
                         )
-                
+
                         return
-                
+
                     elif (not new_password) and (
                         not confirm_password
                     ):  # new_password: false -- confirm_password: false
-                
+
                         container_frame__new_password.configure(border_color="#FF0000")
                         container_frame__confirm_password.configure(
                             border_color="#FF0000"
                         )
                         container_frame__new_password_label.configure(
-                            text="invalid new password", width=101, text_color="#FF0000",
+                            text="invalid new password",
+                            width=101,
+                            text_color="#FF0000",
                         )
                         container_frame__confirm_password_label.configure(
-                            text="invalid confirm password", width=116, text_color="#FF0000",
+                            text="invalid confirm password",
+                            width=116,
+                            text_color="#FF0000",
                         )
-                
+
                         return
-                
+
                     elif (
                         len(new_password) < 8
                     ):  # new_password: true -- confirm_password: true [less than 8 characters]
-                
+
                         container_frame__new_password.configure(border_color="#FF0000")
                         container_frame__new_password_label.configure(
                             text="password must be at least 8 characters long",
                             width=197,
                             text_color="#FF0000",
                         )
-                
+
                         return
-                
+
                     elif (
                         new_password != confirm_password
                     ):  # new_password: true -- confirm_password: true [mismatched]
-                
+
                         container_frame__confirm_password.configure(
                             border_color="#FF0000"
                         )
@@ -878,9 +888,60 @@ the password reset process is completed.""",
                             width=226,
                             text_color="#FF0000",
                         )
-                
+
                         return
-                
+
+                    else:
+
+                        is_password_changed = SERVER.management.admin.change_password(
+                            username, new_password
+                        )
+
+                        if is_password_changed:
+
+                            title_recovery_completed.configure(
+                                image=customtkinter.CTkImage(
+                                    light_image=assets.icons.material.check_circle,
+                                    dark_image=assets.icons.material.check_circle,
+                                    size=(48, 48),
+                                ),
+                                text="Password Reset Successful",
+                            )
+
+                            desc_recovery_completed.configure(
+                                text="""Your password has been successfully updated
+and your account is now secured with the 
+new password. 
+                                                              
+You can continue to the sign-in page and 
+access your account using your
+new credentials."""
+                            )
+
+                        else:
+
+                            title_recovery_completed.configure(
+                                image=customtkinter.CTkImage(
+                                    light_image=assets.icons.material.error,
+                                    dark_image=assets.icons.material.error,
+                                    size=(48, 48),
+                                ),
+                                text="Password Reset Failed",
+                            )
+                            desc_recovery_completed.configure(
+                                text="""We were unable to update your password at
+this time. No changes have been made to 
+your account. Please try again later.
+                                                              
+If the issue persists, please contact 
+support for further assistance in 
+resolving the problem."""
+                            )
+
+                        frame__recovery_completed_frame.place(x=0, y=0)
+                        frame__password_reset_frame.place_forget()
+                        frame__password_reset_frame.destroy()
+
                 customtkinter.CTkLabel(
                     frame__password_reset_frame,
                     text="User Password Reset",
@@ -895,7 +956,7 @@ the password reset process is completed.""",
                     height=0,  # 73
                     width=450,
                 ).place(x=0, y=154)
-                
+
                 container_frame__new_password: customtkinter.CTkFrame = (
                     customtkinter.CTkFrame(
                         frame__password_reset_frame,
@@ -907,7 +968,7 @@ the password reset process is completed.""",
                         corner_radius=6,
                     )
                 )
-                
+
                 container_frame__new_password_label: customtkinter.CTkLabel = (
                     customtkinter.CTkLabel(
                         frame__password_reset_frame,
@@ -918,7 +979,7 @@ the password reset process is completed.""",
                         text_color="#FFFFFF",
                     )
                 )
-                
+
                 customtkinter.CTkLabel(
                     container_frame__new_password,
                     image=customtkinter.CTkImage(
@@ -928,9 +989,9 @@ the password reset process is completed.""",
                     ),
                     text="",
                 ).place(x=8, rely=0.5, anchor="w")
-                
+
                 container_frame__new_password.place(x=50, y=382)
-                
+
                 __new_password: customtkinter.CTkEntry = customtkinter.CTkEntry(
                     container_frame__new_password,
                     placeholder_text="new password",
@@ -942,7 +1003,7 @@ the password reset process is completed.""",
                     font=("Roboto", 16),
                 )
                 __new_password.place(x=28, rely=0.5, anchor="w")
-                
+
                 __new_password.bind(
                     "<FocusIn>",
                     lambda event: (
@@ -959,7 +1020,7 @@ the password reset process is completed.""",
                         else None
                     ),
                 )
-                
+
                 container_frame__confirm_password: customtkinter.CTkFrame = (
                     customtkinter.CTkFrame(
                         frame__password_reset_frame,
@@ -971,7 +1032,7 @@ the password reset process is completed.""",
                         corner_radius=6,
                     )
                 )
-                
+
                 container_frame__confirm_password_label: customtkinter.CTkLabel = (
                     customtkinter.CTkLabel(
                         frame__password_reset_frame,
@@ -982,7 +1043,7 @@ the password reset process is completed.""",
                         text_color="#FFFFFF",
                     )
                 )
-                
+
                 customtkinter.CTkLabel(
                     container_frame__confirm_password,
                     image=customtkinter.CTkImage(
@@ -992,9 +1053,9 @@ the password reset process is completed.""",
                     ),
                     text="",
                 ).place(x=8, rely=0.5, anchor="w")
-                
+
                 container_frame__confirm_password.place(x=50, y=442)
-                
+
                 __confirm_password: customtkinter.CTkEntry = customtkinter.CTkEntry(
                     container_frame__confirm_password,
                     placeholder_text="confirm password",
@@ -1006,7 +1067,7 @@ the password reset process is completed.""",
                     font=("Roboto", 16),
                 )
                 __confirm_password.place(x=28, rely=0.5, anchor="w")
-                
+
                 __confirm_password.bind(
                     "<FocusIn>",
                     lambda event: (
@@ -1023,27 +1084,29 @@ the password reset process is completed.""",
                         else None
                     ),
                 )
-                
-                btn_exit_to_root_frame: customtkinter.CTkButton = customtkinter.CTkButton(
-                    frame__password_reset_frame,
-                    text="",
-                    width=0,
-                    height=0,
-                    fg_color="transparent",
-                    hover=False,
-                    image=customtkinter.CTkImage(
-                        light_image=assets.icons.material.first_page,
-                        dark_image=assets.icons.material.first_page,
-                        size=(20, 20),
-                    ),
-                    command=lambda: (
-                        self.if_00_container_frame__reset_password.place(x=0, y=0),
-                        frame__password_reset_frame.place_forget(),
-                        frame__password_reset_frame.destroy(),
-                    ),
+
+                btn_exit_to_root_frame: customtkinter.CTkButton = (
+                    customtkinter.CTkButton(
+                        frame__password_reset_frame,
+                        text="",
+                        width=0,
+                        height=0,
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=assets.icons.material.first_page,
+                            dark_image=assets.icons.material.first_page,
+                            size=(20, 20),
+                        ),
+                        command=lambda: (
+                            self.if_00_container_frame__reset_password.place(x=0, y=0),
+                            frame__password_reset_frame.place_forget(),
+                            frame__password_reset_frame.destroy(),
+                        ),
+                    )
                 )
                 btn_exit_to_root_frame.place(x=50, y=532)
-                
+
                 continue_to_frame__recovery_completed_frame: customtkinter.CTkButton = (
                     customtkinter.CTkButton(
                         frame__password_reset_frame,
@@ -1061,7 +1124,57 @@ the password reset process is completed.""",
                     )
                 )
                 continue_to_frame__recovery_completed_frame.place(x=372, y=532)
-                
+
+                ### --- ---  frame__recovery_completed_frame  --- --- ###
+
+                title_recovery_completed: customtkinter.CTkLabel = (
+                    customtkinter.CTkLabel(
+                        frame__recovery_completed_frame,
+                        text="",
+                        font=("Segoe UI", 18, "bold"),
+                        text_color="#FFFFFF",
+                        compound="top",
+                        height=0,  # 73
+                        width=450,
+                    )
+                )
+                title_recovery_completed.place(x=0, y=138)
+
+                desc_recovery_completed: customtkinter.CTkLabel = (
+                    customtkinter.CTkLabel(
+                        frame__recovery_completed_frame,
+                        text="",
+                        font=("Segoe UI", 14),
+                        text_color="#FFFFFF",
+                        height=133,  # 133
+                        width=350,
+                    )
+                )
+                desc_recovery_completed.place(x=50, y=349)
+
+                continue_to_sign_in_frame: customtkinter.CTkButton = (
+                    customtkinter.CTkButton(
+                        frame__recovery_completed_frame,
+                        text="",
+                        width=0,  # 28
+                        height=0,  # 28
+                        fg_color="transparent",
+                        hover=False,
+                        image=customtkinter.CTkImage(
+                            light_image=assets.icons.material.arrow_forward,
+                            dark_image=assets.icons.material.arrow_forward,
+                            size=(20, 20),
+                        ),
+                        command=lambda: (
+                            self.if_00_container_frame__reset_password.place(x=0, y=0),
+                            frame__recovery_completed_frame.place_forget(),
+                            frame__recovery_completed_frame.destroy(),
+                            self.hide_reset_password_frame__show_sign_in_frame(),
+                        ),
+                    )
+                )
+                continue_to_sign_in_frame.place(x=372, y=532)
+
             def opted_email_verification_via_otp() -> None:
 
                 self.if_00_container_frame__reset_password.place_forget()
