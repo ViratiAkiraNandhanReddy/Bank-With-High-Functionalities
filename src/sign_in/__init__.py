@@ -728,7 +728,7 @@ verified using the selected recovery
 method.
                 
 You may now proceed to create a new 
-administrator password.
+user password.
                 
 This recovery session remains active until 
 the password reset process is completed.""",
@@ -893,7 +893,7 @@ the password reset process is completed.""",
 
                     else:
 
-                        is_password_changed = SERVER.management.admin.change_password(
+                        is_password_changed = SERVER.management.user.change_password(
                             username, new_password
                         )
 
