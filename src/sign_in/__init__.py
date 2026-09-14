@@ -125,8 +125,14 @@ class sign_in_interface:
                     self.frame__sign_in,
                     width=450,
                     height=610,
-                    fg_color="#000000",
-                    corner_radius=0,
+                    fg_color="#0a0a0a",
+                    corner_radius=6,
+                    background_corner_colors=(
+                    "#000000",
+                    "#0a0a0a",
+                    "#0a0a0a",
+                    "#000000",
+                ),  # type: ignore[arg-type]
                 )
             )
 
@@ -154,7 +160,13 @@ class sign_in_interface:
                     width=450,
                     height=610,
                     fg_color="#0a0a0a",
-                    corner_radius=0,
+                    corner_radius=6,
+                    background_corner_colors=(
+                        "#0a0a0a",
+                        "#0a0a0a",
+                        "#000000",
+                        "#0a0a0a",
+                    ),  # type: ignore[arg-type]
                 )
             )
 
