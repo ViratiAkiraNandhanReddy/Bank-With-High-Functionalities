@@ -82,7 +82,7 @@ class sign_in_interface:
                 width=0,
                 height=0,
                 corner_radius=0,
-                hover_color="#43545F",
+                hover_color="#0a0a0a",
                 fg_color="black",
                 command=self.more_action__overlay_frame,
             )
@@ -296,7 +296,10 @@ class sign_in_interface:
                 font=("Roboto", 9),
                 text_color="#218CFF",
                 border_spacing=0,
-                command=lambda: (self.hide_sign_in_frame__show_reset_password_frame(), self.more_button.place_configure(x=0,y=0),),
+                command=lambda: (
+                    self.hide_sign_in_frame__show_reset_password_frame(),
+                    self.more_button.place_configure(x=0, y=0),
+                ),
             ).place(x=302, y=371)
 
             self.__password = customtkinter.CTkEntry(
@@ -2439,7 +2442,10 @@ recovery verification.""",
                         dark_image=assets.icons.material.arrow_back,
                         size=(20, 20),
                     ),
-                    command=lambda: (self.hide_reset_password_frame__show_sign_in_frame(), self.more_button.place_configure(x=1080,y=0),),
+                    command=lambda: (
+                        self.hide_reset_password_frame__show_sign_in_frame(),
+                        self.more_button.place_configure(x=1080, y=0),
+                    ),
                 )
             )
             self.btn__back_to_sign_in.place(x=50, y=532)
