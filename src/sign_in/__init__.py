@@ -296,7 +296,7 @@ class sign_in_interface:
                 font=("Roboto", 9),
                 text_color="#218CFF",
                 border_spacing=0,
-                command=self.hide_sign_in_frame__show_reset_password_frame,
+                command=lambda: (self.hide_sign_in_frame__show_reset_password_frame(), self.more_button.place_configure(x=0,y=0),),
             ).place(x=302, y=371)
 
             self.__password = customtkinter.CTkEntry(
@@ -727,7 +727,7 @@ class sign_in_interface:
                         height=610,
                         fg_color="transparent",
                         background_corner_colors=(
-                            "#000000",
+                            "#0a0a0a",
                             "#0a0a0a",
                             "#0a0a0a",
                             "#000000",
@@ -741,7 +741,7 @@ class sign_in_interface:
                         height=610,
                         fg_color="transparent",
                         background_corner_colors=(
-                            "#000000",
+                            "#0a0a0a",
                             "#0a0a0a",
                             "#0a0a0a",
                             "#000000",
@@ -755,7 +755,7 @@ class sign_in_interface:
                         height=610,
                         fg_color="transparent",
                         background_corner_colors=(
-                            "#000000",
+                            "#0a0a0a",
                             "#0a0a0a",
                             "#0a0a0a",
                             "#000000",
@@ -1247,7 +1247,7 @@ resolving the problem."""
                         height=610,
                         fg_color="#0a0a0a",
                         background_corner_colors=(
-                            "#000000",
+                            "#0a0a0a",
                             "#0a0a0a",
                             "#0a0a0a",
                             "#000000",
@@ -1307,7 +1307,7 @@ resolving the problem."""
                         height=610,
                         fg_color="#0a0a0a",
                         background_corner_colors=(
-                            "#000000",
+                            "#0a0a0a",
                             "#0a0a0a",
                             "#0a0a0a",
                             "#000000",
@@ -1517,7 +1517,7 @@ continue account recovery.""",
                         height=610,
                         fg_color="#0a0a0a",
                         background_corner_colors=(
-                            "#000000",
+                            "#0a0a0a",
                             "#0a0a0a",
                             "#0a0a0a",
                             "#000000",
@@ -1996,7 +1996,7 @@ continue account recovery.""",
                     height=610,
                     fg_color="#0a0a0a",
                     background_corner_colors=(
-                        "#000000",
+                        "#0a0a0a",
                         "#0a0a0a",
                         "#0a0a0a",
                         "#000000",
@@ -2329,7 +2329,7 @@ recovery verification.""",
                     height=610,
                     fg_color="#0a0a0a",
                     background_corner_colors=(
-                        "#000000",
+                        "#0a0a0a",
                         "#0a0a0a",
                         "#0a0a0a",
                         "#000000",
@@ -2439,7 +2439,7 @@ recovery verification.""",
                         dark_image=assets.icons.material.arrow_back,
                         size=(20, 20),
                     ),
-                    command=self.hide_reset_password_frame__show_sign_in_frame,
+                    command=lambda: (self.hide_reset_password_frame__show_sign_in_frame(), self.more_button.place_configure(x=1080,y=0),),
                 )
             )
             self.btn__back_to_sign_in.place(x=50, y=532)
