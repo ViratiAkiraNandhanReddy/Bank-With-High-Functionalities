@@ -22,7 +22,7 @@ class sign_in_interface:
             # --- X-Axis Configuration For Animation --- #
 
             self.x_axis_rtl = (
-                +1110
+                +940
             )  # sign in screen frame starts from right to left (initially outside the window) -- rtl
             self.x_axis_ltr = (
                 -910
@@ -91,14 +91,34 @@ class sign_in_interface:
 
             # --- Sign In Screen Configuration --- #
 
-            self.frame__sign_in: customtkinter.CTkFrame = customtkinter.CTkFrame(
+            self.ext_frame__sign_in: customtkinter.CTkFrame = customtkinter.CTkFrame(
                 self.window,
-                corner_radius=0,
-                width=900,
+                corner_radius=6,
+                width=1060,
                 height=610,
+                fg_color="#000000",
+                bg_color="#000000",
+            )
+            self.ext_frame__sign_in.place(x=self.x_axis_rtl, y=20)
+
+            self.place_holder_frame_1: customtkinter.CTkFrame = customtkinter.CTkFrame(
+                self.ext_frame__sign_in,
+                corner_radius=6,
+                width=140,
+                height=50,
                 fg_color="#0a0a0a",
             )
-            self.frame__sign_in.place(x=self.x_axis_rtl, y=20)
+            self.place_holder_frame_1.place(x=0, y=0)
+
+            self.frame__sign_in: customtkinter.CTkFrame = customtkinter.CTkFrame(
+                self.ext_frame__sign_in,
+                corner_radius=6,
+                width=900,
+                height=610,
+                fg_color="#000000",
+                bg_color="#000000",
+            )
+            self.frame__sign_in.place(x=160, y=0)
 
             self.internal_frame_00__sign_in: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
@@ -398,12 +418,12 @@ class sign_in_interface:
 
             self.x_axis_rtl -= 10
 
-            if self.x_axis_rtl >= 180:
+            if self.x_axis_rtl >= 20:
 
-                self.frame__sign_in.place(x=self.x_axis_rtl, y=20)
+                self.ext_frame__sign_in.place(x=self.x_axis_rtl, y=20)
                 self.window.after(10, self.show_sign_in_rtl)
 
-            if self.x_axis_rtl < 180:
+            if self.x_axis_rtl < 20:
 
                 return
 
@@ -414,12 +434,12 @@ class sign_in_interface:
 
             self.x_axis_rtl += 10
 
-            if self.x_axis_rtl <= 1110:
+            if self.x_axis_rtl <= 940:
 
-                self.frame__sign_in.place(x=self.x_axis_rtl, y=20)
+                self.ext_frame__sign_in.place(x=self.x_axis_rtl, y=20)
                 self.window.after(10, self.hide_sign_in_rtl)
 
-            if self.x_axis_rtl > 1110:
+            if self.x_axis_rtl > 940:
 
                 return
 
