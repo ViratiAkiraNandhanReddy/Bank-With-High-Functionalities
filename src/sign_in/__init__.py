@@ -128,11 +128,11 @@ class sign_in_interface:
                     fg_color="#0a0a0a",
                     corner_radius=6,
                     background_corner_colors=(
-                    "#000000",
-                    "#0a0a0a",
-                    "#0a0a0a",
-                    "#000000",
-                ),  # type: ignore[arg-type]
+                        "#000000",
+                        "#0a0a0a",
+                        "#0a0a0a",
+                        "#000000",
+                    ),  # type: ignore[arg-type]
                 )
             )
 
@@ -371,7 +371,12 @@ class sign_in_interface:
             # --- Reset Password Screen Configuration --- #
 
             self.frame__reset_password = customtkinter.CTkFrame(
-                self.window, corner_radius=0, width=900, height=610
+                self.window,
+                corner_radius=6,
+                width=900,
+                height=610,
+                fg_color="#000000",
+                bg_color="#000000",
             )
 
             self.frame__reset_password.place(x=self.x_axis_ltr, y=20)
@@ -380,8 +385,14 @@ class sign_in_interface:
                 self.frame__reset_password,
                 width=450,
                 height=610,
-                fg_color="#000000",
-                corner_radius=0,
+                fg_color="#0a0a0a",
+                corner_radius=6,
+                background_corner_colors=(
+                    "#0a0a0a",
+                    "#000000",
+                    "#000000",
+                    "#0a0a0a",
+                ),  # type: ignore[arg-type]
             )
             self.internal_frame_00__reset_password.place(x=450, y=0)
 
@@ -404,7 +415,7 @@ class sign_in_interface:
                 self.frame__reset_password,
                 width=450,
                 height=610,
-                corner_radius=0,
+                corner_radius=6,
                 fg_color="#0a0a0a",
             )
             self.internal_frame_01__reset_password.place(x=0, y=0)
@@ -715,6 +726,12 @@ class sign_in_interface:
                         width=450,
                         height=610,
                         fg_color="transparent",
+                        background_corner_colors=(
+                            "#000000",
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#000000",
+                        ),  # type: ignore[arg-type]
                     )
                 )
                 frame__password_reset_frame: customtkinter.CTkFrame = (
@@ -723,6 +740,12 @@ class sign_in_interface:
                         width=450,
                         height=610,
                         fg_color="transparent",
+                        background_corner_colors=(
+                            "#000000",
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#000000",
+                        ),  # type: ignore[arg-type]
                     )
                 )
                 frame__recovery_completed_frame: customtkinter.CTkFrame = (
@@ -731,6 +754,12 @@ class sign_in_interface:
                         width=450,
                         height=610,
                         fg_color="transparent",
+                        background_corner_colors=(
+                            "#000000",
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#000000",
+                        ),  # type: ignore[arg-type]
                     )
                 )
 
@@ -1217,6 +1246,12 @@ resolving the problem."""
                         width=450,
                         height=610,
                         fg_color="#0a0a0a",
+                        background_corner_colors=(
+                            "#000000",
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#000000",
+                        ),  # type: ignore[arg-type]
                     )
                 )
                 if_emailotp_container_frame__reset_password.place(x=0, y=0)
@@ -1271,6 +1306,12 @@ resolving the problem."""
                         width=450,
                         height=610,
                         fg_color="#0a0a0a",
+                        background_corner_colors=(
+                            "#000000",
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#000000",
+                        ),  # type: ignore[arg-type]
                     )
                     if_send_mail_and_validate_otp_container_frame__reset_password.place(
                         x=0, y=0
@@ -1475,6 +1516,12 @@ continue account recovery.""",
                         width=450,
                         height=610,
                         fg_color="#0a0a0a",
+                        background_corner_colors=(
+                            "#000000",
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#000000",
+                        ),  # type: ignore[arg-type]
                     )
                     if_emailotp_confirmation_state_container_frame__reset_password.place(
                         x=0, y=0
@@ -1948,6 +1995,12 @@ continue account recovery.""",
                     width=450,
                     height=610,
                     fg_color="#0a0a0a",
+                    background_corner_colors=(
+                        "#000000",
+                        "#0a0a0a",
+                        "#0a0a0a",
+                        "#000000",
+                    ),  # type: ignore[arg-type]
                 )
                 if_backupcode_container_frame__reset_password.place(x=0, y=0)
 
@@ -2275,6 +2328,12 @@ recovery verification.""",
                     width=450,
                     height=610,
                     fg_color="#0a0a0a",
+                    background_corner_colors=(
+                        "#000000",
+                        "#0a0a0a",
+                        "#0a0a0a",
+                        "#000000",
+                    ),  # type: ignore[arg-type]
                 )
             )
             self.if_00_container_frame__reset_password.place(x=0, y=0)
@@ -2333,7 +2392,7 @@ recovery verification.""",
                     text="  No internet connection available",
                     font=("Segoe UI", 9),
                     text_color="#a0a0a0",
-                    width=0,
+                    width=330,
                     height=0,
                     image=customtkinter.CTkImage(
                         light_image=assets.icons.material.wifi_off,
@@ -2341,7 +2400,7 @@ recovery verification.""",
                         size=(12, 12),
                     ),
                     compound="left",
-                ).place(x=133, y=82)
+                ).place(x=10, y=82)
 
             self.btn__backup_code_verification: customtkinter.CTkButton = (
                 customtkinter.CTkButton(
