@@ -13,7 +13,6 @@ lazy from . import assets, utils
 lazy from .__mail__ import (
     email_verification,
     forgot_password,
-    two_factor_authentication,
     welcome,
 )
 lazy from .__server__ import SERVER
