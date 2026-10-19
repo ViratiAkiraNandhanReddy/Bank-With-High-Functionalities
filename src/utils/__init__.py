@@ -1,10 +1,10 @@
-from pathlib import Path
+lazy from pathlib import Path
 
-from .theme import colors
-from .browser import browser
-from .privacy import masking
-from .network import connection
-from .greetings import greetings
+lazy from .browser import browser
+lazy from .greetings import greetings
+lazy from .network import connection
+lazy from .privacy import masking
+lazy from .theme import colors
 
 root: Path = Path(__file__).resolve().parent.parent.parent
 

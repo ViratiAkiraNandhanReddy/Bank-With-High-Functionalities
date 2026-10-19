@@ -1,4 +1,16 @@
-from ._imports import *
+lazy from ._imports import (
+    SMTP__APP_PASSWORD,
+    SMTP__MAIL_ADDRESS,
+    CTkButton,
+    CTkLabel,
+    datetime,
+    email_msg,
+    otp_code,
+    randint,
+    random,
+    root,
+    smtplib,
+)
 
 
 class email_verification:

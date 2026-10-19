@@ -1,4 +1,4 @@
-from .. import customtkinter, Callable
+lazy from .. import Callable, customtkinter
 
 
 class activity_and_history:

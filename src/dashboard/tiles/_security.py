@@ -1,5 +1,6 @@
-from ... import customtkinter, SERVER
-from datetime import datetime, timezone
+lazy from datetime import datetime, timezone
+
+lazy from ... import SERVER, customtkinter
 
 EVENT_LABELS: dict[str, tuple[str, str]] = {
     "login": (

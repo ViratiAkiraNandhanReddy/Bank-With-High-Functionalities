@@ -1,4 +1,4 @@
-from ... import customtkinter, SERVER
+lazy from ... import SERVER, customtkinter
 
 
 class announcement:

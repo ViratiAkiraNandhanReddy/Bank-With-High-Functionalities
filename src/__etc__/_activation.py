@@ -1,4 +1,14 @@
-from . import *
+lazy from .. import (
+    CONFIGURATION_JSON,
+    CONSTANTS,
+    apply_style,
+    assets,
+    borderless_window_utils,
+    customtkinter,
+    get_accent_color,
+    title_bar,
+    utils,
+)
 
 
 class activation:

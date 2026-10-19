@@ -1,5 +1,5 @@
-from .._uuids import _uuids
-from ..__base__ import UserLookupBase, AdminLookupBase
+lazy from ..__base__ import AdminLookupBase, UserLookupBase
+lazy from .._uuids import _uuids
 
 
 class UserLookup(UserLookupBase):

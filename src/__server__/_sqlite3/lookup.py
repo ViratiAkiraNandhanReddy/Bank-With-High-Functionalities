@@ -1,12 +1,13 @@
-from .._uuids import _uuids
-from ._connection import connection
-from datetime import datetime, timezone
-from ..__base__ import (
-    UserLookupBase,
+lazy from datetime import datetime, timezone
+
+lazy from ..__base__ import (
     AdminLookupBase,
     ApplicationLookupBase,
     SecurityEventLookupBase,
+    UserLookupBase,
 )
+lazy from .._uuids import _uuids
+lazy from ._connection import connection
 
 cursor = connection.cursor()
 

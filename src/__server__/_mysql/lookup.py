@@ -1,6 +1,6 @@
-from .._uuids import _uuids
-from ._connection import connection
-from ..__base__ import UserLookupBase, AdminLookupBase
+lazy from ..__base__ import AdminLookupBase, UserLookupBase
+lazy from .._uuids import _uuids
+lazy from ._connection import connection
 
 cursor = connection.cursor()
 

@@ -2,10 +2,10 @@
 Docstring for src.__mail__
 """
 
-from ._welcome import welcome
-from ._forgot_password import forgot_password
-from ._email_verification import email_verification
-from ._two_factor_authentication import two_factor_authentication
+lazy from ._email_verification import email_verification
+lazy from ._forgot_password import forgot_password
+lazy from ._two_factor_authentication import two_factor_authentication
+lazy from ._welcome import welcome
 
 __all__ = [
     "welcome",

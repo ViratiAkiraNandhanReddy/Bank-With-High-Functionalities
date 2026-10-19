@@ -1,4 +1,4 @@
-from .. import *
+lazy from .. import Callable, customtkinter
 
 
 class sign_up_interface:

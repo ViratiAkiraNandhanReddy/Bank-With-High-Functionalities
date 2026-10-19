@@ -1,17 +1,17 @@
-from .authentication import UserAuthentication, AdminAuthentication
-from .lookup import UserLookup, AdminLookup, ApplicationLookup, SecurityEventLookup
-from .management import (
-    UserManagement,
+lazy from .authentication import AdminAuthentication, UserAuthentication
+lazy from .lookup import AdminLookup, ApplicationLookup, SecurityEventLookup, UserLookup
+lazy from .management import (
     AdminManagement,
     ApplicationManagement,
     SecurityEventManagement,
+    UserManagement,
 )
-from .schema import (
-    UserSchema,
+lazy from .schema import (
     AdminSchema,
-    TransactionSchema,
     AnnouncementSchema,
     SecurityEventSchema,
+    TransactionSchema,
+    UserSchema,
 )
 
 

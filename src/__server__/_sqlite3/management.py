@@ -1,12 +1,13 @@
-from .lookup import UserLookup
-from ._connection import connection
-from CaesarCipher import Encryption
-from ..__base__ import (
-    UserManagementBase,
+lazy from CaesarCipher import Encryption
+
+lazy from ..__base__ import (
     AdminManagementBase,
     ApplicationManagementBase,
     SecurityEventManagementBase,
+    UserManagementBase,
 )
+lazy from ._connection import connection
+lazy from .lookup import UserLookup
 
 cursor = connection.cursor()
 

@@ -1,4 +1,4 @@
-from ..__base__ import UserSchemaBase, AdminSchemaBase, TransactionSchemaBase
+lazy from ..__base__ import AdminSchemaBase, TransactionSchemaBase, UserSchemaBase
 
 
 class AdminSchema(AdminSchemaBase):

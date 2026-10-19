@@ -1,4 +1,4 @@
-from ... import customtkinter, assets, SERVER
+lazy from ... import SERVER, assets, customtkinter
 
 
 class account_info:

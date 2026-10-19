@@ -1,7 +1,7 @@
-from .._balance import balance
-from .._favorites import favorites
-from .._transactions import transactions
-from .... import customtkinter, assets, Callable, SERVER
+lazy from .... import SERVER, Callable, assets, customtkinter
+lazy from .._balance import balance
+lazy from .._favorites import favorites
+lazy from .._transactions import transactions
 
 
 class transfer:

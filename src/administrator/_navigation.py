@@ -1,6 +1,12 @@
-from .views import *
-from ._navigation__transaction_carousel import transaction_carousel
-from .. import customtkinter, assets
+lazy from .. import assets, customtkinter
+lazy from ._navigation__transaction_carousel import transaction_carousel
+lazy from .views import (
+    activity_and_history,
+    issues_and_broadcasts,
+    overview,
+    settings,
+    users_and_access,
+)
 
 
 class navigation:

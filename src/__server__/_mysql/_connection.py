@@ -1,5 +1,6 @@
-from os import getenv
-import mysql.connector
+lazy from os import getenv
+
+lazy import mysql.connector
 
 MYSQL__DB_USERNAME: str | None = getenv("MYSQL__DB_USERNAME")
 MYSQL__DB_PASSWORD: str | None = getenv("MYSQL__DB_PASSWORD")

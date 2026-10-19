@@ -1,5 +1,5 @@
-from datetime import datetime
-from abc import ABC, abstractmethod
+lazy from abc import ABC, abstractmethod
+lazy from datetime import datetime
 
 
 class UserLookupBase(ABC):

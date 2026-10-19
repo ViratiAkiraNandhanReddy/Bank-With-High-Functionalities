@@ -1,5 +1,5 @@
-from ._connection import connection
-from ..__base__ import UserSchemaBase, AdminSchemaBase, TransactionSchemaBase
+lazy from ..__base__ import AdminSchemaBase, TransactionSchemaBase, UserSchemaBase
+lazy from ._connection import connection
 
 cursor = connection.cursor()
 

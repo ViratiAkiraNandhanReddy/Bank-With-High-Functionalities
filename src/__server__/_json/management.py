@@ -1,6 +1,7 @@
-from .._uuids import _uuids
-from CaesarCipher import Encryption
-from ..__base__ import UserManagementBase, AdminManagementBase
+lazy from CaesarCipher import Encryption
+
+lazy from ..__base__ import AdminManagementBase, UserManagementBase
+lazy from .._uuids import _uuids
 
 
 class UserManagement(UserManagementBase):

@@ -1,5 +1,6 @@
-import json
-from ..utils import root
+lazy import json
+
+lazy from ..utils import root
 
 try:
 
@@ -16,19 +17,19 @@ match CONFIGURATION_JSON.get("DATABASE TYPE"):
 
     case "JSON":
 
-        from ._json import SERVER as JSONServer
+        lazy from ._json import SERVER as JSONServer
 
         SERVER = JSONServer
 
     case "MySQL":
 
-        from ._mysql import SERVER as MySQLServer
+        lazy from ._mysql import SERVER as MySQLServer
 
         SERVER = MySQLServer
 
     case "SQLite3":
 
-        from ._sqlite3 import SERVER as SQLite3Server
+        lazy from ._sqlite3 import SERVER as SQLite3Server
 
         SERVER = SQLite3Server
 

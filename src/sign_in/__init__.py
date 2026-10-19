@@ -1,7 +1,18 @@
-from .. import *
-from ..sign_up import sign_up_interface
-from ..dashboard import dashboard_interface
-from .more_actions import more_actions_interface
+lazy from .. import (
+    SERVER,
+    apply_style,
+    assets,
+    borderless_window_utils,
+    customtkinter,
+    forgot_password,
+    set_opacity,
+    threading,
+    title_bar,
+    utils,
+)
+lazy from ..dashboard import dashboard_interface
+lazy from ..sign_up import sign_up_interface
+lazy from .more_actions import more_actions_interface
 
 
 class sign_in_interface:

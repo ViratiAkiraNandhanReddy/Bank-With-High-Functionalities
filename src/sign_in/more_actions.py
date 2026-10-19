@@ -1,5 +1,13 @@
-from ..sign_in import *
-from ..administrator import administrator_interface
+lazy from .. import (
+    SERVER,
+    Callable,
+    assets,
+    customtkinter,
+    forgot_password,
+    threading,
+    utils,
+)
+lazy from ..administrator import administrator_interface
 
 
 class more_actions_interface:

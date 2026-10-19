@@ -1,5 +1,6 @@
-from datetime import datetime, timezone
-from ... import customtkinter, Callable, SERVER
+lazy from datetime import datetime, timezone
+
+lazy from ... import SERVER, Callable, customtkinter
 
 
 class transactions_overlay:

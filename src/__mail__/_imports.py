@@ -1,10 +1,12 @@
-import os
-import smtplib
-import datetime
-from ..utils import root
-from random import random, randint
-from customtkinter import CTkButton, CTkLabel
-from email.message import EmailMessage as email_msg
+lazy import datetime
+lazy import os
+lazy import smtplib
+lazy from email.message import EmailMessage as email_msg
+lazy from random import randint, random
+
+lazy from customtkinter import CTkButton, CTkLabel
+
+lazy from ..utils import root
 
 SMTP__MAIL_ADDRESS: str | None = os.getenv("SMTP__MAIL_ADDRESS")
 SMTP__APP_PASSWORD: str | None = os.getenv("SMTP__APP_PASSWORD")

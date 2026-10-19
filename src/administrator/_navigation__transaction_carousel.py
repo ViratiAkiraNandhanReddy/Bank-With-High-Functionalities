@@ -1,4 +1,4 @@
-from .. import customtkinter, assets
+lazy from .. import assets, customtkinter
 
 
 class transaction_carousel:

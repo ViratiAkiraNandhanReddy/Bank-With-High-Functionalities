@@ -1,4 +1,4 @@
-from .. import customtkinter
+lazy from .. import customtkinter
 
 
 class status_panel:

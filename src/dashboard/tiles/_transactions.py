@@ -1,5 +1,6 @@
-from datetime import datetime, timezone
-from ... import customtkinter, SERVER
+lazy from datetime import datetime, timezone
+
+lazy from ... import SERVER, customtkinter
 
 
 class transactions:

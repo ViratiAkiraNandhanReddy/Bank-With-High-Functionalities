@@ -1,7 +1,7 @@
-from .lookup import UserLookup, AdminLookup
-from .management import UserManagement, AdminManagement
-from .schema import UserSchema, AdminSchema, TransactionSchema
-from .authentication import UserAuthentication, AdminAuthentication
+lazy from .authentication import AdminAuthentication, UserAuthentication
+lazy from .lookup import AdminLookup, UserLookup
+lazy from .management import AdminManagement, UserManagement
+lazy from .schema import AdminSchema, TransactionSchema, UserSchema
 
 
 class Schema:

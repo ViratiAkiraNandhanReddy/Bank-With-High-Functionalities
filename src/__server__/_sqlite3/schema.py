@@ -1,11 +1,11 @@
-from ._connection import connection
-from ..__base__ import (
-    UserSchemaBase,
+lazy from ..__base__ import (
     AdminSchemaBase,
-    TransactionSchemaBase,
     AnnouncementSchemaBase,
     SecurityEventSchemaBase,
+    TransactionSchemaBase,
+    UserSchemaBase,
 )
+lazy from ._connection import connection
 
 cursor = connection.cursor()
 
