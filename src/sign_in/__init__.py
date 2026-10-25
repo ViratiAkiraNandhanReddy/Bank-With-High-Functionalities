@@ -716,6 +716,8 @@ class sign_in_interface:
                 overlay_frame__more_actions = more_actions_interface.more_actions(
                     self.window,
                     self.more_button,
+                    on_signup=self.redirect_to_signup,
+                    on_reset_password=self.hide_sign_in_frame__show_reset_password_frame,
                 )  # Opening The More Action Overlay Frame
 
                 self.window.after(480, overlay_frame__more_actions.show_frame)

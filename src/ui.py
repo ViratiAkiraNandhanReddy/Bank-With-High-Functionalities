@@ -155,6 +155,73 @@ def metric_card(
     return card
 
 
+def action_tile(
+    parent: customtkinter.CTkBaseClass,
+    title: str,
+    description: str,
+    x: int,
+    y: int,
+    command: Callable | None = None,
+    accent: str = "info",
+    width: int = 250,
+    height: int = 132,
+) -> customtkinter.CTkFrame:
+
+    accent_color = COLORS.get(accent, accent)
+    tile = customtkinter.CTkFrame(
+        parent,
+        width=width,
+        height=height,
+        fg_color=COLORS["card"],
+        border_width=1,
+        border_color="#252525",
+        corner_radius=8,
+    )
+    tile.place(x=x, y=y)
+
+    customtkinter.CTkFrame(
+        tile,
+        width=5,
+        height=height - 34,
+        fg_color=accent_color,
+        corner_radius=2,
+    ).place(x=14, y=17)
+
+    customtkinter.CTkLabel(
+        tile,
+        text=title,
+        font=("Segoe UI", 16, "bold"),
+        text_color=COLORS["text"],
+        anchor="w",
+    ).place(x=35, y=16)
+
+    customtkinter.CTkLabel(
+        tile,
+        text=description,
+        width=width - 55,
+        font=("Segoe UI", 12),
+        text_color=COLORS["muted"],
+        justify="left",
+        anchor="w",
+        wraplength=width - 55,
+    ).place(x=35, y=50)
+
+    if command is not None:
+        customtkinter.CTkButton(
+            tile,
+            text="Open",
+            width=76,
+            height=25,
+            fg_color="transparent",
+            hover_color=COLORS["card_hover"],
+            text_color=accent_color,
+            font=("Segoe UI", 11, "bold"),
+            command=command,
+        ).place(x=width - 92, y=height - 36)
+
+    return tile
+
+
 def empty_state(
     parent: customtkinter.CTkBaseClass,
     text: str,
