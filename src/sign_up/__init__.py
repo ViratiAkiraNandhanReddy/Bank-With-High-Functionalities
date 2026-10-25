@@ -1,4 +1,4 @@
-lazy from .. import SERVER, Callable, customtkinter
+lazy from .. import SERVER, Callable, customtkinter, ui
 
 
 class sign_up_interface:
@@ -25,64 +25,49 @@ class sign_up_interface:
                 text="Username",
                 font=("Segoe UI", 13),
             ).place(x=60, y=115)
-            username_entry = customtkinter.CTkEntry(
-                self.frame__signup,
-                width=420,
-                height=40,
-                placeholder_text="username",
+            _, username_entry = ui.entry_field(
+                self.frame__signup, "username", 60, 140, width=420
             )
-            username_entry.place(x=60, y=140)
 
             customtkinter.CTkLabel(
                 self.frame__signup,
                 text="Full name",
                 font=("Segoe UI", 13),
             ).place(x=60, y=195)
-            full_name_entry = customtkinter.CTkEntry(
-                self.frame__signup,
-                width=420,
-                height=40,
-                placeholder_text="full name",
+            _, full_name_entry = ui.entry_field(
+                self.frame__signup, "full name", 60, 220, width=420
             )
-            full_name_entry.place(x=60, y=220)
 
             customtkinter.CTkLabel(
                 self.frame__signup,
                 text="Email (optional)",
                 font=("Segoe UI", 13),
             ).place(x=60, y=275)
-            email_entry = customtkinter.CTkEntry(
-                self.frame__signup,
-                width=420,
-                height=40,
-                placeholder_text="email",
+            _, email_entry = ui.entry_field(
+                self.frame__signup, "email", 60, 300, width=420
             )
-            email_entry.place(x=60, y=300)
 
-            password_entry = customtkinter.CTkEntry(
+            _, password_entry = ui.entry_field(
                 self.frame__signup,
+                "password",
+                560,
+                140,
                 width=420,
-                height=40,
-                placeholder_text="password",
                 show="•",
             )
-            password_entry.place(x=560, y=140)
+            ui.add_password_toggle(self.frame__signup, password_entry, 920, 149)
 
-            confirm_password_entry = customtkinter.CTkEntry(
+            _, confirm_password_entry = ui.entry_field(
                 self.frame__signup,
+                "confirm password",
+                560,
+                220,
                 width=420,
-                height=40,
-                placeholder_text="confirm password",
                 show="•",
             )
-            confirm_password_entry.place(x=560, y=220)
+            ui.add_password_toggle(self.frame__signup, confirm_password_entry, 920, 229)
 
-            status_label = customtkinter.CTkLabel(
-                self.frame__signup,
-                text="",
-                font=("Segoe UI", 13),
-            )
-            status_label.place(x=560, y=300)
+            status_label = ui.status_label(self.frame__signup, 560, 300)
 
             def create_account() -> None:
                 username = username_entry.get().strip()
@@ -92,27 +77,23 @@ class sign_up_interface:
                 confirm_password = confirm_password_entry.get()
 
                 if not username or not full_name:
-                    status_label.configure(
-                        text="Username and full name are required.",
-                        text_color="#FF0000",
+                    ui.set_status(
+                        status_label, "Username and full name are required.", "danger"
                     )
                     return
                 if len(password) < 8:
-                    status_label.configure(
-                        text="Password must be at least 8 characters long.",
-                        text_color="#FF0000",
+                    ui.set_status(
+                        status_label,
+                        "Password must be at least 8 characters long.",
+                        "danger",
                     )
                     return
                 if password != confirm_password:
-                    status_label.configure(
-                        text="Passwords do not match.",
-                        text_color="#FF0000",
-                    )
+                    ui.set_status(status_label, "Passwords do not match.", "danger")
                     return
                 if SERVER.management.user.create(username, password, full_name, email):
-                    status_label.configure(
-                        text="Account created. You can now sign in.",
-                        text_color="#22C55E",
+                    ui.set_status(
+                        status_label, "Account created. You can now sign in.", "success"
                     )
                     username_entry.delete(0, "end")
                     full_name_entry.delete(0, "end")
@@ -120,9 +101,8 @@ class sign_up_interface:
                     password_entry.delete(0, "end")
                     confirm_password_entry.delete(0, "end")
                 else:
-                    status_label.configure(
-                        text="Username or email already exists.",
-                        text_color="#FF0000",
+                    ui.set_status(
+                        status_label, "Username or email already exists.", "danger"
                     )
 
             customtkinter.CTkButton(
