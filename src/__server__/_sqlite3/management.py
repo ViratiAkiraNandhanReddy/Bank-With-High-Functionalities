@@ -1,4 +1,5 @@
 lazy from CaesarCipher import Encryption
+lazy from uuid import uuid4
 
 lazy from ..__base__ import (
     AdminManagementBase,
@@ -260,6 +261,33 @@ class UserManagement(UserManagementBase):
 
 
 class AdminManagement(AdminManagementBase):
+
+    @classmethod
+    def create(
+        cls,
+        username: str,
+        password: str,
+        email: str = "",
+    ) -> bool:
+
+        try:
+            cursor.execute(
+                """
+                INSERT INTO ADMINS (USERNAME, PASSWORD, EMAIL, BACKUP_CODE)
+                VALUES (?, ?, ?, ?)
+                """,
+                (
+                    username,
+                    Encryption(password, shift=53, alterNumbers=True).encrypt(),
+                    email or None,
+                    str(uuid4()),
+                ),
+            )
+            connection.commit()
+            return True
+        except Exception:
+            connection.rollback()
+            return False
 
     @classmethod
     def change_password(

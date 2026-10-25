@@ -68,6 +68,17 @@ class AdminManagementBase(ABC):
 
     @classmethod
     @abstractmethod
+    def create(
+        cls,
+        username: str,
+        password: str,
+        email: str = "",
+    ) -> bool:
+
+        pass
+
+    @classmethod
+    @abstractmethod
     def change_password(
         cls,
         username: str,
