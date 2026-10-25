@@ -37,6 +37,17 @@ class settings:
             height=390,
         )
 
+        ui.action_tile(
+            self.frame__settings,
+            "Administrator security",
+            "Use a unique password, avoid sharing access, and sign out when finished.",
+            455,
+            105,
+            accent="info",
+            width=390,
+            height=220,
+        )
+
         current_password = customtkinter.CTkEntry(
             self.frame__settings,
             width=360,

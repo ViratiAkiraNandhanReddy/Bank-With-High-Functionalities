@@ -23,6 +23,14 @@ class announcement:
             text_color="#218CFF",
         ).place(x=12, y=7)
 
+        customtkinter.CTkFrame(
+            self.frame__announcement,
+            width=4,
+            height=92,
+            fg_color="#218CFF",
+            corner_radius=2,
+        ).place(x=12, y=34)
+
         self.announcement_content: str = (
             SERVER.lookup.application.current_announcement()
         )
@@ -40,11 +48,11 @@ class announcement:
         self.label__announcement: customtkinter.CTkLabel = customtkinter.CTkLabel(
             self.frame__announcement,
             text=self.announcement_content,
-            width=550,
+            width=530,
             height=100,
-            wraplength=550,
+            wraplength=530,
             justify=justify,
             anchor=anchor,
             font=("Consolas", 13),
         )
-        self.label__announcement.place(x=10, y=31)
+        self.label__announcement.place(x=24, y=31)

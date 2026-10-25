@@ -19,12 +19,6 @@ class settings_overlay:
             font=("Segoe UI", 24, "bold"),
         ).place(x=40, y=35)
 
-        customtkinter.CTkLabel(
-            self.frame__settings,
-            text="Change password",
-            font=("Segoe UI", 17, "bold"),
-        ).place(x=40, y=95)
-
         ui.action_tile(
             self.frame__settings,
             "Change your password",
@@ -34,6 +28,17 @@ class settings_overlay:
             accent="warning",
             width=410,
             height=350,
+        )
+
+        ui.action_tile(
+            self.frame__settings,
+            "Password security",
+            "Choose a unique password with at least eight characters and keep it private.",
+            480,
+            115,
+            accent="info",
+            width=430,
+            height=220,
         )
 
         current_password = customtkinter.CTkEntry(

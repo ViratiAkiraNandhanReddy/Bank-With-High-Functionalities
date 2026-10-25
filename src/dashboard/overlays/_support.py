@@ -60,3 +60,15 @@ class support_overlay:
             width=300,
             height=140,
         )
+
+        ui.action_tile(
+            self.frame__support,
+            title="Project repository",
+            description="View releases, setup notes, and the latest project source.",
+            x=360,
+            y=350,
+            command=lambda: utils.browser.open_url(CONSTANTS["github"]["repository"]),
+            accent="info",
+            width=300,
+            height=140,
+        )
