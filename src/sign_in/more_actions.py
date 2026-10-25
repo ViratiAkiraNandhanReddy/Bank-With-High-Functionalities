@@ -2218,11 +2218,13 @@ backup recovery code linked to your account.""",
                 135,
                 (
                     lambda: (
-                        self.hide_frame(),
-                        on_signup(),
+                        (
+                            self.hide_frame(),
+                            on_signup(),
+                        )
+                        if on_signup is not None
+                        else None
                     )
-                    if on_signup is not None
-                    else None
                 ),
                 "#22C55E",
             )
@@ -2233,11 +2235,13 @@ backup recovery code linked to your account.""",
                 135,
                 (
                     lambda: (
-                        self.hide_frame(),
-                        on_reset_password(),
+                        (
+                            self.hide_frame(),
+                            on_reset_password(),
+                        )
+                        if on_reset_password is not None
+                        else None
                     )
-                    if on_reset_password is not None
-                    else None
                 ),
                 "#F59E0B",
             )
