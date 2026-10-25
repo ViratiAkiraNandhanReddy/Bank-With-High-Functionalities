@@ -294,6 +294,45 @@ class AdminLookup(AdminLookupBase):
 
         return cursor.fetchone() is not None
 
+    @classmethod
+    def users(cls) -> list[tuple[str, str, float, str]]:
+
+        cursor.execute("""
+            SELECT USERNAME, FULL_NAME, BALANCE, CREATED_AT
+            FROM USERS
+            ORDER BY CREATED_AT DESC
+            """)
+        return cursor.fetchall()
+
+    @classmethod
+    def administrators(cls) -> list[tuple[str, str, str]]:
+
+        cursor.execute("""
+            SELECT USERNAME, COALESCE(EMAIL, ''), CREATED_AT
+            FROM ADMINS
+            ORDER BY CREATED_AT DESC
+            """)
+        return cursor.fetchall()
+
+    @classmethod
+    def recent_security_events(
+        cls,
+        limit: int = 20,
+    ) -> list[tuple[str, str, str]]:
+
+        cursor.execute(
+            """
+            SELECT USERS.USERNAME, SECURITY_EVENTS.EVENT_TYPE,
+                   SECURITY_EVENTS.CREATED_AT
+            FROM SECURITY_EVENTS
+            LEFT JOIN USERS ON USERS.UUID = SECURITY_EVENTS.USER_UUID
+            ORDER BY SECURITY_EVENTS.CREATED_AT DESC
+            LIMIT ?
+            """,
+            (limit,),
+        )
+        return cursor.fetchall()
+
 
 class ApplicationLookup(ApplicationLookupBase):
 
