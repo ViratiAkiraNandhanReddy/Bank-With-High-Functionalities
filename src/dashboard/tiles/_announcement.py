@@ -10,6 +10,13 @@ class announcement:
         )
         self.frame__announcement.place(x=520, y=50)
 
+        customtkinter.CTkLabel(
+            self.frame__announcement,
+            text="Latest announcement",
+            font=("Segoe UI", 12, "bold"),
+            text_color="#218CFF",
+        ).place(x=12, y=7)
+
         self.announcement_content: str = (
             SERVER.lookup.application.current_announcement()
         )
@@ -28,10 +35,10 @@ class announcement:
             self.frame__announcement,
             text=self.announcement_content,
             width=550,
-            height=126,
+            height=100,
             wraplength=550,
             justify=justify,
             anchor=anchor,
             font=("Consolas", 13),
         )
-        self.label__announcement.place(x=10, y=7)
+        self.label__announcement.place(x=10, y=31)

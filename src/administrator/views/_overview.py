@@ -29,20 +29,23 @@ class overview:
         admins = SERVER.lookup.admin.administrators()
         total_balance = sum(user[2] for user in users)
 
+        recent_events = SERVER.lookup.admin.recent_security_events(100)
+
         cards = (
             ("Users", str(len(users)), "#218CFF"),
             ("Administrators", str(len(admins)), "#A855F7"),
             ("Total balance", f"$ {total_balance:,.2f}", "#22C55E"),
+            ("Security events", str(len(recent_events)), "#F59E0B"),
         )
 
         for index, (title, value, color) in enumerate(cards):
             card = customtkinter.CTkFrame(
                 self.frame__overview,
-                width=245,
+                width=180,
                 height=115,
                 fg_color="#111111",
             )
-            card.place(x=35 + index * 270, y=95)
+            card.place(x=35 + index * 200, y=95)
             customtkinter.CTkLabel(
                 card,
                 text=title,
@@ -62,6 +65,12 @@ class overview:
             font=("Segoe UI", 18, "bold"),
         ).place(x=35, y=245)
 
+        customtkinter.CTkLabel(
+            self.frame__overview,
+            text="Recent security activity",
+            font=("Segoe UI", 18, "bold"),
+        ).place(x=470, y=245)
+
         for row, user in enumerate(users[:6]):
             customtkinter.CTkLabel(
                 self.frame__overview,
@@ -70,3 +79,12 @@ class overview:
                 text_color="#D4D4D4",
                 anchor="w",
             ).place(x=40, y=285 + row * 38)
+
+        for row, event in enumerate(recent_events[:6]):
+            customtkinter.CTkLabel(
+                self.frame__overview,
+                text=f"{event[0]}  |  {event[1]}",
+                font=("Consolas", 11),
+                text_color="#D4D4D4",
+                anchor="w",
+            ).place(x=475, y=285 + row * 38)
