@@ -16,6 +16,38 @@ cursor = connection.cursor()
 class UserManagement(UserManagementBase):
 
     @classmethod
+    def create(
+        cls,
+        username: str,
+        password: str,
+        full_name: str,
+        email: str = "",
+    ) -> bool:
+
+        try:
+            cursor.execute(
+                """
+                INSERT INTO USERS (
+                    UUID, USERNAME, PASSWORD, EMAIL, BACKUP_CODE, FULL_NAME
+                )
+                VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    str(uuid4()),
+                    username,
+                    Encryption(password, shift=8, alterNumbers=True).encrypt(),
+                    email or None,
+                    str(uuid4()),
+                    full_name,
+                ),
+            )
+            connection.commit()
+            return True
+        except Exception:
+            connection.rollback()
+            return False
+
+    @classmethod
     def deposit(
         cls,
         username_or_uuid: str,

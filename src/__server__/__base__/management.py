@@ -5,6 +5,18 @@ class UserManagementBase(ABC):
 
     @classmethod
     @abstractmethod
+    def create(
+        cls,
+        username: str,
+        password: str,
+        full_name: str,
+        email: str = "",
+    ) -> bool:
+
+        pass
+
+    @classmethod
+    @abstractmethod
     def deposit(
         cls,
         username_or_uuid: str,
