@@ -1,4 +1,4 @@
-lazy from ... import SERVER, Callable, customtkinter
+lazy from ... import SERVER, Callable, customtkinter, ui
 
 
 class issues_and_broadcasts:
@@ -18,15 +18,16 @@ class issues_and_broadcasts:
             lambda: self.frame__issues_and_broadcasts.place_forget()
         )
 
-        customtkinter.CTkLabel(
+        ui.section_title(
             self.frame__issues_and_broadcasts,
-            text="Issues & broadcasts",
-            font=("Segoe UI", 24, "bold"),
-        ).place(x=35, y=30)
+            "Issues & broadcasts",
+            x=35,
+            y=30,
+        )
 
         customtkinter.CTkLabel(
             self.frame__issues_and_broadcasts,
-            text="Current announcement",
+            text="Publish a dashboard announcement",
             font=("Segoe UI", 16, "bold"),
         ).place(x=35, y=95)
 
@@ -40,6 +41,13 @@ class issues_and_broadcasts:
             "1.0", SERVER.lookup.application.current_announcement()
         )
         announcement_entry.place(x=35, y=130)
+
+        customtkinter.CTkLabel(
+            self.frame__issues_and_broadcasts,
+            text="This message is shown to users on their dashboard.",
+            font=("Segoe UI", 12),
+            text_color="#A3A3A3",
+        ).place(x=35, y=285)
 
         status_label = customtkinter.CTkLabel(
             self.frame__issues_and_broadcasts,

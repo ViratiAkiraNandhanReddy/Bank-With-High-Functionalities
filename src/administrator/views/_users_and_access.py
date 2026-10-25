@@ -1,4 +1,4 @@
-lazy from ... import SERVER, Callable, customtkinter
+lazy from ... import SERVER, Callable, customtkinter, ui
 lazy from ...ui import add_password_toggle
 
 
@@ -23,11 +23,16 @@ class users_and_access:
             ).place(x=40, y=40)
             return
 
-        customtkinter.CTkLabel(
+        ui.action_tile(
             self.frame__users_and_access,
-            text="Create administrator account",
-            font=("Segoe UI", 22, "bold"),
-        ).place(x=40, y=35)
+            "Create administrator",
+            "Only the root administrator can add new administrator accounts.",
+            25,
+            20,
+            accent="success",
+            width=390,
+            height=500,
+        )
 
         customtkinter.CTkLabel(
             self.frame__users_and_access,
@@ -148,19 +153,24 @@ class users_and_access:
             command=create_admin,
         ).place(x=40, y=470)
 
-        customtkinter.CTkLabel(
+        ui.action_tile(
             self.frame__users_and_access,
-            text="Registered administrators",
-            font=("Segoe UI", 18, "bold"),
-        ).place(x=450, y=35)
+            "Registered administrators",
+            "Review the administrator accounts currently allowed to access the console.",
+            435,
+            20,
+            accent="info",
+            width=400,
+            height=500,
+        )
 
         administrators_frame = customtkinter.CTkScrollableFrame(
             self.frame__users_and_access,
-            width=350,
-            height=430,
-            fg_color="#111111",
+            width=365,
+            height=370,
+            fg_color="transparent",
         )
-        administrators_frame.place(x=450, y=85)
+        administrators_frame.place(x=450, y=120)
 
         for row, (admin_username, email, created_at) in enumerate(
             SERVER.lookup.admin.administrators()

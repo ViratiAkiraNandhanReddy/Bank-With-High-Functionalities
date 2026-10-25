@@ -1,4 +1,4 @@
-lazy from ... import SERVER, Callable, customtkinter
+lazy from ... import SERVER, Callable, customtkinter, ui
 
 
 class overview:
@@ -19,11 +19,7 @@ class overview:
         for widget in self.frame__overview.winfo_children():
             widget.destroy()
 
-        customtkinter.CTkLabel(
-            self.frame__overview,
-            text="Administrator overview",
-            font=("Segoe UI", 24, "bold"),
-        ).place(x=35, y=30)
+        ui.section_title(self.frame__overview, "Administrator overview", x=35, y=30)
 
         users = SERVER.lookup.admin.users()
         admins = SERVER.lookup.admin.administrators()
@@ -39,52 +35,51 @@ class overview:
         )
 
         for index, (title, value, color) in enumerate(cards):
-            card = customtkinter.CTkFrame(
+            ui.metric_card(
                 self.frame__overview,
+                title,
+                value,
+                35 + index * 200,
+                95,
                 width=180,
-                height=115,
-                fg_color="#111111",
+                color=color,
             )
-            card.place(x=35 + index * 200, y=95)
-            customtkinter.CTkLabel(
-                card,
-                text=title,
-                font=("Segoe UI", 14),
-                text_color="#A3A3A3",
-            ).place(x=18, y=18)
-            customtkinter.CTkLabel(
-                card,
-                text=value,
-                font=("Consolas", 24, "bold"),
-                text_color=color,
-            ).place(x=18, y=52)
 
-        customtkinter.CTkLabel(
+        recent_users_card = ui.action_tile(
             self.frame__overview,
-            text="Recent users",
-            font=("Segoe UI", 18, "bold"),
-        ).place(x=35, y=245)
-
-        customtkinter.CTkLabel(
+            "Recent users",
+            "Newest accounts and current balances.",
+            35,
+            225,
+            width=390,
+            height=300,
+            accent="info",
+        )
+        recent_events_card = ui.action_tile(
             self.frame__overview,
-            text="Recent security activity",
-            font=("Segoe UI", 18, "bold"),
-        ).place(x=470, y=245)
+            "Recent security activity",
+            "Latest authentication and account events.",
+            445,
+            225,
+            width=390,
+            height=300,
+            accent="warning",
+        )
 
         for row, user in enumerate(users[:6]):
             customtkinter.CTkLabel(
-                self.frame__overview,
+                recent_users_card,
                 text=f"{user[0]}  |  {user[1]}  |  $ {user[2]:,.2f}",
                 font=("Consolas", 12),
                 text_color="#D4D4D4",
                 anchor="w",
-            ).place(x=40, y=285 + row * 38)
+            ).place(x=35, y=92 + row * 32)
 
         for row, event in enumerate(recent_events[:6]):
             customtkinter.CTkLabel(
-                self.frame__overview,
+                recent_events_card,
                 text=f"{event[0]}  |  {event[1]}",
                 font=("Consolas", 11),
                 text_color="#D4D4D4",
                 anchor="w",
-            ).place(x=475, y=285 + row * 38)
+            ).place(x=35, y=92 + row * 32)
