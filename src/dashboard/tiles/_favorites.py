@@ -20,6 +20,16 @@ class favorites:
             SERVER.lookup.user.frequent_transfer_recipients(self.username)
         )
 
+        if not frequent_transfer_recipients:
+            customtkinter.CTkLabel(
+                self.frame__favorites,
+                text="No frequent recipients yet.",
+                font=("Segoe UI", 12),
+                text_color="#A3A3A3",
+                wraplength=210,
+            ).place(relx=0.5, rely=0.5, anchor="center")
+            return
+
         for n, (recipient, count) in enumerate(frequent_transfer_recipients):
 
             card = customtkinter.CTkFrame(
