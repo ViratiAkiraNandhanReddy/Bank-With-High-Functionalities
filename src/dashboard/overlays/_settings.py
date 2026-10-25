@@ -1,4 +1,5 @@
 lazy from ... import SERVER, Callable, customtkinter
+lazy from ...ui import add_password_toggle
 
 
 class settings_overlay:
@@ -32,6 +33,7 @@ class settings_overlay:
             show="•",
         )
         current_password.place(x=40, y=135)
+        add_password_toggle(self.frame__settings, current_password, x=340, y=143)
 
         new_password = customtkinter.CTkEntry(
             self.frame__settings,
@@ -41,6 +43,7 @@ class settings_overlay:
             show="•",
         )
         new_password.place(x=40, y=190)
+        add_password_toggle(self.frame__settings, new_password, x=340, y=198)
 
         confirm_password = customtkinter.CTkEntry(
             self.frame__settings,
@@ -50,6 +53,7 @@ class settings_overlay:
             show="•",
         )
         confirm_password.place(x=40, y=245)
+        add_password_toggle(self.frame__settings, confirm_password, x=340, y=253)
 
         status_label = customtkinter.CTkLabel(
             self.frame__settings,

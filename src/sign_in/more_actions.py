@@ -7,6 +7,7 @@ lazy from .. import (
     threading,
     utils,
 )
+lazy from .. import ui
 lazy from ..administrator import administrator_interface
 
 
@@ -198,6 +199,16 @@ class more_actions_interface:
                 show="•",
             )
             self.__password.place(x=28, rely=0.5, anchor="w")
+            ui.add_password_toggle(
+                self.container_frame__password_admin_sign_in,
+                self.__password,
+                174,
+                8,
+            )
+            self.__password.bind(
+                "<Return>",
+                lambda _event: self.validate_administrator_password(),
+            )
 
             self.__password.bind(
                 "<FocusIn>",
@@ -579,8 +590,15 @@ resolving the problem."""
                     border_width=0,
                     fg_color="transparent",
                     font=("Roboto", 16),
+                    show="•",
                 )
                 __new_password.place(x=28, rely=0.5, anchor="w")
+                ui.add_password_toggle(
+                    container_frame__new_password,
+                    __new_password,
+                    200,
+                    8,
+                )
 
                 __new_password.bind(
                     "<FocusIn>",
@@ -643,8 +661,15 @@ resolving the problem."""
                     border_width=0,
                     fg_color="transparent",
                     font=("Roboto", 16),
+                    show="•",
                 )
                 __confirm_password.place(x=28, rely=0.5, anchor="w")
+                ui.add_password_toggle(
+                    container_frame__confirm_password,
+                    __confirm_password,
+                    200,
+                    8,
+                )
 
                 __confirm_password.bind(
                     "<FocusIn>",
