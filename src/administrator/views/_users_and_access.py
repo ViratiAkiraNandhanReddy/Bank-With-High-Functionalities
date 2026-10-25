@@ -139,3 +139,28 @@ class users_and_access:
             height=42,
             command=create_admin,
         ).place(x=40, y=470)
+
+        customtkinter.CTkLabel(
+            self.frame__users_and_access,
+            text="Registered administrators",
+            font=("Segoe UI", 18, "bold"),
+        ).place(x=450, y=35)
+
+        administrators_frame = customtkinter.CTkScrollableFrame(
+            self.frame__users_and_access,
+            width=350,
+            height=430,
+            fg_color="#111111",
+        )
+        administrators_frame.place(x=450, y=85)
+
+        for row, (admin_username, email, created_at) in enumerate(
+            SERVER.lookup.admin.administrators()
+        ):
+            customtkinter.CTkLabel(
+                administrators_frame,
+                text=f"{admin_username}\n{email or 'No email'}\n{created_at}",
+                font=("Consolas", 11),
+                justify="left",
+                anchor="w",
+            ).grid(row=row, column=0, padx=12, pady=10, sticky="w")
