@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* Complete JSON and MySQL database backends matching the SQLite authentication, lookup, schema, account-management, transaction, announcement, and security-event APIs.
+* Durable JSON database storage in `database/json/database.json`.
+
 ## [0.1.0-alpha.2] - 2026-08-12
 
 ### Added
