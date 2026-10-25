@@ -1,4 +1,4 @@
-lazy from ... import SERVER, Callable, customtkinter
+lazy from ... import SERVER, Callable, customtkinter, ui
 lazy from ...ui import add_password_toggle
 
 
@@ -26,6 +26,17 @@ class settings:
             text_color="#A3A3A3",
         ).place(x=35, y=80)
 
+        ui.action_tile(
+            self.frame__settings,
+            "Update administrator password",
+            "Use a strong password and keep your administrator account protected.",
+            20,
+            105,
+            accent="warning",
+            width=410,
+            height=390,
+        )
+
         current_password = customtkinter.CTkEntry(
             self.frame__settings,
             width=360,
@@ -33,8 +44,8 @@ class settings:
             placeholder_text="current password",
             show="•",
         )
-        current_password.place(x=35, y=135)
-        add_password_toggle(self.frame__settings, current_password, x=335, y=143)
+        current_password.place(x=35, y=180)
+        add_password_toggle(self.frame__settings, current_password, x=335, y=188)
 
         new_password = customtkinter.CTkEntry(
             self.frame__settings,
@@ -43,8 +54,8 @@ class settings:
             placeholder_text="new password",
             show="•",
         )
-        new_password.place(x=35, y=190)
-        add_password_toggle(self.frame__settings, new_password, x=335, y=198)
+        new_password.place(x=35, y=235)
+        add_password_toggle(self.frame__settings, new_password, x=335, y=243)
 
         confirm_password = customtkinter.CTkEntry(
             self.frame__settings,
@@ -53,15 +64,15 @@ class settings:
             placeholder_text="confirm new password",
             show="•",
         )
-        confirm_password.place(x=35, y=245)
-        add_password_toggle(self.frame__settings, confirm_password, x=335, y=253)
+        confirm_password.place(x=35, y=290)
+        add_password_toggle(self.frame__settings, confirm_password, x=335, y=298)
 
         status_label = customtkinter.CTkLabel(
             self.frame__settings,
             text="",
             font=("Segoe UI", 13),
         )
-        status_label.place(x=35, y=305)
+        status_label.place(x=35, y=350)
 
         def update_password() -> None:
             current = current_password.get()
@@ -105,4 +116,4 @@ class settings:
             width=360,
             height=42,
             command=update_password,
-        ).place(x=35, y=350)
+        ).place(x=35, y=395)

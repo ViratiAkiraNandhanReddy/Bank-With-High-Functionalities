@@ -1,4 +1,4 @@
-lazy from ... import SERVER, Callable, customtkinter
+lazy from ... import SERVER, Callable, customtkinter, ui
 lazy from ...ui import add_password_toggle
 
 
@@ -23,11 +23,16 @@ class users_and_access:
             ).place(x=40, y=40)
             return
 
-        customtkinter.CTkLabel(
+        ui.action_tile(
             self.frame__users_and_access,
-            text="Create administrator account",
-            font=("Segoe UI", 22, "bold"),
-        ).place(x=40, y=35)
+            "Create administrator",
+            "Only the root administrator can add new administrator accounts.",
+            25,
+            20,
+            accent="success",
+            width=390,
+            height=500,
+        )
 
         customtkinter.CTkLabel(
             self.frame__users_and_access,

@@ -1,4 +1,4 @@
-lazy from ... import Callable, CONSTANTS, customtkinter, utils
+lazy from ... import Callable, CONSTANTS, customtkinter, ui, utils
 
 
 class support_overlay:
@@ -12,11 +12,7 @@ class support_overlay:
         self.show_frame: Callable = lambda: self.frame__support.place(x=10, y=50)
         self.hide_frame: Callable = lambda: self.frame__support.place_forget()
 
-        customtkinter.CTkLabel(
-            self.frame__support,
-            text="Support",
-            font=("Segoe UI", 24, "bold"),
-        ).place(x=40, y=35)
+        ui.section_title(self.frame__support, "Support", x=40, y=35)
 
         customtkinter.CTkLabel(
             self.frame__support,
@@ -29,26 +25,38 @@ class support_overlay:
             anchor="w",
         ).place(x=40, y=100)
 
-        customtkinter.CTkButton(
+        ui.action_tile(
             self.frame__support,
-            text="Open documentation",
-            width=260,
-            height=42,
+            title="Documentation",
+            description="Learn the main flows and find guidance for common account tasks.",
+            x=40,
+            y=190,
             command=lambda: utils.browser.open_url(CONSTANTS["website"]["home"]),
-        ).place(x=40, y=210)
+            accent="info",
+            width=300,
+            height=140,
+        )
 
-        customtkinter.CTkButton(
+        ui.action_tile(
             self.frame__support,
-            text="Report an issue",
-            width=260,
-            height=42,
+            title="Report an issue",
+            description="Tell us what went wrong so the problem can be investigated.",
+            x=360,
+            y=190,
             command=lambda: utils.browser.open_url(CONSTANTS["github"]["issues"]),
-        ).place(x=40, y=265)
+            accent="danger",
+            width=300,
+            height=140,
+        )
 
-        customtkinter.CTkButton(
+        ui.action_tile(
             self.frame__support,
-            text="Open discussions",
-            width=260,
-            height=42,
+            title="Community discussions",
+            description="Ask questions, share feedback, and connect with the project community.",
+            x=40,
+            y=350,
             command=lambda: utils.browser.open_url(CONSTANTS["github"]["discussions"]),
-        ).place(x=40, y=320)
+            accent="success",
+            width=300,
+            height=140,
+        )

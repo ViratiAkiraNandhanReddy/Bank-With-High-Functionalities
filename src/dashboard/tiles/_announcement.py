@@ -1,4 +1,4 @@
-lazy from ... import SERVER, customtkinter
+lazy from ... import SERVER, customtkinter, ui
 
 
 class announcement:
@@ -6,7 +6,13 @@ class announcement:
     def __init__(self, parent_frame: customtkinter.CTkFrame) -> None:
 
         self.frame__announcement: customtkinter.CTkFrame = customtkinter.CTkFrame(
-            parent_frame, width=570, height=140, fg_color="#0a0a0a"
+            parent_frame,
+            width=570,
+            height=140,
+            fg_color=ui.COLORS["card"],
+            border_width=1,
+            border_color="#252525",
+            corner_radius=8,
         )
         self.frame__announcement.place(x=520, y=50)
 
