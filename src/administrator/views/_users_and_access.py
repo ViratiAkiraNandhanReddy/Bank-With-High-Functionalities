@@ -1,4 +1,5 @@
 lazy from ... import SERVER, Callable, customtkinter
+lazy from ...ui import add_password_toggle
 
 
 class users_and_access:
@@ -54,6 +55,7 @@ class users_and_access:
             show="•",
         )
         password_entry.place(x=40, y=210)
+        add_password_toggle(self.frame__users_and_access, password_entry, x=340, y=217)
 
         customtkinter.CTkLabel(
             self.frame__users_and_access,
@@ -68,6 +70,12 @@ class users_and_access:
             show="•",
         )
         confirm_password_entry.place(x=40, y=290)
+        add_password_toggle(
+            self.frame__users_and_access,
+            confirm_password_entry,
+            x=340,
+            y=297,
+        )
 
         customtkinter.CTkLabel(
             self.frame__users_and_access,
