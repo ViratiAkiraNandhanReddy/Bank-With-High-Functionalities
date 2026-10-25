@@ -10,6 +10,7 @@ lazy from .. import (
     title_bar,
     utils,
 )
+lazy from .. import ui
 lazy from ..dashboard import dashboard_interface
 lazy from ..sign_up import sign_up_interface
 lazy from .more_actions import more_actions_interface
@@ -325,6 +326,16 @@ class sign_in_interface:
                 show="•",
             )
             self.__password.place(x=28, rely=0.5, anchor="w")
+            ui.add_password_toggle(
+                self.container_frame__password_sign_in,
+                self.__password,
+                264,
+                8,
+            )
+            self.__password.bind(
+                "<Return>",
+                lambda _event: self.validate_and_redirect_to_dashboard(),
+            )
 
             self.__password.bind(
                 "<FocusIn>",
@@ -1076,8 +1087,15 @@ resolving the problem."""
                     border_width=0,
                     fg_color="transparent",
                     font=("Roboto", 16),
+                    show="•",
                 )
                 __new_password.place(x=28, rely=0.5, anchor="w")
+                ui.add_password_toggle(
+                    container_frame__new_password,
+                    __new_password,
+                    290,
+                    8,
+                )
 
                 __new_password.bind(
                     "<FocusIn>",
@@ -1140,8 +1158,15 @@ resolving the problem."""
                     border_width=0,
                     fg_color="transparent",
                     font=("Roboto", 16),
+                    show="•",
                 )
                 __confirm_password.place(x=28, rely=0.5, anchor="w")
+                ui.add_password_toggle(
+                    container_frame__confirm_password,
+                    __confirm_password,
+                    290,
+                    8,
+                )
 
                 __confirm_password.bind(
                     "<FocusIn>",
