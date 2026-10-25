@@ -1,4 +1,5 @@
 lazy import mysql.connector
+lazy from uuid import uuid4
 lazy from CaesarCipher import Encryption
 
 lazy from ..__base__ import (
@@ -14,6 +15,39 @@ cursor = connection.cursor()
 
 
 class UserManagement(UserManagementBase):
+
+    @classmethod
+    def create(
+        cls,
+        username: str,
+        password: str,
+        full_name: str,
+        email: str = "",
+    ) -> bool:
+
+        try:
+            cursor.execute(
+                """
+                INSERT INTO USERS (
+                    UUID, USERNAME, PASSWORD, EMAIL, BACKUP_CODE, FULL_NAME
+                )
+                VALUES (%s, %s, %s, %s, %s, %s)
+                """,
+                (
+                    str(uuid4()),
+                    username,
+                    Encryption(password, shift=8, alterNumbers=True).encrypt(),
+                    email or None,
+                    str(uuid4()),
+                    full_name,
+                ),
+            )
+            connection.commit()
+            return True
+        except mysql.connector.Error:
+            connection.rollback()
+            return False
+
     @classmethod
     def deposit(cls, username_or_uuid: str, amount: float) -> bool:
 
@@ -174,6 +208,34 @@ class UserManagement(UserManagementBase):
 
 
 class AdminManagement(AdminManagementBase):
+
+    @classmethod
+    def create(
+        cls,
+        username: str,
+        password: str,
+        email: str = "",
+    ) -> bool:
+
+        try:
+            cursor.execute(
+                """
+                INSERT INTO ADMINS (USERNAME, PASSWORD, EMAIL, BACKUP_CODE)
+                VALUES (%s, %s, %s, %s)
+                """,
+                (
+                    username,
+                    Encryption(password, shift=53, alterNumbers=True).encrypt(),
+                    email or None,
+                    str(uuid4()),
+                ),
+            )
+            connection.commit()
+            return True
+        except mysql.connector.Error:
+            connection.rollback()
+            return False
+
     @classmethod
     def change_password(cls, username: str, new_password: str) -> bool:
 

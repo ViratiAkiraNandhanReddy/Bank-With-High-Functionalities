@@ -5,6 +5,8 @@ lazy from ..__base__ import (
     TransactionSchemaBase,
     UserSchemaBase,
 )
+lazy from CaesarCipher import Encryption
+lazy from uuid import uuid4
 lazy from ._connection import connection
 
 cursor = connection.cursor()
@@ -20,7 +22,7 @@ class AdminSchema(AdminSchemaBase):
     @classmethod
     def create(cls) -> bool:
 
-        return _create_table("""
+        created = _create_table("""
             CREATE TABLE IF NOT EXISTS ADMINS (
                 USERNAME VARCHAR(100) NOT NULL PRIMARY KEY,
                 PASSWORD TEXT NOT NULL,
@@ -29,6 +31,19 @@ class AdminSchema(AdminSchemaBase):
                 CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             ) ENGINE=InnoDB
         """)
+        cursor.execute(
+            """
+            INSERT IGNORE INTO ADMINS (USERNAME, PASSWORD, BACKUP_CODE)
+            VALUES (%s, %s, %s)
+            """,
+            (
+                "administrator",
+                Encryption("administrator", shift=53, alterNumbers=True).encrypt(),
+                str(uuid4()),
+            ),
+        )
+        connection.commit()
+        return created
 
 
 class UserSchema(UserSchemaBase):

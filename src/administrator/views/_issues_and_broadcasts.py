@@ -1,4 +1,4 @@
-lazy from .. import Callable, customtkinter
+lazy from ... import SERVER, Callable, customtkinter
 
 
 class issues_and_broadcasts:
@@ -17,3 +17,60 @@ class issues_and_broadcasts:
         self.hide_frame: Callable = (
             lambda: self.frame__issues_and_broadcasts.place_forget()
         )
+
+        customtkinter.CTkLabel(
+            self.frame__issues_and_broadcasts,
+            text="Issues & broadcasts",
+            font=("Segoe UI", 24, "bold"),
+        ).place(x=35, y=30)
+
+        customtkinter.CTkLabel(
+            self.frame__issues_and_broadcasts,
+            text="Current announcement",
+            font=("Segoe UI", 16, "bold"),
+        ).place(x=35, y=95)
+
+        announcement_entry = customtkinter.CTkTextbox(
+            self.frame__issues_and_broadcasts,
+            width=760,
+            height=145,
+            font=("Segoe UI", 14),
+        )
+        announcement_entry.insert(
+            "1.0", SERVER.lookup.application.current_announcement()
+        )
+        announcement_entry.place(x=35, y=130)
+
+        status_label = customtkinter.CTkLabel(
+            self.frame__issues_and_broadcasts,
+            text="",
+            font=("Segoe UI", 13),
+        )
+        status_label.place(x=35, y=340)
+
+        def update_announcement() -> None:
+            content = announcement_entry.get("1.0", "end").strip()
+            if not content:
+                status_label.configure(
+                    text="Announcement cannot be empty.",
+                    text_color="#FF0000",
+                )
+                return
+            if SERVER.management.application.update_announcement(content):
+                status_label.configure(
+                    text="Announcement updated.",
+                    text_color="#22C55E",
+                )
+            else:
+                status_label.configure(
+                    text="Announcement update failed.",
+                    text_color="#FF0000",
+                )
+
+        customtkinter.CTkButton(
+            self.frame__issues_and_broadcasts,
+            text="Publish announcement",
+            width=240,
+            height=42,
+            command=update_announcement,
+        ).place(x=35, y=375)

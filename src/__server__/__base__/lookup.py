@@ -107,6 +107,31 @@ class AdminLookupBase(ABC):
 
         pass
 
+    @classmethod
+    @abstractmethod
+    def users(
+        cls,
+    ) -> list[tuple[str, str, float, str]]:
+
+        pass
+
+    @classmethod
+    @abstractmethod
+    def administrators(
+        cls,
+    ) -> list[tuple[str, str, str]]:
+
+        pass
+
+    @classmethod
+    @abstractmethod
+    def recent_security_events(
+        cls,
+        limit: int = 20,
+    ) -> list[tuple[str, str, str]]:
+
+        pass
+
 
 class ApplicationLookupBase(ABC):
 

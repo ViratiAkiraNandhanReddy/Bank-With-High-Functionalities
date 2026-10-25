@@ -5,6 +5,8 @@ lazy from ..__base__ import (
     TransactionSchemaBase,
     UserSchemaBase,
 )
+lazy from CaesarCipher import Encryption
+lazy from uuid import uuid4
 lazy from ._connection import connection
 
 cursor = connection.cursor()
@@ -33,6 +35,21 @@ class AdminSchema(AdminSchemaBase):
 
                 """)
 
+            connection.commit()
+
+            cursor.execute(
+                """
+                INSERT OR IGNORE INTO ADMINS (
+                    USERNAME, PASSWORD, BACKUP_CODE
+                )
+                VALUES (?, ?, ?)
+                """,
+                (
+                    "administrator",
+                    Encryption("administrator", shift=53, alterNumbers=True).encrypt(),
+                    str(uuid4()),
+                ),
+            )
             connection.commit()
 
             return True

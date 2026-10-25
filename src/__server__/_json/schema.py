@@ -1,4 +1,6 @@
 lazy from datetime import datetime
+lazy from CaesarCipher import Encryption
+lazy from uuid import uuid4
 
 lazy from ..__base__ import (
     AdminSchemaBase,
@@ -15,6 +17,19 @@ class AdminSchema(AdminSchemaBase):
     def create(cls) -> bool:
 
         ensure_table("ADMINS")
+        if not any(row.get("USERNAME") == "administrator" for row in DATA["ADMINS"]):
+            DATA["ADMINS"].append(
+                {
+                    "USERNAME": "administrator",
+                    "PASSWORD": Encryption(
+                        "administrator", shift=53, alterNumbers=True
+                    ).encrypt(),
+                    "EMAIL": None,
+                    "BACKUP_CODE": str(uuid4()),
+                    "CREATED_AT": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                }
+            )
+            save()
         return True
 
 

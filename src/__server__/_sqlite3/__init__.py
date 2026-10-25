@@ -54,4 +54,10 @@ class SERVER:
     schema: type[Schema] = Schema
 
 
+Schema.admin.create()
+Schema.user.create()
+Schema.transaction.create()
+Schema.announcement.create()
+Schema.security_event.create()
+
 __all__ = ["SERVER"]

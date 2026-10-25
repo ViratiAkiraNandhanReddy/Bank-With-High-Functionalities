@@ -1,4 +1,5 @@
 lazy from datetime import datetime
+lazy from uuid import uuid4
 
 lazy from CaesarCipher import Encryption
 
@@ -29,6 +30,37 @@ def _next_id(table_name: str, id_column: str) -> int:
 
 
 class UserManagement(UserManagementBase):
+
+    @classmethod
+    def create(
+        cls,
+        username: str,
+        password: str,
+        full_name: str,
+        email: str = "",
+    ) -> bool:
+
+        if any(row.get("USERNAME") == username for row in DATA.get("USERS", [])):
+            return False
+        if email and any(row.get("EMAIL") == email for row in DATA.get("USERS", [])):
+            return False
+
+        DATA.setdefault("USERS", []).append(
+            {
+                "UUID": str(uuid4()),
+                "USERNAME": username,
+                "PASSWORD": Encryption(password, shift=8, alterNumbers=True).encrypt(),
+                "EMAIL": email or None,
+                "BACKUP_CODE": str(uuid4()),
+                "LAST_LOGIN": None,
+                "FULL_NAME": full_name,
+                "BALANCE": 0.0,
+                "CREATED_AT": _timestamp(),
+            }
+        )
+        save()
+        return True
+
     @classmethod
     def deposit(cls, username_or_uuid: str, amount: float) -> bool:
 
@@ -151,6 +183,30 @@ class UserManagement(UserManagementBase):
 
 
 class AdminManagement(AdminManagementBase):
+
+    @classmethod
+    def create(
+        cls,
+        username: str,
+        password: str,
+        email: str = "",
+    ) -> bool:
+
+        if any(row.get("USERNAME") == username for row in DATA.get("ADMINS", [])):
+            return False
+
+        DATA.setdefault("ADMINS", []).append(
+            {
+                "USERNAME": username,
+                "PASSWORD": Encryption(password, shift=53, alterNumbers=True).encrypt(),
+                "EMAIL": email or None,
+                "BACKUP_CODE": str(uuid4()),
+                "CREATED_AT": _timestamp(),
+            }
+        )
+        save()
+        return True
+
     @classmethod
     def change_password(cls, username: str, new_password: str) -> bool:
 

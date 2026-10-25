@@ -136,6 +136,52 @@ class AdminLookup(AdminLookupBase):
 
         return any(row.get("USERNAME") == username for row in DATA.get("ADMINS", []))
 
+    @classmethod
+    def users(cls) -> list[tuple[str, str, float, str]]:
+
+        return [
+            (
+                str(row.get("USERNAME", "")),
+                str(row.get("FULL_NAME", "")),
+                float(row.get("BALANCE", 0.0)),
+                str(row.get("CREATED_AT", "")),
+            )
+            for row in DATA.get("USERS", [])
+        ]
+
+    @classmethod
+    def administrators(cls) -> list[tuple[str, str, str]]:
+
+        return [
+            (
+                str(row.get("USERNAME", "")),
+                str(row.get("EMAIL") or ""),
+                str(row.get("CREATED_AT", "")),
+            )
+            for row in DATA.get("ADMINS", [])
+        ]
+
+    @classmethod
+    def recent_security_events(
+        cls,
+        limit: int = 20,
+    ) -> list[tuple[str, str, str]]:
+
+        usernames = {
+            str(row.get("UUID", "")): str(row.get("USERNAME", ""))
+            for row in DATA.get("USERS", [])
+        }
+        events = [
+            (
+                usernames.get(str(row.get("USER_UUID", "")), "unknown"),
+                str(row.get("EVENT_TYPE", "")),
+                str(row.get("CREATED_AT", "")),
+            )
+            for row in DATA.get("SECURITY_EVENTS", [])
+        ]
+        events.sort(key=lambda event: event[2], reverse=True)
+        return events[:limit]
+
 
 class ApplicationLookup(ApplicationLookupBase):
     @classmethod
