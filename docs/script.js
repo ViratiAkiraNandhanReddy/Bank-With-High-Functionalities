@@ -26,6 +26,27 @@ document.querySelectorAll(".site-nav a").forEach((link) => {
   });
 });
 
+const currentPath = window.location.pathname.replace(/\/index\.html$/, "/");
+document.querySelectorAll(".site-nav a").forEach((link) => {
+  const href = link.getAttribute("href");
+  if (!href || href.startsWith("http") || href.startsWith("#")) return;
+  const target = new URL(href, window.location.href).pathname.replace(/\/index\.html$/, "/");
+  link.classList.toggle("current", target === currentPath);
+});
+
+document.querySelectorAll("a[href]").forEach((link) => {
+  const href = link.getAttribute("href");
+  if (!href || href.startsWith("#") || href.startsWith("http") || href.startsWith("mailto:")) return;
+  link.addEventListener("click", (event) => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    document.body.classList.add("is-leaving");
+    window.setTimeout(() => {
+      window.location.href = href;
+    }, 190);
+  });
+});
+
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -143,6 +164,19 @@ if (featureFilters.length && featureCards.length) {
     });
   });
 }
+
+document.querySelectorAll(".hero-card, .feature-card, .detail-card").forEach((card) => {
+  card.addEventListener("pointermove", (event) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const bounds = card.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+    card.style.transform = `perspective(700px) rotateX(${y * -3}deg) rotateY(${x * 3}deg) translateY(-4px)`;
+  });
+  card.addEventListener("pointerleave", () => {
+    card.style.transform = "";
+  });
+});
 
 const footer = document.querySelector(".site-footer");
 if (footer) {
