@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Bank With High Functionalities - a modular Windows banking simulation built with Python and CustomTkinter."
+    />
+    <title>Bank With High Functionalities</title>
+    <link rel="icon" href="../assets/brand/logo/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-noise" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Bank With High Functionalities home">
+        <img src="../assets/brand/logo/logo-circle.png" alt="" />
+        <span>Bank<span class="brand-dot">.</span>HF</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="features/">Capabilities</a>
+        <a href="architecture/">Architecture</a>
+        <a href="getting-started/">Get started</a>
+        <a class="nav-cta" href="faqs/">FAQ <span>↗</span></a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero section-shell">
+        <div class="hero-copy reveal">
+          <div class="eyebrow"><span class="pulse-dot"></span> A desktop banking simulation</div>
+          <h1>Build the bank<br /><em>you can understand.</em></h1>
+          <p class="hero-text">
+            A thoughtful, modular Windows experience for exploring authentication, accounts,
+            transactions, and persistence without the complexity of a real financial system.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#preview">Explore the experience <span>↓</span></a>
+            <a class="text-link" href="https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities" target="_blank" rel="noreferrer">Read the source <span>↗</span></a>
+          </div>
+          <div class="hero-meta">
+            <span><strong>Python 3.15</strong><small>Core runtime</small></span>
+            <span><strong>Windows</strong><small>Desktop-first</small></span>
+            <span><strong>MIT</strong><small>Open source</small></span>
+          </div>
+        </div>
+        <div class="hero-visual reveal reveal-delay">
+          <div class="orb orb-one"></div>
+          <div class="orb orb-two"></div>
+          <div class="hero-card">
+            <div class="hero-card-top"><span class="mini-label">TODAY / 09:41 AM</span><span class="status-chip">● SYSTEM ONLINE</span></div>
+            <div class="hero-card-title">Your money,<br /><span>mapped clearly.</span></div>
+            <div class="hero-chart" aria-hidden="true">
+              <div class="chart-grid"></div>
+              <svg viewBox="0 0 360 130" preserveAspectRatio="none">
+                <defs><linearGradient id="chartFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#b9f36b" stop-opacity=".35" /><stop offset="1" stop-color="#b9f36b" stop-opacity="0" /></linearGradient></defs>
+                <path class="chart-area" d="M0 104 C28 91 40 95 59 83 S94 66 114 76 S146 91 166 57 S200 45 221 55 S250 41 273 48 S307 13 330 30 S349 17 360 8 L360 130 L0 130 Z" />
+                <path class="chart-line" d="M0 104 C28 91 40 95 59 83 S94 66 114 76 S146 91 166 57 S200 45 221 55 S250 41 273 48 S307 13 330 30 S349 17 360 8" />
+              </svg>
+            </div>
+            <div class="hero-card-footer"><span>Balance trend</span><strong>+18.4%</strong></div>
+          </div>
+          <div class="floating-note note-top"><span class="note-icon">↗</span><span><b>Transaction approved</b><small>Just now · Transfer</small></span></div>
+          <div class="floating-note note-bottom"><span class="note-avatar">AK</span><span><b>Alex Kim</b><small>Frequently used</small></span><strong>→</strong></div>
+        </div>
+      </section>
+
+      <section class="logo-strip section-shell reveal" aria-label="Project technologies">
+        <span>BUILT WITH</span><b>Python</b><b>CustomTkinter</b><b>SQLite</b><b>JSON</b><b>MySQL</b>
+      </section>
+
+      <section class="preview-section section-shell" id="preview">
+        <div class="section-heading reveal">
+          <div><span class="eyebrow">01 / THE EXPERIENCE</span><h2>A calm command center<br /><em>for complex things.</em></h2></div>
+          <p>Every screen is designed to make the underlying system easier to see, test, and learn from.</p>
+        </div>
+        <div class="dashboard-window reveal">
+          <div class="window-bar"><div class="window-dots"><i></i><i></i><i></i></div><span>bank_hf / dashboard</span><span class="window-user">AK <b>Alex Kim</b></span></div>
+          <div class="dashboard-body">
+            <aside class="dashboard-side">
+              <div class="side-logo"><img src="../assets/brand/logo/logo-circle.png" alt="" /> <span>bank<span>.</span>hf</span></div>
+              <div class="side-section">WORKSPACE</div>
+              <button class="dash-tab active" data-tab="overview"><span>◈</span> Overview</button>
+              <button class="dash-tab" data-tab="transactions"><span>↕</span> Transactions</button>
+              <button class="dash-tab" data-tab="security"><span>◇</span> Security</button>
+              <div class="side-section side-section-spaced">PERSONAL</div>
+              <button class="dash-tab" data-tab="settings"><span>⚙</span> Settings</button>
+              <div class="side-bottom"><span class="secure-mark">✓</span><b>Simulation mode</b><small>No real money involved</small></div>
+            </aside>
+            <div class="dashboard-main">
+              <div class="dash-heading"><div><span class="mini-label">TUESDAY, OCTOBER 27</span><h3 class="tab-title">Good morning, Alex <span>✦</span></h3></div><button class="icon-button" aria-label="Notifications">♢<i></i></button></div>
+              <div class="dash-content" data-content="overview">
+                <div class="balance-row">
+                  <div class="balance-card"><div class="mini-label">TOTAL BALANCE <span class="visibility">◉</span></div><strong>$24,860<span>.42</span></strong><div class="positive">↗ 12.8% <small>vs. last month</small></div></div>
+                  <div class="quick-actions"><div class="mini-label">QUICK ACTIONS</div><div><button><span>+</span> Deposit</button><button><span>↗</span> Transfer</button><button><span>−</span> Withdraw</button></div></div>
+                </div>
+                <div class="activity-grid"><div class="activity-card"><div class="card-heading"><span>ACTIVITY</span><a href="#preview">View all ↗</a></div><div class="activity-chart"><div class="chart-bars"><i style="height:34%"></i><i style="height:48%"></i><i style="height:42%"></i><i style="height:68%"></i><i style="height:55%"></i><i class="current" style="height:84%"></i><i style="height:63%"></i></div><div class="chart-labels"><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span><span>MON</span><span>TUE</span></div></div></div><div class="activity-card recent-card"><div class="card-heading"><span>RECENT TRANSACTIONS</span><a href="#preview">View all ↗</a></div><div class="transaction"><span class="transaction-icon purple">↗</span><div><b>Transfer to Jamie</b><small>Today, 08:32 AM</small></div><strong>− $240.00</strong></div><div class="transaction"><span class="transaction-icon green">+</span><div><b>Deposit</b><small>Yesterday, 02:15 PM</small></div><strong class="credit">+ $1,200.00</strong></div></div></div>
+              </div>
+              <div class="dash-content hidden" data-content="transactions"><div class="empty-tab"><span>↕</span><h3>Every movement, accounted for.</h3><p>Track deposits, withdrawals, and transfers in one clear timeline.</p></div></div>
+              <div class="dash-content hidden" data-content="security"><div class="empty-tab"><span>◇</span><h3>Security you can inspect.</h3><p>Login events, recovery activity, and account protection stay visible.</p></div></div>
+              <div class="dash-content hidden" data-content="settings"><div class="empty-tab"><span>⚙</span><h3>Your workspace, your rules.</h3><p>Configure the experience and connect the persistence layer that fits.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="features-section section-shell" id="features">
+        <div class="section-heading reveal"><div><span class="eyebrow">02 / CAPABILITIES</span><h2>More than a UI.<br /><em>A system to explore.</em></h2></div><p>From the first sign-in to the last security event, the experience gives every part of the application a place to make sense.</p></div>
+        <div class="feature-grid">
+          <article class="feature-card feature-large reveal"><div class="feature-number">01</div><div class="feature-icon">◒</div><h3>Account flows<br />that feel human.</h3><p>Sign-in, sign-up, recovery, email verification, and backup-code support in a considered flow.</p><a href="#architecture">Explore authentication <span>↗</span></a><div class="feature-orbit"></div></article>
+          <article class="feature-card reveal"><div class="feature-number">02</div><div class="feature-icon">↗</div><h3>Transactions<br />without the noise.</h3><p>Deposits, withdrawals, transfers, and history with clear feedback at every step.</p><a href="#preview">See the dashboard <span>↗</span></a></article>
+          <article class="feature-card feature-dark reveal"><div class="feature-number">03</div><div class="feature-icon">◇</div><h3>Security as<br />a first-class citizen.</h3><p>Surface activity, protect access, and make every important event observable.</p><a href="#architecture">See how it works <span>↗</span></a></article>
+        </div>
+      </section>
+
+      <section class="architecture-section section-shell" id="architecture">
+        <div class="architecture-copy reveal"><span class="eyebrow">03 / UNDER THE HOOD</span><h2>One interface.<br /><em>Three ways to persist.</em></h2><p>The public UI speaks to a shared server abstraction, so the experience stays consistent while the storage layer remains flexible.</p><a class="button button-dark" href="https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/blob/main/ARCHITECTURE.md" target="_blank" rel="noreferrer">Read architecture <span>↗</span></a></div>
+        <div class="architecture-diagram reveal"><div class="diagram-node diagram-ui"><span>UI</span><b>CustomTkinter</b><small>Human-facing layer</small></div><div class="diagram-line line-one"></div><div class="diagram-node diagram-server"><span>SERVER</span><b>Shared contracts</b><small>One public shape</small></div><div class="diagram-line line-two"></div><div class="diagram-stores"><div><span>JSON</span><small>Simple local</small></div><div><span>SQLite</span><small>Default desktop</small></div><div><span>MySQL</span><small>Shared backend</small></div></div></div>
+      </section>
+
+      <section class="story-section section-shell" id="story">
+        <div class="story-quote reveal"><span class="quote-mark">“</span><blockquote>Good software does not hide complexity.<br /><em>It gives complexity a home.</em></blockquote><div class="quote-author"><span class="author-line"></span><span>Bank With High Functionalities<br /><small>An open-source learning project</small></span></div></div>
+        <div class="story-side reveal"><div class="eyebrow">WHY THIS EXISTS</div><p>Banking is a familiar idea with surprisingly rich systems behind it. This project makes those systems tangible: authentication, persistence, transactions, and administration, all in one approachable desktop experience.</p><a class="text-link" href="https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities" target="_blank" rel="noreferrer">Meet the project on GitHub <span>↗</span></a></div>
+      </section>
+
+      <section class="cta-section section-shell reveal"><div class="cta-glow"></div><div class="eyebrow">READY WHEN YOU ARE</div><h2>Open the door<br /><em>to better systems.</em></h2><div class="hero-actions"><a class="button button-primary" href="https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities" target="_blank" rel="noreferrer">Explore the repository <span>↗</span></a><a class="text-link light-link" href="#top">Back to top <span>↑</span></a></div></section>
+    </main>
+    <footer class="site-footer section-shell"><a class="brand" href="#top"><img src="../assets/brand/logo/logo-circle.png" alt="" /><span>Bank<span class="brand-dot">.</span>HF</span></a><span>Designed for learning. Built for Windows. <b>Simulation only.</b></span><span>© 2026 Bank With High Functionalities</span></footer>
+    <script src="script.js"></script>
+  </body>
+</html>
