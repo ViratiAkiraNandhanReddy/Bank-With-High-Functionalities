@@ -234,6 +234,11 @@ The default preview contains three showcase accounts plus 24 additional
 `preview01` through `preview24` accounts, 120 additional transactions, and 72
 additional security events.
 
+The resulting local preview contains 35 users, 177 transactions, 180 security
+events, and the default administrator account. The seed script uses
+deterministic identifiers and encrypted demo credentials so
+the same preview can be inspected consistently across local runs.
+
 Demo sign-in credentials:
 
 | Username | Password |
@@ -247,6 +252,27 @@ The larger dataset uses `preview01` through `preview24`, all with the password
 
 These accounts and all associated activity are for local preview only. They
 must not be treated as real accounts or real financial data.
+
+To inspect the seeded records without opening the desktop UI:
+
+```powershell
+python -c "import sqlite3; db=sqlite3.connect('database/sqlite3/database.sqlite3'); print(db.execute('SELECT USERNAME, BALANCE FROM USERS ORDER BY USERNAME').fetchall())"
+```
+
+The reusable SQL source is available at
+[`database/sqlite3/demo_data.sql`](database/sqlite3/demo_data.sql). The Python
+initializer applies the SQL schema and showcase records, then adds the larger
+deterministic dataset and records both seed versions in `DEMO_SEED`.
+
+To reset the local preview, stop the application and remove only the specific
+SQLite file, then run the initializer again:
+
+```powershell
+Remove-Item database\sqlite3\database.sqlite3
+.\.venv\Scripts\python.exe scripts\init_demo_data.py
+```
+
+Do not use this reset command against shared or production-like data.
 
 ## Project structure
 
@@ -322,7 +348,8 @@ The core data areas are:
 
 Database records use uppercase field names such as `UUID`, `USERNAME`, `BALANCE`, and `CREATED_AT`.
 
-More detail is available in [`architecture.md`](architecture.md), [`database/json/README.md`](database/json/README.md), and the source contracts.
+More detail is available in [`ARCHITECTURE.md`](ARCHITECTURE.md),
+[`database/json/README.md`](database/json/README.md), and the source contracts.
 
 ## Development
 
