@@ -180,8 +180,9 @@ document.querySelectorAll(".hero-card, .feature-card, .detail-card").forEach((ca
 
 const footer = document.querySelector(".site-footer");
 if (footer) {
-  const siteRoot = new URL(".", document.currentScript?.src || window.location.href);
-  const logoUrl = new URL("logo-circle.png", siteRoot).href;
+  const favicon = document.querySelector('link[rel="icon"]');
+  const assetBase = favicon?.href || document.currentScript?.src || window.location.href;
+  const logoUrl = new URL("logo-circle.png", new URL(".", assetBase)).href;
   const docsPage = document.body.classList.contains("docs-page");
   const homeUrl = docsPage ? "../" : "#top";
   footer.innerHTML = `
