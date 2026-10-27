@@ -218,8 +218,12 @@ class UserLookup(UserLookupBase):
             (user_uuid,),
         )
 
+        row = cursor.fetchone()
+        if row is None:
+            return "0000-00-00 00:00:00 AM (+0000)"
+
         return (
-            datetime.fromisoformat(cursor.fetchone()[0])
+            datetime.fromisoformat(row[0])
             .replace(tzinfo=timezone.utc)
             .astimezone()
             .strftime("%Y-%m-%d %I:%M:%S %p (%z)")
@@ -247,7 +251,8 @@ class UserLookup(UserLookupBase):
             (user_uuid,),
         )
 
-        return cursor.fetchone()[0]
+        row = cursor.fetchone()
+        return row[0] if row else "00000000-0000-0000-0000-000000000000"
 
     @classmethod
     def email_address(
@@ -271,7 +276,8 @@ class UserLookup(UserLookupBase):
             (user_uuid,),
         )
 
-        return cursor.fetchone()[0]
+        row = cursor.fetchone()
+        return row[0] if row and row[0] is not None else "email@example.com"
 
 
 class AdminLookup(AdminLookupBase):
@@ -350,7 +356,8 @@ class ApplicationLookup(ApplicationLookupBase):
             """,
         )
 
-        return cursor.fetchone()[0]
+        row = cursor.fetchone()
+        return row[0] if row else ""
 
 
 class SecurityEventLookup(SecurityEventLookupBase):
