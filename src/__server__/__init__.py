@@ -33,4 +33,10 @@ match CONFIGURATION_JSON.get("DATABASE TYPE"):
 
         SERVER = SQLite3Server
 
+    case _:
+
+        raise ValueError(
+            "Unsupported database backend. Set DATABASE TYPE to JSON, SQLite3, or MySQL."
+        )
+
 __all__ = ["SERVER"]

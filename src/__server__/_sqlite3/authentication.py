@@ -28,14 +28,12 @@ class UserAuthentication(UserAuthenticationBase):
             ),
         )
 
-        return (
-            cursor.fetchone()[0]
-            == Encryption(
+        row = cursor.fetchone()
+        return row is not None and row[0] == Encryption(
                 password,
                 shift=8,
                 alterNumbers=True,
             ).encrypt()
-        )
 
     @classmethod
     def backup_code(
@@ -57,7 +55,8 @@ class UserAuthentication(UserAuthenticationBase):
             ),
         )
 
-        return cursor.fetchone()[0] == backup_code
+        row = cursor.fetchone()
+        return row is not None and row[0] == backup_code
 
     @classmethod
     def email_address(
@@ -79,7 +78,8 @@ class UserAuthentication(UserAuthenticationBase):
             ),
         )
 
-        return cursor.fetchone()[0] == email_address
+        row = cursor.fetchone()
+        return row is not None and row[0] == email_address
 
     @classmethod
     def update_last_login(
@@ -121,14 +121,12 @@ class AdminAuthentication(AdminAuthenticationBase):
             (username,),
         )
 
-        return (
-            cursor.fetchone()[0]
-            == Encryption(
+        row = cursor.fetchone()
+        return row is not None and row[0] == Encryption(
                 password,
                 shift=53,
                 alterNumbers=True,
             ).encrypt()
-        )
 
     @classmethod
     def backup_code(
@@ -147,7 +145,8 @@ class AdminAuthentication(AdminAuthenticationBase):
             (username,),
         )
 
-        return cursor.fetchone()[0] == backup_code
+        row = cursor.fetchone()
+        return row is not None and row[0] == backup_code
 
     @classmethod
     def email_address(
@@ -166,4 +165,5 @@ class AdminAuthentication(AdminAuthenticationBase):
             (username,),
         )
 
-        return cursor.fetchone()[0] == email_address
+        row = cursor.fetchone()
+        return row is not None and row[0] == email_address

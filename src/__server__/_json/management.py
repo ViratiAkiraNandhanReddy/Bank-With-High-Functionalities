@@ -65,7 +65,7 @@ class UserManagement(UserManagementBase):
     def deposit(cls, username_or_uuid: str, amount: float) -> bool:
 
         user = find_user(username_or_uuid)
-        if user is None:
+        if user is None or amount <= 0:
             return False
         user["BALANCE"] = float(user.get("BALANCE", 0.0)) + amount  # type: ignore
         DATA.setdefault("TRANSACTIONS", []).append(
@@ -85,7 +85,9 @@ class UserManagement(UserManagementBase):
     def withdraw(cls, username_or_uuid: str, amount: float) -> bool:
 
         user = find_user(username_or_uuid)
-        if user is None:
+        if user is None or amount <= 0:
+            return False
+        if float(user.get("BALANCE", 0.0)) < amount:
             return False
         user["BALANCE"] = float(user.get("BALANCE", 0.0)) - amount  # type: ignore
         DATA.setdefault("TRANSACTIONS", []).append(
@@ -108,7 +110,13 @@ class UserManagement(UserManagementBase):
 
         user = find_user(username_or_uuid)
         recipient = find_user(recipient_username)
-        if user is None or recipient is None:
+        if (
+            user is None
+            or recipient is None
+            or user.get("UUID") == recipient.get("UUID")
+            or amount <= 0
+            or float(user.get("BALANCE", 0.0)) < amount
+        ):
             return False
 
         transaction_id = _next_id("TRANSACTIONS", "TRANSACTION_ID")
@@ -154,7 +162,10 @@ class UserManagement(UserManagementBase):
     def change_username(cls, old_username_or_uuid: str, new_username: str) -> bool:
 
         user = find_user(old_username_or_uuid)
-        if user is None:
+        if user is None or (
+            find_user(new_username) is not None
+            and find_user(new_username).get("UUID") != user.get("UUID")
+        ):
             return False
         user["USERNAME"] = new_username
         save()

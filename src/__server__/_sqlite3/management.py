@@ -55,6 +55,8 @@ class UserManagement(UserManagementBase):
     ) -> bool:
 
         user_uuid = UserLookup.resolve_uuid(username_or_uuid)
+        if user_uuid is None or amount <= 0:
+            return False
 
         cursor.execute(
             """
@@ -67,6 +69,9 @@ class UserManagement(UserManagementBase):
                 user_uuid,
             ),
         )
+        if cursor.rowcount == 0:
+            connection.rollback()
+            return False
 
         cursor.execute(
             """
@@ -98,18 +103,24 @@ class UserManagement(UserManagementBase):
     ) -> bool:
 
         user_uuid = UserLookup.resolve_uuid(username_or_uuid)
+        if user_uuid is None or amount <= 0:
+            return False
 
         cursor.execute(
             """
             UPDATE USERS
             SET BALANCE = BALANCE - ?
-            WHERE UUID = ?
+            WHERE UUID = ? AND BALANCE >= ?
             """,
             (
                 amount,
                 user_uuid,
+                amount,
             ),
         )
+        if cursor.rowcount == 0:
+            connection.rollback()
+            return False
 
         cursor.execute(
             """
@@ -146,18 +157,29 @@ class UserManagement(UserManagementBase):
             user_uuid = UserLookup.resolve_uuid(username_or_uuid)
 
             recipient_uuid = UserLookup.resolve_uuid(recipient_username)
+            if (
+                user_uuid is None
+                or recipient_uuid is None
+                or user_uuid == recipient_uuid
+                or amount <= 0
+            ):
+                return False
 
             cursor.execute(
                 """
                 UPDATE USERS
                 SET BALANCE = BALANCE - ?
-                WHERE UUID = ?
+                WHERE UUID = ? AND BALANCE >= ?
                 """,
                 (
                     amount,
                     user_uuid,
+                    amount,
                 ),
             )
+            if cursor.rowcount == 0:
+                connection.rollback()
+                return False
 
             cursor.execute(
                 """

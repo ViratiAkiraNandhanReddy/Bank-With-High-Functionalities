@@ -52,7 +52,7 @@ class UserManagement(UserManagementBase):
     def deposit(cls, username_or_uuid: str, amount: float) -> bool:
 
         user_uuid = UserLookup.resolve_uuid(username_or_uuid)
-        if user_uuid is None:
+        if user_uuid is None or amount <= 0:
             return False
 
         cursor.execute("SELECT 1 FROM USERS WHERE UUID = %s", (user_uuid,))
@@ -82,7 +82,7 @@ class UserManagement(UserManagementBase):
     def withdraw(cls, username_or_uuid: str, amount: float) -> bool:
 
         user_uuid = UserLookup.resolve_uuid(username_or_uuid)
-        if user_uuid is None:
+        if user_uuid is None or amount <= 0:
             return False
 
         cursor.execute("SELECT 1 FROM USERS WHERE UUID = %s", (user_uuid,))
@@ -90,9 +90,12 @@ class UserManagement(UserManagementBase):
             return False
         try:
             cursor.execute(
-                "UPDATE USERS SET BALANCE = BALANCE - %s WHERE UUID = %s",
-                (amount, user_uuid),
+                "UPDATE USERS SET BALANCE = BALANCE - %s WHERE UUID = %s AND BALANCE >= %s",
+                (amount, user_uuid, amount),
             )
+            if cursor.rowcount == 0:
+                connection.rollback()
+                return False
             cursor.execute(
                 """
                 INSERT INTO TRANSACTIONS (
@@ -115,7 +118,12 @@ class UserManagement(UserManagementBase):
 
         user_uuid = UserLookup.resolve_uuid(username_or_uuid)
         recipient_uuid = UserLookup.resolve_uuid(recipient_username)
-        if user_uuid is None or recipient_uuid is None:
+        if (
+            user_uuid is None
+            or recipient_uuid is None
+            or user_uuid == recipient_uuid
+            or amount <= 0
+        ):
             return False
 
         try:
@@ -126,9 +134,12 @@ class UserManagement(UserManagementBase):
             if cursor.fetchone() is None:
                 return False
             cursor.execute(
-                "UPDATE USERS SET BALANCE = BALANCE - %s WHERE UUID = %s",
-                (amount, user_uuid),
+                "UPDATE USERS SET BALANCE = BALANCE - %s WHERE UUID = %s AND BALANCE >= %s",
+                (amount, user_uuid, amount),
             )
+            if cursor.rowcount == 0:
+                connection.rollback()
+                return False
             cursor.execute(
                 "UPDATE USERS SET BALANCE = BALANCE + %s WHERE UUID = %s",
                 (amount, recipient_uuid),
