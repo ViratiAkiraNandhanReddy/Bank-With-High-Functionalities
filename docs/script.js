@@ -180,18 +180,23 @@ document.querySelectorAll(".hero-card, .feature-card, .detail-card").forEach((ca
 
 const footer = document.querySelector(".site-footer");
 if (footer) {
+  const scriptUrl = document.currentScript?.src || window.location.href;
+  const siteRoot = new URL(".", scriptUrl);
+  const route = (path) => new URL(path, siteRoot).href;
+  const docsPage = document.body.classList.contains("docs-page");
+  const homeUrl = docsPage ? route("") : "#top";
   footer.innerHTML = `
     <div class="footer-main">
-      <a class="brand" href="${document.body.classList.contains("docs-page") ? "../" : "#top"}">
-        <img src="${document.body.classList.contains("docs-page") ? "../../" : "../"}assets/brand/logo/logo-circle.png" alt="">
+      <a class="brand" href="${homeUrl}" aria-label="Bank With High Functionalities home">
+        <img src="${route("logo-circle.png")}" alt="">
         <span>Bank<span class="brand-dot">.</span>HF</span>
       </a>
       <p>Designed for learning. Built for Windows.<br><b>Simulation only.</b></p>
       <button class="footer-toggle" type="button" aria-expanded="false">Explore the site <span>＋</span></button>
     </div>
     <div class="footer-panel" hidden>
-      <div><span class="mini-label">DISCOVER</span><a href="${document.body.classList.contains("docs-page") ? "../" : "#top"}">Home</a><a href="${document.body.classList.contains("docs-page") ? "../features/" : "features/"}">Capabilities</a><a href="${document.body.classList.contains("docs-page") ? "../architecture/" : "architecture/"}">Architecture</a></div>
-      <div><span class="mini-label">LEARN</span><a href="${document.body.classList.contains("docs-page") ? "../getting-started/" : "getting-started/"}">Get started</a><a href="${document.body.classList.contains("docs-page") ? "../faqs/" : "faqs/"}">FAQ</a><a href="${document.body.classList.contains("docs-page") ? "../security/" : "security/"}">Security</a></div>
+      <div><span class="mini-label">DISCOVER</span><a href="${homeUrl}">Home</a><a href="${route("features/")}">Capabilities</a><a href="${route("architecture/")}">Architecture</a><a href="${route("releases/1.0.0/notes/")}">Release notes</a></div>
+      <div><span class="mini-label">LEARN</span><a href="${route("getting-started/")}">Get started</a><a href="${route("faqs/")}">FAQ</a><a href="${route("security/")}">Security</a></div>
       <div><span class="mini-label">OPEN SOURCE</span><a href="https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities" target="_blank" rel="noreferrer">GitHub ↗</a><span class="footer-note">© 2026 Bank With High Functionalities</span></div>
     </div>
   `;

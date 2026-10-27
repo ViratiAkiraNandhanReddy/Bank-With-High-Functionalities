@@ -350,7 +350,7 @@ Database records use uppercase field names such as `UUID`, `USERNAME`, `BALANCE`
 
 More detail is available in [`ARCHITECTURE.md`](ARCHITECTURE.md),
 [`database/json/README.md`](database/json/README.md), and the source contracts.
-More detail is available in [`architecture.md`](architecture.md), [`database/json/README.md`](database/json/README.md), and the source contracts.
+More detail is available in [`ARCHITECTURE.md`](ARCHITECTURE.md), [`database/json/README.md`](database/json/README.md), and the source contracts.
 
 ## Development
 

@@ -52,7 +52,10 @@ We agree to restrict the following behaviors in our community. Instances, threat
 
 Tensions can occur between community members even when they are trying their best to collaborate. Not every conflict represents a code of conduct violation, and this Code of Conduct reinforces encouraged behaviors and norms that can help avoid conflicts and minimize harm.
 
-When an incident does occur, it is important to report it promptly. To report a possible violation, please visit our reporting page: [Report Code of Conduct Violation](https://viratiakiranandhanreddy.github.io/Bank-With-High-Functionalities/report/violations/coc/).
+When an incident does occur, it is important to report it promptly. Use the
+[project maintainer's GitHub profile](https://github.com/ViratiAkiraNandhanReddy)
+to start a private contact, or review the reporting page for guidance:
+[Report Code of Conduct Violation](https://viratiakiranandhanreddy.github.io/Bank-With-High-Functionalities/report/violations/coc/).
 
 All reports will be handled **confidentially and promptly** by the Bank-With-High-Functionalities maintainers. Appropriate action, including temporary or permanent removal from the community, may be taken depending on the severity of the violation.
 
