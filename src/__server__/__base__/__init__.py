@@ -1,22 +1,22 @@
-from .authentication import UserAuthenticationBase, AdminAuthenticationBase
-from .lookup import (
-    UserLookupBase,
+lazy from .authentication import AdminAuthenticationBase, UserAuthenticationBase
+lazy from .lookup import (
     AdminLookupBase,
     ApplicationLookupBase,
     SecurityEventLookupBase,
+    UserLookupBase,
 )
-from .management import (
-    UserManagementBase,
+lazy from .management import (
     AdminManagementBase,
     ApplicationManagementBase,
     SecurityEventManagementBase,
+    UserManagementBase,
 )
-from .schema import (
-    UserSchemaBase,
+lazy from .schema import (
     AdminSchemaBase,
-    TransactionSchemaBase,
     AnnouncementSchemaBase,
     SecurityEventSchemaBase,
+    TransactionSchemaBase,
+    UserSchemaBase,
 )
 
 __all__ = [

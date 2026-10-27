@@ -1,10 +1,23 @@
-from ._imports import *
+lazy from ._imports import (
+    SMTP__APP_PASSWORD,
+    SMTP__MAIL_ADDRESS,
+    CTkButton,
+    CTkLabel,
+    datetime,
+    email_msg,
+    otp_code,
+    randint,
+    random,
+    root,
+    smtplib,
+)
 
 
 class email_verification:
 
     def __init__(self, receiver_mail_address: str) -> None:
 
+        self.sent: bool = False
         self.otp: str = otp_code()
 
         with open(
@@ -34,5 +47,7 @@ class email_verification:
                 gmail.login(f"{SMTP__MAIL_ADDRESS}", f"{SMTP__APP_PASSWORD}")
                 gmail.send_message(self.email)
 
-        except Exception as e:
-            ...
+                self.sent = True
+
+        except Exception:
+            self.sent = False

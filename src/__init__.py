@@ -1,16 +1,21 @@
-import os
-import json
-import ctypes
-import threading
-from . import utils
-import customtkinter
-from .assets import *
-from .__mail__ import *
-from dotenv import load_dotenv
-from .__server__ import SERVER
-from typing import Any, Callable
-from hPyT import title_bar, get_accent_color
-from pywinstyles import apply_style, set_opacity
+lazy import ctypes
+lazy import json
+lazy import os
+lazy import threading
+lazy from typing import Any, Callable
+
+lazy import customtkinter
+lazy from dotenv import load_dotenv
+lazy from hPyT import get_accent_color, title_bar
+lazy from pywinstyles import apply_style, set_opacity
+
+lazy from . import assets, utils
+lazy from .__mail__ import (
+    email_verification,
+    forgot_password,
+    welcome,
+)
+lazy from .__server__ import SERVER
 
 CONSTANTS: dict[str, dict[str, Any]] = {
     "website": {

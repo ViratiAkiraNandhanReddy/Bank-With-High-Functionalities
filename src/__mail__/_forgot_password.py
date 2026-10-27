@@ -1,4 +1,16 @@
-from ._imports import *
+lazy from ._imports import (
+    SMTP__APP_PASSWORD,
+    SMTP__MAIL_ADDRESS,
+    CTkButton,
+    CTkLabel,
+    datetime,
+    email_msg,
+    otp_code,
+    randint,
+    random,
+    root,
+    smtplib,
+)
 
 
 class forgot_password:
@@ -22,7 +34,7 @@ class forgot_password:
 
         self.sent_at: datetime.datetime | None = None
 
-    def send_mail(self) -> None:
+    def send_mail(self) -> bool:
 
         self.otp: str = otp_code()
 
@@ -66,7 +78,8 @@ class forgot_password:
                         self.ctk_report[0].after(3000, self.ctk_report[0].place_forget),
                     ),
                 )
-        except Exception as e:
+                return True
+        except Exception:
             self.ctk_report[0].after(
                 0,
                 lambda: (
@@ -77,6 +90,7 @@ class forgot_password:
                     self.ctk_report[0].after(3000, self.ctk_report[0].place_forget),
                 ),
             )
+            return False
 
     def start_timer(
         self,

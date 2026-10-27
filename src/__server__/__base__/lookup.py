@@ -1,5 +1,5 @@
-from datetime import datetime
-from abc import ABC, abstractmethod
+lazy from abc import ABC, abstractmethod
+lazy from datetime import datetime
 
 
 class UserLookupBase(ABC):
@@ -104,6 +104,31 @@ class AdminLookupBase(ABC):
         cls,
         username: str,
     ) -> bool:
+
+        pass
+
+    @classmethod
+    @abstractmethod
+    def users(
+        cls,
+    ) -> list[tuple[str, str, float, str]]:
+
+        pass
+
+    @classmethod
+    @abstractmethod
+    def administrators(
+        cls,
+    ) -> list[tuple[str, str, str]]:
+
+        pass
+
+    @classmethod
+    @abstractmethod
+    def recent_security_events(
+        cls,
+        limit: int = 20,
+    ) -> list[tuple[str, str, str]]:
 
         pass
 

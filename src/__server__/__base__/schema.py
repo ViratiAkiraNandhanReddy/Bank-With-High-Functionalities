@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+lazy from abc import ABC, abstractmethod
 
 
 class AdminSchemaBase(ABC):

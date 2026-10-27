@@ -1,5 +1,6 @@
-from PIL import Image
-from ..utils import root
+lazy from PIL import Image
+
+lazy from ..utils import root
 
 
 class icons:

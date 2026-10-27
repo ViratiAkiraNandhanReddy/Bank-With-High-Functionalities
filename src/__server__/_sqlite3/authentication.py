@@ -1,6 +1,7 @@
-from ._connection import connection
-from CaesarCipher import Encryption
-from ..__base__ import UserAuthenticationBase, AdminAuthenticationBase
+lazy from CaesarCipher import Encryption
+
+lazy from ..__base__ import AdminAuthenticationBase, UserAuthenticationBase
+lazy from ._connection import connection
 
 cursor = connection.cursor()
 

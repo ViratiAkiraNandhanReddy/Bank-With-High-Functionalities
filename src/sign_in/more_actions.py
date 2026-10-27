@@ -1,5 +1,15 @@
-from ..sign_in import *
-from ..administrator import administrator_interface
+lazy from .. import (
+    CONSTANTS,
+    SERVER,
+    Callable,
+    assets,
+    customtkinter,
+    forgot_password,
+    threading,
+    utils,
+)
+lazy from .. import ui
+lazy from ..administrator import administrator_interface
 
 
 class more_actions_interface:
@@ -190,6 +200,16 @@ class more_actions_interface:
                 show="•",
             )
             self.__password.place(x=28, rely=0.5, anchor="w")
+            ui.add_password_toggle(
+                self.container_frame__password_admin_sign_in,
+                self.__password,
+                174,
+                8,
+            )
+            self.__password.bind(
+                "<Return>",
+                lambda _event: self.validate_administrator_password(),
+            )
 
             self.__password.bind(
                 "<FocusIn>",
@@ -571,8 +591,15 @@ resolving the problem."""
                     border_width=0,
                     fg_color="transparent",
                     font=("Roboto", 16),
+                    show="•",
                 )
                 __new_password.place(x=28, rely=0.5, anchor="w")
+                ui.add_password_toggle(
+                    container_frame__new_password,
+                    __new_password,
+                    200,
+                    8,
+                )
 
                 __new_password.bind(
                     "<FocusIn>",
@@ -635,8 +662,15 @@ resolving the problem."""
                     border_width=0,
                     fg_color="transparent",
                     font=("Roboto", 16),
+                    show="•",
                 )
                 __confirm_password.place(x=28, rely=0.5, anchor="w")
+                ui.add_password_toggle(
+                    container_frame__confirm_password,
+                    __confirm_password,
+                    200,
+                    8,
+                )
 
                 __confirm_password.bind(
                     "<FocusIn>",
@@ -2072,7 +2106,11 @@ backup recovery code linked to your account.""",
     class more_actions:
 
         def __init__(
-            self, parent_window: customtkinter.CTk, _btn: customtkinter.CTkButton
+            self,
+            parent_window: customtkinter.CTk,
+            _btn: customtkinter.CTkButton,
+            on_signup: Callable | None = None,
+            on_reset_password: Callable | None = None,
         ) -> None:
 
             self.frame__more_actions: customtkinter.CTkFrame = customtkinter.CTkFrame(
@@ -2096,6 +2134,132 @@ backup recovery code linked to your account.""",
             self.hide_frame: Callable = lambda: (
                 self.frame__more_actions.destroy(),
                 _btn.configure(state="normal"),
+            )
+
+            customtkinter.CTkLabel(
+                self.frame__more_actions,
+                text="More options",
+                font=("Segoe UI", 26, "bold"),
+                text_color="#FFFFFF",
+                anchor="w",
+            ).place(x=40, y=34)
+
+            customtkinter.CTkLabel(
+                self.frame__more_actions,
+                text="Quick access to account recovery, registration, and support.",
+                font=("Segoe UI", 14),
+                text_color="#A3A3A3",
+                anchor="w",
+            ).place(x=40, y=78)
+
+            def option_tile(
+                title: str,
+                description: str,
+                x: int,
+                y: int,
+                command: Callable | None = None,
+                accent: str = "#218CFF",
+            ) -> None:
+                tile = customtkinter.CTkFrame(
+                    self.frame__more_actions,
+                    width=315,
+                    height=145,
+                    fg_color="#111111",
+                    border_width=1,
+                    border_color="#252525",
+                    corner_radius=8,
+                )
+                tile.place(x=x, y=y)
+
+                customtkinter.CTkFrame(
+                    tile,
+                    width=5,
+                    height=111,
+                    fg_color=accent,
+                    corner_radius=2,
+                ).place(x=14, y=17)
+
+                customtkinter.CTkLabel(
+                    tile,
+                    text=title,
+                    font=("Segoe UI", 17, "bold"),
+                    text_color="#FFFFFF",
+                    anchor="w",
+                ).place(x=35, y=18)
+
+                customtkinter.CTkLabel(
+                    tile,
+                    text=description,
+                    width=250,
+                    font=("Segoe UI", 12),
+                    text_color="#A3A3A3",
+                    justify="left",
+                    anchor="w",
+                    wraplength=250,
+                ).place(x=35, y=52)
+
+                if command is not None:
+                    customtkinter.CTkButton(
+                        tile,
+                        text="Open",
+                        width=80,
+                        height=26,
+                        fg_color="transparent",
+                        hover_color="#1A1A1A",
+                        text_color=accent,
+                        font=("Segoe UI", 11, "bold"),
+                        command=command,
+                    ).place(x=220, y=105)
+
+            option_tile(
+                "Create account",
+                "Register a new user account and start using the banking dashboard.",
+                40,
+                135,
+                (
+                    lambda: (
+                        (
+                            self.hide_frame(),
+                            on_signup(),
+                        )
+                        if on_signup is not None
+                        else None
+                    )
+                ),
+                "#22C55E",
+            )
+            option_tile(
+                "Reset password",
+                "Recover access securely with the existing email verification flow.",
+                375,
+                135,
+                (
+                    lambda: (
+                        (
+                            self.hide_frame(),
+                            on_reset_password(),
+                        )
+                        if on_reset_password is not None
+                        else None
+                    )
+                ),
+                "#F59E0B",
+            )
+            option_tile(
+                "Documentation",
+                "Learn how the application works and find guidance for common tasks.",
+                40,
+                300,
+                lambda: utils.browser.open_url(CONSTANTS["website"]["home"]),
+                "#218CFF",
+            )
+            option_tile(
+                "Report an issue",
+                "Send feedback or report a problem so it can be investigated.",
+                375,
+                300,
+                lambda: utils.browser.open_url(CONSTANTS["github"]["issues"]),
+                "#EF4444",
             )
 
             more_actions_interface.frame__administrator(

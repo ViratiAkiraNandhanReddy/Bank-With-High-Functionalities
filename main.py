@@ -2,10 +2,11 @@
 Docstring for main
 """
 
-import datetime
-from src import CONFIGURATION_JSON
-from src.sign_in import sign_in_interface
-from src.__etc__._activation import activation
+lazy import datetime
+
+lazy from src import CONFIGURATION_JSON
+lazy from src.__etc__._activation import activation
+lazy from src.sign_in import sign_in_interface
 
 _product_keys: list[str] = [
     "2030-GITH-UBGC-AKKI-DIST-FIRS-TPRJ-INDI-AUSA-2026",

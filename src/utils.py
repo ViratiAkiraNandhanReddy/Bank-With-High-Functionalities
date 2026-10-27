@@ -1,5 +1,5 @@
-import os
-import json
+lazy import json
+lazy import os
 
 DIR_PATH: str = str(os.environ.get("LOCALAPPDATA")) + r"\Bank-With-High-Functionalities"
 

@@ -1,5 +1,6 @@
-from datetime import datetime, timezone
-from ... import customtkinter, SERVER
+lazy from datetime import datetime, timezone
+
+lazy from ... import SERVER, customtkinter
 
 
 class transactions:
@@ -18,6 +19,15 @@ class transactions:
     def load_transactions_cards(self) -> None:
 
         recent_transactions = SERVER.lookup.user.transactions(self.username)
+
+        if not recent_transactions:
+            customtkinter.CTkLabel(
+                self.frame__transactions,
+                text="No transactions yet.",
+                font=("Segoe UI", 12),
+                text_color="#A3A3A3",
+            ).place(relx=0.5, rely=0.5, anchor="center")
+            return
 
         for n, _transaction in enumerate(recent_transactions):
 

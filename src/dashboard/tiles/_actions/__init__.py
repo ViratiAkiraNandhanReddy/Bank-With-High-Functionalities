@@ -1,10 +1,10 @@
-from ._deposit import deposit
-from .._balance import balance
-from ._withdraw import withdraw
-from ._transfer import transfer
-from .... import customtkinter
-from .._favorites import favorites
-from .._transactions import transactions
+lazy from .... import customtkinter
+lazy from .._balance import balance
+lazy from .._favorites import favorites
+lazy from .._transactions import transactions
+lazy from ._deposit import deposit
+lazy from ._transfer import transfer
+lazy from ._withdraw import withdraw
 
 
 class actions:

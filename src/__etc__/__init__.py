@@ -1,2 +1,1 @@
-from .. import *
-from ._activation import activation
+lazy from ._activation import activation

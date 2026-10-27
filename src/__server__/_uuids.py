@@ -1,4 +1,4 @@
-import uuid
+lazy import uuid
 
 
 class _uuids:

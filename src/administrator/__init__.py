@@ -1,6 +1,6 @@
-from .. import *
-from ._navigation import navigation
-from ._status_panel import status_panel
+lazy from .. import Callable, assets, customtkinter
+lazy from ._navigation import navigation
+lazy from ._status_panel import status_panel
 
 
 class administrator_interface:

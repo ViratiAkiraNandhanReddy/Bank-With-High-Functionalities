@@ -1,6 +1,7 @@
-from .._balance import balance
-from .._transactions import transactions
-from .... import customtkinter, assets, Callable, SERVER
+lazy from .... import SERVER, Callable, assets, customtkinter
+lazy from .._balance import balance
+lazy from .._transactions import transactions
+lazy from ....ui import add_password_toggle
 
 
 class deposit:
@@ -155,6 +156,12 @@ class deposit:
             font=("Consolas", 16),
         )
         self.__password.place(x=28, rely=0.5, anchor="w")
+        add_password_toggle(
+            self.container_frame__password_deposit,
+            self.__password,
+            x=220,
+            y=9,
+        )
 
         self.__password.bind(
             "<FocusIn>",

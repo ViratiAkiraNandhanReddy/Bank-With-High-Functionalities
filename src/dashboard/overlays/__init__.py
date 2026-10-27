@@ -1,7 +1,7 @@
-from ._support import support_overlay
-from ._settings import settings_overlay
-from ._security import security_overlay
-from ._transactions import transactions_overlay
+lazy from ._security import security_overlay
+lazy from ._settings import settings_overlay
+lazy from ._support import support_overlay
+lazy from ._transactions import transactions_overlay
 
 __all__ = [
     "support_overlay",

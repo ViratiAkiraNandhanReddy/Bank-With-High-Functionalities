@@ -1,4 +1,4 @@
-from ... import customtkinter, SERVER, assets
+lazy from ... import SERVER, assets, customtkinter
 
 
 class balance:

@@ -1,7 +1,19 @@
-from .. import *
-from ..sign_up import sign_up_interface
-from ..dashboard import dashboard_interface
-from .more_actions import more_actions_interface
+lazy from .. import (
+    SERVER,
+    apply_style,
+    assets,
+    borderless_window_utils,
+    customtkinter,
+    forgot_password,
+    set_opacity,
+    threading,
+    title_bar,
+    utils,
+)
+lazy from .. import ui
+lazy from ..dashboard import dashboard_interface
+lazy from ..sign_up import sign_up_interface
+lazy from .more_actions import more_actions_interface
 
 
 class sign_in_interface:
@@ -22,7 +34,7 @@ class sign_in_interface:
             # --- X-Axis Configuration For Animation --- #
 
             self.x_axis_rtl = (
-                +1110
+                +940
             )  # sign in screen frame starts from right to left (initially outside the window) -- rtl
             self.x_axis_ltr = (
                 -910
@@ -82,7 +94,7 @@ class sign_in_interface:
                 width=0,
                 height=0,
                 corner_radius=0,
-                hover_color="#43545F",
+                hover_color="#0a0a0a",
                 fg_color="black",
                 command=self.more_action__overlay_frame,
             )
@@ -91,22 +103,48 @@ class sign_in_interface:
 
             # --- Sign In Screen Configuration --- #
 
-            self.frame__sign_in: customtkinter.CTkFrame = customtkinter.CTkFrame(
+            self.ext_frame__sign_in: customtkinter.CTkFrame = customtkinter.CTkFrame(
                 self.window,
-                corner_radius=0,
-                width=900,
+                corner_radius=6,
+                width=1060,
                 height=610,
+                fg_color="#000000",
+                bg_color="#000000",
+            )
+            self.ext_frame__sign_in.place(x=self.x_axis_rtl, y=20)
+
+            self.place_holder_frame_1: customtkinter.CTkFrame = customtkinter.CTkFrame(
+                self.ext_frame__sign_in,
+                corner_radius=6,
+                width=140,
+                height=50,
                 fg_color="#0a0a0a",
             )
-            self.frame__sign_in.place(x=self.x_axis_rtl, y=20)
+            self.place_holder_frame_1.place(x=0, y=0)
+
+            self.frame__sign_in: customtkinter.CTkFrame = customtkinter.CTkFrame(
+                self.ext_frame__sign_in,
+                corner_radius=6,
+                width=900,
+                height=610,
+                fg_color="#000000",
+                bg_color="#000000",
+            )
+            self.frame__sign_in.place(x=160, y=0)
 
             self.internal_frame_00__sign_in: customtkinter.CTkFrame = (
                 customtkinter.CTkFrame(
                     self.frame__sign_in,
                     width=450,
                     height=610,
-                    fg_color="#000000",
-                    corner_radius=0,
+                    fg_color="#0a0a0a",
+                    corner_radius=6,
+                    background_corner_colors=(
+                        "#000000",
+                        "#0a0a0a",
+                        "#0a0a0a",
+                        "#000000",
+                    ),  # type: ignore[arg-type]
                 )
             )
 
@@ -134,7 +172,13 @@ class sign_in_interface:
                     width=450,
                     height=610,
                     fg_color="#0a0a0a",
-                    corner_radius=0,
+                    corner_radius=6,
+                    background_corner_colors=(
+                        "#0a0a0a",
+                        "#0a0a0a",
+                        "#000000",
+                        "#0a0a0a",
+                    ),  # type: ignore[arg-type]
                 )
             )
 
@@ -264,7 +308,10 @@ class sign_in_interface:
                 font=("Roboto", 9),
                 text_color="#218CFF",
                 border_spacing=0,
-                command=self.hide_sign_in_frame__show_reset_password_frame,
+                command=lambda: (
+                    self.hide_sign_in_frame__show_reset_password_frame(),
+                    self.more_button.place_configure(x=0, y=0),
+                ),
             ).place(x=302, y=371)
 
             self.__password = customtkinter.CTkEntry(
@@ -279,6 +326,16 @@ class sign_in_interface:
                 show="•",
             )
             self.__password.place(x=28, rely=0.5, anchor="w")
+            ui.add_password_toggle(
+                self.container_frame__password_sign_in,
+                self.__password,
+                264,
+                8,
+            )
+            self.__password.bind(
+                "<Return>",
+                lambda _event: self.validate_and_redirect_to_dashboard(),
+            )
 
             self.__password.bind(
                 "<FocusIn>",
@@ -339,7 +396,12 @@ class sign_in_interface:
             # --- Reset Password Screen Configuration --- #
 
             self.frame__reset_password = customtkinter.CTkFrame(
-                self.window, corner_radius=0, width=900, height=610
+                self.window,
+                corner_radius=6,
+                width=900,
+                height=610,
+                fg_color="#000000",
+                bg_color="#000000",
             )
 
             self.frame__reset_password.place(x=self.x_axis_ltr, y=20)
@@ -348,8 +410,14 @@ class sign_in_interface:
                 self.frame__reset_password,
                 width=450,
                 height=610,
-                fg_color="#000000",
-                corner_radius=0,
+                fg_color="#0a0a0a",
+                corner_radius=6,
+                background_corner_colors=(
+                    "#0a0a0a",
+                    "#000000",
+                    "#000000",
+                    "#0a0a0a",
+                ),  # type: ignore[arg-type]
             )
             self.internal_frame_00__reset_password.place(x=450, y=0)
 
@@ -372,7 +440,7 @@ class sign_in_interface:
                 self.frame__reset_password,
                 width=450,
                 height=610,
-                corner_radius=0,
+                corner_radius=6,
                 fg_color="#0a0a0a",
             )
             self.internal_frame_01__reset_password.place(x=0, y=0)
@@ -398,12 +466,12 @@ class sign_in_interface:
 
             self.x_axis_rtl -= 10
 
-            if self.x_axis_rtl >= 180:
+            if self.x_axis_rtl >= 20:
 
-                self.frame__sign_in.place(x=self.x_axis_rtl, y=20)
+                self.ext_frame__sign_in.place(x=self.x_axis_rtl, y=20)
                 self.window.after(10, self.show_sign_in_rtl)
 
-            if self.x_axis_rtl < 180:
+            if self.x_axis_rtl < 20:
 
                 return
 
@@ -414,12 +482,12 @@ class sign_in_interface:
 
             self.x_axis_rtl += 10
 
-            if self.x_axis_rtl <= 1110:
+            if self.x_axis_rtl <= 940:
 
-                self.frame__sign_in.place(x=self.x_axis_rtl, y=20)
+                self.ext_frame__sign_in.place(x=self.x_axis_rtl, y=20)
                 self.window.after(10, self.hide_sign_in_rtl)
 
-            if self.x_axis_rtl > 1110:
+            if self.x_axis_rtl > 940:
 
                 return
 
@@ -648,6 +716,8 @@ class sign_in_interface:
                 overlay_frame__more_actions = more_actions_interface.more_actions(
                     self.window,
                     self.more_button,
+                    on_signup=self.redirect_to_signup,
+                    on_reset_password=self.hide_sign_in_frame__show_reset_password_frame,
                 )  # Opening The More Action Overlay Frame
 
                 self.window.after(480, overlay_frame__more_actions.show_frame)
@@ -683,6 +753,12 @@ class sign_in_interface:
                         width=450,
                         height=610,
                         fg_color="transparent",
+                        background_corner_colors=(
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#000000",
+                        ),  # type: ignore[arg-type]
                     )
                 )
                 frame__password_reset_frame: customtkinter.CTkFrame = (
@@ -691,6 +767,12 @@ class sign_in_interface:
                         width=450,
                         height=610,
                         fg_color="transparent",
+                        background_corner_colors=(
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#000000",
+                        ),  # type: ignore[arg-type]
                     )
                 )
                 frame__recovery_completed_frame: customtkinter.CTkFrame = (
@@ -699,6 +781,12 @@ class sign_in_interface:
                         width=450,
                         height=610,
                         fg_color="transparent",
+                        background_corner_colors=(
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#000000",
+                        ),  # type: ignore[arg-type]
                     )
                 )
 
@@ -728,7 +816,7 @@ verified using the selected recovery
 method.
                 
 You may now proceed to create a new 
-administrator password.
+user password.
                 
 This recovery session remains active until 
 the password reset process is completed.""",
@@ -893,7 +981,7 @@ the password reset process is completed.""",
 
                     else:
 
-                        is_password_changed = SERVER.management.admin.change_password(
+                        is_password_changed = SERVER.management.user.change_password(
                             username, new_password
                         )
 
@@ -1001,8 +1089,15 @@ resolving the problem."""
                     border_width=0,
                     fg_color="transparent",
                     font=("Roboto", 16),
+                    show="•",
                 )
                 __new_password.place(x=28, rely=0.5, anchor="w")
+                ui.add_password_toggle(
+                    container_frame__new_password,
+                    __new_password,
+                    290,
+                    8,
+                )
 
                 __new_password.bind(
                     "<FocusIn>",
@@ -1065,8 +1160,15 @@ resolving the problem."""
                     border_width=0,
                     fg_color="transparent",
                     font=("Roboto", 16),
+                    show="•",
                 )
                 __confirm_password.place(x=28, rely=0.5, anchor="w")
+                ui.add_password_toggle(
+                    container_frame__confirm_password,
+                    __confirm_password,
+                    290,
+                    8,
+                )
 
                 __confirm_password.bind(
                     "<FocusIn>",
@@ -1185,6 +1287,12 @@ resolving the problem."""
                         width=450,
                         height=610,
                         fg_color="#0a0a0a",
+                        background_corner_colors=(
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#000000",
+                        ),  # type: ignore[arg-type]
                     )
                 )
                 if_emailotp_container_frame__reset_password.place(x=0, y=0)
@@ -1239,6 +1347,12 @@ resolving the problem."""
                         width=450,
                         height=610,
                         fg_color="#0a0a0a",
+                        background_corner_colors=(
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#000000",
+                        ),  # type: ignore[arg-type]
                     )
                     if_send_mail_and_validate_otp_container_frame__reset_password.place(
                         x=0, y=0
@@ -1443,6 +1557,12 @@ continue account recovery.""",
                         width=450,
                         height=610,
                         fg_color="#0a0a0a",
+                        background_corner_colors=(
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#0a0a0a",
+                            "#000000",
+                        ),  # type: ignore[arg-type]
                     )
                     if_emailotp_confirmation_state_container_frame__reset_password.place(
                         x=0, y=0
@@ -1916,6 +2036,12 @@ continue account recovery.""",
                     width=450,
                     height=610,
                     fg_color="#0a0a0a",
+                    background_corner_colors=(
+                        "#0a0a0a",
+                        "#0a0a0a",
+                        "#0a0a0a",
+                        "#000000",
+                    ),  # type: ignore[arg-type]
                 )
                 if_backupcode_container_frame__reset_password.place(x=0, y=0)
 
@@ -2243,6 +2369,12 @@ recovery verification.""",
                     width=450,
                     height=610,
                     fg_color="#0a0a0a",
+                    background_corner_colors=(
+                        "#0a0a0a",
+                        "#0a0a0a",
+                        "#0a0a0a",
+                        "#000000",
+                    ),  # type: ignore[arg-type]
                 )
             )
             self.if_00_container_frame__reset_password.place(x=0, y=0)
@@ -2301,7 +2433,7 @@ recovery verification.""",
                     text="  No internet connection available",
                     font=("Segoe UI", 9),
                     text_color="#a0a0a0",
-                    width=0,
+                    width=330,
                     height=0,
                     image=customtkinter.CTkImage(
                         light_image=assets.icons.material.wifi_off,
@@ -2309,7 +2441,7 @@ recovery verification.""",
                         size=(12, 12),
                     ),
                     compound="left",
-                ).place(x=133, y=82)
+                ).place(x=10, y=82)
 
             self.btn__backup_code_verification: customtkinter.CTkButton = (
                 customtkinter.CTkButton(
@@ -2348,7 +2480,10 @@ recovery verification.""",
                         dark_image=assets.icons.material.arrow_back,
                         size=(20, 20),
                     ),
-                    command=self.hide_reset_password_frame__show_sign_in_frame,
+                    command=lambda: (
+                        self.hide_reset_password_frame__show_sign_in_frame(),
+                        self.more_button.place_configure(x=1080, y=0),
+                    ),
                 )
             )
             self.btn__back_to_sign_in.place(x=50, y=532)

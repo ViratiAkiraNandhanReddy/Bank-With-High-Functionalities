@@ -1,7 +1,13 @@
-from .tiles import *
-from .overlays import *
-from datetime import datetime
-from .. import customtkinter, assets, utils, Callable, SERVER
+lazy from datetime import datetime
+
+lazy from .. import SERVER, Callable, assets, customtkinter, utils
+lazy from .overlays import (
+    security_overlay,
+    settings_overlay,
+    support_overlay,
+    transactions_overlay,
+)
+lazy from .tiles import account_info, actions, announcement, security
 
 
 class dashboard_interface:

@@ -1,10 +1,23 @@
-from ._imports import *
+lazy from ._imports import (
+    SMTP__APP_PASSWORD,
+    SMTP__MAIL_ADDRESS,
+    CTkButton,
+    CTkLabel,
+    datetime,
+    email_msg,
+    otp_code,
+    randint,
+    random,
+    root,
+    smtplib,
+)
 
 
 class welcome:
 
     def __init__(self, receiver_mail_address: str, fullname: str) -> None:
 
+        self.sent: bool = False
         with open(root / "src" / "__mail__" / "templates" / "welcome.html") as file:
 
             self.email_html = file.read().replace("[TESTER]", fullname)
@@ -24,5 +37,7 @@ class welcome:
                 gmail.login(f"{SMTP__MAIL_ADDRESS}", f"{SMTP__APP_PASSWORD}")
                 gmail.send_message(self.email)
 
-        except Exception as e:
-            ...
+                self.sent = True
+
+        except Exception:
+            self.sent = False

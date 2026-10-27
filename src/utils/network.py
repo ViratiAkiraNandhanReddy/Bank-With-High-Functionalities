@@ -1,4 +1,4 @@
-import socket
+lazy import socket
 
 
 class connection:
@@ -23,7 +23,7 @@ class connection:
 
                 return True
 
-        except (OSError, socket.timeout):
+        except OSError, socket.timeout:
 
             # Connection could not be established successfully.
             # This usually indicates no active internet access.

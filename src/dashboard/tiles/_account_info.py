@@ -1,4 +1,4 @@
-from ... import customtkinter, assets, SERVER
+lazy from ... import SERVER, assets, customtkinter
 
 
 class account_info:
@@ -62,12 +62,49 @@ class account_info:
             height=0,  # 15
         ).place(x=22, y=216)
 
-        customtkinter.CTkLabel(
+        self.frame__account_metrics = customtkinter.CTkFrame(
             self.frame__account_info,
-            text="Keep your backup code private. It can be used to recover access to"
-            + "\n"
-            + "your account if you lose access to your primary sign-in method.",
-            font=("Consolas", 11),
-            height=0,  # 26
             width=456,
-        ).place(x=22, y=252)
+            height=58,
+            fg_color="transparent",
+        )
+        self.frame__account_metrics.place(x=22, y=248)
+
+        metrics = (
+            (
+                "Transactions",
+                len(SERVER.lookup.user.transactions(username, -1)),
+                "#218CFF",
+            ),
+            (
+                "Favorites",
+                len(SERVER.lookup.user.frequent_transfer_recipients(username)),
+                "#A855F7",
+            ),
+            (
+                "Security events",
+                len(SERVER.lookup.security_event.recent(username, -1)),
+                "#22C55E",
+            ),
+        )
+
+        for index, (title, value, color) in enumerate(metrics):
+            card = customtkinter.CTkFrame(
+                self.frame__account_metrics,
+                width=142,
+                height=58,
+                fg_color="#111111",
+            )
+            card.place(x=index * 156, y=0)
+            customtkinter.CTkLabel(
+                card,
+                text=title,
+                font=("Segoe UI", 10),
+                text_color="#A3A3A3",
+            ).place(x=10, y=8)
+            customtkinter.CTkLabel(
+                card,
+                text=str(value),
+                font=("Consolas", 18, "bold"),
+                text_color=color,
+            ).place(x=10, y=27)

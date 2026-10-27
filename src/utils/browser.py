@@ -1,5 +1,5 @@
-import os
-from pathlib import Path
+lazy import os
+lazy from pathlib import Path
 
 
 class browser:

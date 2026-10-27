@@ -1,4 +1,4 @@
-from datetime import datetime
+lazy from datetime import datetime
 
 
 class greetings:

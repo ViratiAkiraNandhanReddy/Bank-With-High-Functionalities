@@ -1,7 +1,19 @@
-from abc import ABC, abstractmethod
+lazy from abc import ABC, abstractmethod
 
 
 class UserManagementBase(ABC):
+
+    @classmethod
+    @abstractmethod
+    def create(
+        cls,
+        username: str,
+        password: str,
+        full_name: str,
+        email: str = "",
+    ) -> bool:
+
+        pass
 
     @classmethod
     @abstractmethod
@@ -65,6 +77,17 @@ class UserManagementBase(ABC):
 
 
 class AdminManagementBase(ABC):
+
+    @classmethod
+    @abstractmethod
+    def create(
+        cls,
+        username: str,
+        password: str,
+        email: str = "",
+    ) -> bool:
+
+        pass
 
     @classmethod
     @abstractmethod

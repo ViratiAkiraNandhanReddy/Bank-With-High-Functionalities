@@ -1,5 +1,6 @@
-from ... import customtkinter, SERVER
-from datetime import datetime, timezone
+lazy from datetime import datetime, timezone
+
+lazy from ... import SERVER, customtkinter
 
 EVENT_LABELS: dict[str, tuple[str, str]] = {
     "login": (
@@ -35,6 +36,15 @@ class security:
         recent_security_events: list[tuple[str, str]] = (
             SERVER.lookup.security_event.recent(self.username)
         )
+
+        if not recent_security_events:
+            customtkinter.CTkLabel(
+                self.frame__security,
+                text="No security events yet.",
+                font=("Segoe UI", 12),
+                text_color="#A3A3A3",
+            ).place(relx=0.5, rely=0.5, anchor="center")
+            return
 
         for n, (event_type, timestamp) in enumerate(recent_security_events):
 
