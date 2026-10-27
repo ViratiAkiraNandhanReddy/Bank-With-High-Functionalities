@@ -217,6 +217,37 @@ The startup sequence is:
 
 For a clean local SQLite setup, remove or rename only the specific local database file while the application is stopped, then start the application again. Do not delete the repository or broad database directories.
 
+### Initialize demo data
+
+SQLite is the default backend for the preview workflow. From the repository root,
+run the idempotent demo-data initializer before launching the application:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\init_demo_data.py
+python main.py
+```
+
+The initializer adds fictional users, balances, transactions, security events,
+and an announcement to `database/sqlite3/database.sqlite3`. It creates
+versioned `DEMO_SEED` markers and will not seed the same preview dataset twice.
+The default preview contains three showcase accounts plus 24 additional
+`preview01` through `preview24` accounts, 120 additional transactions, and 72
+additional security events.
+
+Demo sign-in credentials:
+
+| Username | Password |
+| --- | --- |
+| `alice.demo` | `DemoPass123!` |
+| `bob.demo` | `DemoPass123!` |
+| `charlie.demo` | `DemoPass123!` |
+
+The larger dataset uses `preview01` through `preview24`, all with the password
+`DemoPass123!`.
+
+These accounts and all associated activity are for local preview only. They
+must not be treated as real accounts or real financial data.
+
 ## Project structure
 
 ```text
@@ -230,6 +261,8 @@ For a clean local SQLite setup, remove or rename only the specific local databas
 │   ├── json/                       # JSON backend data
 │   ├── schema/                     # Database documentation
 │   └── sqlite3/                    # SQLite database files
+├── scripts/
+│   └── init_demo_data.py           # Idempotent SQLite preview-data initializer
 ├── src/
 │   ├── __init__.py                 # Shared imports and application setup
 │   ├── __etc__/                    # Supporting flows, including activation
