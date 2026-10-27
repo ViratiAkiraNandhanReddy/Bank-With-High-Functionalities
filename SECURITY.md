@@ -17,7 +17,10 @@ Older forks, archived versions, or significantly modified derivatives are not co
 
 If you believe you have discovered a security vulnerability in Bank-With-High-Functionalities, **do not open a public issue or discussion**. Public disclosure before a fix is available may expose users to risk.
 
-Instead, report the vulnerability privately using the official project contact channels listed on the repository or project homepage.
+Instead, use GitHub's private security advisory form:
+[Report a vulnerability privately](https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities/security/advisories/new).
+If the form is unavailable, contact the maintainer through the
+[project profile](https://github.com/ViratiAkiraNandhanReddy).
 
 Your report should include:
 
