@@ -1,16 +1,93 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Install Bank With High Functionalities on Windows."><title>Installation · Bank.HF</title><link rel="icon" href="../../../assets/brand/logo/favicon.ico"><link rel="stylesheet" href="../../style.css"></head>
-<body class="docs-page"><div class="page-noise" aria-hidden="true"></div>
-<header class="site-header"><a class="brand" href="../../"><img src="../../../assets/brand/logo/logo-circle.png" alt=""><span>Bank<span class="brand-dot">.</span>HF</span></a><button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button><nav class="site-nav" aria-label="Main navigation"><a href="../../features/">Capabilities</a><a href="../../architecture/">Architecture</a><a href="../">Get started</a><a href="../../faqs/">FAQ</a><a class="nav-cta" href="https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities" target="_blank" rel="noreferrer">GitHub <span>↗</span></a></nav></header>
-<main><section class="docs-hero section-shell"><div class="eyebrow"><span class="pulse-dot"></span> Get started / Installation</div><h1>Install once.<br><em>Explore freely.</em></h1><p>A clean, repeatable installation path for Windows contributors and curious builders.</p><div class="docs-hero-meta"><span>⌘ Windows</span><span>◈ Python 3.15</span><span>⏱ 5 minutes</span></div></section>
-<section class="docs-layout section-shell"><aside class="docs-toc"><span class="mini-label">ON THIS PAGE</span><a class="active" href="#clone">Clone</a><a href="#environment">Environment</a><a href="#dependencies">Dependencies</a><a href="#verify">Verify</a></aside><article class="docs-content">
-<section id="clone" class="docs-block reveal"><span class="eyebrow">01 / GET THE CODE</span><h2>Start with a clean checkout.</h2><p>Open PowerShell and clone the repository into a folder where you keep development projects.</p><div class="code-card"><div class="code-top"><span>PowerShell</span><button class="copy-code" type="button">Copy</button></div><pre><code>git clone https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities.git
-cd Bank-With-High-Functionalities</code></pre></div><div class="callout"><strong>Why clone?</strong><span>It keeps the docs, assets, Python source, database abstractions, and runtime configuration together.</span></div></section>
-<section id="environment" class="docs-block reveal"><span class="eyebrow">02 / ISOLATE</span><h2>Create a virtual environment.</h2><p>Use a project-local environment so application dependencies do not conflict with other Python work.</p><div class="code-card"><div class="code-top"><span>PowerShell</span><button class="copy-code" type="button">Copy</button></div><pre><code>py -3.15 -m venv .venv
-.\.venv\Scripts\Activate.ps1</code></pre></div><details class="docs-extra"><summary>If activation is blocked</summary><p>Run the app with the environment interpreter directly:</p><pre><code>.\.venv\Scripts\python.exe main.py</code></pre></details></section>
-<section id="dependencies" class="docs-block reveal"><span class="eyebrow">03 / INSTALL</span><h2>Bring in the runtime.</h2><p>The runtime manifest includes the desktop UI, image handling, Windows helpers, environment loading, encryption utilities, and optional MySQL connectivity.</p><div class="code-card"><div class="code-top"><span>PowerShell</span><button class="copy-code" type="button">Copy</button></div><pre><code>python -m pip install --upgrade pip
-python -m pip install -r requirements.txt</code></pre></div><div class="info-grid"><div><b>CustomTkinter</b><span>Desktop interface and themed controls.</span></div><div><b>Pillow</b><span>Images and application assets.</span></div><div><b>hPyT + pywinstyles</b><span>Windows window styling.</span></div><div><b>MySQL connector</b><span>Optional server-backed storage.</span></div></div></section>
-<section id="verify" class="docs-block reveal"><span class="eyebrow">04 / CONFIRM</span><h2>Make sure it is ready.</h2><p>Run a lightweight import check before starting the full desktop interface.</p><div class="code-card"><div class="code-top"><span>PowerShell</span><button class="copy-code" type="button">Copy</button></div><pre><code>python -c "import customtkinter, PIL, dotenv; print('Bank.HF environment ready')"</code></pre></div><div class="callout warning"><strong>Windows only.</strong><span>The application uses native Windows helpers and is not currently supported on other operating systems.</span></div></section>
-</article></section></main>
-<footer class="site-footer section-shell"></footer><script src="../../script.js"></script></body></html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Install Bank With High Functionalities on Windows.">
+  <title>Installation · Bank.HF</title>
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="docs-page">
+  <div class="page-noise" aria-hidden="true"></div>
+  <header class="site-header"><a class="brand" href="../../"><img src="../../logo-circle.png" alt=""><span>Bank<span
+          class="brand-dot">.</span>HF</span></a><button class="menu-toggle" type="button" aria-label="Open navigation"
+      aria-expanded="false"><span></span><span></span></button>
+    <nav class="site-nav" aria-label="Main navigation"><a href="../../features/">Capabilities</a><a
+        href="../../architecture/">Architecture</a><a href="../">Get started</a><a href="../../faqs/">FAQ</a><a
+        class="nav-cta" href="https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities" target="_blank"
+        rel="noreferrer">GitHub <span>↗</span></a></nav>
+  </header>
+  <main>
+    <section class="docs-hero section-shell">
+      <div class="eyebrow"><span class="pulse-dot"></span> Get started / Installation</div>
+      <h1>Install once.<br><em>Explore freely.</em></h1>
+      <p>A clean, repeatable installation path for Windows contributors and curious builders.</p>
+      <div class="docs-hero-meta"><span>⌘ Windows</span><span>◈ Python 3.15</span><span>⏱ 5 minutes</span></div>
+    </section>
+    <section class="docs-layout section-shell">
+      <aside class="docs-toc"><span class="mini-label">ON THIS PAGE</span><a class="active" href="#clone">Clone</a><a
+          href="#environment">Environment</a><a href="#dependencies">Dependencies</a><a href="#verify">Verify</a>
+      </aside>
+      <article class="docs-content">
+        <section id="clone" class="docs-block reveal"><span class="eyebrow">01 / GET THE CODE</span>
+          <h2>Start with a clean checkout.</h2>
+          <p>Open PowerShell and clone the repository into a folder where you keep development projects.</p>
+          <div class="code-card">
+            <div class="code-top"><span>PowerShell</span><button class="copy-code" type="button">Copy</button></div>
+            <pre><code>git clone https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities.git
+cd Bank-With-High-Functionalities</code></pre>
+          </div>
+          <div class="callout"><strong>Why clone?</strong><span>It keeps the docs, assets, Python source, database
+              abstractions, and runtime configuration together.</span></div>
+        </section>
+        <section id="environment" class="docs-block reveal"><span class="eyebrow">02 / ISOLATE</span>
+          <h2>Create a virtual environment.</h2>
+          <p>Use a project-local environment so application dependencies do not conflict with other Python work.</p>
+          <div class="code-card">
+            <div class="code-top"><span>PowerShell</span><button class="copy-code" type="button">Copy</button></div>
+            <pre><code>py -3.15 -m venv .venv
+.\.venv\Scripts\Activate.ps1</code></pre>
+          </div>
+          <details class="docs-extra">
+            <summary>If activation is blocked</summary>
+            <p>Run the app with the environment interpreter directly:</p>
+            <pre><code>.\.venv\Scripts\python.exe main.py</code></pre>
+          </details>
+        </section>
+        <section id="dependencies" class="docs-block reveal"><span class="eyebrow">03 / INSTALL</span>
+          <h2>Bring in the runtime.</h2>
+          <p>The runtime manifest includes the desktop UI, image handling, Windows helpers, environment loading,
+            encryption utilities, and optional MySQL connectivity.</p>
+          <div class="code-card">
+            <div class="code-top"><span>PowerShell</span><button class="copy-code" type="button">Copy</button></div>
+            <pre><code>python -m pip install --upgrade pip
+python -m pip install -r requirements.txt</code></pre>
+          </div>
+          <div class="info-grid">
+            <div><b>CustomTkinter</b><span>Desktop interface and themed controls.</span></div>
+            <div><b>Pillow</b><span>Images and application assets.</span></div>
+            <div><b>hPyT + pywinstyles</b><span>Windows window styling.</span></div>
+            <div><b>MySQL connector</b><span>Optional server-backed storage.</span></div>
+          </div>
+        </section>
+        <section id="verify" class="docs-block reveal"><span class="eyebrow">04 / CONFIRM</span>
+          <h2>Make sure it is ready.</h2>
+          <p>Run a lightweight import check before starting the full desktop interface.</p>
+          <div class="code-card">
+            <div class="code-top"><span>PowerShell</span><button class="copy-code" type="button">Copy</button></div>
+            <pre><code>python -c "import customtkinter, PIL, dotenv; print('Bank.HF environment ready')"</code></pre>
+          </div>
+          <div class="callout warning"><strong>Windows only.</strong><span>The application uses native Windows helpers
+              and is not currently supported on other operating systems.</span></div>
+        </section>
+      </article>
+    </section>
+  </main>
+  <footer class="site-footer section-shell"></footer>
+  <script src="../../script.js"></script>
+</body>
+
+</html>

@@ -1,13 +1,99 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Bank With High Functionalities 1.0.0 release notes."><title>Release 1.0.0 · Bank.HF</title><link rel="icon" href="../../../../assets/brand/logo/favicon.ico"><link rel="stylesheet" href="../../../style.css"></head>
-<body class="docs-page"><div class="page-noise" aria-hidden="true"></div>
-<header class="site-header"><a class="brand" href="../../../"><img src="../../../../assets/brand/logo/logo-circle.png" alt=""><span>Bank<span class="brand-dot">.</span>HF</span></a><button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button><nav class="site-nav" aria-label="Main navigation"><a href="../../../features/">Capabilities</a><a href="../../../architecture/">Architecture</a><a href="../../../getting-started/">Get started</a><a href="../../../faqs/">FAQ</a><a class="nav-cta" href="https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities" target="_blank" rel="noreferrer">GitHub <span>↗</span></a></nav></header>
-<main><section class="docs-hero section-shell"><div class="eyebrow"><span class="pulse-dot"></span> Releases / 1.0.0</div><h1>The first foundation<br><em>is in place.</em></h1><p>A stable learning surface for exploring a Windows desktop banking simulation, its flows, and its persistence layer.</p><div class="docs-hero-meta"><span>✓ Initial release</span><span>⌁ Windows desktop</span><span>◈ MIT licensed</span></div></section>
-<section class="docs-layout section-shell"><aside class="docs-toc"><span class="mini-label">ON THIS PAGE</span><a class="active" href="#headline">Headline</a><a href="#included">Included</a><a href="#notes">Notes</a><a href="#next">Next steps</a></aside><article class="docs-content">
-<section id="headline" class="docs-block reveal"><span class="eyebrow">01 / RELEASE HIGHLIGHT</span><h2>Readable systems, real workflows.</h2><p>Version 1.0.0 brings together the desktop UI, shared persistence contracts, local storage backends, authentication flows, dashboard activity, administrator views, and optional email workflows.</p><div class="release-grid"><div><span class="status-pill">CORE</span><b>Python desktop application</b><small>Windows-first UI built with CustomTkinter.</small></div><div><span class="status-pill">DATA</span><b>Three persistence options</b><small>JSON, SQLite, and MySQL behind one server shape.</small></div><div><span class="status-pill">FLOW</span><b>Account lifecycle</b><small>Activation, sign-in, registration, recovery, and logout events.</small></div><div><span class="status-pill">OPEN</span><b>MIT licensed</b><small>Built for learning and contribution.</small></div></div></section>
-<section id="included" class="docs-block reveal"><span class="eyebrow">02 / WHAT SHIPPED</span><h2>A complete first pass.</h2><div class="changelog-list"><div><b>Authentication</b><span>User sign-in, registration, administrator entry, backup-code support, email operations, and security events.</span></div><div><b>Dashboard</b><span>Balance, account information, deposits, withdrawals, transfers, announcements, favorites, transactions, and overlays.</span></div><div><b>Administration</b><span>Overview, users and access, activity and history, issues and broadcasts, settings, and status navigation.</span></div><div><b>Persistence</b><span>Common contracts with JSON, SQLite, and MySQL implementations plus automatic schema initialization.</span></div><div><b>Email</b><span>Welcome, verification, and password-recovery templates with Gmail SMTP integration.</span></div></div></section>
-<section id="notes" class="docs-block reveal"><span class="eyebrow">03 / IMPORTANT NOTES</span><h2>Know the edges.</h2><div class="callout warning"><strong>Simulation only.</strong><span>This release does not process real money, real bank accounts, or real financial transactions.</span></div><details class="docs-extra"><summary>Compatibility</summary><p>The supported environment is Windows with Python 3.15 and a graphical desktop session.</p></details><details class="docs-extra"><summary>Runtime state</summary><p>Activation state, launch time, and local SQLite or JSON data are runtime artifacts.</p></details></section>
-<section id="next" class="docs-block reveal"><span class="eyebrow">04 / KEEP EXPLORING</span><h2>Take the next step.</h2><div class="rule-grid"><div><b>New contributor?</b><span>Start with installation, then read the architecture reference.</span></div><div><b>Testing a flow?</b><span>Use fictional local data and inspect generated security events.</span></div><div><b>Changing persistence?</b><span>Update shared contracts and every backend together.</span></div><div><b>Found a vulnerability?</b><span>Use the private reporting process.</span></div></div></section>
-</article></section></main>
-<footer class="site-footer section-shell"></footer><script src="../../../script.js"></script></body></html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bank With High Functionalities 1.0.0 release notes.">
+  <title>Release 1.0.0 · Bank.HF</title>
+  <link rel="icon" href="../../../favicon.ico">
+  <link rel="stylesheet" href="../../../style.css">
+</head>
+
+<body class="docs-page">
+  <div class="page-noise" aria-hidden="true"></div>
+  <header class="site-header"><a class="brand" href="../../../"><img src="../../../logo-circle.png"
+        alt=""><span>Bank<span class="brand-dot">.</span>HF</span></a><button class="menu-toggle" type="button"
+      aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
+    <nav class="site-nav" aria-label="Main navigation"><a href="../../../features/">Capabilities</a><a
+        href="../../../architecture/">Architecture</a><a href="../../../getting-started/">Get started</a><a
+        href="../../../faqs/">FAQ</a><a class="nav-cta"
+        href="https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities" target="_blank"
+        rel="noreferrer">GitHub <span>↗</span></a></nav>
+  </header>
+  <main>
+    <section class="docs-hero section-shell">
+      <div class="eyebrow"><span class="pulse-dot"></span> Releases / 1.0.0</div>
+      <h1>The first foundation<br><em>is in place.</em></h1>
+      <p>A stable learning surface for exploring a Windows desktop banking simulation, its flows, and its persistence
+        layer.</p>
+      <div class="docs-hero-meta"><span>✓ Initial release</span><span>⌁ Windows desktop</span><span>◈ MIT
+          licensed</span></div>
+    </section>
+    <section class="docs-layout section-shell">
+      <aside class="docs-toc"><span class="mini-label">ON THIS PAGE</span><a class="active"
+          href="#headline">Headline</a><a href="#included">Included</a><a href="#notes">Notes</a><a href="#next">Next
+          steps</a></aside>
+      <article class="docs-content">
+        <section id="headline" class="docs-block reveal"><span class="eyebrow">01 / RELEASE HIGHLIGHT</span>
+          <h2>Readable systems, real workflows.</h2>
+          <p>Version 1.0.0 brings together the desktop UI, shared persistence contracts, local storage backends,
+            authentication flows, dashboard activity, administrator views, and optional email workflows.</p>
+          <div class="release-grid">
+            <div><span class="status-pill">CORE</span><b>Python desktop application</b><small>Windows-first UI built
+                with CustomTkinter.</small></div>
+            <div><span class="status-pill">DATA</span><b>Three persistence options</b><small>JSON, SQLite, and MySQL
+                behind one server shape.</small></div>
+            <div><span class="status-pill">FLOW</span><b>Account lifecycle</b><small>Activation, sign-in, registration,
+                recovery, and logout events.</small></div>
+            <div><span class="status-pill">OPEN</span><b>MIT licensed</b><small>Built for learning and
+                contribution.</small></div>
+          </div>
+        </section>
+        <section id="included" class="docs-block reveal"><span class="eyebrow">02 / WHAT SHIPPED</span>
+          <h2>A complete first pass.</h2>
+          <div class="changelog-list">
+            <div><b>Authentication</b><span>User sign-in, registration, administrator entry, backup-code support, email
+                operations, and security events.</span></div>
+            <div><b>Dashboard</b><span>Balance, account information, deposits, withdrawals, transfers, announcements,
+                favorites, transactions, and overlays.</span></div>
+            <div><b>Administration</b><span>Overview, users and access, activity and history, issues and broadcasts,
+                settings, and status navigation.</span></div>
+            <div><b>Persistence</b><span>Common contracts with JSON, SQLite, and MySQL implementations plus automatic
+                schema initialization.</span></div>
+            <div><b>Email</b><span>Welcome, verification, and password-recovery templates with Gmail SMTP
+                integration.</span></div>
+          </div>
+        </section>
+        <section id="notes" class="docs-block reveal"><span class="eyebrow">03 / IMPORTANT NOTES</span>
+          <h2>Know the edges.</h2>
+          <div class="callout warning"><strong>Simulation only.</strong><span>This release does not process real money,
+              real bank accounts, or real financial transactions.</span></div>
+          <details class="docs-extra">
+            <summary>Compatibility</summary>
+            <p>The supported environment is Windows with Python 3.15 and a graphical desktop session.</p>
+          </details>
+          <details class="docs-extra">
+            <summary>Runtime state</summary>
+            <p>Activation state, launch time, and local SQLite or JSON data are runtime artifacts.</p>
+          </details>
+        </section>
+        <section id="next" class="docs-block reveal"><span class="eyebrow">04 / KEEP EXPLORING</span>
+          <h2>Take the next step.</h2>
+          <div class="rule-grid">
+            <div><b>New contributor?</b><span>Start with installation, then read the architecture reference.</span>
+            </div>
+            <div><b>Testing a flow?</b><span>Use fictional local data and inspect generated security events.</span>
+            </div>
+            <div><b>Changing persistence?</b><span>Update shared contracts and every backend together.</span></div>
+            <div><b>Found a vulnerability?</b><span>Use the private reporting process.</span></div>
+          </div>
+        </section>
+      </article>
+    </section>
+  </main>
+  <footer class="site-footer section-shell"></footer>
+  <script src="../../../script.js"></script>
+</body>
+
+</html>

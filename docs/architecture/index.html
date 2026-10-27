@@ -1,13 +1,74 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Explore the architecture of Bank With High Functionalities."><title>Architecture · Bank.HF</title><link rel="icon" href="../../assets/brand/logo/favicon.ico"><link rel="stylesheet" href="../style.css"></head>
-<body class="docs-page"><div class="page-noise" aria-hidden="true"></div>
-<header class="site-header"><a class="brand" href="../"><img src="../../assets/brand/logo/logo-circle.png" alt=""><span>Bank<span class="brand-dot">.</span>HF</span></a><button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button><nav class="site-nav" aria-label="Main navigation"><a href="../features/">Capabilities</a><a href="./">Architecture</a><a href="../getting-started/">Get started</a><a href="../faqs/">FAQ</a><a class="nav-cta" href="https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities" target="_blank" rel="noreferrer">GitHub <span>↗</span></a></nav></header>
-<main><section class="docs-hero section-shell"><div class="eyebrow"><span class="pulse-dot"></span> Documentation / 02</div><h1>One interface.<br><em>Many foundations.</em></h1><p>The application keeps the UI independent from storage by routing behavior through a shared, class-based server contract.</p><div class="docs-hero-meta"><span>▦ Four layers</span><span>◈ Three backends</span><span>↗ One public shape</span></div></section>
-<section class="docs-layout section-shell"><aside class="docs-toc"><span class="mini-label">ON THIS PAGE</span><a class="active" href="#layers">System layers</a><a href="#flow">Runtime flow</a><a href="#server">SERVER namespace</a><a href="#data">Data model</a><a href="#rules">Design rules</a></aside><article class="docs-content">
-<section id="layers" class="docs-block reveal"><span class="eyebrow">01 / SYSTEM LAYERS</span><h2>Four layers, one direction.</h2><p>Each layer has a clear responsibility. The presentation layer can evolve without rewriting persistence, while each backend preserves the same behavior behind the scenes.</p><div class="layer-stack"><div><strong>01</strong><b>Presentation</b><span>CustomTkinter windows, screens, dashboard tiles, overlays, and administrator views.</span></div><div><strong>02</strong><b>Application services</b><span>Authentication flows, activation, email workflows, validation, and shared utilities.</span></div><div><strong>03</strong><b>Persistence abstraction</b><span>The <code>SERVER</code> namespace exposes authentication, lookup, management, and schema services.</span></div><div><strong>04</strong><b>Storage implementations</b><span>JSON files, SQLite, or MySQL selected at runtime.</span></div></div></section>
-<section id="flow" class="docs-block reveal"><span class="eyebrow">02 / STARTUP FLOW</span><h2>What happens at launch?</h2><div class="timeline"><div><i>01</i><b>Load context</b><span><code>main.py</code> imports shared configuration, environment variables, and the selected server.</span></div><div><i>02</i><b>Check activation</b><span>If <code>is_activated</code> is false, the activation interface is shown before sign-in.</span></div><div><i>03</i><b>Record launch</b><span>The current launch time is written to runtime configuration.</span></div><div><i>04</i><b>Open sign-in</b><span><code>sign_in_interface().sign_in()</code> becomes the first user-facing screen.</span></div></div></section>
-<section id="server" class="docs-block reveal"><span class="eyebrow">03 / THE CONTRACT</span><h2>Meet <code>SERVER</code>.</h2><p>UI code calls services through a stable namespace. It should not select a database, construct SQL, or open backend connections directly.</p><div class="code-card"><div class="code-top"><span>Public service shape</span></div><pre><code>SERVER
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore the architecture of Bank With High Functionalities.">
+  <title>Architecture · Bank.HF</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="docs-page">
+  <div class="page-noise" aria-hidden="true"></div>
+  <header class="site-header"><a class="brand" href="../"><img src="../logo-circle.png" alt=""><span>Bank<span
+          class="brand-dot">.</span>HF</span></a><button class="menu-toggle" type="button" aria-label="Open navigation"
+      aria-expanded="false"><span></span><span></span></button>
+    <nav class="site-nav" aria-label="Main navigation"><a href="../features/">Capabilities</a><a
+        href="./">Architecture</a><a href="../getting-started/">Get started</a><a href="../faqs/">FAQ</a><a
+        class="nav-cta" href="https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities" target="_blank"
+        rel="noreferrer">GitHub <span>↗</span></a></nav>
+  </header>
+  <main>
+    <section class="docs-hero section-shell">
+      <div class="eyebrow"><span class="pulse-dot"></span> Documentation / 02</div>
+      <h1>One interface.<br><em>Many foundations.</em></h1>
+      <p>The application keeps the UI independent from storage by routing behavior through a shared, class-based server
+        contract.</p>
+      <div class="docs-hero-meta"><span>▦ Four layers</span><span>◈ Three backends</span><span>↗ One public shape</span>
+      </div>
+    </section>
+    <section class="docs-layout section-shell">
+      <aside class="docs-toc"><span class="mini-label">ON THIS PAGE</span><a class="active" href="#layers">System
+          layers</a><a href="#flow">Runtime flow</a><a href="#server">SERVER namespace</a><a href="#data">Data
+          model</a><a href="#rules">Design rules</a></aside>
+      <article class="docs-content">
+        <section id="layers" class="docs-block reveal"><span class="eyebrow">01 / SYSTEM LAYERS</span>
+          <h2>Four layers, one direction.</h2>
+          <p>Each layer has a clear responsibility. The presentation layer can evolve without rewriting persistence,
+            while each backend preserves the same behavior behind the scenes.</p>
+          <div class="layer-stack">
+            <div><strong>01</strong><b>Presentation</b><span>CustomTkinter windows, screens, dashboard tiles, overlays,
+                and administrator views.</span></div>
+            <div><strong>02</strong><b>Application services</b><span>Authentication flows, activation, email workflows,
+                validation, and shared utilities.</span></div>
+            <div><strong>03</strong><b>Persistence abstraction</b><span>The <code>SERVER</code> namespace exposes
+                authentication, lookup, management, and schema services.</span></div>
+            <div><strong>04</strong><b>Storage implementations</b><span>JSON files, SQLite, or MySQL selected at
+                runtime.</span></div>
+          </div>
+        </section>
+        <section id="flow" class="docs-block reveal"><span class="eyebrow">02 / STARTUP FLOW</span>
+          <h2>What happens at launch?</h2>
+          <div class="timeline">
+            <div><i>01</i><b>Load context</b><span><code>main.py</code> imports shared configuration, environment
+                variables, and the selected server.</span></div>
+            <div><i>02</i><b>Check activation</b><span>If <code>is_activated</code> is false, the activation interface
+                is shown before sign-in.</span></div>
+            <div><i>03</i><b>Record launch</b><span>The current launch time is written to runtime configuration.</span>
+            </div>
+            <div><i>04</i><b>Open sign-in</b><span><code>sign_in_interface().sign_in()</code> becomes the first
+                user-facing screen.</span></div>
+          </div>
+        </section>
+        <section id="server" class="docs-block reveal"><span class="eyebrow">03 / THE CONTRACT</span>
+          <h2>Meet <code>SERVER</code>.</h2>
+          <p>UI code calls services through a stable namespace. It should not select a database, construct SQL, or open
+            backend connections directly.</p>
+          <div class="code-card">
+            <div class="code-top"><span>Public service shape</span></div>
+            <pre><code>SERVER
 ├── authentication
 │   ├── user
 │   └── admin
@@ -16,8 +77,58 @@
 ├── management
 │   └── user / admin / application / security_event
 └── schema
-    └── user / admin / transaction / announcement / security_event</code></pre></div><p>Shared contracts live in <code>src/__server__/__base__/</code>. JSON, SQLite, and MySQL implementations preserve method signatures, return values, and tuple shapes.</p></section>
-<section id="data" class="docs-block reveal"><span class="eyebrow">04 / DATA MODEL</span><h2>Small, explicit, inspectable.</h2><div class="backend-table"><div class="table-row table-head"><span>Entity</span><span>Purpose</span><span>Important fields</span></div><div class="table-row"><span><b>USERS</b></span><span>Simulated customer accounts</span><span><code>UUID</code> · <code>USERNAME</code> · <code>BALANCE</code></span></div><div class="table-row"><span><b>ADMINS</b></span><span>Administrator accounts</span><span><code>USERNAME</code> · <code>EMAIL</code></span></div><div class="table-row"><span><b>TRANSACTIONS</b></span><span>Fictional financial activity</span><span><code>AMOUNT</code> · <code>TYPE</code> · <code>TIMESTAMP</code></span></div><div class="table-row"><span><b>SECURITY_EVENTS</b></span><span>Account-security activity</span><span><code>EVENT_TYPE</code> · <code>CREATED_AT</code></span></div></div></section>
-<section id="rules" class="docs-block reveal"><span class="eyebrow">05 / CONTRIBUTOR RULES</span><h2>Keep the boundaries clean.</h2><div class="rule-grid"><div><b>Reuse the server</b><span>Use existing lookup and management methods from the UI instead of duplicating persistence logic.</span></div><div><b>Update all backends</b><span>Shared contract changes usually need matching JSON, SQLite, and MySQL implementations.</span></div><div><b>Protect runtime state</b><span>Database files and config values are execution state, not disposable source-code fixtures.</span></div><div><b>Preserve the shape</b><span>Class-based namespaces and return formats stay consistent across implementations.</span></div></div><details class="docs-extra"><summary>What changes together?</summary><p>A new schema field may require a shared contract update, schema initialization in each backend, lookup or management methods, and UI call sites. Make the smallest complete change: keep SQL, JSON file access, and connection handling inside the selected backend package.</p></details><details class="docs-extra"><summary>Why SQLite is the default</summary><p>SQLite keeps local demonstrations reproducible because it needs no running service. It also enables foreign-key enforcement and automatic schema initialization while remaining easy to inspect during development.</p></details></section>
-</article></section></main>
-<footer class="site-footer section-shell"><a class="brand" href="../"><img src="../../assets/brand/logo/logo-circle.png" alt=""><span>Bank<span class="brand-dot">.</span>HF</span></a><span>Designed for learning. Built for Windows. <b>Simulation only.</b></span><span>© 2026</span></footer><script src="../script.js"></script></body></html>
+    └── user / admin / transaction / announcement / security_event</code></pre>
+          </div>
+          <p>Shared contracts live in <code>src/__server__/__base__/</code>. JSON, SQLite, and MySQL implementations
+            preserve method signatures, return values, and tuple shapes.</p>
+        </section>
+        <section id="data" class="docs-block reveal"><span class="eyebrow">04 / DATA MODEL</span>
+          <h2>Small, explicit, inspectable.</h2>
+          <div class="backend-table">
+            <div class="table-row table-head"><span>Entity</span><span>Purpose</span><span>Important fields</span></div>
+            <div class="table-row"><span><b>USERS</b></span><span>Simulated customer
+                accounts</span><span><code>UUID</code> · <code>USERNAME</code> · <code>BALANCE</code></span></div>
+            <div class="table-row"><span><b>ADMINS</b></span><span>Administrator
+                accounts</span><span><code>USERNAME</code> · <code>EMAIL</code></span></div>
+            <div class="table-row"><span><b>TRANSACTIONS</b></span><span>Fictional financial
+                activity</span><span><code>AMOUNT</code> · <code>TYPE</code> · <code>TIMESTAMP</code></span></div>
+            <div class="table-row"><span><b>SECURITY_EVENTS</b></span><span>Account-security
+                activity</span><span><code>EVENT_TYPE</code> · <code>CREATED_AT</code></span></div>
+          </div>
+        </section>
+        <section id="rules" class="docs-block reveal"><span class="eyebrow">05 / CONTRIBUTOR RULES</span>
+          <h2>Keep the boundaries clean.</h2>
+          <div class="rule-grid">
+            <div><b>Reuse the server</b><span>Use existing lookup and management methods from the UI instead of
+                duplicating persistence logic.</span></div>
+            <div><b>Update all backends</b><span>Shared contract changes usually need matching JSON, SQLite, and MySQL
+                implementations.</span></div>
+            <div><b>Protect runtime state</b><span>Database files and config values are execution state, not disposable
+                source-code fixtures.</span></div>
+            <div><b>Preserve the shape</b><span>Class-based namespaces and return formats stay consistent across
+                implementations.</span></div>
+          </div>
+          <details class="docs-extra">
+            <summary>What changes together?</summary>
+            <p>A new schema field may require a shared contract update, schema initialization in each backend, lookup or
+              management methods, and UI call sites. Make the smallest complete change: keep SQL, JSON file access, and
+              connection handling inside the selected backend package.</p>
+          </details>
+          <details class="docs-extra">
+            <summary>Why SQLite is the default</summary>
+            <p>SQLite keeps local demonstrations reproducible because it needs no running service. It also enables
+              foreign-key enforcement and automatic schema initialization while remaining easy to inspect during
+              development.</p>
+          </details>
+        </section>
+      </article>
+    </section>
+  </main>
+  <footer class="site-footer section-shell"><a class="brand" href="../"><img src="../logo-circle.png"
+        alt=""><span>Bank<span class="brand-dot">.</span>HF</span></a><span>Designed for learning. Built for Windows.
+      <b>Simulation
+        only.</b></span><span>© 2026</span></footer>
+  <script src="../script.js"></script>
+</body>
+
+</html>

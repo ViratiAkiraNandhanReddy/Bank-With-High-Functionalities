@@ -1,22 +1,110 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Configure Bank With High Functionalities."><title>Setup · Bank.HF</title><link rel="icon" href="../../../assets/brand/logo/favicon.ico"><link rel="stylesheet" href="../../style.css"></head>
-<body class="docs-page"><div class="page-noise" aria-hidden="true"></div>
-<header class="site-header"><a class="brand" href="../../"><img src="../../../assets/brand/logo/logo-circle.png" alt=""><span>Bank<span class="brand-dot">.</span>HF</span></a><button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button><nav class="site-nav" aria-label="Main navigation"><a href="../../features/">Capabilities</a><a href="../../architecture/">Architecture</a><a href="../">Get started</a><a href="../../faqs/">FAQ</a><a class="nav-cta" href="https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities" target="_blank" rel="noreferrer">GitHub <span>↗</span></a></nav></header>
-<main><section class="docs-hero section-shell"><div class="eyebrow"><span class="pulse-dot"></span> Get started / Setup</div><h1>Shape the runtime<br><em>to your experiment.</em></h1><p>Configure storage, optional email workflows, and activation without touching the application UI.</p><div class="docs-hero-meta"><span>▦ SQLite default</span><span>⌘ .env safe</span><span>◇ Runtime state</span></div></section>
-<section class="docs-layout section-shell"><aside class="docs-toc"><span class="mini-label">ON THIS PAGE</span><a class="active" href="#backend">Backend</a><a href="#environment">Environment</a><a href="#email">Email</a><a href="#activation">Activation</a></aside><article class="docs-content">
-<section id="backend" class="docs-block reveal"><span class="eyebrow">01 / STORAGE</span><h2>Pick a persistence mode.</h2><p>The shared <code>SERVER</code> namespace hides backend-specific details. Change one value before launch, then restart the app.</p><div class="backend-table"><div class="table-row table-head"><span>Mode</span><span>Use it when</span><span>Setup</span></div><div class="table-row"><span><b>SQLite3</b></span><span>Default local experience</span><span>No service required</span></div><div class="table-row"><span><b>JSON</b></span><span>File-based experiments</span><span>Local data file</span></div><div class="table-row"><span><b>MySQL</b></span><span>Shared development</span><span>Database + .env</span></div></div><div class="code-card"><div class="code-top"><span>database/config.json</span><button class="copy-code" type="button">Copy</button></div><pre><code>{
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Configure Bank With High Functionalities.">
+  <title>Setup · Bank.HF</title>
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="docs-page">
+  <div class="page-noise" aria-hidden="true"></div>
+  <header class="site-header"><a class="brand" href="../../"><img src="../../logo-circle.png" alt=""><span>Bank<span
+          class="brand-dot">.</span>HF</span></a><button class="menu-toggle" type="button" aria-label="Open navigation"
+      aria-expanded="false"><span></span><span></span></button>
+    <nav class="site-nav" aria-label="Main navigation"><a href="../../features/">Capabilities</a><a
+        href="../../architecture/">Architecture</a><a href="../">Get started</a><a href="../../faqs/">FAQ</a><a
+        class="nav-cta" href="https://github.com/ViratiAkiraNandhanReddy/Bank-With-High-Functionalities" target="_blank"
+        rel="noreferrer">GitHub <span>↗</span></a></nav>
+  </header>
+  <main>
+    <section class="docs-hero section-shell">
+      <div class="eyebrow"><span class="pulse-dot"></span> Get started / Setup</div>
+      <h1>Shape the runtime<br><em>to your experiment.</em></h1>
+      <p>Configure storage, optional email workflows, and activation without touching the application UI.</p>
+      <div class="docs-hero-meta"><span>▦ SQLite default</span><span>⌘ .env safe</span><span>◇ Runtime state</span>
+      </div>
+    </section>
+    <section class="docs-layout section-shell">
+      <aside class="docs-toc"><span class="mini-label">ON THIS PAGE</span><a class="active"
+          href="#backend">Backend</a><a href="#environment">Environment</a><a href="#email">Email</a><a
+          href="#activation">Activation</a></aside>
+      <article class="docs-content">
+        <section id="backend" class="docs-block reveal"><span class="eyebrow">01 / STORAGE</span>
+          <h2>Pick a persistence mode.</h2>
+          <p>The shared <code>SERVER</code> namespace hides backend-specific details. Change one value before launch,
+            then restart the app.</p>
+          <div class="backend-table">
+            <div class="table-row table-head"><span>Mode</span><span>Use it when</span><span>Setup</span></div>
+            <div class="table-row"><span><b>SQLite3</b></span><span>Default local experience</span><span>No service
+                required</span></div>
+            <div class="table-row"><span><b>JSON</b></span><span>File-based experiments</span><span>Local data
+                file</span></div>
+            <div class="table-row"><span><b>MySQL</b></span><span>Shared development</span><span>Database + .env</span>
+            </div>
+          </div>
+          <div class="code-card">
+            <div class="code-top"><span>database/config.json</span><button class="copy-code" type="button">Copy</button>
+            </div>
+            <pre><code>{
     "is_activated": false,
     "DATABASE TYPE": "SQLite3"
-}</code></pre></div><div class="callout"><strong>Restart required.</strong><span>The selected implementation is bound during server initialization.</span></div></section>
-<section id="environment" class="docs-block reveal"><span class="eyebrow">02 / SECRETS</span><h2>Keep credentials outside code.</h2><p>Copy the example file and fill only the variables needed by the backend or workflow you are exploring. Never commit the resulting <code>.env</code>.</p><div class="code-card"><div class="code-top"><span>PowerShell</span><button class="copy-code" type="button">Copy</button></div><pre><code>Copy-Item .env.example .env</code></pre></div><details class="docs-extra"><summary>MySQL variables</summary><pre><code>MYSQL__DB_USERNAME=
+}</code></pre>
+          </div>
+          <div class="callout"><strong>Restart required.</strong><span>The selected implementation is bound during
+              server initialization.</span></div>
+        </section>
+        <section id="environment" class="docs-block reveal"><span class="eyebrow">02 / SECRETS</span>
+          <h2>Keep credentials outside code.</h2>
+          <p>Copy the example file and fill only the variables needed by the backend or workflow you are exploring.
+            Never commit the resulting <code>.env</code>.</p>
+          <div class="code-card">
+            <div class="code-top"><span>PowerShell</span><button class="copy-code" type="button">Copy</button></div>
+            <pre><code>Copy-Item .env.example .env</code></pre>
+          </div>
+          <details class="docs-extra">
+            <summary>MySQL variables</summary>
+            <pre><code>MYSQL__DB_USERNAME=
 MYSQL__DB_PASSWORD=
 MYSQL__DB_HOSTNAME=127.0.0.1
 MYSQL__DB_PORTNMBR=3306
 MYSQL__DB_CHAR_SET=utf8mb4
-MYSQL__DB_DATABASE=bank_with_high_functionalities</code></pre></details></section>
-<section id="email" class="docs-block reveal"><span class="eyebrow">03 / OPTIONAL WORKFLOWS</span><h2>Connect email only when needed.</h2><p>Welcome messages, email verification, and password recovery use Gmail SMTP over SSL. Email is optional for general local exploration.</p><div class="code-card"><div class="code-top"><span>.env</span><button class="copy-code" type="button">Copy</button></div><pre><code>SMTP__MAIL_ADDRESS=your-address@example.com
-SMTP__APP_PASSWORD=your-gmail-app-password</code></pre></div><div class="callout warning"><strong>Use an app password.</strong><span>Do not place a normal account password in project configuration.</span></div></section>
-<section id="activation" class="docs-block reveal"><span class="eyebrow">04 / FIRST RUN</span><h2>Activation is part of startup.</h2><p>When <code>is_activated</code> is false, <code>main.py</code> opens the activation flow. After activation it records launch time and opens sign-in.</p><div class="timeline"><div><i>01</i><b>Read configuration</b><span>Shared setup loads environment variables and selects the backend.</span></div><div><i>02</i><b>Check activation</b><span>The activation interface appears when runtime state says it is incomplete.</span></div><div><i>03</i><b>Enter the app</b><span>Sign-in becomes the entry point for user and administrator flows.</span></div></div></section>
-</article></section></main>
-<footer class="site-footer section-shell"></footer><script src="../../script.js"></script></body></html>
+MYSQL__DB_DATABASE=bank_with_high_functionalities</code></pre>
+          </details>
+        </section>
+        <section id="email" class="docs-block reveal"><span class="eyebrow">03 / OPTIONAL WORKFLOWS</span>
+          <h2>Connect email only when needed.</h2>
+          <p>Welcome messages, email verification, and password recovery use Gmail SMTP over SSL. Email is optional for
+            general local exploration.</p>
+          <div class="code-card">
+            <div class="code-top"><span>.env</span><button class="copy-code" type="button">Copy</button></div>
+            <pre><code>SMTP__MAIL_ADDRESS=your-address@example.com
+SMTP__APP_PASSWORD=your-gmail-app-password</code></pre>
+          </div>
+          <div class="callout warning"><strong>Use an app password.</strong><span>Do not place a normal account password
+              in project configuration.</span></div>
+        </section>
+        <section id="activation" class="docs-block reveal"><span class="eyebrow">04 / FIRST RUN</span>
+          <h2>Activation is part of startup.</h2>
+          <p>When <code>is_activated</code> is false, <code>main.py</code> opens the activation flow. After activation
+            it records launch time and opens sign-in.</p>
+          <div class="timeline">
+            <div><i>01</i><b>Read configuration</b><span>Shared setup loads environment variables and selects the
+                backend.</span></div>
+            <div><i>02</i><b>Check activation</b><span>The activation interface appears when runtime state says it is
+                incomplete.</span></div>
+            <div><i>03</i><b>Enter the app</b><span>Sign-in becomes the entry point for user and administrator
+                flows.</span></div>
+          </div>
+        </section>
+      </article>
+    </section>
+  </main>
+  <footer class="site-footer section-shell"></footer>
+  <script src="../../script.js"></script>
+</body>
+
+</html>
